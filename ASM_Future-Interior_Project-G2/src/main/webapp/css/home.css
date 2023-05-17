@@ -12,6 +12,27 @@ body {
 }
 
 /* navbar */
+.dropdown-hover:hover>.dropdown-menu {
+    display: inline-block;
+}
+.dropdown-hover:hover>.dropdown-toggle{
+    color: #007bff !important;
+}
+.dropdown-hover>.dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+.show>.nav-link,
+.nav-link.active {
+    color: #007bff !important;
+}
+
+.show>.nav-link,
+.nav-link:hover {
+    color: #007bff !important;
+}
+
 .item-menu {
     font-size: 20px;
     font-weight: 700;
@@ -28,6 +49,82 @@ body {
 
 .icon-navbar span {
     padding: 10px;
+}
+
+
+.navbar .megamenu {
+    padding: 1rem;
+}
+
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+
+    .navbar .has-megamenu {
+        position: static !important;
+    }
+
+    .navbar .megamenu {
+        left: 15%;
+        right: 0;
+        width: 70%;
+        margin-top: 0;
+    }
+
+}
+
+/* ============ desktop view .end// ============ */
+
+
+/* ============ mobile view ============ */
+@media(max-width: 991px) {
+
+    .navbar.fixed-top .navbar-collapse,
+    .navbar.sticky-top .navbar-collapse {
+        overflow-y: auto;
+        max-height: 90vh;
+        margin-top: 10px;
+    }
+}
+
+
+.item-opsition-menu a {
+    text-decoration: none;
+    color: #101828;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.item-opsition-menu a:hover {
+    color: #007bff;
+}
+
+.item-opsition-menu p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin: 10px 0 20px;
+}
+
+.item-opsition-menu .material-symbols-sharp {
+    margin-right: 10px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    background: #F4EBFF;
+    padding: 10px;
+    border-radius: 100%;
 }
 
 /* banner */
@@ -194,6 +291,15 @@ body {
     float: right;
 }
 
+.product-main .product a {
+    text-decoration: none;
+    color: #475467;
+}
+
+.product-main .product a h3:hover {
+    color: #1562b6
+}
+
 .product-main .product img {
     /* margin-left: 21px; */
     width: 260px;
@@ -230,10 +336,19 @@ body {
     margin-bottom: 100px;
 }
 
+.product-list-main a {
+    text-decoration: none;
+}
+
+.product-list-main a h3:hover {
+    color: #1562b6;
+}
+
 .product-list-main .product {
     width: 200px;
     text-align: center;
 }
+
 
 .product-list-main .product img {
     width: 100%;
@@ -242,6 +357,8 @@ body {
 
 .product-list-main .product-title {
     margin-top: 10px;
+    color: #101828;
+    text-decoration: none;
 }
 
 .product-list-main .product-description {
@@ -304,7 +421,6 @@ footer {
 }
 
 footer h5 {
-    font-family: "Inter";
     font-size: 20px;
     font-weight: 700;
     line-height: 30px;
@@ -313,36 +429,17 @@ footer h5 {
     color: #98A2B3;
 
 }
-.footer-link li a{
+
+.footer-link li a {
     color: white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
 }
 
-.footer-link li a:hover{
+.footer-link li a:hover {
     color: rgb(145, 140, 140);
-}
-
-
-
-
-/* demo */
-
-.navbar .megamenu{ padding: 1rem; }
-/* ============ desktop view ============ */
-@media all and (min-width: 992px) {
-	
-	.navbar .has-megamenu{position:static!important;}
-	.navbar .megamenu{left:15%; right:0; width:70%; margin-top:0;  }
-	
-}	
-
-/* ============ desktop view .end// ============ */
-
-
-/* ============ mobile view ============ */
-@media(max-width: 991px){
-	.navbar.fixed-top .navbar-collapse, .navbar.sticky-top .navbar-collapse{
-		overflow-y: auto;
-	    max-height: 90vh;
-	    margin-top:10px;
-	}
 }
