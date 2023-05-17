@@ -227,6 +227,7 @@ body {
 .product-list-main {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 100px;
 }
 
 .product-list-main .product {
@@ -251,9 +252,11 @@ body {
     margin-top: 5px;
     font-weight: bold;
 }
-aside{
+
+aside {
     margin-top: 15px;
 }
+
 .product-list-title h3 {
     padding: 50px 0px 30px;
     font-family: "EB Garamond";
@@ -263,9 +266,83 @@ aside{
     letter-spacing: 0em;
     text-align: left;
 }
+
+.product-list-main .product-list .product-title {
+    font-family: "EB Garamond";
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.product-list-main .product-list .product-description {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #475467;
+}
+
+.product-list-main .product-list .product-price {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.035em;
+    text-align: left;
+
+}
+
 /* footer */
 
-footer{
-    height: 100px;
-    background-color: cadetblue;
+footer {
+    padding: 50px 0px 10px;
+    background-color: #101828;
+}
+
+footer h5 {
+    font-family: "Inter";
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #98A2B3;
+
+}
+.footer-link li a{
+    color: white;
+}
+
+.footer-link li a:hover{
+    color: rgb(145, 140, 140);
+}
+
+
+
+
+/* demo */
+
+.navbar .megamenu{ padding: 1rem; }
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+	
+	.navbar .has-megamenu{position:static!important;}
+	.navbar .megamenu{left:15%; right:0; width:70%; margin-top:0;  }
+	
+}	
+
+/* ============ desktop view .end// ============ */
+
+
+/* ============ mobile view ============ */
+@media(max-width: 991px){
+	.navbar.fixed-top .navbar-collapse, .navbar.sticky-top .navbar-collapse{
+		overflow-y: auto;
+	    max-height: 90vh;
+	    margin-top:10px;
+	}
 }
