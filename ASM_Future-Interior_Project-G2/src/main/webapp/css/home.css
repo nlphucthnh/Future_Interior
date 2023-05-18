@@ -81,11 +81,11 @@ body {
 
 .product-main .product a {
     text-decoration: none;
-    color: #475467;
+    color: #101828;
 }
-
+/* de tam  */
 .product-main .product a h3:hover {
-    color: #1562b6
+    color: #4f8dcf
 }
 
 .product-main .product img {
@@ -127,9 +127,9 @@ body {
 .product-list-main a {
     text-decoration: none;
 }
-
+/* de tam  */
 .product-list-main a h3:hover {
-    color: #1562b6;
+    color: #527397;
 }
 
 .product-list-main .product {
@@ -200,3 +200,18 @@ aside {
     text-align: left;
 
 }
+
+/* zooohinh */
+.noidung {
+    overflow: hidden;
+  }
+  .zoom_color img {
+    height: 300px;
+    width: 300px;
+    transition: transform .4s, filter 1.5s ease-in-out;
+    /* filter: grayscale(100%); */
+  }
+  .zoom_color img:hover {
+    /* filter: grayscale(0); */
+    transform: scale(1.1);
+  }

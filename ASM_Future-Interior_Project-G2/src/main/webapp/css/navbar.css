@@ -1,3 +1,36 @@
+/* navbar-no-login */
+ .navbar {
+    justify-content: center;
+  }
+  .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-collapse {
+    justify-content: center;
+  }
+  .navbar-brand {
+    margin-right: auto;
+  }
+  .ms-auto {
+    margin-left: auto;
+  }
+
+  .nav-item.sign-navbar a {
+    background-color: #000000;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    border: 2px solid black;
+    width: 110px;
+    border-radius: 3px;
+  }     
+  .nav-item.sign-navbar a:hover{
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    font-weight: 500;
+  }
+
 
 /* navbar */
 .dropdown-hover:hover>.dropdown-menu {
