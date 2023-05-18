@@ -121,7 +121,7 @@ body {
 .product-list-main {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .product-list-main a {
