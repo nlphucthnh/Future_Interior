@@ -83,6 +83,7 @@ body {
     text-decoration: none;
     color: #101828;
 }
+
 /* de tam  */
 .product-main .product a h3:hover {
     color: #4f8dcf
@@ -106,7 +107,7 @@ body {
 
 .product-main .product p {
     font-family: "Open Sans";
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0.035em;
@@ -127,6 +128,7 @@ body {
 .product-list-main a {
     text-decoration: none;
 }
+
 /* de tam  */
 .product-list-main a h3:hover {
     color: #527397;
@@ -153,10 +155,6 @@ body {
     margin-top: 5px;
 }
 
-.product-list-main .product-price {
-    margin-top: 5px;
-    font-weight: bold;
-}
 
 aside {
     margin-top: 15px;
@@ -193,25 +191,26 @@ aside {
 
 .product-list-main .product-list .product-price {
     font-family: "Open Sans";
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0.035em;
     text-align: left;
-
 }
 
 /* zooohinh */
 .noidung {
     overflow: hidden;
-  }
-  .zoom_color img {
+}
+
+.zoom_color img {
     height: 300px;
     width: 300px;
     transition: transform .4s, filter 1.5s ease-in-out;
     /* filter: grayscale(100%); */
-  }
-  .zoom_color img:hover {
+}
+
+.zoom_color img:hover {
     /* filter: grayscale(0); */
     transform: scale(1.1);
-  }
+}
