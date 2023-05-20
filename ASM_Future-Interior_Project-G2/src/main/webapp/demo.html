@@ -1,37 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Nếu bạn chưa liên kết với Bootstrap, hãy bao gồm đoạn mã sau -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/css/bootstrap.min.css" integrity="sha384-TdX+oIu/+FSB8rZn3M48ER3FwZVEa4M5odV0kZjgN1QuWbK6r+1NuVhylTpjxtG0" crossorigin="anonymous">
+<meta charset="utf-8">
+<title>Học thiết kế web - Cách tạo trang chi tiết sản phẩm bằng Bootstrap | hocwebgiare.com</title>
+<meta name="description" content="Học thiết kế web giả rẻ tại hocwbgiare.com" />
+<meta name="keywords" content="hoc thiet ke web, lap trinh php, học online, thiet ke web chuan seo, lap trinh web, hoc php, thiet ke website chuan seo, học thiết kế website, thiết kế website chuẩn seo" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<style type="text/css">
+.quantity {
+  display: flex;
+  align-items: center;
+}
 
-  <!-- Nếu bạn chưa liên kết với Font Awesome, hãy bao gồm đoạn mã sau -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+.quantity label {
+  margin-right: 10px;
+}
 
-  <style>
-    .input-with-icon {
-      position: relative;
-    }
+.quantity .input-group {
+  flex-grow: 1;
+  width: auto;
+}
 
-    .input-with-icon i {
-      position: absolute;
-      left: 10px; /* Vị trí của icon */
-      top: 50%; /* Vị trí của icon */
-      transform: translateY(-50%); /* Để căn giữa theo chiều dọc */
-      color: gray; /* Màu của icon */
-    }
-  </style>
+.quantity .input-group-prepend,
+.quantity .input-group-append {
+  display: flex;
+}
+
+.quantity .input-group-prepend .btn,
+.quantity .input-group-append .btn {
+  border-radius: 0;
+}
+
+.quantity .input-group-prepend .btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.quantity .input-group-append .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+</style>
 </head>
 <body>
-  <div class="input-group input-with-icon">
-    <span class="input-group-text"><i class="fas fa-user"></i></span>
-    <input type="text" class="form-control" placeholder="Tên người dùng">
+  <div class="quantity">
+  <label for="quantity-input">Số lượng:</label>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <button class="btn btn-outline-secondary" type="button" id="quantity-minus">-</button>
+    </div>
+    <input type="number" class="form-control" id="quantity-input" name="quantity" min="1" value="1">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" id="quantity-plus">+</button>
+    </div>
   </div>
-
-  <div class="input-group input-with-icon">
-    <span class="input-group-text"><i class="fas fa-lock"></i></span>
-    <input type="password" class="form-control" placeholder="Mật khẩu">
-  </div>
-
-  <!-- Đảm bảo rằng bạn đã bao gồm thư viện Bootstrap và Font Awesome trên đầu trang -->
+</div>
 </body>
+<script>
+document.getElementById('quantity-minus').addEventListener('click', function() {
+  var quantityInput = document.getElementById('quantity-input');
+  var currentQuantity = parseInt(quantityInput.value);
+  if (currentQuantity > 1) {
+    quantityInput.value = currentQuantity - 1;
+  }
+});
+
+document.getElementById('quantity-plus').addEventListener('click', function() {
+  var quantityInput = document.getElementById('quantity-input');
+  var currentQuantity = parseInt(quantityInput.value);
+  quantityInput.value = currentQuantity + 1;
+});
+
+</script>
 </html>
