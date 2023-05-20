@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <!-- icon web  -->
@@ -30,11 +29,10 @@
 
 
 
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/about.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/product-item.css">
-    <title>Porduct Item</title>
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/about.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <title>About</title>
 </head>
 
 <body>
@@ -50,7 +48,7 @@
                         <a class="nav-link" href="#">Liên hệ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Giới thiệu</a>
+                        <a class="nav-link active" href="#">Giới thiệu</a>
                     </li>
                     <li class="nav-item dropdown dropdown-hover has-megamenu">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Sản phẩm </a>
@@ -177,60 +175,140 @@
             </ul>
         </div>
     </nav>
-    <header class="container product-item-title my-5">
-        <h3>Chi tiết sản phẩm</h3>
-        <h5>Sản phẩm / bàn làm việc</h5>
+
+    <header>
+        <div class="carousel-inner banner-slide">
+            <div class="carousel-item active">
+                <div class="banner-content">
+                    <h2>Nội thất hiện đại, phong cách tối giản</h2><br>
+                    <pre>
+Future Interior là trang web chuyên cung cấp các sản phẩm nội thất hiện đại và tối giản. 
+Với mục đích tạo ra không gian sống đẹp mắt, tiện nghi và thư giãn cho khách hàng của mình, 
+Future Interior đã chọn lựa những sản phẩm nội thất có thiết kế đẹp, chất lượng cao và 
+phù hợp với nhu cầu của khách hàng.
+                   </pre>
+                </div>
+                <img src="img/Banner-about.png" class="d-block w-100 carousel-img" alt="Slide 1">
+            </div>
+        </div>
     </header>
 
-
-    <div class="container">
-        <div class="container-fluid">
-            <div class="wrapper row">
-                <div class="preview col-md-6">
-                    <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img src="img/chitietsanpham.png" /></div>
-                        <div class="tab-pane" id="pic-2"><img src="img/Ban_dep.png" /></div>
-                        <div class="tab-pane" id="pic-3"><img src="img/Den.png" /></div>
-                        <div class="tab-pane" id="pic-4"><img src="img/ghe-to-br.png" /></div>
-                        <div class="tab-pane" id="pic-5"><img src="img/chitietsanpham.png" /></div>
-                    </div>
+    <section class="container title-about">
+        <h3>Future Interior</h3><br>
+        <p>Quy trình mua hàng tiết kiệm thời gian.</p>
+        <div class="row">
+            <div class="col-lg-3  product-about">
+                <div class="product-card">
+                    <span class="material-symbols-outlined">
+                        shopping_cart
+                    </span>
+                    <h5 class="mt-3">Lựa chọn sản phẩm</h5>
+                    <pre class="text-muted">
+Khách hàng lựa chọn những 
+sản phẩm ưng ý với mình 
+tại trang web
+                    </pre>
 
                 </div>
-                <div class="col-md-2">
-                    <ul class="nav">
-                        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#pic-1"><img
-                                    src="img/Ban.png" /></a></li>
-                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pic-2"><img
-                                    src="img/Ban_dep.png" /></a></li>
-                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pic-3"><img
-                                    src="img/Den.png" /></a></li>
-                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pic-4"><img
-                                    src="img/ghe-to-br.png" /></a></li>
-                        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pic-5"><img
-                                    src="img/Ban.png" /></a></li>
-                    </ul>
+            </div>
+            <div class="col-lg-3 offset-1  product-about">
+                <div class="product-card">
+                    <span class="material-symbols-outlined">
+                        shopping_cart
+                    </span>
+                    <h5 class="mt-3">Lựa chọn sản phẩm</h5>
+                    <pre class="text-muted">
+Khách hàng lựa chọn những 
+sản phẩm ưng ý với mình 
+tại trang web
+                    </pre>
+
                 </div>
-                <div class="col-md-4 product-item-text my-4">
-                    <div class="product-item-name">
-                        <h3>Bàn UNIQ</h3>
-                        <h5>4,700,000đ</h5>
-                    </div>
-                    <div class="properties my-5">
-                        <h3>Loại : <span>Bàn làm việc</span></h3>
-                        <h3>Kích thước : <span> D140 x R60 x C74 cm</span></h3>
-                        <h3>Chất liệu : <span> MFC phủ Melamine</span></h3>
-                    </div>
-                    <div class="quantity">
-                        <input type="number" id="quantity-input" name="quantity" min="1" value="1">
-                      </div>
-                      
+            </div>
+            <div class="col-lg-3  offset-1 product-about">
+                <div class="product-card">
+                    <span class="material-symbols-outlined">
+                        shopping_cart
+                    </span>
+                    <h5 class="mt-3">Lựa chọn sản phẩm</h5>
+                    <pre class="text-muted">
+Khách hàng lựa chọn những 
+sản phẩm ưng ý với mình 
+tại trang web
+                    </pre>
+
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+    </section>
 
+    <header class="title-mid-about">
+        <div class="carousel-inner banner-slide-mid">
+            <div class="carousel-item active">
+                <div class="banner-content-mid">
+                    <pre>
+Các sản phẩm được phân loại rõ ràng và đầy đủ thông 
+tin, hình ảnh chi tiết để giúp khách hàng dễ dàng lựa 
+chọn cho mình những sản phẩm phù hợp nhất.
+               </pre>
+                </div>
+                <img src="img/banner2-about.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
+            </div>
+        </div>
+    </header>
 
+    <article class="container create-website">
+
+        <div class="creator d-flex justify-content-between">
+            <div class="creator-title">
+                <h3> Người tạo ra trang web</h3>
+                <h5>Future Interior</h5>
+            </div>
+            <div class="creator-text">
+                <pre class="text-lg-end">
+Đội ngũ phát triển trang web Future Interior luôn đặt khách 
+hàng lên hàng đầu và sẵn sàng lắng nghe ý kiến phản hồi của 
+khách hàng để cải thiện sản phẩm ngày càng tốt hơn.</pre>
+            </div>
+        </div>
+
+        <div class="creator-img">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="creator-card">
+                        <img src="img/Img_Thien.jpg" alt="Product Image">
+                        <h3 class="mt-3">Công Thiện</h3>
+                        <p class="text-muted">Front end developers <br> Databese creater</p>
+                        <h5>Team 02 - 05/2023</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="creator-card">
+                        <img src="img/Img_Phuong.jpg" alt="Product Image">
+                        <h3 class="mt-3">Trúc Phương</h3>
+                        <p class="text-muted">Design UI website <br> Support front end</p>
+                        <h5>Team 02 - 05/2023</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="creator-card">
+                        <img src="img/Img_Thinh.jpg" alt="Product Image">
+                        <h3 class="mt-3">Phúc Thịnh</h3>
+                        <p class="text-muted">Design UI website <br> Fullstack developers</p>
+                        <h5>Team 02 - 05/2023</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="creator-card">
+                        <img src="img/Img_Thao.jpg" alt="Product Image">
+                        <h3 class="mt-3">Hoàng Thảo</h3>
+                        <p class="text-muted">Back end developers <br> Database creater</p>
+                        <h5>Team 02 - 05/2023</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
 
 
     <footer>
