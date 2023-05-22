@@ -1,80 +1,268 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>Học thiết kế web - Cách tạo trang chi tiết sản phẩm bằng Bootstrap | hocwebgiare.com</title>
-<meta name="description" content="Học thiết kế web giả rẻ tại hocwbgiare.com" />
-<meta name="keywords" content="hoc thiet ke web, lap trinh php, học online, thiet ke web chuan seo, lap trinh web, hoc php, thiet ke website chuan seo, học thiết kế website, thiết kế website chuẩn seo" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<style type="text/css">
-.quantity {
-  display: flex;
-  align-items: center;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Example</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+  <style>
+    .price-column {
+      display: none;
+    }
 
-.quantity label {
-  margin-right: 10px;
-}
+    .total-final {
+      position: relative;
+      display: inline-block;
+    }
 
-.quantity .input-group {
-  flex-grow: 1;
-  width: auto;
-}
+    .total-final::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #000;
+    }
 
-.quantity .input-group-prepend,
-.quantity .input-group-append {
-  display: flex;
-}
-
-.quantity .input-group-prepend .btn,
-.quantity .input-group-append .btn {
-  border-radius: 0;
-}
-
-.quantity .input-group-prepend .btn {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.quantity .input-group-append .btn {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-</style>
+    .total-final span {
+      position: relative;
+      background-color: #fff;
+      padding: 0 10px;
+      z-index: 1;
+    }
+  </style>
 </head>
+
 <body>
-  <div class="quantity">
-  <label for="quantity-input">Số lượng:</label>
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <button class="btn btn-outline-secondary" type="button" id="quantity-minus">-</button>
-    </div>
-    <input type="number" class="form-control" id="quantity-input" name="quantity" min="1" value="1">
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" id="quantity-plus">+</button>
-    </div>
+  <div class="container">
+    <h1 class="mb-4">Cart</h1>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" onchange="checkAllProducts(this)">
+                  </div>
+                </th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th class="price-column">Price (VND)</th>
+                <th>Total (VND)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input product-checkbox" type="checkbox" onchange="checkProduct(this)">
+                  </div>
+                </td>
+                <td>Product 1</td>
+                <td>
+                  <div class="input-group">
+                    <button class="btn btn-secondary" type="button" onclick="increaseQuantity(this)" disabled>+</button>
+                    <input type="number" class="form-control quantity-input" value="1" min="1"
+                      onchange="updateTotal(this)" disabled>
+                    <button class="btn btn-secondary" type="button" onclick="decreaseQuantity(this)" disabled>-</button>
+                  </div>
+                </td>
+                <td class="price-column">100,000</td>
+                <td class="total">100,000</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input product-checkbox" type="checkbox" onchange="checkProduct(this)">
+                  </div>
+                </td>
+                <td>Product 2</td>
+                <td>
+                  <div class="input-group">
+                    <button class="btn btn-secondary" type="button" onclick="increaseQuantity(this)" disabled>+</button>
+                    <input type="number" class="form-control quantity-input" value="1" min="1"
+                      onchange="updateTotal(this)" disabled>
+                    <button class="btn btn-secondary" type="button" onclick="decreaseQuantity(this)" disabled>-</button>
+                  </div>
+                </td>
+                <td class="price-column">200,000</td>
+                <td class="total">200,000</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <table class="table table-borderless">
+          <tfoot>
+            <tr>
+              <td   ><strong>Tổng phụ:</strong></td>
+              <td></td>
+              <td class="text-end" id="total"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td  ><strong>Giảm giá:</strong></td>
+              <td></td>
+              <td class="text-end" id="total-discount"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td  ><strong>Phụ thu:</strong></td>
+              <td></td>
+              <td class="text-end" id="surcharge"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td ><strong>Phí vận chuyển:</strong></td>
+              <td></td>
+              <td class="text-end" id="shipping"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td  ><strong>Tổng cộng:</strong></td>
+              <td></td>
+              <td class="text-end" id="total-final"></td>
+              <td></td>
+            </tr>
+            <td>
+              <div>
+                <button class="btn btn-primary">Checkout</button>
+              </div>
+            </td>
+          </tfoot>
+        </table>
+      </div>
+      
+
+   
   </div>
-</div>
+
+  <!-- Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function checkProduct(checkbox) {
+      var row = checkbox.closest('tr');
+      var quantityInput = row.querySelector('.quantity-input');
+      var isChecked = checkbox.checked;
+
+      if (isChecked) {
+        quantityInput.disabled = false;
+        quantityInput.parentNode.querySelectorAll('button').forEach(function (button) {
+          button.disabled = false;
+        });
+        row.querySelector('.price-column').classList.remove('hidden');
+      } else {
+        quantityInput.disabled = true;
+        quantityInput.value = 1;
+        quantityInput.parentNode.querySelectorAll('button').forEach(function (button) {
+          button.disabled = true;
+        });
+        row.querySelector('.price-column').classList.add('hidden');
+        setTotal(row, getPrice(row));
+      }
+
+      calculateTotal();
+    }
+
+    function checkAllProducts(checkboxAll) {
+      var checkboxes = document.querySelectorAll('.product-checkbox');
+
+      checkboxes.forEach(function (checkbox) {
+        checkbox.checked = checkboxAll.checked;
+        checkProduct(checkbox);
+      });
+    }
+
+    function updateTotal(input) {
+      var row = input.closest('tr');
+      var quantity = parseInt(input.value);
+      var price = getPrice(row);
+      var total = price * quantity;
+      setTotal(row, total);
+
+      calculateTotal();
+    }
+
+    function increaseQuantity(button) {
+      var input = button.parentNode.querySelector('.quantity-input');
+      input.stepUp();
+      updateTotal(input);
+    }
+
+    function decreaseQuantity(button) {
+      var input = button.parentNode.querySelector('.quantity-input');
+      input.stepDown();
+      updateTotal(input);
+    }
+
+    function removeProduct(button) {
+      var row = button.closest('tr');
+      row.remove();
+
+      calculateTotal();
+    }
+
+    function getPrice(row) {
+      var priceString = row.querySelector('.price-column').textContent;
+      var price = parseFloat(priceString.replace(/,/g, ''));
+      return price;
+    }
+
+    function setTotal(row, total) {
+      row.querySelector('.total').textContent = formatCurrency(total);
+    }
+
+    function calculateTotal() {
+      var total = 0;
+
+      var rows = document.querySelectorAll('tbody tr');
+      rows.forEach(function (row) {
+        var checkbox = row.querySelector('.product-checkbox');
+        if (checkbox.checked) {
+          var price = getPrice(row);
+          var quantity = parseInt(row.querySelector('.quantity-input').value);
+          var rowTotal = price * quantity;
+          total += rowTotal;
+        }
+      });
+
+      document.getElementById('total').textContent = formatCurrency(total);
+      document.getElementById('total-discount').textContent = formatCurrency(total * 0.9);
+      document.getElementById('surcharge').textContent = formatCurrency(total * 0.05);
+      document.getElementById('shipping').textContent = formatCurrency(50000);
+      document.getElementById('total-final').textContent = formatCurrency(total * 0.9 + total * 0.05 + 50000);
+    }
+
+    function formatCurrency(value) {
+      var formatter = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      });
+      return formatter.format(value);
+    }
+
+    calculateTotal();
+  </script>
 </body>
-<script>
-document.getElementById('quantity-minus').addEventListener('click', function() {
-  var quantityInput = document.getElementById('quantity-input');
-  var currentQuantity = parseInt(quantityInput.value);
-  if (currentQuantity > 1) {
-    quantityInput.value = currentQuantity - 1;
-  }
-});
 
-document.getElementById('quantity-plus').addEventListener('click', function() {
-  var quantityInput = document.getElementById('quantity-input');
-  var currentQuantity = parseInt(quantityInput.value);
-  quantityInput.value = currentQuantity + 1;
-});
-
-</script>
 </html>

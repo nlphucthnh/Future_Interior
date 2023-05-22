@@ -1,0 +1,136 @@
+
+.title-cart-main h1 {
+    font-family: 'EB Garamond';
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 47px;
+    letter-spacing: 0em;
+    text-align: left;
+
+  }
+
+  .table>:not(:last-child)>:last-child>* {
+    border-bottom-color: #d4d7db
+  }
+
+  .delete-btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    padding: 50px 10px;
+    cursor: pointer;
+  }
+
+  .title-cart th {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #475467;
+    padding: 20px;
+  }
+
+
+
+  .name-cart img {
+    height: 90px;
+    width: 107px;
+  }
+
+  .name-cart h5 {
+    margin: 15px 20px;
+    font-family: "EB Garamond";
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  .name-cart span {
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.035em;
+    text-align: left;
+  }
+
+  .counter {
+    width: 140px;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+  }
+
+  .counter input {
+    width: 60px;
+    border: 0;
+    line-height: 30px;
+    font-size: 20px;
+    text-align: center;
+    appearance: none;
+    outline: 0;
+  }
+
+  .counter span {
+    display: block;
+    font-size: 25px;
+    padding: 0 10px;
+    cursor: pointer;
+    /* color: #0052cc; */
+    user-select: none;
+  }
+
+  .checkbox-cart {
+    margin: 50px 10px;
+  }
+
+  .price-cart {
+    margin-top: 40px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 41px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+
+  /* bill */
+  .bill {
+    padding: 15px;
+    border: 1px solid #D0D5DD;
+    ;
+  }
+
+  .bill-text {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+
+  }
+
+  .bill-number {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: right;
+    display: flex;
+    justify-content: end;
+  }
+
+  .pay-bill button {
+    width: 100%;
+    height: 52px;
+    background-color: #101828;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+  }
