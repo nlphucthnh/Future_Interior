@@ -4,265 +4,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart Example</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+  <title>Product Form</title>
   <style>
-    .price-column {
-      display: none;
-    }
-
-    .total-final {
+    .product-card {
       position: relative;
-      display: inline-block;
+    }
+    .product-card .card-img {
+      position: relative;
+      width: 592px;
+      height: 280px;
     }
 
-    .total-final::before {
-      content: "";
+    .product-card .card-img-overlay {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transition: opacity 0.2s;
       position: absolute;
-      top: 50%;
+      top: 70%;
       left: 0;
-      right: 0;
-      height: 1px;
-      background-color: #000;
+      width: 592px;
+      text-align: center;
+      height: 88px;
+      
     }
 
-    .total-final span {
-      position: relative;
-      background-color: #fff;
-      padding: 0 10px;
-      z-index: 1;
+    .product-card:hover .card-img-overlay {
+      opacity: 1;
+    }
+
+    .product-card .card-title {
+      margin-top: 10px;
+      font-weight: bold;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1 class="mb-4">Cart</h1>
-
     <div class="row">
-      <div class="col-md-8">
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" onchange="checkAllProducts(this)">
-                  </div>
-                </th>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th class="price-column">Price (VND)</th>
-                <th>Total (VND)</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="form-check">
-                    <input class="form-check-input product-checkbox" type="checkbox" onchange="checkProduct(this)">
-                  </div>
-                </td>
-                <td>Product 1</td>
-                <td>
-                  <div class="input-group">
-                    <button class="btn btn-secondary" type="button" onclick="increaseQuantity(this)" disabled>+</button>
-                    <input type="number" class="form-control quantity-input" value="1" min="1"
-                      onchange="updateTotal(this)" disabled>
-                    <button class="btn btn-secondary" type="button" onclick="decreaseQuantity(this)" disabled>-</button>
-                  </div>
-                </td>
-                <td class="price-column">100,000</td>
-                <td class="total">100,000</td>
-                <td>
-                  <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="form-check">
-                    <input class="form-check-input product-checkbox" type="checkbox" onchange="checkProduct(this)">
-                  </div>
-                </td>
-                <td>Product 2</td>
-                <td>
-                  <div class="input-group">
-                    <button class="btn btn-secondary" type="button" onclick="increaseQuantity(this)" disabled>+</button>
-                    <input type="number" class="form-control quantity-input" value="1" min="1"
-                      onchange="updateTotal(this)" disabled>
-                    <button class="btn btn-secondary" type="button" onclick="decreaseQuantity(this)" disabled>-</button>
-                  </div>
-                </td>
-                <td class="price-column">200,000</td>
-                <td class="total">200,000</td>
-                <td>
-                  <button class="btn btn-danger btn-sm" onclick="removeProduct(this)">Remove</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="col-md-6">
+        <div class="product-card">
+          <img src="/img/ban.png" class="card-img" alt="Product 1">
+          <div class="card-img-overlay">
+            <h5 class="card-title">Product 1 Description</h5>
+          </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <table class="table table-borderless">
-          <tfoot>
-            <tr>
-              <td   ><strong>Tổng phụ:</strong></td>
-              <td></td>
-              <td class="text-end" id="total"></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td  ><strong>Giảm giá:</strong></td>
-              <td></td>
-              <td class="text-end" id="total-discount"></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td  ><strong>Phụ thu:</strong></td>
-              <td></td>
-              <td class="text-end" id="surcharge"></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td ><strong>Phí vận chuyển:</strong></td>
-              <td></td>
-              <td class="text-end" id="shipping"></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td  ><strong>Tổng cộng:</strong></td>
-              <td></td>
-              <td class="text-end" id="total-final"></td>
-              <td></td>
-            </tr>
-            <td>
-              <div>
-                <button class="btn btn-primary">Checkout</button>
-              </div>
-            </td>
-          </tfoot>
-        </table>
+      <div class="col-md-6">
+        <div class="product-card">
+          <img src="/img/ban.png" class="card-img" alt="Product 2">
+          <div class="card-img-overlay d-flex justify-content-between">
+            <h5 class="card-title">Product 2 Description</h5>
+            <h3>okeconde</h3>
+          </div>
+        </div>
       </div>
-      
-
-   
+    </div>
   </div>
 
-  <!-- Bootstrap JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function checkProduct(checkbox) {
-      var row = checkbox.closest('tr');
-      var quantityInput = row.querySelector('.quantity-input');
-      var isChecked = checkbox.checked;
-
-      if (isChecked) {
-        quantityInput.disabled = false;
-        quantityInput.parentNode.querySelectorAll('button').forEach(function (button) {
-          button.disabled = false;
-        });
-        row.querySelector('.price-column').classList.remove('hidden');
-      } else {
-        quantityInput.disabled = true;
-        quantityInput.value = 1;
-        quantityInput.parentNode.querySelectorAll('button').forEach(function (button) {
-          button.disabled = true;
-        });
-        row.querySelector('.price-column').classList.add('hidden');
-        setTotal(row, getPrice(row));
-      }
-
-      calculateTotal();
-    }
-
-    function checkAllProducts(checkboxAll) {
-      var checkboxes = document.querySelectorAll('.product-checkbox');
-
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = checkboxAll.checked;
-        checkProduct(checkbox);
-      });
-    }
-
-    function updateTotal(input) {
-      var row = input.closest('tr');
-      var quantity = parseInt(input.value);
-      var price = getPrice(row);
-      var total = price * quantity;
-      setTotal(row, total);
-
-      calculateTotal();
-    }
-
-    function increaseQuantity(button) {
-      var input = button.parentNode.querySelector('.quantity-input');
-      input.stepUp();
-      updateTotal(input);
-    }
-
-    function decreaseQuantity(button) {
-      var input = button.parentNode.querySelector('.quantity-input');
-      input.stepDown();
-      updateTotal(input);
-    }
-
-    function removeProduct(button) {
-      var row = button.closest('tr');
-      row.remove();
-
-      calculateTotal();
-    }
-
-    function getPrice(row) {
-      var priceString = row.querySelector('.price-column').textContent;
-      var price = parseFloat(priceString.replace(/,/g, ''));
-      return price;
-    }
-
-    function setTotal(row, total) {
-      row.querySelector('.total').textContent = formatCurrency(total);
-    }
-
-    function calculateTotal() {
-      var total = 0;
-
-      var rows = document.querySelectorAll('tbody tr');
-      rows.forEach(function (row) {
-        var checkbox = row.querySelector('.product-checkbox');
-        if (checkbox.checked) {
-          var price = getPrice(row);
-          var quantity = parseInt(row.querySelector('.quantity-input').value);
-          var rowTotal = price * quantity;
-          total += rowTotal;
-        }
-      });
-
-      document.getElementById('total').textContent = formatCurrency(total);
-      document.getElementById('total-discount').textContent = formatCurrency(total * 0.9);
-      document.getElementById('surcharge').textContent = formatCurrency(total * 0.05);
-      document.getElementById('shipping').textContent = formatCurrency(50000);
-      document.getElementById('total-final').textContent = formatCurrency(total * 0.9 + total * 0.05 + 50000);
-    }
-
-    function formatCurrency(value) {
-      var formatter = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-      });
-      return formatter.format(value);
-    }
-
-    calculateTotal();
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

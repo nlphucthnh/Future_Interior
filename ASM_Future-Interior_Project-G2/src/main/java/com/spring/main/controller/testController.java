@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class testController {
 	@RequestMapping(value = "/home", method= RequestMethod.GET)
 	public String getAboutPage() {
-		return "cart";
+		return "blog";
 	}
 }
