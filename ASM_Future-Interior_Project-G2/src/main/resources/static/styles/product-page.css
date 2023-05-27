@@ -1,0 +1,423 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font_tertiary);
+}
+
+/* ------------------------------- Manager_Content ------------------------------- */
+
+#Manager_Content {
+    width: 80%;
+    background-color: white;
+    margin: 10px 10px 10px 0;
+    overflow: auto;
+}
+
+/* ------------------------------- header Manager_Content ------------------------------- */
+
+#Manager_Content .header_content {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0;
+}
+
+
+#Manager_Content .header_content .header_content_main-text {
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 38px;
+}
+
+
+#Manager_Content .header_content .header_content_sub-text {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray_500);
+}
+
+
+
+/* ------------------------------- header Manager_Content ------------------------------- */
+
+
+/* ------------------------------- body Manager_Content ------------------------------- */
+
+#Manager_Content  .body_content {
+    width: 95%;
+    margin: 0 auto;
+}
+
+
+#Manager_Content  .body_content .body_content_tabs {
+    width: fit-content;
+    border: none;
+    border-radius: 3px;
+}
+
+
+#Manager_Content  .body_content .body_content_tabs .btn-style  {
+    padding: 8px 12px;
+    border-radius: 3px;
+    border: none; 
+    background-color: white;
+}
+
+#Manager_Content  .body_content .body_content_tabs .btn-style:focus-within  {
+    background-color: var(--gray_50);
+    border: 1px solid var(--gray_300) ;
+}
+
+
+/* ------------ list blogs Manager_Content ---------------- */
+
+#Manager_Content #list_blogs .list_blogs-header {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#Manager_Content #list_blogs .list_blogs-header .list_blogs-header-seletion-group form {
+    display: flex;
+}
+
+ 
+#Manager_Content #list_blogs .list_blogs-header-seletion-group .form-select  {
+    font-size: 15px;
+    padding: 6px 30px 6px 12px ;
+    font-family: var(--font_tertiary);
+    font-weight: 500;
+    color: var(--gray_800);
+    border: 1.5px solid var(--gray_300);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#Manager_Content #list_blogs .list_blogs-header-seletion-group .form-select:focus {
+    box-shadow: none;
+
+}
+
+/* ------------ list blogs Manager_Content ---------------- */
+
+
+/* ------------ table blogs Manager_Content ---------------- */
+
+#Manager_Content .list_blogs-body .table-responsive,
+#Manager_Content .table-responsive {
+    border-radius: 6px;
+    border: 2px solid var(--gray_300);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+
+
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: var(--gray_50);
+    color: var(--bs-table-striped-color);
+}
+
+#Manager_Content .list_blogs-body .table-responsive thead,
+#Manager_Content .table-responsive thead {
+    border-bottom:1px solid var(--gray_300) ;
+}
+
+#Manager_Content .list_blogs-body .table-responsive thead th,
+#Manager_Content .table-responsive thead th {
+    font-size: 12px;
+    font-family: var(--font_tertiary);
+    font-weight: 500;
+    color: var(--gray_500);
+    padding: 10px 8px;
+}
+
+
+
+/* #Manager_Content .list_blogs-body .table-responsive thead th {
+    width: 10%;
+} */
+
+#Manager_Content .list_blogs-body .table-responsive thead th:first-child,
+#Manager_Content .table-responsive thead th:first-child {
+    width: 50% !important;      
+}
+
+#Manager_Content .list_blogs-body .table-responsive .table tbody,
+#Manager_Content .table-responsive .table tbody {
+    border: none !important;
+    border-style:none !important ;
+}
+
+
+
+#Manager_Content .list_blogs-body .table-responsive tbody tr,
+#Manager_Content .table-responsive tbody tr {
+   vertical-align: middle;
+   transition: 0.5s;
+  
+}
+
+#Manager_Content .list_blogs-body .table-responsive tbody tr:hover,
+#Manager_Content  .table-responsive tbody tr:hover  {
+    background-color: var(--gray_200);
+   
+}
+
+
+
+#Manager_Content .list_blogs-body  .td-first-table,
+#Manager_Content  .td-first-table {
+    display: flex;
+    align-items: center;
+}
+
+#Manager_Content .list_blogs-body  .text-blogs-group,
+#Manager_Content .text-blogs-group {
+    margin-left: 10px;
+}
+
+#Manager_Content .list_blogs-body  .text-blogs-group .text-title-blogs,
+#Manager_Content  .text-blogs-group .text-title-blogs {
+    font-size: 15px;
+    font-family: var(--font_tertiary);
+    font-weight: 600;
+    margin: 3px 0;
+    text-align: left;
+}
+
+
+#Manager_Content .list_blogs-body  .text-blogs-group .text-id-blogs,
+#Manager_Content .text-blogs-group .text-id-blogs {
+    font-size: 13px;
+    font-family: var(--font_tertiary);
+    font-weight: 400;
+    color: var(--gray_700);
+    margin: 2px 0;
+    text-align: left;
+}
+
+#Manager_Content .list_blogs-body .table-responsive tbody td,
+#Manager_Content .table-responsive tbody td {
+    font-size: 14px;
+    font-family: var(--font_tertiary);
+    font-weight: 600;
+    color: var(--gray_600);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: none;
+    border-width: 0;
+    text-align: center;
+    transition: 0.5s;
+}
+
+
+#Manager_Content .list_blogs-body .table-responsive tfoot {
+    border-top: 1px solid var(--gray_300) ;
+}
+
+
+#Manager_Content .list_blogs-body .table-responsive tfoot .btn-style {
+    padding: 7px 13px;
+    border-radius: 3px;
+    transition: 0.4s;
+}
+
+#Manager_Content .list_blogs-body .table-responsive tfoot .btn-style:hover {
+    background-color: var(--gray_100);
+}
+
+#Manager_Content .list_blogs-body .table-responsive tfoot td:last-child {
+    font-family: var(--font_tertiary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ------------ table blogs Manager_Content ---------------- */
+
+
+/* ------------ form blogs Manager_Content ---------------- */
+#Manager_Content  #form_blogs  .form_blogs-pane {
+    width: 100%;
+    border: 2px solid var(--gray_200);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#Manager_Content #form_blogs .group-fleld {
+    width: 95%;
+    margin: 10px auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+#Manager_Content #form_blogs .group-fleld .title-order {
+    margin: 10px 0;
+    font-family: var(--font_tertiary);
+    font-weight: 600;
+}
+
+#Manager_Content #form_blogs .group-fleld .form-group {
+    width: calc((100% - 2.5%)/3);
+}
+
+
+#Manager_Content #form_blogs .group-fleld-04 .form-group,
+#Manager_Content #form_blogs .group-fleld-06 .form-group,
+#Manager_Content #form_blogs .group-fleld-07 .form-group,
+#Manager_Content #form_blogs .group-fleld-011 .form-group {
+    width: 100%;
+}
+
+
+
+#Manager_Content #form_blogs .group-fleld-03 .form-group,
+#Manager_Content #form_blogs .group-fleld-010 .form-group  {
+    width: calc((100% - 2.5%)/2);
+}
+
+#Manager_Content #form_blogs .group-fleld-05 .form-group {
+    width: calc((100% - 2.5%)/3);
+}
+#Manager_Content #form_blogs .group-fleld .on-the-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+}
+
+#Manager_Content #form_blogs .group-fleld .on-the-table .on-the-table-title {
+    font-family: var(--font_tertiary);
+    color: var(--gray_900);
+    font-weight: 600;
+}
+
+#Manager_Content #form_blogs .group-fleld .on-the-table .btn-style {
+    font-family: var(--font_tertiary);
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+#Manager_Content #form_blogs .group-fleld .on-the-table .on-the-table-button {
+    font-family: var(--font_tertiary);
+    color: var(--gray_100);
+    background-color: var(--gray_700);
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+
+
+
+
+
+#Manager_Content #form_blogs .group-fleld .form-group .form-select {
+    color: var(--gray_900) !important;
+    font-weight: 600 ;
+}
+
+#Manager_Content .group-fleld-06 .table-responsive thead th:first-child{
+    width: 65% !important;
+}
+
+#Manager_Content .group-fleld-06,
+#Manager_Content .group-fleld-07 {
+    position: relative;
+}
+
+#Manager_Content .group-fleld-06 .on-the-table,
+#Manager_Content .group-fleld-07 .on-the-table{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid var(--gray_200);
+
+}
+
+#Manager_Content .group-fleld-06 .table-responsive tr,
+#Manager_Content .group-fleld-07 .table-responsive tr{
+    border-bottom: 1px solid var(--gray_200);
+}
+
+
+#Manager_Content #form_blogs .group-fleld-012 {
+    justify-content: right;
+}
+
+
+#Manager_Content #form_blogs .group-fleld-012 .btn {
+    padding: 10px 20px;
+    margin: 10px;
+    transition: 0.5s;
+}
+
+
+#Manager_Content #form_blogs .group-fleld-012 .btn-clear:hover {
+    background-color: var(--gray_300);
+}
+
+#Manager_Content #form_blogs .group-fleld-012 .btn:last-child {
+    margin-right: 0;
+    background-color: var(--gray_900);
+    color: var(--gray_50);
+}
+
+#Manager_Content #form_blogs .group-fleld-012 .btn:last-child:hover {
+    background-color: var(--gray_1000);
+  
+}
+
+#Manager_Content #form_blogs .group-fleld-012 .btn-update {
+    margin-right: 0;
+    background-color: var(--gray_100);
+    color: var(--gray_700);
+}
+
+#Manager_Content #form_blogs .group-fleld-012 .btn-update:hover {
+    margin-right: 0;
+    background-color: var(--gray_300);
+    color: var(--gray_700);
+}
+
+
+
+
+#Manager_Content #form_blogs .form-group .form-label {
+    font-family: var(--font_tertiary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#Manager_Content #form_blogs .form-group .form-control {
+    font-family: var(--font_tertiary);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--gray_500);
+    box-shadow: 0px 1px var(--gray_300);
+}
+
+
+/* ------------ form blogs Manager_Content ---------------- */
+
+
+
+/* ------------------------------- body Manager_Content ------------------------------- */
+
+

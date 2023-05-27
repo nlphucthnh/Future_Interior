@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- icon web  -->
+    <link rel="icon" type="image/x-icon" href="../../img/logoMark.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--link css -->
+    <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navigation.css">
+    <link rel="stylesheet" href="/styles/product-page.css">
+    <title>Manager product</title>
+</head>
+
+<body>
+    <div class="background-manager">
+        <nav id="Manager_Navigation">
+            <div class="header-navigation">
+                <div class="header-navigation-logo">
+                    <img src="../../img/Logo_website.png" alt="" class="header-navigation-logo-img">
+                </div>
+            </div>
+            <div class="body-navigation">
+                <ul class="body-navigation-menu menu-style">
+                    <li class="body-navigation-li"><a href="/Manager/blog" class="body-navigation-link text-link"><i
+                                class="bi bi-file-earmark-text icon-text"></i> Bài đăng</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/revenue" class="body-navigation-link text-link"><i
+                                class="bi bi-bar-chart icon-text"></i> Doanh thu</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/order" class="body-navigation-link text-link"><i
+                                class="bi bi-handbag icon-text"></i> Đơn hàng</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/filter" class="body-navigation-link text-link"><i
+                                class="bi bi-list-ul icon-text"></i> Phân loại</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/product" class="body-navigation-link text-link"><i
+                                class="bi bi-box icon-text"></i> Sản phẩm</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/account" class="body-navigation-link text-link"><i
+                                class="bi bi-people icon-text"></i>Tài khoản</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-nagvigation">
+                <hr style=" border-top: 1px solid var(--gray_100) ; width: 90%; margin: 5px auto;">
+                <div class="footer-nagvigation-content">
+                    <div class="footer-nagvigation-account">
+                        <h4 class="footer-nagvigation-account-name">Olivia Rhye</h4>
+                        <h6 class="footer-nagvigation-account-email">olivia@untitledui.com</h6>
+                    </div>
+                    <div class="footer-nagvigation-logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                            <path fill-rule="evenodd"
+                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div id="Manager_Content">
+            <div class="header_content">
+                <div class="header_content_text-group">
+                    <h3 class="header_content_main-text text-title">Quản lý sản phẩm</h3>
+                    <h5 class="header_content_sub-text text-title">Chức năng quản lý sản phẩm giúp người dùng dễ dàng
+                        quản lý, sắp xếp và cập nhật...</h5>
+                </div>
+                <div class="header_content_button-group">
+                    <form action="" method="post">
+                        <button class="btn btn-export btn-style"><i class="bi bi-cloud-download icon-text"></i> Xuất
+                            file</button>
+                    </form>
+                </div>
+            </div>
+            <div class="body_content">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs body_content_tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="btn-style" id="list-blogs-tab" data-bs-toggle="tab" data-bs-target="#list_blogs"
+                            type="button" role="tab" aria-controls="list_blogs" aria-selected="true">Danh sách sản
+                            phẩm</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="btn-style" id="form-blogs-tab" data-bs-toggle="tab" data-bs-target="#form_blogs"
+                            type="button" role="tab" aria-controls="form_blogs" aria-selected="false">Chi tiết sản
+                            phẩm</button>
+                    </li>
+                </ul>
+                <hr>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="list_blogs" role="tabpanel" aria-labelledby="list-blogs-tab">
+                        <div class="list_blogs-header">
+                            <div class="list_blogs-header-seletion-group">
+                                <form action="" method="post">
+                                    <div class="mb-3" style="margin-right: 20px;">
+                                        <select class="form-select form-select-lg" name="" id="">
+                                            <option selected>Từ A đến Z</option>
+                                            <option value="">Từ Z đến A</option>
+                                            <option value="">Istanbul</option>
+                                            <option value="">Jakarta</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3" style="margin-right: 20px;">
+                                        <select class="form-select form-select-lg" name="" id="">
+                                            <option selected>Nhóm loại</option>
+                                            <option value="">New Delhi</option>
+                                            <option value="">Istanbul</option>
+                                            <option value="">Jakarta</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="list_blogs-header-search-group">
+                                <form action="">
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-outline-secondary box-shadow-none" type="button"
+                                            id="button-search"><i class="bi bi-search"></i></button>
+                                        <input type="text" class="form-control box-shadow-none" placeholder="Tìm kiếm"
+                                            aria-label="Example text with button addon"
+                                            aria-describedby="button-search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="list_blogs-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped m-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="text-align: left;">
+                                                <form action="" method="post">
+                                                    <input class="form-check-input box-shadow-none"
+                                                        style="margin-right: 10px;" name="" id="" type="checkbox"
+                                                        value="checkedValue" aria-label="Text for screen reader">
+                                                   Sản phẩm
+                                                    <i class="bi bi-arrow-down"></i>
+                                                </form>
+                                            </th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Đơn giá</th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <form action="">
+                                                <td scope="row" class="td-first-table">
+                                                    <input class="form-check-input box-shadow-none" name="" id=""
+                                                        type="checkbox" value="checkedValue"
+                                                        aria-label="Text for screen reader">
+
+                                                    <div class="text-blogs-group">
+                                                        <h4 class="text-title-blogs text-title">Bàn QUADA</h4>
+                                                        <h6 class="text-id-blogs text-title">SP2013</h6>
+                                                    </div>
+                                                </td>
+                                                <td>10023 cái</td>
+                                                <td>2,130,000 đ</td>
+                                                <td>13/03/2023</td>
+                                                <td>
+                                                    <button class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-trash-fill"></i></button>
+                                                    <button class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-pen-fill"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                <button class="btn-style btn-prev">Trước đó</button>
+                                                <button class="btn-style btn-next">Kế tiếp</button>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                            <td>
+                                                Trang 1 của 10
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="form_blogs" role="tabpanel" aria-labelledby="form-blogs-tab">
+                        <div class="form_blogs-pane">
+                            <form action="">
+                                <div class="group-fleld group-fleld-01">
+                                    <div class="mb-3 form-group">
+                                        <label for="id_product" class="form-label">Mã sản phẩm</label>
+                                        <input type="text" min="0" name="id-product" id="id_product"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="name_product" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" min="0" name="name-product" id="name_product"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="price_product" class="form-label">Ngày tạo</label>
+                                        <div class="input-group">
+                                            <input type="number" name="price-product" id="price_product"
+                                                class="form-control box-shadow-none" placeholder=""
+                                                aria-describedby="price_product-span">
+                                            <span class="input-group-text" id="price_product-span">VND</span>
+                                        </div>
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-02">
+                                    <div class="mb-3 form-group">
+                                        <label for="producer_product" class="form-label">Nhà sản xuất</label>
+                                        <select class="form-control form-select box-shadow-none" name="producer-product"
+                                            id="producer_product">
+                                            <option selected>Make my home</option>
+                                            <option value="">Uinest</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="type-group_product" class="form-label">Phân nhóm loại</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="card-credit"><i class="bi-layers-fill"
+                                                    style="color: var(--gray_700);"></i></span>
+                                            <select class="form-control form-select box-shadow-none"
+                                                name="type-group-product" id="type-group_product"
+                                                aria-describedby="card-credit">
+                                                <option selected>Bàn làm việc, bàn ăn</option>
+                                                <option value="">Ghế làm việc, ghế ăn</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="promotion_product" class="form-label">Mã khuyến mãi</label>
+                                        <select class="form-control form-select box-shadow-none"
+                                            name="promotion-product" id="promotion_product">
+                                            <option selected>KM-120223-210323-10</option>
+                                            <option value="">KM-210223-210323-10</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-03">
+                                    <div class="mb-3 form-group">
+                                        <label for="quatity_product" class="form-label">Số lượng sản phẩm</label>
+                                        <input type="text" name="quatity-product" id="quatity_product"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="date_product" class="form-label">Ngày đăng</label>
+                                        <input type="date" name="date-product" id="date_product"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-04">
+                                    <div class="mb-3 form-group">
+                                        <label for="link-video_product" class="form-label">Link video lắp đặt</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="youtube"><i class="bi-youtube"
+                                                    style="color: var(--gray_700);"></i></span>
+                                            <input type="text" name="link-video-product" id="link-video_product"
+                                                class="form-control box-shadow-none" placeholder=""
+                                                aria-describedby="youtube">
+                                        </div>
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-05">
+                                    <div class="mb-3 form-group">
+                                        <label for="length_product" class="form-label">Chiều dài</label>
+                                        <div class="input-group">
+                                            <input type="number" name="length-product" id="length_product"
+                                            class="form-control box-shadow-none" placeholder=""
+                                            aria-describedby="youtube">
+                                            <span class="input-group-text" id="length_product-span">CM</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="width_product" class="form-label">Chiều rộng</label>
+                                        <div class="input-group">
+                                            <input type="number" name="width-product" id="width_product"
+                                            class="form-control box-shadow-none" placeholder=""
+                                            aria-describedby="youtube">
+                                            <span class="input-group-text" id="width_product-span">CM</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="height_product" class="form-label">Chiều cao</label>
+                                        <div class="input-group">
+                                            <input type="number" name="height-product" id="height_product"
+                                            class="form-control box-shadow-none" placeholder=""
+                                            aria-describedby="youtube">
+                                            <span class="input-group-text" id="height_product-span">CM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-06">
+                                    <div class="table-responsive" style="height: 400px; overflow: auto;">
+                                        <table class="table  m-0 table-hover ">
+                                            <div class="on-the-table">
+                                                <h6 class="on-the-table-title text-title">Chất liệu sản phẩm</h6>
+                                                <button class="on-the-table-button btn-style"><i class="bi-plus-lg"></i>Thêm chất liệu</button>
+                                            </div>
+                                            <thead>
+                                                <tr class="table-active">
+                                                    <th scope="col" style="text-align: left;">
+                                                        <form action="" method="post">
+                                                            <input class="form-check-input box-shadow-none"
+                                                                style="margin-right: 10px;" name="" id=""
+                                                                type="checkbox" value="checkedValue"
+                                                                aria-label="Text for screen reader">
+                                                           chất liệu
+                                                            <i class="bi bi-arrow-down"></i>
+                                                        </form>
+                                                    </th>
+                                                    <th scope="col">Ngày đăng</th>
+                                                    <th scope="col">Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="">
+                                                    <form action="">
+                                                        <td scope="row" class="td-first-table">
+                                                            <input class="form-check-input box-shadow-none" name=""
+                                                                id="" type="checkbox" value="checkedValue"
+                                                                aria-label="Text for screen reader">
+
+                                                            <div class="text-blogs-group">
+                                                                <h4 class="text-title-blogs text-title">Tên chất liệu
+                                                                </h4>
+                                                                <h6 class="text-id-blogs text-title">Mã chất liệu</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td>13/03/2023</td>
+                                                        <td>
+                                                            <button class="btn" style="color: var(--gray_600);"><i
+                                                                    class="bi bi-trash-fill"></i></button>
+                                                            <button class="btn" style="color: var(--gray_600);"><i
+                                                                    class="bi bi-pen-fill"></i></button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                                
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-07">
+                                    <div class="table-responsive" style="height: 400px; overflow: auto;">
+                                        <table class="table  m-0 table-hover ">
+                                            <div class="on-the-table">
+                                                <h6 class="on-the-table-title text-title">Hình ảnh sản phẩm</h6>
+                                                <div class="btn-group">
+                                                    <button class="btn-style"><i class="bi-download"></i> Tải ảnh xuống</button>
+                                                    <button class="on-the-table-button btn-style"><i class="bi-upload"></i> Thêm ảnh lên</button>
+                                                </div>
+                                            </div>
+                                            <thead>
+                                                <tr class="table-active">
+                                                    <th scope="col" style="text-align: left;">
+                                                        <form action="" method="post">
+                                                            <input class="form-check-input box-shadow-none"
+                                                                style="margin-right: 10px;" name="" id=""
+                                                                type="checkbox" value="checkedValue"
+                                                                aria-label="Text for screen reader">
+                                                            File ảnh
+                                                            <i class="bi bi-arrow-down"></i>
+                                                        </form>
+                                                    </th>
+                                                    <th scope="col">Dung lượng</th>
+                                                    <th scope="col">Ngày đăng</th>
+                                                    <th scope="col">Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="">
+                                                    <form action="">
+                                                        <td scope="row" class="td-first-table">
+                                                            <input class="form-check-input box-shadow-none" name=""
+                                                                id="" type="checkbox" value="checkedValue"
+                                                                aria-label="Text for screen reader">
+
+                                                            <div class="text-blogs-group">
+                                                                <h4 class="text-title-blogs text-title">Tên ảnh
+                                                                </h4>
+                                                                <h6 class="text-id-blogs text-title">Mã ảnh</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td>12 MB</td>
+                                                        <td>13/03/2023</td>
+                                                    
+                                                        <td>
+                                                            <button class="btn" style="color: var(--gray_600);"><i
+                                                                    class="bi bi-trash-fill"></i></button>
+                                                            <button class="btn" style="color: var(--gray_600);"><i
+                                                                    class="bi bi-pen-fill"></i></button>
+                                                        </td>
+                                                    </form>
+                                                </tr>
+                                                
+                                               
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-011">
+                                    <div class="mb-3 form-group">
+                                        <label for="" class="form-label">Mô tả sản phẩm</label>
+                                        <textarea class="form-control" name="" id="" rows="9"></textarea>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-012">
+                                    <button class="btn btn-style btn-update">Cập nhật</button>
+                                    <button class="btn btn-style btn-add">Thêm mới</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
