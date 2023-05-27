@@ -26,15 +26,172 @@ body {
     height: 90%;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center !important;
     margin: auto;
 }
 
 .lg-ct-left {
     width: 50%;
+    height: 100%;
 }
 
-.lg-ct-form {
+#LoginContainer .lg-ct-left-form {
+    width: 95%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#LoginContainer .lg-ct-left-form .lg-ct-top {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#LoginContainer .lg-ct-left-form .lg-ct-top .lg-ct-title {
+    font-family: 'Open Sans', sans-serif;
+    width: 70%;
+    margin: 0 auto;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+#LoginContainer .lg-ct-left-form .form-group {
+    width: 100% !important;
+    
+}
+
+
+#LoginContainer .lg-ct-left-form .form-group label {
+    width: 100%;
+    height: 20px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #344054;
+}
+
+#LoginContainer .lg-ct-left-form .form-group .form-control {
+    width: 100%;
+    height: 45px;
+    background: #FFFFFF;
+    padding: 10px 14px;
+    border: 1px solid #EAECF0;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 3px;
+}
+
+
+#LoginContainer .lg-ct-left-form .form-check {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+#LoginContainer .lg-ct-left-form  .form-check .input-groups {
+   display: flex;
+   align-items: center !important;
+}
+
+
+#LoginContainer .lg-ct-left-form  .form-check .input-groups-01 {
+    margin-left:22px ;
+ }
+
+ #LoginContainer .lg-ct-left-form  .form-check .input-groups-01 label {
+    margin-left: 5px;
+ }
+
+ 
+#LoginContainer .lg-ct-left-form  .btn-login  {
+    width: 100%;
+    background: #101828;
+    border: 1px solid #475467;
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 3px; 
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 20px;
+    color: #FFFFFF;
+}
+
+#LoginContainer .lg-ct-left-form .lg-ct-end {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    width: 100%;
+    height: 24px;
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+   
+
+}
+
+#LoginContainer .lg-ct-left-form .lg-ct-end p {
+    color: #000000;
+}
+
+#LoginContainer .lg-ct-left-form .lg-ct-end a {
+    margin-left: 5px;
+    color: #101828;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+
+
+/* -------------------------------- */
+.lg-ct-right {
+    width: 50%;
+    height: 100%;
+}
+
+.lg-image {
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
+    height: 100%;
+    /* background-color: antiquewhite; */
+}
+
+.lg-image img {
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .lg-ct-form {
     width: 80%;
     margin: auto;
     display: flex;
@@ -81,12 +238,25 @@ body {
     border-radius: 3px;
 }
 
-.lg-ct-form .lg-ct-mid-form-check {
+.lg-ct-form .form-check {
     display: flex;
     justify-content: space-between;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.lg-ct-form .lg-ct-mid-form-check label {
+.lg-ct-form .form-check .input-group {
+   display: flex;
+   align-items: center !important;
+   width: fit-content !important;
+}
+
+.lg-ct-form .form-check .input-group .form-check-label{
+    
+    overflow: hidden;
+}
+
+ .lg-ct-form .lg-ct-mid-form-check label {
     width: 93px;
     height: 20px;
     font-family: 'Inter';
@@ -107,7 +277,7 @@ body {
     line-height: 24px;
     text-decoration-line: underline;
     color: #000000;
-}
+} 
 
 .lg-ct-form .btn-primary {
     width: 410px;
@@ -116,7 +286,7 @@ body {
     border: 1px solid #475467;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
     border-radius: 3px;
-    /*  */
+ 
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 500;
@@ -137,8 +307,7 @@ body {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    /* color: #000000; */
-    /* color: #101828; */
+   
 
 }
 
@@ -150,27 +319,4 @@ body {
     margin-left: 5px;
     color: #101828;
     text-decoration: none;
-}
-
-/* -------------------------------- */
-.lg-ct-right {
-    width: 50%;
-    height: 100%;
-}
-
-.lg-image {
-    width: 100%;
-    /* border: 10px; */
-    /* margin: 20px 16px; */
-    overflow: hidden;
-    height: 100%;
-    /* background-color: antiquewhite; */
-}
-
-.lg-image img {
-    width: 100%;
-    border-radius: 10px;
-    height: 100%;
-    object-fit: cover;
-
-}
+} */
