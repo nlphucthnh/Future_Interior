@@ -313,32 +313,38 @@ img {
 .button-sell .btn-sell {
     width: 40%;
     height: 57px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 27px;
     letter-spacing: 0em;
-    color: white;
     background-color: black;
+}
+
+.button-sell .btn-sell a{
+    color: white;
+}
+
+.button-sell .btn-sell a:hover{
+    color: black;
+    background-color: white;
 }
 
 .button-sell .btn-base {
     width: 40%;
     height: 57px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     line-height: 27px;
     letter-spacing: 0em;
-    color: black;
     background-color: white;
 }
 
-.button-sell .btn-sell:hover {
+.button-sell .btn-base a{
+    text-decoration: none;
     color: black;
-    background-color: white;
 }
 
-.button-sell .btn-base:hover {
-
+.button-sell .btn-base:hover >a{
     color: white;
     background-color: black;
 }

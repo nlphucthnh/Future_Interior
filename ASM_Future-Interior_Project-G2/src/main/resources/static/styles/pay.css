@@ -54,4 +54,19 @@
     line-height: 28px;
     letter-spacing: 0.035em;
     text-align: left;
+    margin-bottom: 40px;
 }
+
+.header-matercard {
+    border: 1px solid #D0D5DD;
+    border-radius: 8px;
+  }
+
+  .input-matercard {
+    background-color: #F2F4F7;
+    border-radius: 8px;
+  }
+
+  .form-group {
+    padding: 20px 50px 10px 50px;
+  }
