@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class testController {
+public class UserController {
 	@GetMapping("/home-page")
 	public String getHomePage() {
 
