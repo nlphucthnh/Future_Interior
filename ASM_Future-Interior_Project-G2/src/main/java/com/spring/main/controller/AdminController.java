@@ -9,6 +9,12 @@ public class AdminController {
 	
 //	---------------- GET URL MANAGER PAGE ----------------//
 	
+	@GetMapping("/Manager/login")
+	public String ManageLoginPage() {
+		return "Manager-login-page";
+	}
+	
+	
 	@GetMapping("/Manager/blog")
 	public String ManageBlogPage() {
 		return "Manager-blog-page";

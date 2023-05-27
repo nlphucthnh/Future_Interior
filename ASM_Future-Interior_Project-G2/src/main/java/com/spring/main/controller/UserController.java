@@ -8,10 +8,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
+	
+
+	
+	@GetMapping("/login-page")
+	public String getLoginPage() {
+		return "dangnhap";
+	}
+	
+	@GetMapping("/sign-up-page")
+	public String getSiginPage() {
+		return "dangky";
+	}
+	
 	@GetMapping("/home-page")
 	public String getHomePage() {
-
-		return "home";
+		return "index";
+	}
+	
+	@GetMapping("/blog-page")
+	public String getBlogPage() {
+		return "blog";
+	}
+	
+	@GetMapping("/blogs-item-page")
+	public String getBlogItemPage() {
+		return "blog-item";
 	}
 
 	@GetMapping("/about-page")
