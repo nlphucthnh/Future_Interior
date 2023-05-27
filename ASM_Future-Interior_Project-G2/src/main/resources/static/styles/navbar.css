@@ -46,12 +46,12 @@
 
 .show>.nav-link,
 .nav-link.active {
-    color: #040505 !important;
+    color: #040505 ;
 }
 
 
 .nav-link:hover {
-    color: #040505 !important;
+    color: #040505 ;
 }
 
 .item-menu {
@@ -242,4 +242,14 @@
     line-height: 24px;
     letter-spacing: 0em;
 
+}
+
+/* duong dan con  */
+.duongdancon a{
+    color: #475467;
+    text-decoration: none;
+}
+.duongdancon a:hover{
+    color: #09459f;
+    text-decoration: underline;
 }

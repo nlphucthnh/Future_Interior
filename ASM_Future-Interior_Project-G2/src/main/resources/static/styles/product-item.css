@@ -73,7 +73,7 @@ img {
     overflow: hidden;
 }
 
-.tab-content img {
+.img-tabcontent img {
     width: 100%;
     height: 650px;
     animation-name: opacity;
@@ -132,10 +132,6 @@ img {
     margin-right: 10px;
 }
 
-.size:first-of-type {
-    /* margin-left: 40px; */
-}
-
 .color {
     display: inline-block;
     vertical-align: middle;
@@ -145,9 +141,6 @@ img {
     border-radius: 2px;
 }
 
-.color:first-of-type {
-    /* margin-left: 20px; */
-}
 
 .add-to-cart,
 .like {
@@ -233,14 +226,15 @@ img {
 
 }
 
-.product-item-text .properties h3{
+.product-item-text .properties h3 {
     font-size: 20px;
     font-weight: 600;
     line-height: 30px;
     letter-spacing: 0.025em;
     text-align: left;
 }
-.product-item-text .properties h3 span{
+
+.product-item-text .properties h3 span {
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
@@ -248,3 +242,192 @@ img {
     text-align: left;
     color: Gray/500;
 }
+
+/* quatittyy */
+
+
+.quantity label {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0.025em;
+    text-align: left;
+
+}
+
+.quantity .input-group {
+    flex-grow: 1;
+    width: auto;
+}
+
+.quantity .input-group-prepend,
+.quantity .input-group-append {
+    display: flex;
+}
+
+.quantity .input-group-prepend .btn,
+.quantity .input-group-append .btn {
+    border-radius: 0;
+    background-color: #171d27;
+    color: white;
+}
+
+.quantity .input-group-prepend .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.quantity .input-group-append .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+}
+
+.quantity-input {
+    text-align: center;
+    width: 80px;
+    height: 40px;
+}
+
+/* item-more */
+.item-more label {
+    margin: 35px 0 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0.025em;
+    text-align: left;
+}
+
+.option-item select {
+    width: 100%;
+    height: 44px;
+    border-radius: 2px;
+    padding-left: 15px;
+    color: #667085;
+    border: 1px solid #D0D5DD;
+}
+
+/* btn sell  */
+.button-sell .btn-sell {
+    width: 40%;
+    height: 57px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0em;
+    background-color: black;
+}
+
+.button-sell .btn-sell a{
+    color: white;
+}
+
+.button-sell .btn-sell a:hover{
+    color: black;
+    background-color: white;
+}
+
+.button-sell .btn-base {
+    width: 40%;
+    height: 57px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0em;
+    background-color: white;
+}
+
+.button-sell .btn-base a{
+    text-decoration: none;
+    color: black;
+}
+
+.button-sell .btn-base:hover >a{
+    color: white;
+    background-color: black;
+}
+
+/* tab mota */
+.nav-tabs {
+    background: #344054;
+}
+
+.nav-link.active::after {
+    content: '';
+    display: flex;
+    width: 100%;
+    height: 2px;    
+    background: #f4f4f4;
+}
+.nav-tabs .nav-link{    
+    border: 0px;
+    padding: 20px;
+    font-size: 20px;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    background: #344054;
+    padding: 20px;
+}
+
+/* mo ta - huong dan lap dat  */
+/* .nav-link .active .img-item{
+    position: relative;
+    height: 75px;
+  } */
+/* 
+  .nav-link.active.img-item::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+  }
+
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active .img-item{
+    color: #f5f5f5;
+    background-color: #344054;
+    border-color: #344054;
+  } */
+
+  .nav-tabs .nav-link{  
+    margin: 10px 20px;
+    /* background: 0 0; */
+    /* border: 1px solid transparent; */
+    /* border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem; */
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    letter-spacing: 0em;
+    text-align: center;
+    font-family: "EB Garamond";
+  }
+
+  .nav.nav-tabs {
+    margin-top: 40px;
+    height: 100px;
+    padding-left: 40px;
+    background-color: #344054;
+  }
+
+  .description p {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 41px;
+    letter-spacing: 0em;
+  }
+
+  .preserve {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 41px;
+    letter-spacing: 0em;
+    margin-top: 100px;
+  }
+
+  
