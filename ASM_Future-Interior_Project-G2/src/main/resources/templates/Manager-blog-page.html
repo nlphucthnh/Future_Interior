@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- icon web  -->
+    <link rel="icon" type="image/x-icon" href="../../img/logoMark.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--link css -->
+    <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navigation.css">
+    <link rel="stylesheet" href="/styles/blog-page.css">
+    <title>Manager blog</title>
+</head>
+
+<body>
+    <div class="background-manager">
+       <nav id="Manager_Navigation">
+            <div class="header-navigation">
+                <div class="header-navigation-logo">
+                    <img src="../../img/Logo_website.png" alt="" class="header-navigation-logo-img">
+                </div>
+            </div>
+            <div class="body-navigation">
+                <ul class="body-navigation-menu menu-style">
+                    <li class="body-navigation-li"><a href="/Manager/blog" class="body-navigation-link text-link"><i
+                                class="bi bi-file-earmark-text icon-text"></i> Bài đăng</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/revenue" class="body-navigation-link text-link"><i
+                                class="bi bi-bar-chart icon-text"></i> Doanh thu</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/order" class="body-navigation-link text-link"><i
+                                class="bi bi-handbag icon-text"></i> Đơn hàng</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/filter" class="body-navigation-link text-link"><i
+                                class="bi bi-list-ul icon-text"></i> Phân loại</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/product" class="body-navigation-link text-link"><i
+                                class="bi bi-box icon-text"></i> Sản phẩm</a></li>
+                    <li class="body-navigation-li"><a href="/Manager/account" class="body-navigation-link text-link"><i
+                                class="bi bi-people icon-text"></i>Tài khoản</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-nagvigation">
+                <hr style=" border-top: 1px solid var(--gray_100) ; width: 90%; margin: 5px auto;">
+                <div class="footer-nagvigation-content">
+                    <div class="footer-nagvigation-account">
+                        <h4 class="footer-nagvigation-account-name">Olivia Rhye</h4>
+                        <h6 class="footer-nagvigation-account-email">olivia@untitledui.com</h6>
+                    </div>
+                    <div class="footer-nagvigation-logout">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                            class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                            <path fill-rule="evenodd"
+                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div id="Manager_Content">
+            <div class="header_content">
+                <div class="header_content_text-group">
+                    <h3 class="header_content_main-text text-title">Quản lý bài đăng</h3>
+                    <h5 class="header_content_sub-text text-title">Quản lý nội dung những bài đăng của website nhằm
+                        quảng bá sản phẩm</h5>
+                </div>
+                <div class="header_content_button-group">
+                    <form action="" method="post">
+                        <button class="btn btn-export btn-style"><i class="bi bi-cloud-download icon-text"></i> Xuất
+                            file</button>
+                    </form>
+                </div>
+            </div>
+            <div class="body_content">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs body_content_tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="btn-style active" id="list-blogs-tab" data-bs-toggle="tab"
+                            data-bs-target="#list_blogs" type="button" role="tab" aria-controls="list_blogs"
+                            aria-selected="true">Danh sách bài đăng</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="btn-style" id="form-blogs-tab" data-bs-toggle="tab" data-bs-target="#form_blogs"
+                            type="button" role="tab" aria-controls="form_blogs" aria-selected="false">Chi tiết bài
+                            đăng</button>
+                    </li>
+                </ul>
+                <hr>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="list_blogs" role="tabpanel" aria-labelledby="list-blogs-tab">
+                        <div class="list_blogs-header">
+                            <div class="list_blogs-header-seletion-group">
+                                <form action="" method="post">
+                                    <div class="mb-3" style="margin-right: 20px;">
+                                        <select class="form-select form-select-lg" name="" id="">
+                                            <option selected>Từ A đến Z</option>
+                                            <option value="">Từ Z đến A</option>
+                                            <option value="">Istanbul</option>
+                                            <option value="">Jakarta</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <select class="form-select form-select-lg" name="" id="">
+                                            <option selected>Theo ngày</option>
+                                            <option value="">New Delhi</option>
+                                            <option value="">Istanbul</option>
+                                            <option value="">Jakarta</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="list_blogs-header-search-group">
+                                <form action="">
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-outline-secondary box-shadow-none" type="button"
+                                            id="button-search"><i class="bi bi-search"></i></button>
+                                        <input type="text" class="form-control box-shadow-none" placeholder="Tìm kiếm"
+                                            aria-label="Example text with button addon"
+                                            aria-describedby="button-search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="list_blogs-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped m-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="text-align: left;">
+                                                <form action="" method="post">
+                                                    <input class="form-check-input box-shadow-none"
+                                                        style="margin-right: 10px;" name="" id="" type="checkbox"
+                                                        value="checkedValue" aria-label="Text for screen reader">
+                                                    Bài đăng
+                                                    <i class="bi bi-arrow-down"></i>
+                                                </form>
+                                            </th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Tác giả</th>
+                                            <th scope="col">Tài khoản đăng</th>
+                                            <th scope="col">Lược xem</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <form action="">
+                                                <td scope="row" class="td-first-table">
+                                                    <input class="form-check-input box-shadow-none" name="" id=""
+                                                        type="checkbox" value="checkedValue"
+                                                        aria-label="Text for screen reader">
+                                                    <div class="text-blogs-group">
+                                                        <h4 class="text-title-blogs text-title">Unis - Bộ sưu tập nội
+                                                            thất đẳng cấp</h4>
+                                                        <h6 class="text-id-blogs text-title">Mã bài đăng</h6>
+                                                    </div>
+                                                </td>
+                                                <td>13/03/2023</td>
+                                                <td>Phúc Thịnh</td>
+                                                <td>phucthnh123</td>
+                                                <td>100000 lượt xem</td>
+                                                <td>
+                                                    <button class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-trash-fill"></i></button>
+                                                    <button class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-pen-fill"></i></button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                <button class="btn-style btn-prev">Trước đó</button>
+                                                <button class="btn-style btn-next">Kế tiếp</button>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                Trang 1 của 10
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="form_blogs" role="tabpanel" aria-labelledby="form-blogs-tab">
+                        <div class="form_blogs-pane" >
+                            <form action="">
+                                <div class="group-fleld group-fleld-01">
+                                    <div class="mb-3 form-group">
+                                        <label for="titel_blog" class="form-label">Tiêu đề bài đăng</label>
+                                        <input type="text" name="titel-blog" id="titel_blog"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="description_blog" class="form-label">Mô tả bài đăng</label>
+                                        <input type="text" name="description-blog" id="description_blog"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-02">
+                                    <div class="mb-3 form-group">
+                                        <label for="view_blog" class="form-label">Lượt xem bài đăng</label>
+                                        <input type="number" min="0" name="view-blog" id="view_blog"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="image_blog" class="form-label">Link ảnh nền</label>
+                                        <input type="file" name="image-blog" id="image_blog" aria-describedby="img-blog"
+                                            class="form-control box-shadow-none" placeholder="">
+
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-03">
+                                    <div class="mb-3 form-group">
+                                        <label for="view_blog" class="form-label">Lượt xem bài đăng</label>
+                                        <input type="number" min="0" name="view-blog" id="view_blog"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="account_blog" class="form-label">Tài khoản đăng</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="calendar"><i
+                                                    class="bi-calendar-check-fill"
+                                                    style="color: var(--gray_700);"></i></span>
+                                            <select class="form-control  box-shadow-none" name="account_blog" id=""
+                                                aria-describedby="calendar">
+                                                <option selected>phucThinh123</option>
+                                                <option value="">NewDelhi</option>
+                                                <option value="">Istanbul</option>
+                                                <option value="">Jakarta</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="author_blog" class="form-label">Tác giả bài đăng</label>
+                                        <input type="text" name="author_blog" id="author_blog"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-04">
+                                  <div class="mb-3 form-group">
+                                    <label for="content_blog" class="form-label">Nội dung bài đăng</label>
+                                    <textarea class="form-control box-shadow-none" name="" id="content_blog" rows="9"></textarea>
+                                  </div>
+                                </div>
+                                <div class="group-fleld group-fleld-05">
+                                    <button class="btn btn-style btn-clear"><i class="bi-brush"></i></button>
+                                    <button class="btn btn-style btn-update">Cập nhật</button>
+                                    <button class="btn btn-style btn-add">Thêm mới</button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

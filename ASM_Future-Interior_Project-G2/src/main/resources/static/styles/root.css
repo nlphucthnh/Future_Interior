@@ -1,0 +1,90 @@
+/* font */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+
+:root {
+    /* Color-primary */
+    --gray_25 : #FCFCFD;
+    --gray_50 : #F9FAFB;
+    --gray_100 : #F2F4F7;
+    --gray_200 : #EAECF0;
+    --gray_300 : #D0D5DD;
+    --gray_400 : #98A2B3;
+    --gray_500 : #667085;
+    --gray_600 : #475467;
+    --gray_700 : #344054;
+    --gray_800 : #1D2939;
+    --gray_900 : #101828;
+    --gray_1000 : #090e18;
+    /* font-primary */
+    --font_primary : "Open sans";
+    --font_secondary : "EB Garamond";
+    --font_tertiary : "Inter";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.text-link {
+    text-decoration: none;
+    color: black;
+}
+
+.menu-style {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+
+.icon-text {
+    font-size: 20px; 
+    margin: 0 5px;
+}
+
+.text-title {
+    margin: 0;
+    padding: 0;
+}
+
+.btn-style {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--gray_900);
+    background-color: var(--gray_25);
+    border: 1px solid var(--gray_300);
+    padding: 2px 10px;
+}
+
+.box-shadow-none:focus {
+    box-shadow: none;
+    border: 1px solid var(--gray_300);
+}
+
+.badge-blue {
+    background-color: #EFF8FF;
+    color: #175CD3;
+}
+
+.badge-yellow {
+    background-color: #ffffeb;
+    color: #b5b208;
+}
+
+
+.badge-gray {
+    background-color: #F2F4F7;
+    color: #344054;
+}
+
+.badge-green {
+    background-color: #ECFDF3;
+    color: #027A48;
+}
+
+.badge-purple {
+    background-color: #F9F5FF;
+    color: #6941C6;
+}
