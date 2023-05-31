@@ -1,211 +1,133 @@
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 200,
-        'GRAD' 0,
-        'opsz' 48
-}
-
-#carouselExampleIndicators .carousel-indicators [data-bs-target] {
-    width: 15px;
-    height: 15px;
-    background-color: #000000;
-    border-radius: 50%;
-}
-
-#carouselExampleIndicators .carousel-indicators {
-    justify-content: flex-end;
-}
-
-#carouselExampleIndicators .carousel-indicators li {
-    background-color: white;
-
-    border: 2px double #000000;
-
-}
-
-/* Thiết lập màu cho carousel-indicators khi được chọn */
-#carouselExampleIndicators .carousel-indicators li.active {
-    background-color: rgb(174, 166, 166);
-    border: 2px double #000000;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .banner-slide {
-    /* Chiều rộng của phần khúc cần hiển thị */
-    height: 820px;
-    /* Chiều cao của phần khúc cần hiển thị */
-    overflow: hidden;
-    /* Ẩn các phần tử vượt ra khỏi phạm vi của .image-container */
-}
-
-.banner-slide img {
+    margin-top: 80px;
     width: 100%;
-    /* Đảm bảo hình ảnh điền vào phần tử cha */
-    height: 1300px;
-    /* Tự động tính toán chiều cao phù hợp với tỷ lệ khung hình */
-    object-fit: cover;
-    /* Cắt và điều chỉnh kích thước hình ảnh để điền vào phần tử */
-    object-position: center bottom;
-    /* Hiển thị phần khúc dưới của hình ảnh */
+    height: 80vh;
+    background-image: url('../img/Banner-about.png');
+    background-size: cover;
 }
 
-.carousel-inner .carousel-item .banner-content {
-    position: absolute;
-    top: 280px;
-    left: 80px;
-    z-index: 2;
-    text-align: left;
-    color: #fff;
-}
-
-.carousel-inner .carousel-item::before {
-    content: "";
-    position: absolute;
-    top: 240px;
-    left: 0;
+.banner-slide .background-content {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    height: inherit;
     width: 70%;
-    height: 30%;
-    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.banner-slide .background-content div{
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 0;
+    background-color: rgba(0, 0, 0, 0.288);
 }
 
-.carousel-inner .carousel-item .banner-content h2 {
-
-    font-family: "EB Garamond";
-    font-size: 48px;
-    font-weight: 600;
-    line-height: 63px;
-    letter-spacing: 0em;
-    text-align: left;
-
+.banner-slide .background-content div .banner-content {
+    width: 75%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0);
 }
 
-.carousel-inner .carousel-item .banner-content .price {
-
-    font-family: EB Garamond;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 32px;
-    letter-spacing: 0em;
-    text-align: left;
+.banner-slide .background-content div .banner-content .title-content {
+    font-family: var(--font_secondary);
+    font-size: 36px;
+    color: var(--gray_25);
 }
 
-.carousel-inner .carousel-item .banner-content pre {
+.banner-slide .background-content div .banner-content .text-content {
+    font-family: var(--font_primary);
+    font-size: 18px;
+    color: var(--gray_25);
+    text-align: justify;
+    line-height: 30px;
+}
 
-    font-family: "Open Sans";
-    font-size: 24px;
+.title-about {
+    width: 100%;
+    height: 80vh;
+}
+
+.title-about .name-page{
+    word-spacing: 10px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px 0;
+    font-family: var(--font_primary);
     font-weight: 500;
-    line-height: 41px;
-    letter-spacing: 0em;
-    text-align: justified;
-
-
+    color: var(--gray_500);
 }
 
-
-/* main title about */
-.title-about h3 {
-    margin: 53px 0px 10px;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: 0.1em;
+.title-about .description-page {
     text-align: center;
+    font-family: var(--font_secondary);
+    font-weight: 500;
+    color: var(--gray_800);
+    font-size: 26px;
+    margin-bottom: 20px;
 }
 
-.title-about p {
-    font-family: "EB Garamond";
-    font-size: 48px;
-    font-weight: 400;
-    line-height: 63px;
-    letter-spacing: 0em;
-    text-align: center;
-    margin: 0 0 35px 0;
+.title-about .row {
+    justify-content: space-between;
+    overflow: hidden;
 }
 
 .product-about {
-    background-color: #E8E8E8;
-    width: 360px;
-
-}
-
-.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
-    margin: 70px 0;
+    width: calc((100% - 5%)/3);
+    background-color: var(--gray_200);
+    height: 300px;
 }
 
-.product-card span {
-    font-size: 50px;
-}
-
-.product-card h5 {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 33px;
-    letter-spacing: 0.02em;
-    text-align: center;
-    margin: 25px 0px;
-}
-
-.product-card .text-muted {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 33px;
-    text-align: center;
-    letter-spacing: 0.025em;
-    color: #000206;
-}
 
 /* banner mid */
 .title-mid-about {
-    margin: 70px 0;
+   width: 100%;
+    height: 475px;
+    background-image: url('../img/banner2-about.jpg');
+    background-size: cover;
 }
 
 .banner-slide-mid {
-    height: 475px;
+    width: 100%;
+    height: inherit;
+    background-color: #1d1d1d91;
     overflow: hidden;
 }
+.banner-content-mid {
+    height: inherit;
+    display: flex;
 
-.banner-slide-mid img {
-    width: 100%;
-    height: 1270px;
-    object-fit: cover;
-    object-position: center bottom;
-}
+} 
 
-.carousel-inner .carousel-item .banner-content-mid {
-    position: absolute;
-    top: 150px;
-    left: 280px;
-    z-index: 2;
-    text-align: left;
-    color: #fff;
-}
-
-.carousel-inner .carousel-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
-
-.carousel-inner .carousel-item .banner-content-mid pre {
-    font-family: "EB Garamond";
-    font-size: 36px;
-    font-weight: 500;
-    line-height: 53px;
-    letter-spacing: 0.085em;
+.banner-content-mid p {
     text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    font-family: var(--font_secondary);
+    width: 50%;
+    margin: auto;
+    color: var(--gray_25);
+   
+}
+
+.create-website {
+    margin-top: 30px;
 }
 
 .creator-title h3 {
     font-family: "EB Garamond";
-    font-size: 40px;
+    font-size: 22px;
     font-weight: 600;
     line-height: 59px;
     letter-spacing: 0.085em;
@@ -215,7 +137,7 @@
 
 .creator-title h5 {
     font-family: "Open Sans";
-    font-size: 32px;
+    font-size: 20px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0.1em;
@@ -241,7 +163,7 @@
 }
 
 .creator-card h3 {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 47px;
     letter-spacing: 0em;
@@ -250,7 +172,7 @@
 }
 
 .creator-card .text-muted {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     line-height: 28px;
     letter-spacing: 0.035em;
@@ -259,7 +181,7 @@
     margin: 20px 0;
 }
 .creator-card h5 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 33px;
     letter-spacing: 0.025em;

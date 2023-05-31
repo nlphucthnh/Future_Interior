@@ -1,29 +1,39 @@
 /* navbar-no-login */
 @import url("/styles/root.css");
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap');
- .navbar {
+
+.navbar {
     justify-content: center;
     width: 100vw;
     height: 80px;
-  }
-  .navbar-nav {
+    position: fixed;
+    top: 0;
+    background-color: var(--gray_25);
+    z-index: 3;
+    border-bottom: 1px solid var(--gray_200);
+}
+
+.navbar-nav {
     flex-direction: row;
-  }
-  .navbar-collapse {
+}
+
+.navbar-collapse {
     justify-content: center;
-  }
-  .navbar-brand {
+}
+
+.navbar-brand {
     margin-right: auto;
-  }
-  .ms-auto {
+}
+
+.ms-auto {
     margin-left: auto;
-  }
+}
 
-  .navbar > .container {
+.navbar>.container {
     height: inherit;
-  }
+}
 
-  .nav-item .sign-navbar a {
+.nav-item .sign-navbar a {
 
     background-color: #000000;
     text-align: center;
@@ -32,29 +42,32 @@
     border: 2px solid black;
     width: 110px;
     border-radius: 3px;
-  }     
-  .nav-item .sign-navbar a:hover{
+}
+
+.nav-item .sign-navbar a:hover {
     color: black;
     background-color: white;
     border: 2px solid black;
     font-weight: 500;
-  }
+}
 
 
 /* navbar */
 .dropdown-hover:hover>.dropdown-menu {
     display: inline-block;
 }
-.dropdown-hover:hover>.dropdown-toggle{
-    
+
+.dropdown-hover:hover>.dropdown-toggle {
+
     color: #040505 !important;
 }
+
 .dropdown-hover>.dropdown-toggle:active {
     pointer-events: none;
 }
 
 .item-menu .nav-item {
-    margin: 0 12px ;
+    margin: 0 12px;
     padding: 20px 0;
 }
 
@@ -67,22 +80,22 @@
 }
 
 .nav-item .nav-link:hover {
-   transform: translateY(-5px);
-   color: var(--gray_1000) !important;
+    transform: translateY(-5px);
+    color: var(--gray_1000) !important;
 }
 
 
 .signin-group {
     display: flex;
     align-items: center;
-} 
+}
 
 
 .signin-group li {
-    margin: 0 10px ;
+    margin: 0 10px;
 }
 
-.signin-group .sign-navbar  {
+.signin-group .sign-navbar {
     margin: 0;
 }
 
@@ -144,7 +157,7 @@
     }
 }
 
-.megamenu .item-group .item-opsition-menu{
+.megamenu .item-group .item-opsition-menu {
     transition: 0.5s;
     display: flex;
     flex-direction: column;
@@ -154,7 +167,7 @@
     cursor: pointer;
 }
 
-.room-group .item-opsition-menu{
+.room-group .item-opsition-menu {
     transition: 0.5s;
     display: flex;
     align-items: center;
@@ -165,8 +178,8 @@
 }
 
 
-.megamenu .item-group  .item-opsition-menu a,
-.megamenu .item-group  .item-opsition-menu p {
+.megamenu .item-group .item-opsition-menu a,
+.megamenu .item-group .item-opsition-menu p {
     padding-left: 7px;
 }
 
@@ -185,7 +198,7 @@
     line-height: 22px;
     letter-spacing: 0em;
     text-align: left;
-   
+
 }
 
 
@@ -315,11 +328,12 @@
 }
 
 /* duong dan con  */
-.duongdancon a{
+.duongdancon a {
     color: #475467;
     text-decoration: none;
 }
-.duongdancon a:hover{
+
+.duongdancon a:hover {
     color: #09459f;
     text-decoration: underline;
 }

@@ -17,13 +17,14 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <!-- link icon -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
- 	<link rel="stylesheet" href="styles/root.css">
+    <link rel="stylesheet" href="styles/root.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/footer.css">
@@ -32,9 +33,9 @@
 </head>
 
 <body>
-    <nav class="container navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a href="/home-page"><img src="img/Logowebsite.png" alt=""></a>
+            <a href="/home-page"><img src="img/Logowebsite.png" style="background-color: var(--gray_25);" alt=""></a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav item-menu">
                     <li class="nav-item">
@@ -47,26 +48,31 @@
                         <a class="nav-link " aria-current="page" href="/blog-page">Bài viết</a>
                     </li>
                     <li class="nav-item dropdown dropdown-hover has-megamenu">
-                        <a class="nav-link " href="/product-page" > Sản phẩm   <i class="bi bi-chevron-down"></i></a>
+                        <a class="nav-link " href="/product-page"> Sản phẩm <i class="bi bi-chevron-down"></i></a>
                         <div class="dropdown-menu megamenu" role="menu">
                             <div class="row g-3">
                                 <div class="col-lg-4 col-6 item-group">
                                     <div class="col-megamenu">
                                         <h6 class="title ">Loại nội thất</h6>
                                         <ul class="list-unstyled ">
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">BÀN - tables</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">BÀN -
+                                                    tables</a>
                                                 <p>Bàn làm việc, bàn ăn, bàn sofa.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">SOFA - sofas</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">SOFA -
+                                                    sofas</a>
                                                 <p>Sofa băng, sofa góc, sofa giường.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GHẾ - chairs</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GHẾ -
+                                                    chairs</a>
                                                 <p>Ghế văn phòng, ghế ăn, ghế cafe.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÈN - lamps</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÈN -
+                                                    lamps</a>
                                                 <p>Đèn sản, đèn bàn, đèn trang trí.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">KỆ, TỦ - sheft units,
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">KỆ, TỦ -
+                                                    sheft units,
                                                     cabinets</a>
                                                 <p>Tử đồ, tủ TV, kệ để đồ.</p>
                                             </li>
@@ -78,16 +84,20 @@
                                         <h6 class="title">&#160;</h6>
                                         <ul class="list-unstyled">
 
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GƯƠNG - mirrors</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GƯƠNG -
+                                                    mirrors</a>
                                                 <p>Gường nhỏ, gương toàn thân.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GIƯỜNG - beds</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GIƯỜNG -
+                                                    beds</a>
                                                 <p>Gường sofr, gường đơn, gường đôi.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">TRANG TRÍ - decorations</a>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">TRANG TRÍ
+                                                    - decorations</a>
                                                 <p>Khung ảnh, kệ giá.</p>
                                             </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÒ GIA DỤNG - household
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÒ GIA
+                                                    DỤNG - household
                                                     goods</a>
                                                 <p>Rem, thung rác.</p>
                                             </li>
@@ -263,45 +273,44 @@ tạo để tạo ra một không gian sống đẹp mắt và hài hòa.
             </div>
 
             <div class="col-6 offset-1 product-main">
-                <div class="row">
-                    <div class="product">
-                        <a href="product-item-page">
-                            <div class="zoom_color noidung">
-                                <img src="img/Sofa_FLYNN.png" alt="Product 1">
-                            </div>
-                            <h3>Sofa FLYNN</h3>
-                        </a>
-                        <p>12,400,000₫</p>
-                    </div>
-                    <div class="product">
-                        <a href="product-item-page">
-                            <div class="zoom_color noidung">
-                                <img src="img/Ban_dep.png" alt="Product 2">
-                            </div>
-                            <h3>Bàn Đẹp</h3>
-                        </a>
-                        <p>4,240,000₫</p>
-                    </div>
+
+                <div class="product">
+                    <a href="product-item-page">
+                        <div class="zoom_color noidung">
+                            <img src="img/Sofa_FLYNN.png" alt="Product 1">
+                        </div>
+                        <h3>Sofa FLYNN</h3>
+                    </a>
+                    <p>12,400,000₫</p>
                 </div>
-                <div class="row">
-                    <div class="product">
-                        <a href="product-item-page">
-                            <div class="zoom_color noidung">
-                                <img src="img/Tu_dep.png" alt="Product 3">
-                            </div>
-                            <h3>Tủ QUADA</h3>
-                        </a>
-                        <p>8,200,000₫</p>
-                    </div>
-                    <div class="product"> <a href="#">
-                            <div class="zoom_color noidung">
-                                <img src="img/Tutivi.png" alt="Product 4">
-                            </div>
-                            <h3>Tủ Tivi QUADA</h3>
-                        </a>
-                        <p>5,650,000₫</p>
-                    </div>
+                <div class="product">
+                    <a href="product-item-page">
+                        <div class="zoom_color noidung">
+                            <img src="img/Ban_dep.png" alt="Product 2">
+                        </div>
+                        <h3>Bàn Đẹp</h3>
+                    </a>
+                    <p>4,240,000₫</p>
                 </div>
+
+                <div class="product">
+                    <a href="product-item-page">
+                        <div class="zoom_color noidung">
+                            <img src="img/Tu_dep.png" alt="Product 3">
+                        </div>
+                        <h3>Tủ QUADA</h3>
+                    </a>
+                    <p>8,200,000₫</p>
+                </div>
+                <div class="product"> <a href="#">
+                        <div class="zoom_color noidung">
+                            <img src="img/Tutivi.png" alt="Product 4">
+                        </div>
+                        <h3>Tủ Tivi QUADA</h3>
+                    </a>
+                    <p>5,650,000₫</p>
+                </div>
+
             </div>
         </div>
     </article>
@@ -358,7 +367,7 @@ tạo để tạo ra một không gian sống đẹp mắt và hài hòa.
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-6 col-md-3 mb-3">
+                <div class="col-6 col-md-3 mb-3 menu-footer">
                     <h5>Sản phẩm</h5>
                     <ul class="nav flex-column footer-link">
                         <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">BÀN - tables</a></li>

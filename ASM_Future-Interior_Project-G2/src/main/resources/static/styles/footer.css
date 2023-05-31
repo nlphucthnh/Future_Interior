@@ -18,10 +18,11 @@ footer h5 {
 }
 
 .footer-link li a {
+    font-weight: var(--font_tertiary) !important;
     text-decoration: none;
     color: white;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 600 !important;
     line-height: 24px;
     letter-spacing: 0em;
     text-align: left;
