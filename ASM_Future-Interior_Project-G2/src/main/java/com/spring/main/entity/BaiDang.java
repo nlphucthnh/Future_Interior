@@ -16,6 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name = "bai_dang")
 public class BaiDang implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_bai_dang")

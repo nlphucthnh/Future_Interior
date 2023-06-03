@@ -17,6 +17,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tai_khoan")
 public class TaiKhoan implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "ten_dang_nhap")
 	String tenDangNhap;

@@ -21,6 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "chat_lieu")
 public class ChatLieu implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_chat_lieu")

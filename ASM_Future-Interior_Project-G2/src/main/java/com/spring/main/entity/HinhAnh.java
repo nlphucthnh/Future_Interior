@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hinh_anh")
 public class HinhAnh implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "id_hinh_anh")
 	String idHinhAnh;

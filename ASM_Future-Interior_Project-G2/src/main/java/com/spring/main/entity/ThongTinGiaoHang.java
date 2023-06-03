@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "thong_tin_giao_hang")
 public class ThongTinGiaoHang implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_thong_tin_giao_hang")
