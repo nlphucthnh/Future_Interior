@@ -74,14 +74,14 @@
 .nav-item .nav-link {
     font-size: 18px;
     font-family: var(--font_tertiary);
-    color: var(--gray_700) !important;
+    color:#344054;
     font-weight: 500;
     transition: 0.5s;
 }
 
 .nav-item .nav-link:hover {
     transform: translateY(-5px);
-    color: var(--gray_1000) !important;
+    color: #344054
 }
 
 

@@ -54,7 +54,7 @@
                                     <div class="col-megamenu">
                                         <h6 class="title ">Loại nội thất</h6>
                                         <ul class="list-unstyled ">
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">BÀN -
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page/ban">BÀN -
                                                     tables</a>
                                                 <p>Bàn làm việc, bàn ăn, bàn sofa.</p>
                                             </li>
@@ -251,7 +251,7 @@ khiêm tốn như phòng trọ hay căn hộ studio
                 <div class="product-list col my-4" th:each="pros : ${productsSales}">
                     <a th:href="@{'/product-page/edit/' + ${pros.sanPhamSPKM.idSanPham}}">
                         <div class="zoom_color noidung">
-                            <img th:src="@{/img/ghe.png}" alt="Sản phẩm 1">
+                            <img th:src="@{'/img/' + ${pros.sanPhamSPKM.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
                             <span class="price-sale"
                                 th:text="${#numbers.formatDecimal(pros.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0) + '%'}"></span>
                         </div>
@@ -288,7 +288,7 @@ khiêm tốn như phòng trọ hay căn hộ studio
                                 <span class="price-sale"
                                     th:text="${#numbers.formatDecimal(khuyenMai.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0)} + '%'"></span>
                             </th:block>
-                            <img th:src="@{/img/ghe.png}" alt="Sản phẩm 1">
+                            <img th:src="@{'/img/' + ${pro.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
                         </div>
                         <h3 class="product-title" th:text="${pro.tenSanPham}"></h3>
                     </a>
@@ -300,9 +300,7 @@ khiêm tốn như phòng trọ hay căn hộ studio
                             <span 
                                 th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
                             <del class="old-price mx-3" th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
-                            
                         </p>
-
                     </div>
                 </div>
 
@@ -332,7 +330,7 @@ khiêm tốn như phòng trọ hay căn hộ studio
         <div class="row">
 
             <div class="col-5 title-main">
-                <h3>QUADA CONCEPT - Thấy mình trong những đơn gvb  iản.</h3><br>
+                <h3>QUADA CONCEPT - Thấy mình trong những đơn giản.</h3><br>
                 <p>Điểm lên không gian những giá trị tự nhiên từ gỗ, từ những đường cạnh vuông vắn đều mắt, QUADA
                     Concept nổi bật những điều thú vị bên trong “ngoại hình đơn giản nhưng lôi cuốn, không ngừng thôi
                     thúc sự sáng tạo.

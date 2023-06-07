@@ -31,6 +31,5 @@ public class SanPhamChatLieu implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_chat_lieu")
 	ChatLieu chatLieuSPCL;
-	
-	
+
 }

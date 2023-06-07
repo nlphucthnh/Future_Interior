@@ -1,128 +1,482 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
-  <meta charset="UTF-8">
-  <title>Scrolling Bootstrap Card Carousel</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css">
-  <style>
-    @media (min-width: 768px) {
-      /* show 3 items */
-      .carousel-inner .active,
-      .carousel-inner .active + .carousel-item,
-      .carousel-inner .active + .carousel-item + .carousel-item {
-        display: block;
-      }
+    <!-- icon web  -->
+    <link rel="website icon" type="png" href="img/logo--noname.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-      .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-      .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
-      .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
-        transition: none;
-      }
-
-      .carousel-inner .carousel-item-next,
-      .carousel-inner .carousel-item-prev {
-        position: relative;
-        transform: translate3d(0, 0, 0);
-      }
-
-      .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item {
-        position: absolute;
-        top: 0;
-        right: -33.3333%;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-      }
-
-      /* left or forward direction */
-      .active.carousel-item-left + .carousel-item-next.carousel-item-left,
-      .carousel-item-next.carousel-item-left + .carousel-item,
-      .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
-      .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-      }
-
-      /* farthest right hidden item must be abso position for animations */
-      .carousel-inner .carousel-item-prev.carousel-item-right {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-      }
-
-      /* right or prev direction */
-      .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
-      .carousel-item-prev.carousel-item-right + .carousel-item,
-      .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
-      .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-      }
-    }
-  </style>
+    <!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+ 	<link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/product.css">
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/product-list.cs    s">
+    <title>Product List</title>
 </head>
+
 <body>
-<div class="container">
-  <h1 class="text-center mb-3">Bootstrap Multi-Card Carousel</h1>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner row w-100 mx-auto">
-      <div class="carousel-item col-md-4 active">
-        <div class="card">
-          <img class="card-img-top img-fluid" src="http://placehold.it/800x600/f44242/fff" alt="Card image cap">
-          <div class="card-body">
-            <h4 class="card-title">Card 1</h4>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-          </div>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a href="/home-page"><img src="/img/Logowebsite.png" style="background-color: var(--gray_25);" alt=""></a>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav item-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about-page">Giới thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact-page">Liên hệ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/blog-page">Bài viết</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-hover has-megamenu">
+                        <a class="nav-link " href="/product-page"> Sản phẩm <i class="bi bi-chevron-down"></i></a>
+                        <div class="dropdown-menu megamenu" role="menu">
+                            <div class="row g-3">
+                                <div class="col-lg-4 col-6 item-group">
+                                    <div class="col-megamenu">
+                                        <h6 class="title ">Loại nội thất</h6>
+                                        <ul class="list-unstyled ">
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">BÀN -
+                                                    tables</a>
+                                                <p>Bàn làm việc, bàn ăn, bàn sofa.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">SOFA -
+                                                    sofas</a>
+                                                <p>Sofa băng, sofa góc, sofa giường.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GHẾ -
+                                                    chairs</a>
+                                                <p>Ghế văn phòng, ghế ăn, ghế cafe.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÈN -
+                                                    lamps</a>
+                                                <p>Đèn sản, đèn bàn, đèn trang trí.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">KỆ, TỦ -
+                                                    sheft units,
+                                                    cabinets</a>
+                                                <p>Tử đồ, tủ TV, kệ để đồ.</p>
+                                            </li>
+                                        </ul>
+                                    </div> <!-- col-megamenu.// -->
+                                </div><!-- end col-3 -->
+                                <div class="col-lg-4 col-6 item-group">
+                                    <div class="col-megamenu">
+                                        <h6 class="title">&#160;</h6>
+                                        <ul class="list-unstyled">
+
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GƯƠNG -
+                                                    mirrors</a>
+                                                <p>Gường nhỏ, gương toàn thân.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GIƯỜNG -
+                                                    beds</a>
+                                                <p>Gường sofr, gường đơn, gường đôi.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">TRANG TRÍ
+                                                    - decorations</a>
+                                                <p>Khung ảnh, kệ giá.</p>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÒ GIA
+                                                    DỤNG - household
+                                                    goods</a>
+                                                <p>Rem, thung rác.</p>
+                                            </li>
+                                        </ul>
+                                    </div> <!-- col-megamenu.// -->
+                                </div><!-- end col-3 -->
+                                <div class="col-lg-4 col-6 room-group">
+                                    <div class="col-megamenu">
+                                        <h6 class="title">Nội thất cho các phòng</h6>
+                                        <ul class="list-unstyled ">
+                                            <li class="item-opsition-menu pb-2 ">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-symbols-sharp ">
+                                                        chair
+                                                    </span>
+                                                    <div>
+                                                        <a href="product-list-page">Phòng khách - Living room</a>
+                                                        <p>Các nội thất phòng khách</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 ">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-symbols-sharp">
+                                                        bed
+                                                    </span>
+                                                    <div>
+                                                        <a href="#">Phòng ngủ - Bedroom</a>
+                                                        <p>Các nội thất phòng ngủ</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 ">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-symbols-sharp">
+                                                        kitchen
+                                                    </span>
+                                                    <div>
+                                                        <a href="product-list-page">Phòng ăn - Kitchen room</a>
+                                                        <p>Các nội thất nhà ăn</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 ">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-symbols-sharp">
+                                                        laptop_chromebook
+                                                    </span>
+                                                    <div>
+                                                        <a href="product-list-page">Phòng làm việc - Office</a>
+                                                        <p>Các nội thất phòng làm việc</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-opsition-menu pb-2 ">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="material-symbols-sharp">
+                                                        bathtub
+                                                    </span>
+                                                    <div>
+                                                        <a href="product-list-page">Phòng tắm - Bathroom</a>
+                                                        <p>Các nội thất phòng tắm</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div> <!-- col-megamenu.// -->
+                                </div>
+                            </div><!-- end row -->
+                        </div> <!-- dropdown-mega-menu.// -->
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav item-menu ms-auto signin-group">
+                <li class="nav-item">
+                    <a class="nav-link login" href="login-page">Đăng nhập</a>
+                </li>
+                <li class="nav-item sign-navbar ">
+                    <a class="nav-link sigin" href="sign-up-page">Đăng ký</a>
+                </li>
+            </ul>
         </div>
-      </div>
-      <!-- Add more carousel items here -->
-    </div>
-    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-  </div>
-</div>
+    </nav>
+    <header id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
+        data-bs-delay="1000">
+        <ol class="carousel-indicators mb-4">
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner banner-slide">
+            <div class="carousel-item active">
+                <div class="banner-content">
+                    <h2>Ghế AURORA</h2><br>
+                    <span class="price">3,900,000₫</span><br><br>
+                    <pre>
+Nếu như diện tích phòng bạn không cho phép 
+có đủ bộ sofa hoành tráng, thì sofa bed
+AURORA chắc chắn sẽ khiến bạn hài lòng.
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $("#myCarousel").on("slide.bs.carousel", function(e) {
-      var $e = $(e.relatedTarget);
-      var idx = $e.index();
-      var itemsPerSlide = 3;
-      var totalItems = $(".carousel-item").length;
+Với kích thước nhỏ gọn và tích hợp công năng
+của sofa lẫn giường ngủ, AURORA sẽ là món
+nội thất tiện dụng cho những không gian 
+khiêm tốn như phòng trọ hay căn hộ studio
+                   </pre>
+                </div>
+                <img src="/img/Banner-slide1.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
+            </div>
+            <div class="carousel-item">
+                <div class="banner-content">
+                    <h2>Ghế AURORA</h2><br>
+                    <span class="price">3,900,000₫</span><br><br>
+                    <pre>
+Nếu như diện tích phòng bạn không cho phép 
+có đủ bộ sofa hoành tráng, thì sofa bed
+AURORA chắc chắn sẽ khiến bạn hài lòng.
 
-      if (idx >= totalItems - (itemsPerSlide - 1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i = 0; i < it; i++) {
-          // append slides to end
-          if (e.direction == "left") {
-            $(".carousel-item")
-              .eq(i)
-              .appendTo(".carousel-inner");
-          } else {
-            $(".carousel-item")
-              .eq(0)
-              .appendTo($(this).find(".carousel-inner"));
-          }
-        }
-      }
-    });
-  });
-</script>
+Với kích thước nhỏ gọn và tích hợp công năng
+của sofa lẫn giường ngủ, AURORA sẽ là món
+nội thất tiện dụng cho những không gian 
+khiêm tốn như phòng trọ hay căn hộ studio
+                   </pre>
+                </div>
+                <img src="/img/Banner-slide2.jpg" class="d-block w-100 carousel-img" alt="Slide 2">
+            </div>
+            <div class="carousel-item">
+                <div class="banner-content">
+                    <h2>Ghế AURORA</h2><br>
+                    <span class="price">3,900,000₫</span><br><br>
+                    <pre>
+Nếu như diện tích phòng bạn không cho phép 
+có đủ bộ sofa hoành tráng, thì sofa bed
+AURORA chắc chắn sẽ khiến bạn hài lòng.
+
+Với kích thước nhỏ gọn và tích hợp công năng
+của sofa lẫn giường ngủ, AURORA sẽ là món
+nội thất tiện dụng cho những không gian 
+khiêm tốn như phòng trọ hay căn hộ studio
+                   </pre>
+                </div>
+                <img src="/img/Banner-slide3.jpg" class="d-block w-100 carousel-img" alt="Slide 3">
+            </div>
+        </div>
+    </header>
+    <!-- title nội dụng chính  -->
+   
+
+    <article>
+        <div class="container">
+            <div class="product-list-title">
+                <h3>BÀN LÀM VIỆC - DESKS</h3>
+            </div>
+            <div class="row">
+                <div class="col-2 flex-fill ">
+                    <label for="select3" class="form-label">Mức giá</label>
+                  <select class="form-select ">
+                    <option selected>Dưới 1 Triệu</option>
+                    <option value="1">Lựa chọn 1</option>
+                    <option value="2">Lựa chọn 2</option>
+                    <option value="3">Lựa chọn 3</option>
+                  </select>
+                </div>
+                <!-- <div class="col-2 flex-fill ">
+                    <label for="select3" class="form-label">Màu sắc</label>
+                  <select class="form-select">
+                    <option selected>Trắng gỗ</option>
+                    <option value="1">Lựa chọn 1</option>
+                    <option value="2">Lựa chọn 2</option>
+                    <option value="3">Lựa chọn 3</option>
+                  </select>
+                </div> -->
+                <div class="col-2 flex-fill ">
+                    <label for="select3" class="form-label">Chất liệu</label>
+                  <select class="form-select">
+                    <option selected>Gỗ ép</option>
+                    <option value="1">Lựa chọn 1</option>
+                    <option value="2">Lựa chọn 2</option>
+                    <option value="3">Lựa chọn 3</option>
+                  </select>
+                </div>
+                
+                <div class="col-2 "></div>
+             
+                <div class="col-2 flex-fill  ">
+                    <label for="select3" class="form-label">Sắp xếp</label>
+                  <select class="form-select ">
+                    <option selected>Từ A đến Z</option>
+                    <option value="1">Lựa chọn 1</option>
+                    <option value="2">Lựa chọn 2</option>
+                    <option value="3">Lựa chọn 3</option>
+                  </select>
+                </div>   
+              </div>    
+              
+            <div class="product-list-main">
+                <div class="product-list ">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/ghe.png" alt="Sản phẩm 1">
+                        </div>
+
+                        <h3 class="product-title">Bàn CHIN</h3>
+                    </a>
+                    <p class="product-description">Bàn sofa, bàn gốc</p>
+                    <p class="product-price">880,000₫</p>
+                </div>
+                
+            </div>
+            <div class="product-list-main">
+                <div class="product-list ">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/ghe.png" alt="Sản phẩm 1">
+                        </div>
+
+                        <h3 class="product-title">Bàn CHIN</h3>
+                    </a>
+                    <p class="product-description">Bàn sofa, bàn gốc</p>
+                    <p class="product-price">880,000₫<span>5.250,000₫</span></p>
+                </div>
+                <div class="product-list">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/Ban.png" alt="Sản phẩm 2">
+                            <span class="price-sale">20%</span>
+                        </div>
+                        <h3 class="product-title">Bàn UNIQ</h3>
+                    </a>
+                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
+                    <p class="product-price">4,730,000₫<span>5.250,000₫</span></p>
+                </div>
+                <div class="product-list">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="img/ghe-to-br.png" alt="Sản phẩm 3">
+                            <span class="price-sale">20%</span>
+                        </div>
+                        <h3 class="product-title">Ghế TO-BE</h3>
+                    </a>
+                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
+                    <p class="product-price">4,250,000₫<span>5.250,000₫</span></p>
+                </div>
+                <div class="product-list">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/Den.png" alt="Sản phẩm 4">
+                            <span class="price-sale">20%</span>
+                        </div>
+                        <h3 class="product-title">Tủ PIXAR</h3>
+                    </a>
+                    <p class="product-description">Đèn bàn</p>
+                    <p class="product-price">450,000₫<span>5.250,000₫</span></p>
+                </div>
+
+            </div>
+            <div class="product-list-main line">
+                <div class="product-list ">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/ghe.png" alt="Sản phẩm 1">
+                        </div>
+
+                        <h3 class="product-title">Bàn CHIN</h3>
+                    </a>
+                    <p class="product-description">Bàn sofa, bàn gốc</p>
+                    <p class="product-price">880,000₫</p>
+                </div>
+                <div class="product-list">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="img/Ban.png" alt="Sản phẩm 2">
+                            <span class="price-sale">20%</span>
+                        </div>
+                        <h3 class="product-title">Bàn UNIQ</h3>
+                    </a>
+                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
+                    <p class="product-price">4,730,000₫<span>5.250,000₫</span></p>
+                </div>
+                <div class="product-list">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/ghe-to-br.png" alt="Sản phẩm 3">
+                            <span class="price-sale">20%</span>
+                        </div>
+                        <h3 class="product-title">Ghế TO-BE</h3>
+                    </a>
+                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
+                    <p class="product-price">4,250,000₫<span>5.250,000₫</span></p>
+                </div>
+                <div class="product-list">
+                    <a href=product-item-page>
+                        <div class="zoom_color noidung">
+                            <img src="/img/Den.png" alt="Sản phẩm 4">
+                            <span class="price-sale">20%</span>
+                        </div>
+                        <h3 class="product-title">Tủ PIXAR</h3>
+                    </a>
+                    <p class="product-description">Đèn bàn</p>
+                    <p class="product-price">450,000₫<span>5.250,000₫</span></p>
+                </div>
+
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item "><a class="page-link bg-dark text-white" href="# ">
+                            << Pre</a>
+                    </li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">1</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">2</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">3</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">..</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">8</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">9</a></li>
+                    <li class="page-item"><a class="page-link text-dark" href="# ">10</a></li>
+                    <li class="page-item "><a class="page-link bg-dark text-white" href="# ">Next >></a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </article>
+   
+
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-3 mb-3">
+                    <h5>Sản phẩm</h5>
+                    <ul class="nav flex-column footer-link">
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">BÀN - tables</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">SOFA - sofas</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">TỦ - cabinets</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">GHẾ - chairs</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">ĐÈN - lamps</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">KỆ - shelf units</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h5>Phòng</h5>
+                    <ul class="nav flex-column footer-link">
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG KHÁCH -Living room</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG NGỦ - Bedroom</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG BẾP - Kitchen room</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG TẮM - Bathroom</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG LÀM VIỆC - Office</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h5>Trang khác</h5>
+                    <ul class="nav flex-column footer-link">
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang giới thiệu</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang liên hệ</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang bài viết</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang cá nhân</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang cài đặt</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h5>Mạng xã hội</h5>
+                    <ul class="nav flex-column footer-link">
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Twitter</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Linkedln</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Facebook</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">GitHub</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">AngelList</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Dribble</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <div class="logo-footer">
+                    <a href=product-item-page><img src="img/Logowebsite.png" alt=""></a>
+                </div>
+
+
+                <p class="text-white-50">© 2023 Company, Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
