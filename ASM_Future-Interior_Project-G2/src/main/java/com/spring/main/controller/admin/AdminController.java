@@ -15,10 +15,10 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/Manager/blog")
-	public String ManageBlogPage() {
-		return "Manager-blog-page";
-	}
+//	@GetMapping("/Manager/blog")
+//	public String ManageBlogPage() {
+//		return "Manager-blog-page";
+//	}
 	
 	@GetMapping("/Manager/revenue")
 	public String ManageRevunuePage() {
@@ -41,10 +41,10 @@ public class AdminController {
 		return "Manager-filter-page";
 	}
 	
-	@GetMapping("/Manager/account")
-	public String ManageAccountPage() {
-		return "Manager-account-page";
-	}
+//	@GetMapping("/Manager/account")
+//	public String ManageAccountPage() {
+//		return "Manager-account-page";
+//	}
 	
 	
 }
