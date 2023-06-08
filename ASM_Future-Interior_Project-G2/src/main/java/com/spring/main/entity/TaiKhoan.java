@@ -20,16 +20,15 @@ public class TaiKhoan implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "ten_dang_nhap")
-	String tenDangNhap;
+	String ten_dang_nhap;
 	@Column(name = "mat_khau")
-	String matKhau;
+	String mat_khau;
 	@Column(name = "email")
 	String email;
 	@Column(name = "trang_thai")
-	boolean trangThai;
+	boolean trang_thai;
 	@Column(name = "vai_tro")
-	boolean vaiTro;
-	
+	boolean vai_tro;
 	
 	@OneToMany(mappedBy = "taiKhoanBaiDang")
 	List<BaiDang> ListBaiDang;
