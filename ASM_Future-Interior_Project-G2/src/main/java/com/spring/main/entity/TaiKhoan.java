@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
@@ -18,9 +20,12 @@ import lombok.Data;
 @Table(name = "tai_khoan")
 public class TaiKhoan implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@NotBlank(message= "Vui lòng nhập tài khoản!")
 	@Id
 	@Column(name = "ten_dang_nhap")
 	String ten_dang_nhap;
+	
+	@NotBlank(message= "Vui lòng nhập mật khẩu!")
 	@Column(name = "mat_khau")
 	String mat_khau;
 	@Column(name = "email")

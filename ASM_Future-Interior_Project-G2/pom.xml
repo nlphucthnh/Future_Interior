@@ -18,6 +18,11 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+		<dependency>
+   			 <groupId>jakarta.xml.bind</groupId>
+    		 <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
 			<artifactId>tiles-jsp</artifactId>
@@ -33,6 +38,11 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -99,6 +109,24 @@
 			<groupId>com.poly</groupId>
 			<artifactId>SOF302-Lab2</artifactId>
 			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.poly</groupId>
+			<artifactId>SOF302-ASMFinal</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
 	</dependencies>
 
