@@ -1,9 +1,16 @@
 package com.spring.main.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import com.spring.main.entity.DonHang;
 import com.spring.main.entity.DonHangChiTiet;
+import com.spring.main.entity.TaiKhoan;
 
-public interface DonHangChiTietDAO extends JpaRepository<DonHangChiTiet, Integer> {
+public interface DonHangChiTietDAO extends JpaRepository<DonHangChiTiet, String> {
+    @Query(value = "Select d from DonHangChiTiet d where d.donHangDHCT.taiKhoanMuaHang.tenDangNhap Like ?1")
+    List<DonHangChiTiet> findByTaiKhoan(String taiKhoan);
 
 }

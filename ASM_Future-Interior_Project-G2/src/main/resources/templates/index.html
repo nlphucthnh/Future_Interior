@@ -272,98 +272,25 @@ tạo để tạo ra một không gian sống đẹp mắt và hài hòa.
                 </p>
             </div>
 
-            <div class="col-6 offset-1 product-main">
+            <div class="col-6 offset-1 product-main" th:each="pro : ${products}">
+                <div class="row">
 
-                <div class="product">
+                
+                <div class="col-6 product">
                     <a href="product-item-page">
                         <div class="zoom_color noidung">
                             <img src="img/Sofa_FLYNN.png" alt="Product 1">
                         </div>
-                        <h3>Sofa FLYNN</h3>
+                        <h3 th:text="${pro.tenSanPham}"></h3>
                     </a>
                     <p>12,400,000₫</p>
                 </div>
-                <div class="product">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/Ban_dep.png" alt="Product 2">
-                        </div>
-                        <h3>Bàn Đẹp</h3>
-                    </a>
-                    <p>4,240,000₫</p>
-                </div>
-
-                <div class="product">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/Tu_dep.png" alt="Product 3">
-                        </div>
-                        <h3>Tủ QUADA</h3>
-                    </a>
-                    <p>8,200,000₫</p>
-                </div>
-                <div class="product"> <a href="#">
-                        <div class="zoom_color noidung">
-                            <img src="img/Tutivi.png" alt="Product 4">
-                        </div>
-                        <h3>Tủ Tivi QUADA</h3>
-                    </a>
-                    <p>5,650,000₫</p>
-                </div>
+            </div>
 
             </div>
         </div>
     </article>
-    <aside class="bg-light">
-        <div class="container">
-            <div class="product-list-title">
-                <h3>Sản phẩn bán chạy</h3>
-            </div>
-            <div class="product-list-main">
-                <div class="product-list ">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe.png" alt="Sản phẩm 1">
-                        </div>
-
-                        <h3 class="product-title">Bàn CHIN</h3>
-                    </a>
-                    <p class="product-description">Bàn sofa, bàn gốc</p>
-                    <p class="product-price">880,000₫</p>
-                </div>
-                <div class="product-list">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/Ban.png" alt="Sản phẩm 2">
-                        </div>
-                        <h3 class="product-title">Bàn UNIQ</h3>
-                    </a>
-                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
-                    <p class="product-price">4,730,000₫</p>
-                </div>
-                <div class="product-list">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe-to-br.png" alt="Sản phẩm 3">
-                        </div>
-                        <h3 class="product-title">Ghế TO-BE</h3>
-                    </a>
-                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
-                    <p class="product-price">4,250,000₫</p>
-                </div>
-                <div class="product-list">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/Den.png" alt="Sản phẩm 4">
-                        </div>
-                        <h3 class="product-title">Tủ PIXAR</h3>
-                    </a>
-                    <p class="product-description">Đèn bàn</p>
-                    <p class="product-price">450,000₫</p>
-                </div>
-            </div>
-        </div>
-    </aside>
+  
     <footer>
         <div class="container">
             <div class="row">

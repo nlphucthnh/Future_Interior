@@ -1,0 +1,97 @@
+/* banner header */
+.text-user-person {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+.name-product-person span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0.035em;
+  text-align: left;
+  margin-left: 25px;
+}
+.btn-edit {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0em;
+  color: white;
+}
+.btn-edit-user {
+  background-color: #101828;
+  width: 165px;
+  height: 40px;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-edit-user:hover {
+  background: white;
+  color: #101828;
+  border: 1px solid #101828;
+}
+
+/* table */
+.name-product-person h5 {
+  margin: 10px 25px;
+}
+
+/* dia chi */
+.map {
+  border: 1px solid #101828;
+}
+.map .title-person {
+  background-color: #1d2939;
+  color: white;
+  font-family: "EB Garamond";
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 41px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 20px;
+}
+
+.profle-tile {
+  font-family: "EB Garamond";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 20px;
+}
+.profle-text {
+  font-family: "EB Garamond";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: 0em;
+  float: right;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+.edit-profile {
+  float: right;
+  background-color: #101828;
+}
+.btn-edit-profile {
+  color: aliceblue;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.edit-profile:hover{
+    background: white;
+    color: #101828;
+    border: 1px solid #101828;
+}

@@ -18,12 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.main.dao.DonHangChiTietDAO;
+import com.spring.main.dao.DonHangDAO;
 import com.spring.main.dao.PhanNhomLoaiDAO;
 import com.spring.main.dao.SanPhamDAO;
 import com.spring.main.dao.SanPhamKhuyenMaiDAO;
+import com.spring.main.dao.TaiKhoanDAO;
+import com.spring.main.entity.DonHang;
+import com.spring.main.entity.DonHangChiTiet;
 import com.spring.main.entity.PhanNhomLoai;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.SanPhamKhuyenMai;
+import com.spring.main.entity.TaiKhoan;
 
 import ch.qos.logback.core.util.DirectJson;
 
@@ -37,6 +43,22 @@ public class productController {
 
     @Autowired
     PhanNhomLoaiDAO pnlDao;
+
+    @Autowired
+    TaiKhoanDAO tkDAO;
+
+    @Autowired
+    DonHangDAO dhDAO;
+
+    @Autowired
+    DonHangChiTietDAO dhctDAO;
+
+    @GetMapping("/")
+    public String index(Model model) {
+        List<SanPham> phamList = spDAO.findAll();
+        model.addAttribute("products", phamList);
+        return "index";
+    }
 
     @GetMapping("/product-page")
     public String getProduct(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -55,7 +77,6 @@ public class productController {
         return "product";
     }
 
-
     @GetMapping("/product-page/page")
     public String paginate(Model model, @RequestParam("p") Optional<Integer> p) {
         return this.getProduct(model, p);
@@ -72,8 +93,9 @@ public class productController {
 
     // product list-name
     @PostMapping("/product-list-page/{category}/name")
-    public String productListPage(Model model, @PathVariable("category") String category, @RequestParam("selectName") String select) {
-       
+    public String productListPage(Model model, @PathVariable("category") String category,
+            @RequestParam("selectName") String select) {
+
         if (select.equals("AZ")) {
             List<SanPham> prolists = spDAO.findByLoaiSanpham("%" + category + "%",
                     Sort.by(Direction.ASC, "tenSanPham"));
@@ -87,48 +109,54 @@ public class productController {
         }
         return "product-List";
     }
-    
 
     @PostMapping("/product-list-page/{category}/price")
-    public String productListPagePrice(Model model,@PathVariable("category") String category ,@RequestParam("selectPrice") String selectPrice) {
+    public String productListPagePrice(Model model, @PathVariable("category") String category,
+            @RequestParam("selectPrice") String selectPrice) {
         switch (selectPrice) {
             case "1":
                 model.addAttribute("messages", "Lọc từ 0 đến 1.000.000");
-                List<SanPham> prolists0_1 = spDAO.findByLoaiSanphamPrice("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"), 0,
+                List<SanPham> prolists0_1 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
+                        Sort.by(Direction.ASC, "tenSanPham"), 0,
                         1000000);
                 model.addAttribute("prolists", prolists0_1);
                 break;
             case "2":
                 model.addAttribute("messages", "Lọc từ 1.000.000 đến 5.000.000");
-                List<SanPham> prolists1_5 = spDAO.findByLoaiSanphamPrice("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"),
+                List<SanPham> prolists1_5 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
+                        Sort.by(Direction.ASC, "tenSanPham"),
                         1000000,
                         5000000);
                 model.addAttribute("prolists", prolists1_5);
                 break;
             case "3":
                 model.addAttribute("messages", "Lọc từ 5.000.000 đến 10.000.000");
-                List<SanPham> prolists5_10 = spDAO.findByLoaiSanphamPrice("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"),
+                List<SanPham> prolists5_10 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
+                        Sort.by(Direction.ASC, "tenSanPham"),
                         5000000,
                         10000000);
                 model.addAttribute("prolists", prolists5_10);
                 break;
             case "4":
                 model.addAttribute("messages", "Lọc từ 10.000.000 đến 15.000.000");
-                List<SanPham> prolists10_15 = spDAO.findByLoaiSanphamPrice("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"),
+                List<SanPham> prolists10_15 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
+                        Sort.by(Direction.ASC, "tenSanPham"),
                         10000000,
                         15000000);
                 model.addAttribute("prolists", prolists10_15);
                 break;
             case "5":
                 model.addAttribute("messages", "Lọc từ 15.000.000 đến 20.000.000");
-                List<SanPham> prolists15_20 = spDAO.findByLoaiSanphamPrice("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"),
+                List<SanPham> prolists15_20 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
+                        Sort.by(Direction.ASC, "tenSanPham"),
                         15000000,
                         20000000);
                 model.addAttribute("prolists", prolists15_20);
                 break;
             case "6":
                 model.addAttribute("messages", "Lọc từ 20.000.000 Trở lên");
-                List<SanPham> prolists20_ = spDAO.findByLoaiSanphamPrice("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"),
+                List<SanPham> prolists20_ = spDAO.findByLoaiSanphamPrice("%" + category + "%",
+                        Sort.by(Direction.ASC, "tenSanPham"),
                         2000000,
                         10000000);
                 model.addAttribute("prolists", prolists20_);
@@ -138,25 +166,26 @@ public class productController {
                 break;
         }
 
-        return "demo2";
+        return "product-List";
     }
 
     @GetMapping("/product-list-page/{category}")
     public String productListPage(Model model, @PathVariable("category") String category) {
-        
+
         List<SanPham> prolists = spDAO.findByLoaiSanpham("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"));
         model.addAttribute("prolists", prolists);
         return "product-List";
     }
 
-    
-    // @GetMapping("/product-list-page/page")
-    // public String paginateLisst(Model model, @RequestParam("l") Optional<Integer> l) {
-    //     return this.getProduct(model, l);
-    // }
-    
- 
+    /// person
 
-    /// list gia
+    @GetMapping("/person")
+    public String person(Model model) {
+        List<TaiKhoan> people = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("people", people);
+        List<DonHangChiTiet> tkmuahang = dhctDAO.findByTaiKhoan("thienlv");
+        model.addAttribute("donhangct", tkmuahang);
+        return "person";
+    }
 
 }
