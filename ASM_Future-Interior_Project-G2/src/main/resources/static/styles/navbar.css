@@ -6,10 +6,10 @@
     justify-content: center;
     width: 100vw;
     height: 80px;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     background-color: var(--gray_25);
-    z-index: 3;
+    /* z-index: 3; */
     border-bottom: 1px solid var(--gray_200);
 }
 

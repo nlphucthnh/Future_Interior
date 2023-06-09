@@ -259,8 +259,6 @@ img {
 }
 
 /* quatittyy */
-
-
 .quantity label {
     margin-bottom: 10px;
     font-size: 18px;
@@ -268,7 +266,6 @@ img {
     line-height: 30px;
     letter-spacing: 0.025em;
     text-align: left;
-
 }
 
 .quantity .input-group {
