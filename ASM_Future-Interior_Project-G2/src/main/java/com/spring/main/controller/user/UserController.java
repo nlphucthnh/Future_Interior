@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.main.entity.TaiKhoan;
+
 @Controller
 public class UserController {
 	
@@ -16,10 +18,11 @@ public class UserController {
 		return "dangnhap";
 	}
 	
-	@GetMapping("/sign-up-page")
-	public String getSiginPage() {
-		return "dangky";
-	}
+	// @GetMapping("/sign-up-page")
+	// public String getSiginPage() {
+	// 	TaiKhoan item = new TaiKhoan();
+	// 	return "dangky";
+	// }
 	
 	@GetMapping("/home-page")
 	public String getHomePage() {

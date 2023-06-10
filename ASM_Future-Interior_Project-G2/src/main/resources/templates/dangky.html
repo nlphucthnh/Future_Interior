@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -21,46 +21,66 @@
                 </div>
             </div>
             <div class="lg-ct-left">
-               <div class="lg-ct-left-form">
-                    <form action="">
+                <div class="lg-ct-left-form">
+                    <form th:action="@{/student/save}" th:object="${student}" method="post">
                         <div class="lg-ct-top">
                             <img src="../static/img/logoMark.png" alt="">
                             <h2 class="lg-ct-title">Chào mừng bạn đến với Future Interior</h2>
                         </div>
                         <div class="mb-3 form-group">
-                            <label for="name" class="form-label">Tên đăng nhập</label>
-                            <input type="text" class="form-control" id="name" placeholder="Tên đăng nhập của bạn">
+                            <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
+                            <input type="text" name="tenDangNhap" th:field="*{tenDangNhap}" class="form-control"
+                                id="tenDangNhap" placeholder="Tên đăng nhập của bạn">
+                            <small id="helpId" class="text-muted" th:if="${#fields.hasErrors('tenDangNhap')}"
+                                th:errors="*{tenDangNhap}">Help text</small>
+                            <small class="text-danger" th:if="${duplicateUsername}">Tên đăng nhập đã tồn tại</small>
+
                         </div>
                         <div class="mb-3 form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="hello@gmai.com">
+                            <input type="email" name="email" th:field="*{email}" class="form-control" id="email"
+                                placeholder="hello@gmai.com">
+                            <small id="helpId" class="text-muted" th:if="${#fields.hasErrors('email')}"
+                                th:errors="*{email}">Help text</small>
+
                         </div>
 
                         <div class="mb-3 form-group">
-                            <label for="password" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="password" placeholder="********">
+                            <label for="matKhau" class="form-label">Mật khẩu</label>
+                            <input type="password" name="matKhau" th:field="*{matKhau}" class="form-control"
+                                id="matKhau">
+                            <small id="helpId" class="text-muted" th:if="${#fields.hasErrors('matKhau')}"
+                                th:errors="*{matKhau}">Help text</small>
+
                         </div>
+                        <!-- <div class="mb-3 form-group">
+                            <label for="confirmpassword" class="form-label">Xác nhận</label>
+                            <input type="password" class="form-control" id="confirmpassword">
+                            <small id="helpId" class="text-muted" th:if="${#fields.hasErrors('confirm')}" th:errors="*{confirm}">Mật khẩu xác nhận không khớp</small>
+                        </div> -->
                         <div class="mb-3 form-group">
                             <label for="confirmpassword" class="form-label">Xác nhận</label>
-                            <input type="password" class="form-control" id="confirmpassword" placeholder="********">
+                            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword">
+                            <small id="confirmPasswordHelp" class="form-text text-muted">Vui lòng nhập lại mật khẩu để xác nhận</small>
                         </div>
-                       
-                        <button type="submit" class="btn btn-login">Đăng Ký</button>
+
+
+                        <button type="submit" formaction="/student/save" class="btn btn-login">Đăng Ký</button>
                         <div class="lg-ct-end">
                             <p>Bạn đã có tài khoản?</p>
-                            <a href="#">Đăng Nhập</a>                
+                            <a href="#">Đăng Nhập</a>
                         </div>
 
                     </form>
-               </div>
+                </div>
             </div> <!-- ------------ -->
-            
+
         </div>
 
     </div>
 
     <!-- ----------------- -->
-   
+
 
 
     <!-- </div> -->
