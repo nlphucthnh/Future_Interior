@@ -13,10 +13,10 @@ public class UserController {
 	
 
 	
-	@GetMapping("/login-page")
-	public String getLoginPage() {
-		return "dangnhap";
-	}
+	// @GetMapping("/login-page")
+	// public String getLoginPage() {
+	// 	return "dangnhap";
+	// }
 	
 	// @GetMapping("/sign-up-page")
 	// public String getSiginPage() {
