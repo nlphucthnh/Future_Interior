@@ -13,6 +13,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -20,20 +21,30 @@ import lombok.Data;
 @Table(name = "tai_khoan")
 public class TaiKhoan implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@NotBlank(message= "Vui lòng nhập tài khoản!")
+	
+
+	//@NotBlank(message = "Vui lòng nhập tên đăng nhập!")
+	//@NotNull(message= "Vui lòng nhập tên đăng nhập!")
+	//@NotEmpty(message= "Vui lòng nhập tên đăng nhập!")
 	@Id
 	@Column(name = "ten_dang_nhap")
-	String ten_dang_nhap;
+	String tenDangNhap;
 	
-	@NotBlank(message= "Vui lòng nhập mật khẩu!")
+
+//	@NotBlank(message = "Vui lòng nhập mật khẩu!1")
+//	@NotNull(message= "Vui lòng nhập mật khẩu!2")
+//	@NotEmpty(message= "Vui lòng nhập mật khẩu!3")
 	@Column(name = "mat_khau")
-	String mat_khau;
+	String matKhau;
+	
 	@Column(name = "email")
 	String email;
+	
 	@Column(name = "trang_thai")
-	boolean trang_thai;
+	boolean trangThai;
+	
 	@Column(name = "vai_tro")
-	boolean vai_tro;
+	boolean vaiTro;
 	
 	@OneToMany(mappedBy = "taiKhoanBaiDang")
 	List<BaiDang> ListBaiDang;

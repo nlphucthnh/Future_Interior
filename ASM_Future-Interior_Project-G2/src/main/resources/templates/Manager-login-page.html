@@ -17,42 +17,42 @@
         <div class="lg-container-ctent">
             <div class="lg-ct-left">
                 <div class="lg-ct-left-form">
-                    <form th:action="@{/Manager/login}" th:object="${tai_khoan}" method="post" >
+                    <form th:action="@{/Manager/login}" th:object="${TaiKhoan}" method="post" >
                     <div class="lg-ct-top">
                         <div class="lg-ct-top-up">
                             <img src="img/logoMark.png" alt="">
-                            <h2 class="lg-ct-title">Future Interior</h2>    
+                            <h2 class="lg-ct-title">Future Interior</h2>   
+                             
                         </div>
                         <h1>Đăng nhập</h1>
                         <p>Form đăng nhập dành cho quản trị viên website</p>
                     </div>
                     <div class="mb-3 form-group">
                         <label for="exampleInputEmail1" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" name="ten_dang_nhap" id="exampleInputEmail1" placeholder="Nhập Tên Đăng Nhập">
-                   		<!-- <div th:if="${#fields.hasErrors('ten_dang_nhap')}" th:errors="*{ten_dang_nhap}"></div>
-                   		  <div th:text="${message}" th:if="${message}"></div> 
-                   		  <div th:text="${message}"></div>  -->
+                        <input type="text" class="form-control" name="tenDangNhap" id="exampleInputEmail1" placeholder="Nhập Tên Đăng Nhập">
+                   	 <div class="alert alert-warning" th:if="${#fields.hasErrors('tenDangNhap')}" th:errors="*{tenDangNhap}"></div>
+                   		
                     </div>
                     <div class="mb-3 form-group">
                         <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" name="mat_khau" id="exampleInputPassword1" placeholder="Nhập Mật Khẩu">
-                   	
+                        <input type="password" class="form-control" name="matKhau" id="exampleInputPassword1" placeholder="Nhập Mật Khẩu">
+                   		<div class="alert alert-warning" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}"></div>
                     </div>    
                     <div class="mb-3 form-check">
                     	<div class="input-groups input-groups-01">
-                                <input type="checkbox" class="form-check-input"  name="remember" value="true" id="exampleCheck1">
+                                <input type="checkbox" class="form-check-input" value="true" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
                     	 </div>
                      </div><hr>        
                     <button type="submit" class="btn btn-login">Đăng Nhập</button>
-                     
+                    
                 </form>
-                <th:if test="${not empty message}">
-						<div th:text="${message}"></div>
+                	<th:if test="${not empty message}">
+						<div style="color:red;"th:text="${message}"></div>
 					</th:if>
-                </div>
+				</div>
                 
-            </div> <!-- ------------ -->
+            </div> 
             <div class="lg-ct-right">
                 <div class="lg-image">
                     <img src="/img/img-p-ctact.png" alt="login">
@@ -61,7 +61,7 @@
         </div>
 
     </div>
-
+ 
 
 
     <!-- </div> -->

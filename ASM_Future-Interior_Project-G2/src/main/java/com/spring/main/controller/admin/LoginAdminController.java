@@ -3,11 +3,15 @@ package com.spring.main.controller.admin;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +24,7 @@ import com.spring.main.service.CookieService;
 import com.spring.main.service.ParamService;
 import com.spring.main.service.SessionService;
 import com.spring.main.entity.*;
+
 import com.spring.main.dao.TaiKhoanDAO;
 
 import jakarta.servlet.ServletContext;
@@ -30,22 +35,13 @@ import jakarta.validation.Valid;
 
 @Controller
 public class LoginAdminController {
-	@Autowired
-	HttpServletRequest request;
 
-	@Autowired
-	HttpServletResponse response;
-
-	@Autowired
-	ServletContext context;
-	
 	@Autowired
 	TaiKhoanDAO dao;
-	
+
 	@Autowired
 	CookieService cookieService;
 
-	
 	@Autowired
 	ParamService paramService;
 
@@ -54,70 +50,82 @@ public class LoginAdminController {
 	 */
 	@Autowired
 	SessionService session;
-	
-	
+
 	// đăng nhập
 	@PostMapping("/Manager/login")
-	public String ManageLoginPage(@Validated @ModelAttribute("tai_khoan") TaiKhoan tai_khoan, Model model, BindingResult errors, @RequestParam("ten_dang_nhap") String ten_dang_nhap,
-			@RequestParam("mat_khau") String mat_khau, @RequestParam(name = "remember", defaultValue = "false") Boolean remember)
-			throws NoSuchAlgorithmException {
-	
-		// bắt null tên đăng nhập và mật khẩu
-		if("".equals(ten_dang_nhap.trim())){
-			model.addAttribute("message","Tên đăng nhập không được bỏ trống");
-			return "redirect:/Manager/login";
-		}else if("".equals(mat_khau.trim())) {
-			model.addAttribute("message","Mật khẩu không được bỏ trống");
-			return "redirect:/Manager/login";
-		}
+	public String ManageLoginPage (@Valid @ModelAttribute("TaiKhoan") TaiKhoan TaiKhoan, Model model, @RequestParam(name = "remember", defaultValue = "false") Boolean remember, BindingResult errors) {
 		
-		TaiKhoan taikhoan = dao.findById(ten_dang_nhap).get();
+//		
+		if(errors.hasErrors()){
+			model.addAttribute("message", "Vui lòng nhập đúng thông tin!");
+			return "Manager/login";
+        }
 		
-		if(taikhoan == null || !mat_khau.equals(taikhoan.getMat_khau())) {
-			model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu");
-			return "redirect:/Manager/login";
-		}else if(!taikhoan.isTrang_thai()) {
-			model.addAttribute("message", "Tài khoản chưa được kích hoạt");
-			return "redirect:/Manager/login";
+		String un = paramService.getString("tenDangNhap", "");
+		String pw = paramService.getString("matKhau", "");
+		
+		if("".equals(un.trim())) {
+			model.addAttribute("message", "Tên đăng nhập không được để trống!");
+			return "Manager-login-page";
+		}else if("".equals(pw.trim())){
+			model.addAttribute("message", "Mật khẩu không được để trống!");
+			return "Manager-login-page";
 		}
-
-		// đăng nhập thành công
-		if (ten_dang_nhap.equals(taikhoan.getTen_dang_nhap()) && mat_khau.equals(taikhoan.getMat_khau()) && taikhoan.isTrang_thai()==true) {
-			
-			session.set("ten_dang_nhap", taikhoan);
-			session.set("isLogin", true);
-			
-			// lưu thông tin tài khoản và mật khẩu vào Cookie
-			if (remember == true) {
-				cookieService.add("ten_dang_nhap", ten_dang_nhap, 10);
-				cookieService.add("mat_khau", mat_khau, 10);
-				model.addAttribute("ten_dang_nhap", taikhoan);
-			} else {
-				cookieService.remove("ten_dang_nhap");
-				cookieService.remove("mat_khau");
-			}
-			
-			// vai trò admin mới được đăng nhập
-			if (taikhoan.isVai_tro() == true) {
-				session.set("isVaiTro", true);
-				model.addAttribute("ten_dang_nhap", taikhoan);
-				model.addAttribute("message", "Đăng nhập thành công!");
+		List<TaiKhoan> list = new ArrayList<>();
+		TaiKhoan taikhoan = dao.findById(un).get();
+//		Chưa bắt sai tenDangNhap
+		System.out.println("TAIKHOAN == "+TaiKhoan);
+		System.out.println("taikhoan == "+taikhoan);
+				if(!un.equals(taikhoan.getTenDangNhap()) || !pw.equals(taikhoan.getMatKhau())) {
+					model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
+					System.out.println("Sai tên đăng nhập hoặc mật khẩu");
+					System.out.println(TaiKhoan);
+					return "Manager-login-page";
+					
+				}else if(!taikhoan.isTrangThai()) {
+					model.addAttribute("message", "Tài khoản chưa được kích hoạt!");
+					System.out.println("Tài khoản chưa được kích hoạt");
+					return "Manager-login-page";
+					
+				}
 				
-				return "redirect:/Manager/blog";
-			} else {
-				session.set("isVaiTro", false);
-			}
-			model.addAttribute("message", "Đăng nhập thất bại!");
-			return "redirect:/Manager/login";
 		
-		} else {
-			session.set("isLogin", false);
-			model.addAttribute("message", "Đăng nhập thất bại!");
-			return "redirect:/Manager/login";
-		}
+	   
+				// đăng nhập thành công
+				if (un.equals(taikhoan.getTenDangNhap()) && pw.equals(taikhoan.getMatKhau()) && taikhoan.isTrangThai()==true && taikhoan.isVaiTro()==true) {
+					
+					session.set("tenDangNhap", taikhoan);
+					session.set("isLogin", true);
+					session.set("isVaiTro", true);
+					// lưu thông tin tài khoản và mật khẩu vào Cookie
+					if (remember == true) {
+						cookieService.add("tenDangNhap", un, 10);
+						cookieService.add("matKhau", pw, 10);
+						model.addAttribute("message", "Đăng nhập thành công!");
+						//return "redirect:/Manager/blog";
+					} else {
+						
+						cookieService.remove("tenDangNhap");
+						cookieService.remove("matKhau");
+						model.addAttribute("message", "Đăng nhập thành công!");
+						
+						//return "redirect:/Manager/blog";
+					}
+					
+					return "Manager-blog-page";
+				} else {
+					session.set("isLogin", false);
+					session.set("isVaiTro", false);
+					model.addAttribute("message", "Đăng nhập thất bại!");
+					
+				}
+				
+				return "Manager-login-page";
 	}
+
 	
-	// đăng xuất 
+	
+	// đăng xuất
 	@RequestMapping("/Manager/logout")
 	public String logout() {
 		session.remove("ten_dang_nhap");
