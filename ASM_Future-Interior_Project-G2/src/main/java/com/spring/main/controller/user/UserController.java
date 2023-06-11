@@ -1,4 +1,4 @@
-// package com.spring.main.controller.user;
+package com.spring.main.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +24,10 @@ public class UserController {
 		return "dangky";
 	}
 
-	@GetMapping("/home-page")
-	public String getHomePage() {
-		return "index";
-	}
+//	@GetMapping("/home-page")
+//	public String getHomePage() {
+//		return "index";
+//	}
 
 	@GetMapping("/blog-page")
 	public String getBlogPage() {
@@ -50,16 +50,16 @@ public class UserController {
 		model.addAttribute("lienhe", lh);
 		return "contact";
 	}
+//
+//	@GetMapping("/product-page")
+//	public String getProductPage() {
+//		return "product";
+//	}
 
-	@GetMapping("/product-page")
-	public String getProductPage() {
-		return "product";
-	}
-
-	@GetMapping("/products-list-page")
-	public String getProductList() {
-		return "product-list";
-	}
+//	@GetMapping("/products-list-page")
+//	public String getProductList() {
+//		return "product-list";
+//	}
 
 	@GetMapping("/product-item-page")
 	public String getProductItem() {
