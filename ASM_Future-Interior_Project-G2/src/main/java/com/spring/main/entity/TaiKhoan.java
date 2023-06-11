@@ -29,7 +29,6 @@ public class TaiKhoan implements Serializable {
 	@Column(name = "vai_tro")
 	boolean vaiTro;
 	
-	
 	@OneToMany(mappedBy = "taiKhoanBaiDang")
 	List<BaiDang> ListBaiDang;
 	

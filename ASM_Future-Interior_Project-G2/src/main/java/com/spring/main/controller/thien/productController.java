@@ -188,4 +188,47 @@ public class productController {
         return "person";
     }
 
+    // doi mk
+    @GetMapping("/changePassword")
+    public String changepass(Model model) {
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public String change(Model model,
+            @RequestParam("currentPassword") String currentPassword,
+            @RequestParam("newPassword") String newPassword,
+            @RequestParam("confirmNewPassword") String confirmNewPassword) {
+
+        List<TaiKhoan> change = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("username", "thienlv");
+        boolean usernameExists = false;
+        for (TaiKhoan tk : change) {
+            if (tk.getMatKhau().equals(currentPassword)) {
+                usernameExists = true;
+                break;
+            }
+        }
+        if (usernameExists) {
+            if (newPassword.length() < 4 || newPassword.length() > 20) {
+                model.addAttribute("length", "Mật khẩu từ 4 - 20 ký tự");
+            } else if (!newPassword.equals(confirmNewPassword)) {
+                model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
+            } else {
+                model.addAttribute("success", "Đổi mật khẩu thành công");
+            }
+        } else {
+            model.addAttribute("message", "Nhập mật khẩu cũ sai");
+        }
+
+        return "changePassword";
+    }
+
+    // quen mat khau ?
+    @GetMapping("/quenmatkhau")
+    public String quenmatkhau() {
+
+        return "quenmatkhau";
+    }
+
 }
