@@ -53,6 +53,8 @@ public class BlogsController {
 	private String informatinSort[] = { "DESC", "tieuDeBaiDang", "", "" };
 	private BaiDang baiDang = new BaiDang();
 	private File file;
+	private BaiDangExport BlogExport = new BaiDangExport();
+	private final String excelFilePath = "..\\ASM_Future-Interior_Project-G2\\src\\main\\resources\\static\\fileExport\\baiDangs.xlsx";
 	@Autowired
 	HttpServletRequest request;
 
@@ -74,6 +76,12 @@ public class BlogsController {
 			} else {
 				model.addAttribute("ChangeTab", false);
 			}
+			File excel = new File(excelFilePath);
+			if(excel.exists()) {
+				excel.delete();
+				BlogExport.writeExcelBlogs(baiDangDAO.findAll(), excelFilePath);
+			}
+			model.addAttribute("duongDan", excel.getName());
 			model.addAttribute("BaiDang", baiDang);
 			model.addAttribute("FileBg", file);
 			model.addAttribute("inforSort", informatinSort);
@@ -178,14 +186,5 @@ public class BlogsController {
 		return "redirect:/Manager/blog";
 	}
 
-	
-	@PostMapping("/Manager/blog/export")
-	public String exportFile() throws IOException {
-		List<BaiDang> list = baiDangDAO.findAll();
-		final String excelFilePath = "C:\\Users\\Thinh\\Downloads\\baiDangs.xlsx";
-		BaiDangExport BlogExport = new BaiDangExport();
-		BlogExport.writeExcelBlogs(list, excelFilePath);
-		return "redirect:/Manager/blog";
-	}
 	
 }

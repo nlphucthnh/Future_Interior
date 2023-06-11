@@ -32,7 +32,7 @@ public class BaiDangExport {
 	public final int COLUMN_INDEX_DESCRIPTION = 7;
 	public final int COLUMN_INDEX_CONTENT = 8;
 	
-	public void writeExcelBlogs(List<BaiDang> baiDangs, String excelFilePath) throws IOException {
+	public String writeExcelBlogs(List<BaiDang> baiDangs, String excelFilePath) throws IOException {
         // Create Workbook
         Workbook workbook = getWorkbook(excelFilePath);
  
@@ -61,6 +61,7 @@ public class BaiDangExport {
         // Create file excel
         createOutputFile(workbook, excelFilePath);
         System.out.println("Done!!!");
+       return excelFilePath;
     }
  
  

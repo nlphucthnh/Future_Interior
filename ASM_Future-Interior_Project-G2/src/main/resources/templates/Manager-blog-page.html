@@ -41,11 +41,9 @@
                         quảng bá sản phẩm</h5>
                 </div>
                 <div class="header_content_button-group">
-                    <form action="/Manager/blog/export" method="post">
-                        <button th:onclick="exportFile()" class="btn btn-export btn-style"><i class="bi bi-cloud-download icon-text"></i> Xuất
-                            file</button>
-                            
-                    </form>
+                    <a class="btn btn-export btn-style text-title" th:href="@{/fileExport/__${duongDan}__}" 
+                        download="BaiDang"><i class="bi bi-cloud-download icon-text"></i> Xuất
+                        file</a>
                 </div>
             </div>
             <div class="body_content">
@@ -105,8 +103,8 @@
                                     <div class="input-group mb-3">
                                         <button class="btn btn-outline-secondary box-shadow-none" type="button"
                                             id="button-search"><i class="bi bi-search"></i></button>
-                                        <input type="text" th:value="${inforSort[2]}" name="nameBlogs" class="form-control box-shadow-none"
-                                            placeholder="Nhập tiêu đề tìm kiếm"
+                                        <input type="text" th:value="${inforSort[2]}" name="nameBlogs"
+                                            class="form-control box-shadow-none" placeholder="Nhập tiêu đề tìm kiếm"
                                             aria-label="Example text with button addon"
                                             aria-describedby="button-search">
                                     </div>
@@ -293,8 +291,8 @@
                                     <form action="#" method="post">
                                         <button formaction="/Manager/blog/clearform" class="btn btn-style btn-clear"><i
                                                 class="bi-brush"></i></button>
-                                        <button th:if="${ChangeTab == false}"
-                                            class="btn btn-style btn-update disnable" style="color: var(--gray_400);">Cập nhật</button>
+                                        <button th:if="${ChangeTab == false}" class="btn btn-style btn-update disnable"
+                                            style="color: var(--gray_400);">Cập nhật</button>
                                         <button th:if="${ChangeTab == true}" formaction="/Manager/blog/update"
                                             class="btn btn-style btn-update">Cập nhật</button>
                                         <button th:if="${ChangeTab == false}" formaction="/Manager/blog/create"
@@ -361,17 +359,6 @@
             Http.send();
             alert("Xóa thành công!");
             location.reload(true);
-        }
-    }
-
-    function exportFile() {
-        let message = "Bạn muốn xuất file .xlsx"
-        if (confirm(message) == true) {
-            const Http = new XMLHttpRequest();
-            const url = '/Manager/blog/export';
-            Http.open("POST", url);
-            Http.send();
-            alert("Xuất thành công!");
         }
     }
 
