@@ -1,16 +1,23 @@
 package com.spring.main.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
-import com.spring.main.entity.TaiKhoan;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.spring.main.entity.TaiKhoan;
+import java.text.SimpleDateFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -19,15 +26,26 @@ import lombok.Data;
 public class TaiKhoan implements Serializable {
 	@Id
 	@Column(name = "ten_dang_nhap")
+	@NotNull(message = "Không để trống tên đăng nhập")
+	@NotBlank(message = "Không để trống tên đăng nhập")
 	String tenDangNhap;
+
 	@Column(name = "mat_khau")
+	@NotNull(message = "Không để trống mật khẩu")
+	@NotBlank(message = "Không để trống mật khẩu")
 	String matKhau;
 	@Column(name = "email")
+	@NotNull(message = "Không để trống email")
+	@NotBlank(message = "Không để trống email")
 	String email;
 	@Column(name = "trang_thai")
-	boolean trangThai;
+	boolean trangThai = true;
 	@Column(name = "vai_tro")
-	boolean vaiTro;
+	boolean vaiTro = false;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "ngay_dang_ky")
+	Date ngayDangKy = new Date();
 	
 	
 	@OneToMany(mappedBy = "taiKhoanBaiDang")

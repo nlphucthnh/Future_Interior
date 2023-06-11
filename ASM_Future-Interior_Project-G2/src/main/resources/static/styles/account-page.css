@@ -209,10 +209,16 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 
+
 #Manager_Content .list_blogs-body .table-responsive tfoot .btn-style {
     padding: 7px 13px;
     border-radius: 3px;
     transition: 0.4s;
+}
+
+#Manager_Content .list_blogs-body .table-responsive tfoot .btn-prev,
+#Manager_Content .list_blogs-body .table-responsive tfoot .btn-next {
+    margin-bottom: 20px;
 }
 
 #Manager_Content .list_blogs-body .table-responsive tfoot .btn-style:hover {
@@ -234,6 +240,7 @@ tbody, td, tfoot, th, thead, tr {
     border: 2px solid var(--gray_200);
     border-radius: 5px;
     margin-bottom: 20px;
+    
 }
 
 #Manager_Content #form_blogs .group-fleld {

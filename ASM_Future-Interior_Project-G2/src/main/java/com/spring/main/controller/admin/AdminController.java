@@ -36,11 +36,11 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/Manager/filter")
-	public String ManageFilterPage() {
-		return "Manager-filter-page";
-	}
-	
+//	@GetMapping("/Manager/filter")
+//	public String ManageFilterPage() {
+//		return "Manager-filter-page";
+//	}
+//	
 //	@GetMapping("/Manager/account")
 //	public String ManageAccountPage() {
 //		return "Manager-account-page";
