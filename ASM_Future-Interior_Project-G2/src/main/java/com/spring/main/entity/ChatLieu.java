@@ -33,8 +33,6 @@ public class ChatLieu implements Serializable{
 	Date ngayTao = new Date() ;
 	@Column(name = "mo_ta_chat_lieu")
 	String moTaChatLieu;
-	
-	
 	@OneToMany(mappedBy = "chatLieuSPCL")
 	List<SanPhamChatLieu> ListSPCL;
 }
