@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- icon web  -->
+    <link rel="icon" type="image/x-icon" href="../../img/logoMark.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!--link css -->
+    <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navigation.css">
+    <link rel="stylesheet" href="/styles/blog-page.css">
+    <title>Manager blog</title>
+</head>
+
+<body>
+    <div class="background-manager">
+        <nav id="Manager_Navigation" th:include="components/Manager-navigation"></nav>
+        <div id="Manager_Content">
+            <div class="header_content">
+                <div class="header_content_text-group">
+                    <h3 class="header_content_main-text text-title">Quản lý bài đăng</h3>
+                    <h5 class="header_content_sub-text text-title">Quản lý nội dung những bài đăng của website nhằm
+                        quảng bá sản phẩm</h5>
+                </div>
+                <div class="header_content_button-group">
+                    <form action="/Manager/blog/export" method="post">
+                        <button th:onclick="exportFile()" class="btn btn-export btn-style"><i class="bi bi-cloud-download icon-text"></i> Xuất
+                            file</button>
+                            
+                    </form>
+                </div>
+            </div>
+            <div class="body_content">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs body_content_tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="btn-style active" id="list-blogs-tab" data-bs-toggle="tab"
+                            data-bs-target="#list_blogs" type="button" role="tab" aria-controls="list_blogs"
+                            th:onclick="TabList()" aria-selected="true">Danh sách bài đăng</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="btn-style" id="form-blogs-tab" data-bs-toggle="tab" data-bs-target="#form_blogs"
+                            th:onclick="TabForm() " type="button" role="tab" aria-controls="form_blogs"
+                            aria-selected="false">Chi tiết bài
+                            đăng</button>
+                    </li>
+                </ul>
+
+                <hr>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="list_blogs" role="tabpanel" aria-labelledby="list-blogs-tab">
+                        <div class="list_blogs-header">
+                            <div class="list_blogs-header-seletion-group">
+                                <form action="/Manager/blog/sort" method="post">
+                                    <div class="mb-3" style="margin-right: 20px;">
+                                        <select class="form-select form-select-lg" name="methodSort" id="methodSort_id">
+                                            <option value="DESC" th:selected="${inforSort[0] == 'DESC'}">Từ thấp đến cao
+                                            </option>
+                                            <option value="ASC" th:selected="${inforSort[0] == 'ASC'}">Từ cao đến thấp
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <select class="form-select form-select-lg" name="fieldSort" id="fieldSort_id">
+                                            <option value="tieuDeBaiDang"
+                                                th:selected="${inforSort[1] == 'tieuDeBaiDang'}">Tiêu đề bài đăng
+                                            </option>
+                                            <option value="ngayDang" th:selected="${inforSort[1] == 'ngayDang'}">Theo
+                                                ngày đăng</option>
+                                            <option value="tacGiaBaiDang"
+                                                th:selected="${inforSort[1] == 'tacGiaBaiDang'}">Theo tác giả</option>
+                                            <option value="taiKhoanBaiDang"
+                                                th:selected="${inforSort[1] == 'taiKhoanBaiDang'}">Theo tài khoản đăng
+                                            </option>
+                                            <option value="luotXemBaiDang"
+                                                th:selected="${inforSort[1] == 'luotXemBaiDang'}">Theo lượt xem</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn-style mb-3" style="margin: 0 10px;">Sắp xếp</button>
+                                </form>
+                            </div>
+                            <div class="list_blogs-header-search-group">
+                                <form action="/Manager/blog/search" method="post">
+                                    <div class="input-group mb-3">
+                                        <button class="btn btn-outline-secondary box-shadow-none" type="button"
+                                            id="button-search"><i class="bi bi-search"></i></button>
+                                        <input type="text" th:value="${inforSort[2]}" name="nameBlogs" class="form-control box-shadow-none"
+                                            placeholder="Nhập tiêu đề tìm kiếm"
+                                            aria-label="Example text with button addon"
+                                            aria-describedby="button-search">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="list_blogs-body">
+                            <div class="table-responsive">
+                                <table class="table ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" style="text-align: left;">
+                                                <form action="" method="post">
+                                                    <input class="form-check-input box-shadow-none"
+                                                        style="margin-right: 10px;" name="" id="" type="checkbox"
+                                                        value="checkedValue" aria-label="Text for screen reader">
+                                                    Bài đăng
+                                                    <i class="bi bi-arrow-down"></i>
+                                                </form>
+                                            </th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Tác giả</th>
+                                            <th scope="col">Tài khoản đăng</th>
+                                            <th scope="col">Lược xem</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:if="${disnableTable == false}">
+                                        <tr style="border-bottom: 1px solid var(--gray_200);" class=""
+                                            th:each="baiDang : ${PageBD.content}">
+                                            <!-- <form th:action="@{/Manager/blog/__${baiDang.idBaiDang}__}"> -->
+                                            <td scope="row" class="td-first-table">
+                                                <input class="form-check-input box-shadow-none" name="" id=""
+                                                    type="checkbox" value="checkedValue"
+                                                    aria-label="Text for screen reader">
+                                                <div class="text-blogs-group">
+                                                    <h4 class="text-title-blogs text-title"
+                                                        th:text="${baiDang.tieuDeBaiDang}">...</h4>
+                                                    <h6 class="text-id-blogs text-title" style="display: flex;">BD
+                                                        <p style="margin-bottom: 0;" th:text="${baiDang.idBaiDang}">
+                                                        </p>
+                                                    </h6>
+                                                </div>
+                                            </td>
+                                            <td th:text="${baiDang.ngayDang}">...</td>
+                                            <td th:text="${baiDang.tacGiaBaiDang}">...</td>
+                                            <td th:text="${baiDang.taiKhoanBaiDang.tenDangNhap}">...</td>
+                                            <td th:text="${baiDang.luotXemBaiDang}">...</td>
+                                            <td style="display: flex; justify-content: center;">
+                                                <button
+                                                    th:onclick="confomDelete([[${baiDang.tieuDeBaiDang}]],[[${baiDang.idBaiDang}]])"
+                                                    class="btn" style="color: var(--gray_600);"><i
+                                                        class="bi bi-trash-fill"></i></button>
+
+                                                <form th:action="@{/Manager/blog/edit/__${baiDang.idBaiDang}__}"
+                                                    method="post">
+                                                    <button class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-pen-fill"></i></button>
+                                                </form>
+
+
+                                            </td>
+                                            <!-- </form> -->
+                                        </tr>
+                                    </tbody>
+                                    <tfoot th:if="${disnableTable == false}">
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                <a class="btn-style btn-prev disnable"
+                                                    th:if="${PageBD.number == 0}">Trước đó</a>
+                                                <a class="btn-style btn-prev" th:if="${PageBD.number > 0}"
+                                                    th:href="@{/Manager/blog?page=__${PageBD.number-1}__}">Trước đó</a>
+                                                <a class="btn-style btn-next"
+                                                    th:if="${PageBD.number < PageBD.totalPages - 1}"
+                                                    th:href="@{/Manager/blog?page=__${PageBD.number+1}__}">Kế tiếp</a>
+                                                <a class="btn-style btn-next disnable"
+                                                    th:if="${PageBD.number == PageBD.totalPages - 1}">Kế tiếp</a>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td th:text="'Trang ' + ${PageBD.number} + ' của ' + ${PageBD.totalPages} ">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="form_blogs" role="tabpanel" aria-labelledby="form-blogs-tab">
+                        <div class="form_blogs-pane">
+                            <form th:action="@{#}" th:object="${BaiDang}" method="post">
+                                <div class="group-fleld group-fleld-01">
+                                    <div class="mb-3 form-group">
+                                        <label for="titel_blog" class="form-label">Tiêu đề bài đăng</label>
+                                        <input th:field="*{tieuDeBaiDang}" type="text" name="titel-blog" id="titel_blog"
+                                            class="form-control box-shadow-none" placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('tieuDeBaiDang')}"
+                                            th:errors="*{tieuDeBaiDang}">..</small>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="description_blog" class="form-label">Mô tả bài đăng</label>
+                                        <input type="text" name="description-blog" id="description_blog"
+                                            th:field="*{moTaBaiDang}" class="form-control box-shadow-none"
+                                            placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('moTaBaiDang')}"
+                                            th:errors="*{moTaBaiDang}">..</small>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-02">
+                                    <div class="mb-3 form-group">
+                                        <label for="view_blog" class="form-label">Lượt xem bài đăng</label>
+                                        <input type="number" min="0" name="view-blog" id="view_blog"
+                                            th:field="*{luotXemBaiDang}" class="form-control box-shadow-none"
+                                            placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('luotXemBaiDang')}"
+                                            th:errors="*{luotXemBaiDang}">..</small>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="image_blog" class="form-label">Link ảnh nền</label>
+
+                                        <div class="input-group">
+                                            <input id="NameBg" type="text" class="form-control" th:field="*{anhNen}"
+                                                aria-label="Recipient's username with two button addons"
+                                                style="pointer-events: none;">
+                                            <input id="UploadFileBg" type="file" name="BgBlogs" th:value="${FileBg}"
+                                                class="form-control" accept="image/png, image/gif, image/jpeg"
+                                                aria-label="Recipient's username with two button addons">
+                                            <button th:onclick="onInputName()" class="btn btn-outline-secondary"
+                                                type="button">Tên ảnh</button>
+                                            <button th:onclick="onInputFile()" class="btn btn-outline-secondary"
+                                                type="button">Tải ảnh khác</button>
+                                        </div>
+
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('anhNen')}" th:errors="*{anhNen}">..</small>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-03">
+                                    <div class="mb-3 form-group">
+                                        <label for="date_blogs" class="form-label">Ngày đăng</label>
+                                        <input type="date" min="0" name="date-blogs" id="date_blogs"
+                                            th:field="*{ngayDang}" class=" form-control box-shadow-none" placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('ngayDang')}" th:errors="*{ngayDang}">..</small>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="account_blog" class="form-label">Tài khoản đăng</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-white" id="calendar"><i
+                                                    class="bi-person-fill" style="color: var(--gray_700);"></i></span>
+                                            <input type="text" min="0" name="date-blogs" id="date_blogs"
+                                                class=" form-control box-shadow-none" placeholder=""
+                                                th:field="*{taiKhoanBaiDang.tenDangNhap}">
+
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="author_blog" class="form-label">Tác giả bài đăng</label>
+                                        <input type="text" name="author_blog" id="author_blog"
+                                            th:field="*{tacGiaBaiDang}" class="form-control box-shadow-none"
+                                            placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('tacGiaBaiDang')}"
+                                            th:errors="*{tacGiaBaiDang}">..</small>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-04">
+                                    <div class="mb-3 form-group">
+                                        <label for="content_blog" class="form-label">Nội dung bài đăng</label>
+                                        <textarea class="form-control box-shadow-none" name="" id="content_blog"
+                                            th:field="*{noiDungBaiDang}" rows="9"></textarea>
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('noiDungBaiDang')}"
+                                            th:errors="*{noiDungBaiDang}">...</small>
+                                    </div>
+                                </div>
+                                <div class="group-fleld group-fleld-05">
+                                    <form action="#" method="post">
+                                        <button formaction="/Manager/blog/clearform" class="btn btn-style btn-clear"><i
+                                                class="bi-brush"></i></button>
+                                        <button th:if="${ChangeTab == false}"
+                                            class="btn btn-style btn-update disnable" style="color: var(--gray_400);">Cập nhật</button>
+                                        <button th:if="${ChangeTab == true}" formaction="/Manager/blog/update"
+                                            class="btn btn-style btn-update">Cập nhật</button>
+                                        <button th:if="${ChangeTab == false}" formaction="/Manager/blog/create"
+                                            id="btn-add-id" class="btn btn-style btn-add">Thêm mới</button>
+                                        <button th:if="${ChangeTab == true}" id="btn-add-id"
+                                            class="btn btn-style btn-add disnable"
+                                            style="background-color: var(--gray_400);">Thêm mới</button>
+                                    </form>
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+
+    var listBlogsTab = document.getElementById("list-blogs-tab");
+    var formBlogsTab = document.getElementById("form-blogs-tab");
+    var formBlogs = document.getElementById("form_blogs");
+    var listBlogs = document.getElementById("list_blogs");
+    var NameBlogBg = document.getElementById("NameBg");
+    listBlogsTab.style.backgroundColor = 'var(--gray_50)';
+    listBlogsTab.style.border = '1px solid var(--gray_300)';
+    NameBlogBg.style.display = 'none';
+    $("#UploadFileBg").change(function () {
+        var nameFile = this.value.split(/(\\|\/)/g).pop()
+        NameBlogBg.value = nameFile;
+    });
+    function TabList() {
+        listBlogsTab.style.backgroundColor = 'var(--gray_50)';
+        listBlogsTab.style.border = '1px solid var(--gray_300)';
+        formBlogsTab.style.backgroundColor = 'white';
+        formBlogsTab.style.border = 'none';
+        listBlogs.className = "tab-pane active";
+        formBlogs.className = "tab-pane";
+    }
+
+
+    function TabForm() {
+        formBlogsTab.style.backgroundColor = 'var(--gray_50)';
+        formBlogsTab.style.border = '1px solid var(--gray_300)';
+        listBlogsTab.style.backgroundColor = 'white';
+        listBlogsTab.style.border = 'none';
+        formBlogs.className = "tab-pane active";
+        listBlogs.className = "tab-pane";
+    }
+
+    function confomDelete(nameBlogs, idBlogs) {
+        let message = "Bạn muốn xóa bài đăng : " + nameBlogs;
+
+        if (confirm(message) == true) {
+            const Http = new XMLHttpRequest();
+            const url = '/Manager/blog/delete/' + idBlogs;
+            Http.open("POST", url);
+            Http.send();
+            alert("Xóa thành công!");
+            location.reload(true);
+        }
+    }
+
+    function exportFile() {
+        let message = "Bạn muốn xuất file .xlsx"
+        if (confirm(message) == true) {
+            const Http = new XMLHttpRequest();
+            const url = '/Manager/blog/export';
+            Http.open("POST", url);
+            Http.send();
+            alert("Xuất thành công!");
+        }
+    }
+
+    function onInputName() {
+        var UploadFileBg = document.getElementById("UploadFileBg");
+        var NameBg = document.getElementById("NameBg");
+        UploadFileBg.style.display = 'none';
+        NameBg.style.display = 'block';
+    }
+
+    function onInputFile() {
+        var UploadFileBg = document.getElementById("UploadFileBg");
+        var NameBg = document.getElementById("NameBg");
+        NameBg.style.display = 'none';
+        UploadFileBg.style.display = 'block';
+    }
+
+</script>
+
+<script th:if="${ChangeTab == true}">
+    var listBlogsTab = document.getElementById("list-blogs-tab");
+    var formBlogsTab = document.getElementById("form-blogs-tab");
+    var formBlogs = document.getElementById("form_blogs");
+    var listBlogs = document.getElementById("list_blogs");
+    function TabForm() {
+        formBlogsTab.style.backgroundColor = 'var(--gray_50)';
+        formBlogsTab.style.border = '1px solid var(--gray_300)';
+        listBlogsTab.style.backgroundColor = 'white';
+        listBlogsTab.style.border = 'none';
+        formBlogs.className = "tab-pane active";
+        listBlogs.className = "tab-pane";
+    }
+    TabForm();
+</script>
+
+</html>
