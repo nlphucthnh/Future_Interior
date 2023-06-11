@@ -12,29 +12,21 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "tai_khoan")
 public class TaiKhoan implements Serializable {
-	private static final long serialVersionUID = 1L;
 	
-
-	//@NotBlank(message = "Vui lòng nhập tên đăng nhập!")
-	//@NotNull(message= "Vui lòng nhập tên đăng nhập!")
-	//@NotEmpty(message= "Vui lòng nhập tên đăng nhập!")
 	@Id
 	@Column(name = "ten_dang_nhap")
+	@NotBlank(message = "Vui lòng nhập tên đăng nhập!")
 	String tenDangNhap;
 	
 
-//	@NotBlank(message = "Vui lòng nhập mật khẩu!1")
-//	@NotNull(message= "Vui lòng nhập mật khẩu!2")
-//	@NotEmpty(message= "Vui lòng nhập mật khẩu!3")
 	@Column(name = "mat_khau")
+	@NotBlank(message = "Vui lòng nhập mật khẩu!")
 	String matKhau;
 	
 	@Column(name = "email")

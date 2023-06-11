@@ -1,10 +1,15 @@
 package com.spring.main.controller.user;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.spring.main.bean.MailInfo;
+import com.spring.main.entity.TaiKhoan;
 
 @Controller
 public class UserController {
@@ -42,9 +47,12 @@ public class UserController {
 	}
 
 	@GetMapping("/contact-page")
-	public String getContactPage() {
+	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
+		MailInfo lh = new MailInfo();
+		model.addAttribute("lienhe", lh);
 		return "contact";
 	}
+	
 	@GetMapping("/product-page")
 	public String getProductPage() {
 		return "product";

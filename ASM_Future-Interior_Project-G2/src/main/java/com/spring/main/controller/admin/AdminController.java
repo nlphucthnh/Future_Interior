@@ -15,10 +15,9 @@ public class AdminController {
 //	---------------- GET URL MANAGER PAGE ----------------//
 
 	@GetMapping("/Manager/login")
-	public String ManageLoginPage(@ModelAttribute("TaiKhoan") TaiKhoan TaiKhoan) {
-		
-		//TaiKhoan TaiKhoan = new TaiKhoan();
-		//model.addAttribute("TaiKhoan", TaiKhoan);
+	public String ManageLoginPage(@ModelAttribute("tk") TaiKhoan taiKhoan, Model model) {
+		TaiKhoan tk = new TaiKhoan();
+		model.addAttribute("taiKhoan", tk);
 		return "Manager-login-page";
 	}
 	

@@ -17,7 +17,7 @@
         <div class="lg-container-ctent">
             <div class="lg-ct-left">
                 <div class="lg-ct-left-form">
-                    <form th:action="@{/Manager/login}" th:object="${TaiKhoan}" method="post" >
+                    <form th:action="@{/Manager/login}" th:object="${taiKhoan}" method="post" >
                     <div class="lg-ct-top">
                         <div class="lg-ct-top-up">
                             <img src="img/logoMark.png" alt="">
@@ -28,27 +28,29 @@
                         <p>Form đăng nhập dành cho quản trị viên website</p>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="exampleInputEmail1" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" name="tenDangNhap" id="exampleInputEmail1" placeholder="Nhập Tên Đăng Nhập">
-                   	 <div class="alert alert-warning" th:if="${#fields.hasErrors('tenDangNhap')}" th:errors="*{tenDangNhap}"></div>
+                        <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="tenDangNhap" th:field="*{tenDangNhap}" id="tenDangNhap" placeholder="Nhập Tên Đăng Nhập">
+                   	<div class="text-danger" th:if="${#fields.hasErrors('tenDangNhap')}" th:errors="*{tenDangNhap}"></div>
                    		
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" name="matKhau" id="exampleInputPassword1" placeholder="Nhập Mật Khẩu">
-                   		<div class="alert alert-warning" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}"></div>
+                        <label for="matKhau" class="form-label">Mật khẩu</label>
+                        <input type="password" class="form-control" name="matKhau" th:field="*{matKhau}" id="matKhau" placeholder="Nhập Mật Khẩu">
+                   		<div class="text-danger" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}"></div>
                     </div>    
                     <div class="mb-3 form-check">
                     	<div class="input-groups input-groups-01">
-                                <input type="checkbox" class="form-check-input" value="true" id="exampleCheck1">
+                                <input type="checkbox" class="form-check-input" value="true" id="matKhau">
                                 <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
                     	 </div>
                      </div><hr>        
-                    <button type="submit" class="btn btn-login">Đăng Nhập</button>
+                    <button type="submit" class="btn btn-login" id="liveAlertBtn">Đăng Nhập</button>
                     
                 </form>
-                	<th:if test="${not empty message}">
-						<div style="color:red;"th:text="${message}"></div>
+               		 <div id="liveAlertPlaceholder"></div>
+                
+                	<th:if test="${not empty message}" class="alert-warning">
+						<div  th:text="${message}"></div>
 					</th:if>
 				</div>
                 
@@ -69,5 +71,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
+    
+    
 
 </html>

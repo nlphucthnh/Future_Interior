@@ -37,7 +37,7 @@ import jakarta.validation.Valid;
 public class LoginAdminController {
 
 	@Autowired
-	TaiKhoanDAO dao;
+	TaiKhoanDAO taiKhoanDAO;
 
 	@Autowired
 	CookieService cookieService;
@@ -53,12 +53,12 @@ public class LoginAdminController {
 
 	// đăng nhập
 	@PostMapping("/Manager/login")
-	public String ManageLoginPage (@Valid @ModelAttribute("TaiKhoan") TaiKhoan TaiKhoan, Model model, @RequestParam(name = "remember", defaultValue = "false") Boolean remember, BindingResult errors) {
+	public String ManageLoginPage ( @RequestParam(name = "remember", defaultValue = "false") Boolean remember,@Valid @ModelAttribute("taiKhoan") TaiKhoan taiKhoan, BindingResult result, Model model) {
 		
 //		
-		if(errors.hasErrors()){
+		if(result.hasErrors()){
 			model.addAttribute("message", "Vui lòng nhập đúng thông tin!");
-			return "Manager/login";
+			return "Manager-login-page";
         }
 		
 		String un = paramService.getString("tenDangNhap", "");
@@ -72,14 +72,14 @@ public class LoginAdminController {
 			return "Manager-login-page";
 		}
 		List<TaiKhoan> list = new ArrayList<>();
-		TaiKhoan taikhoan = dao.findById(un).get();
+		TaiKhoan taikhoan = taiKhoanDAO.findById(un).get();
 //		Chưa bắt sai tenDangNhap
-		System.out.println("TAIKHOAN == "+TaiKhoan);
+		System.out.println("TAIKHOAN == "+taiKhoan);
 		System.out.println("taikhoan == "+taikhoan);
-				if(!un.equals(taikhoan.getTenDangNhap()) || !pw.equals(taikhoan.getMatKhau())) {
+				if(taiKhoanDAO.existsById(un) == false || !pw.equals(taikhoan.getMatKhau())) {
 					model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
 					System.out.println("Sai tên đăng nhập hoặc mật khẩu");
-					System.out.println(TaiKhoan);
+					System.out.println(taiKhoan);
 					return "Manager-login-page";
 					
 				}else if(!taikhoan.isTrangThai()) {
