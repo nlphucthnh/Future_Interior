@@ -13,6 +13,9 @@
     <!-- Bootstrap CSS: -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- link javaSprict -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Bootstrap JavaScript: -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -29,12 +32,13 @@
 
 <body>
     <div class="background-manager">
-        <nav id="Manager_Navigation" th:include="components/Manager-navigation" ></nav>
+        <nav id="Manager_Navigation" th:include="components/Manager-navigation"></nav>
         <div id="Manager_Content">
             <div class="header_content">
                 <div class="header_content_text-group">
                     <h3 class="header_content_main-text text-title">Phân loại sản phẩm</h3>
-                    <h5 class="header_content_sub-text text-title">Phân loại sản phẩm theo nhà sản xuất, chất liệu, khuyến mãi</h5>
+                    <h5 class="header_content_sub-text text-title">Phân loại sản phẩm theo nhà sản xuất, chất liệu,
+                        khuyến mãi</h5>
                 </div>
                 <div class="header_content_button-group">
                     <form action="" method="post">
@@ -47,21 +51,114 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs body_content_tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="btn-style active" id="info-filter-tab" data-bs-toggle="tab"
-                            data-bs-target="#info-filter" type="button" role="tab" aria-controls="info-filter"
-                            aria-selected="true">Thông tin phân loại</button>
+                        <button onclick="changeTab('km')" class="btn-style btn-tab active" id="form-promotion-tab"
+                            data-bs-toggle="tab" data-bs-target="#form-promotion" type="button" role="tab"
+                            aria-controls="form-promotion" aria-selected="false">Khuyến mãi</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button onclick="changeTab('cl')" class="btn-style btn-tab " id="chat-lieu-tab"
+                            data-bs-toggle="tab" data-bs-target="#chat-lieu" type="button" role="tab"
+                            aria-controls="chat-lieu" aria-selected="true">Chất liệu</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button onclick="changeTab('nsx')" class="btn-style btn-tab" id="nhaSanXuat-tab"
+                            data-bs-toggle="tab" data-bs-target="#nhaSanXuat" type="button" role="tab"
+                            aria-controls="nhaSanXuat" aria-selected="true">Nhà sản
+                            xuất</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button onclick="changeTab('nl')" class="btn-style btn-tab" id="nhomLoai-tab"
+                            data-bs-toggle="tab" data-bs-target="#nhomLoai" type="button" role="tab"
+                            aria-controls="nhomLoai" aria-selected="true">Nhóm loại</button>
                     </li>
 
-                    <li class="nav-item" role="presentation">
-                        <button class="btn-style" id="form-promotion-tab" data-bs-toggle="tab"
-                            data-bs-target="#form-promotion" type="button" role="tab" aria-controls="form-promotion"
-                            aria-selected="false">Khuyến mãi</button>
-                    </li>
+
                 </ul>
                 <hr>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active" id="info-filter" role="tabpanel" aria-labelledby="info-filter-tab">
+                    <div class="tab-pane " id="chat-lieu" role="tabpanel" aria-labelledby="chat-lieu-tab">
+                        <div class="infor-filter-container">
+                            <h5 class="infor-filter-container-title container-item text-title">Thông tin chất liệu</h5>
+                            <div class="table-responsive container-item">
+                                <table class="table m-0">
+                                    <div class="on-the-table">
+                                        <h6 class="text-on-table text-title">Chất liệu sản phẩm</h6>
+                                        <button onclick="onBtnCreate()" class="btn-style btn-on-table"
+                                            data-bs-toggle="modal" data-bs-target="#modal-material"><i
+                                                class="bi-plus-lg"></i> Thêm chất
+                                            liệu</button>
+                                    </div>
+                                    <thead>
+                                        <tr class="table-active">
+                                            <th scope="col" style="text-align: left;">
+                                                <form action="" method="post">
+                                                    Chất liệu
+
+                                                </form>
+                                            </th>
+                                            <th scope="col">Mã chất liệu</th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="body-table-chatLieu">
+                                        <tr th:id="'chatlieu' + ${chatLieu.idChatLieu}" class="row-chatLieu"
+                                            th:each="chatLieu, istatus : ${pageChatLieu.content}">
+                                            <!-- <form action=""> -->
+                                            <td th:id="'tenChatLieu' + ${chatLieu.idChatLieu}" scope="row"
+                                                class="td-first-table" th:text="${chatLieu.tenChatLieu}">
+                                                ...
+                                            </td>
+                                            <td th:text="${chatLieu.idChatLieu}">...</td>
+                                            <td th:id="'ngayTaoCl' + ${chatLieu.idChatLieu}"
+                                                th:text="${chatLieu.ngayTao}">...</td>
+                                            <td style="display: flex; justify-content: center;">
+                                                <button th:onclick="deleteChatLieu([[${chatLieu.idChatLieu}]])"
+                                                    class="btn" style="color: var(--gray_600);"><i
+                                                        class="bi bi-trash-fill"></i></button>
+                                                <button th:onclick="setFormChatLieu([[${chatLieu.idChatLieu}]])"
+                                                    data-bs-toggle="modal" data-bs-target="#modal-material" class="btn"
+                                                    style="color: var(--gray_600);"><i
+                                                        class="bi bi-pen-fill"></i></button>
+                                            </td>
+                                            <!-- </form> -->
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                <!-- <button class="btn-style btn-prev">Trước đó</button>
+                                                <button class="btn-style btn-next">Kế tiếp</button> -->
+                                                <a class="btn-style btn-prev disnable"
+                                                    th:if="${pageChatLieu.number == 0}">Trước đó</a>
+                                                <a class="btn-style btn-prev" th:if="${pageChatLieu.number > 0}"
+                                                    th:href="@{/Manager/filter?pageCL=__${pageChatLieu.number-1}__&&pageNSX=__${pageNSX.number}__&&pageNL=__${pageNhomLoai.number}__}">Trước
+                                                    đó</a>
+                                                <a class="btn-style btn-next"
+                                                    th:if="${pageChatLieu.number < pageChatLieu.totalPages - 1}"
+                                                    th:href="@{/Manager/filter?pageCL=__${pageChatLieu.number+1}__&&pageNSX=__${pageNSX.number}__&&pageNL=__${pageNhomLoai.number}__}">Kế
+                                                    tiếp</a>
+                                                <a class="btn-style btn-next disnable"
+                                                    th:if="${pageChatLieu.number == pageChatLieu.totalPages - 1}">Kế
+                                                    tiếp</a>
+
+                                            </td>
+
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: center;"
+                                                th:text="'Trang ' + ${pageChatLieu.number + 1} + ' của ' + ${pageChatLieu.totalPages} ">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="nhaSanXuat" role="tabpanel" aria-labelledby="nhaSanXuat-tab">
                         <div class="infor-filter-container">
                             <h5 class="infor-filter-container-title container-item text-title">Thông tin nhà sản xuất
                             </h5>
@@ -69,17 +166,15 @@
                                 <table class="table m-0">
                                     <div class="on-the-table">
                                         <h6 class="text-on-table text-title">Nhà sản xuất sản phẩm</h6>
-                                        <button class="btn-style btn-on-table" data-bs-toggle="modal"
-                                            data-bs-target="#modal-producer"><i class="bi-plus-lg"></i> Thêm nhà sản
+                                        <button onclick="onBtnCreate()" class="btn-style btn-on-table"
+                                            data-bs-toggle="modal" data-bs-target="#modal-producer"><i
+                                                class="bi-plus-lg"></i> Thêm nhà sản
                                             xuất</button>
                                     </div>
                                     <thead>
                                         <tr class="table-active">
                                             <th scope="col" style="text-align: left;">
                                                 <form action="" method="post">
-                                                    <input class="form-check-input box-shadow-none"
-                                                        style="margin-right: 10px;" name="" id="" type="checkbox"
-                                                        value="checkedValue" aria-label="Text for screen reader">
                                                     Nhà sản xuất
 
                                                 </form>
@@ -90,154 +185,47 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="">
-                                            <form action="">
-                                                <td scope="row" class="td-first-table">
-                                                    <input class="form-check-input box-shadow-none" name="" id=""
-                                                        type="checkbox" value="checkedValue"
-                                                        aria-label="Text for screen reader">
-                                                    Nhà sản xuất
-                                                </td>
-                                                <td>Mã nhà sản xuất</td>
-                                                <td>13/03/2023</td>
-                                                <td>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-trash-fill"></i></button>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-pen-fill"></i></button>
-                                                </td>
-                                            </form>
+                                        <tr th:id="'nha-san-xuat'+${nhaSanXuat.idNhaSanXuat}" class="row-nsx"
+                                            th:each="nhaSanXuat : ${pageNSX.content}">
+                                            <!-- <form action=""> -->
+                                            <td scope="row" th:id="'tenNhaSanXuat'+${nhaSanXuat.idNhaSanXuat}"
+                                                class="td-first-table row-nsx-name"
+                                                th:text="${nhaSanXuat.tenNhaSanXuat}">
+                                                ...
+                                            </td>
+                                            <td class="row-nsx-id" th:text="${nhaSanXuat.idNhaSanXuat}">...</td>
+                                            <td class="row-nsx-date" th:id="'ngayTaoNSX'+${nhaSanXuat.idNhaSanXuat}"
+                                                th:text="${nhaSanXuat.ngayTao}">13/03/2023</td>
+                                            <td>
+                                                <button th:onclick="deleteNhaSanXuat([[${nhaSanXuat.idNhaSanXuat}]])"
+                                                    class="btn" style="color: var(--gray_600);"><i
+                                                        class="bi bi-trash-fill"></i></button>
+                                                <button th:onclick="setFormNhaSanXuat([[${nhaSanXuat.idNhaSanXuat}]])"
+                                                    data-bs-toggle="modal" data-bs-target="#modal-producer" class="btn"
+                                                    style="color: var(--gray_600);"><i
+                                                        class="bi bi-pen-fill"></i></button>
+                                            </td>
+                                            <!-- </form> -->
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td style="text-align: left;">
-                                                <button class="btn-style btn-prev">Trước đó</button>
-                                                <button class="btn-style btn-next">Kế tiếp</button>
-                                            </td>
-
-                                            <td></td>
-                                            <td></td>
-                                            <td style="text-align: center;">
-                                                Trang 1 của 10
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-
-                            </div>
-                            <h5 class="infor-filter-container-title container-item text-title">Thông tin chất liệu</h5>
-                            <div class="table-responsive container-item">
-                                <table class="table m-0">
-                                    <div class="on-the-table">
-                                        <h6 class="text-on-table text-title">Chất liệu sản phẩm</h6>
-                                        <button class="btn-style btn-on-table" data-bs-toggle="modal"
-                                            data-bs-target="#modal-material"><i class="bi-plus-lg"></i> Thêm chất
-                                            liệu</button>
-                                    </div>
-                                    <thead>
-                                        <tr class="table-active">
-                                            <th scope="col" style="text-align: left;">
-                                                <form action="" method="post">
-                                                    <input class="form-check-input box-shadow-none"
-                                                        style="margin-right: 10px;" name="" id="" type="checkbox"
-                                                        value="checkedValue" aria-label="Text for screen reader">
-                                                    Chất liệu
-
-                                                </form>
-                                            </th>
-                                            <th scope="col">Mã chất liệu</th>
-                                            <th scope="col">Ngày đăng</th>
-                                            <th scope="col">Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="">
-                                            <form action="">
-                                                <td scope="row" class="td-first-table">
-                                                    <input class="form-check-input box-shadow-none" name="" id=""
-                                                        type="checkbox" value="checkedValue"
-                                                        aria-label="Text for screen reader">
-                                                    Chất liệu
-                                                </td>
-                                                <td>Mã chất liệu</td>
-                                                <td>13/03/2023</td>
-                                                <td>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-trash-fill"></i></button>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-pen-fill"></i></button>
-                                                </td>
-                                            </form>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td style="text-align: left;">
-                                                <button class="btn-style btn-prev">Trước đó</button>
-                                                <button class="btn-style btn-next">Kế tiếp</button>
-                                            </td>
-
-                                            <td></td>
-                                            <td></td>
-                                            <td style="text-align: center;">
-                                                Trang 1 của 10
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-
-                            </div>
-                            <h5 class="infor-filter-container-title container-item text-title">Thông tin nhóm loại</h5>
-                            <div class="table-responsive container-item">
-                                <table class="table m-0">
-                                    <div class="on-the-table">
-                                        <h6 class="text-on-table text-title">Nhóm loại sản phẩm</h6>
-                                        <button class="btn-style btn-on-table" data-bs-toggle="modal"
-                                            data-bs-target="#modal-type-group"><i class="bi-plus-lg"></i> Thêm nhóm
-                                            loại</button>
-                                    </div>
-                                    <thead>
-                                        <tr class="table-active">
-                                            <th scope="col" style="text-align: left;">
-                                                <form action="" method="post">
-                                                    <input class="form-check-input box-shadow-none"
-                                                        style="margin-right: 10px;" name="" id="" type="checkbox"
-                                                        value="checkedValue" aria-label="Text for screen reader">
-                                                    Nhóm loại
-
-                                                </form>
-                                            </th>
-                                            <th scope="col">Mã nhóm loạit</th>
-                                            <th scope="col">Ngày đăng</th>
-                                            <th scope="col">Thao tác</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="">
-                                            <form action="">
-                                                <td scope="row" class="td-first-table">
-                                                    <input class="form-check-input box-shadow-none" name="" id=""
-                                                        type="checkbox" value="checkedValue"
-                                                        aria-label="Text for screen reader">
-                                                    Nhóm loại
-                                                </td>
-                                                <td>Mã nhóm loại</td>
-                                                <td>13/03/2023</td>
-                                                <td>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-trash-fill"></i></button>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-pen-fill"></i></button>
-                                                </td>
-                                            </form>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td style="text-align: left;">
-                                                <button class="btn-style btn-prev">Trước đó</button>
-                                                <button class="btn-style btn-next">Kế tiếp</button>
+                                                <!-- <button class="btn-style btn-prev">Trước đó</button>
+                                                <button
+                                                    class="btn-style btn-next">Kế tiếp</button> -->
+                                                <a class="btn-style btn-prev disnable"
+                                                    th:if="${pageNSX.number == 0}">Trước đó</a>
+                                                <a class="btn-style btn-prev" th:if="${pageNSX.number > 0}"
+                                                    th:href="@{/Manager/filter?pageNSX=__${pageNSX.number-1}__&&pageCL=__${pageChatLieu.number}__&&pageNL=__${pageNhomLoai.number}__}">Trước
+                                                    đó</a>
+                                                <a class="btn-style btn-next"
+                                                    th:if="${pageNSX.number < pageNSX.totalPages - 1}"
+                                                    th:href="@{/Manager/filter?pageNSX=__${pageNSX.number+1}__&&pageCL=__${pageChatLieu.number}__&&pageNL=__${pageNhomLoai.number}__}">Kế
+                                                    tiếp</a>
+                                                <a class="btn-style btn-next disnable"
+                                                    th:if="${pageNSX.number == pageNSX.totalPages - 1}">Kế
+                                                    tiếp</a>
                                             </td>
 
                                             <td></td>
@@ -253,101 +241,203 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane" id="form-promotion" role="tabpanel" aria-labelledby="form-promotion-tab">
+                    <div class="tab-pane" id="nhomLoai" role="tabpanel" aria-labelledby="nhomLoai-tab">
+                        <div class="infor-filter-container">
+                            <h5 class="infor-filter-container-title container-item text-title">Thông tin nhóm loại</h5>
+                            <div class="table-responsive container-item">
+                                <table class="table m-0">
+                                    <div class="on-the-table">
+                                        <h6 class="text-on-table text-title">Nhóm loại sản phẩm</h6>
+                                        <button onclick="onBtnCreate()" class="btn-style btn-on-table"
+                                            data-bs-toggle="modal" data-bs-target="#modal-type-group"><i
+                                                class="bi-plus-lg"></i> Thêm nhóm
+                                            loại</button>
+                                    </div>
+                                    <thead>
+                                        <tr class="table-active">
+                                            <th scope="col" style="text-align: left;">
+                                                <form action="" method="post">
+                                                    Nhóm loại
+
+                                                </form>
+                                            </th>
+                                            <th scope="col">Mã nhóm loạit</th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:id="'nhom-loai' + ${nhomLoai.idPhanNhomLoai}" class=""
+                                            th:each="nhomLoai : ${pageNhomLoai.content}">
+                                            <!-- <form action=""> -->
+                                            <td scope="row" class="td-first-table"
+                                                th:id="'tenNhomLoai' + ${nhomLoai.idPhanNhomLoai}"
+                                                th:text="${nhomLoai.tenPhanLoaiNhom}">
+                                                Nhóm loại
+                                            </td>
+                                            <td th:text="${nhomLoai.idPhanNhomLoai}">Mã nhóm loại</td>
+                                            <td th:id="'ngayTaoNL' + ${nhomLoai.idPhanNhomLoai}"
+                                                th:text="${nhomLoai.ngayTao}">13/03/2023</td>
+                                            <td>
+                                                <button th:onclick="deleteNhomLoai([[${nhomLoai.idPhanNhomLoai}]])"
+                                                    class="btn" style="color: var(--gray_600);"><i
+                                                        class="bi bi-trash-fill"></i></button>
+                                                <button th:onclick="setFormNhomLoai([[${nhomLoai.idPhanNhomLoai}]])"
+                                                    class="btn" style="color: var(--gray_600);" data-bs-toggle="modal"
+                                                    data-bs-target="#modal-type-group"><i
+                                                        class="bi bi-pen-fill"></i></button>
+                                            </td>
+                                            <!-- </form> -->
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="text-align: left;">
+                                                <!-- <button class="btn-style btn-prev">Trước đó</button>
+                                                <button class="btn-style btn-next">Kế tiếp</button> -->
+
+                                                <a class="btn-style btn-prev disnable"
+                                                    th:if="${pageNhomLoai.number == 0}">Trước đó</a>
+                                                <a class="btn-style btn-prev" th:if="${pageNhomLoai.number > 0}"
+                                                    th:href="@{/Manager/filter?pageNL=__${pageNhomLoai.number-1}__&&pageNSX=__${pageNSX.number}__&&pageCL=__${pageChatLieu.number}__}">Trước
+                                                    đó</a>
+                                                <a class="btn-style btn-next"
+                                                    th:if="${pageNhomLoai.number < pageNhomLoai.totalPages - 1}"
+                                                    th:href="@{/Manager/filter?pageNL=__${pageNhomLoai.number+1}__&&pageNSX=__${pageNSX.number}__&&pageCL=__${pageChatLieu.number}__}">Kế
+                                                    tiếp</a>
+                                                <a class="btn-style btn-next disnable"
+                                                    th:if="${pageNhomLoai.number == pageNhomLoai.totalPages - 1}">Kế
+                                                    tiếp</a>
+                                            </td>
+
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: center;">
+                                                Trang 1 của 10
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane active" id="form-promotion" role="tabpanel"
+                        aria-labelledby="form-promotion-tab">
                         <div class="form-promotion-pane">
-                            <form action="">
+                            <form th:action="@{/Manager/filter/khuyenMai/create}" th:object="${khuyenMaiMain}"
+                                method="post">
                                 <div class="group-fleld group-fleld-01">
                                     <h5 class="form-promotion-container-title text-title">Thông tin khuyến mãi</h5>
                                 </div>
                                 <div class="group-fleld group-fleld-02">
                                     <div class="mb-3 form-group">
                                         <label for="date-start_promotion" class="form-label">Ngày bắt đầu</label>
-                                        <input type="date" name="date_start_promotion" id="date-start_promotion"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="date" th:field="*{ngayBatDau}" name="date_start_promotion"
+                                            id="date-start_promotion" class="form-control box-shadow-none"
+                                            placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('ngayBatDau')}"
+                                            th:errors="*{ngayBatDau}">..</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="date-end_promotion" class="form-label">Ngày kết thúc</label>
-                                        <input type="date" name="date_end_promotion" id="ate-end_promotion"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="date" th:field="*{ngayKetThuc}" name="date_end_promotion"
+                                            id="date-end_promotion" class="form-control box-shadow-none" placeholder="">
+                                            <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('ngayKetThuc')}"
+                                            th:errors="*{ngayKetThuc}">..</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="discount-promotion" class="form-label">Phần trăm khuyến mãi</label>
                                         <div class="input-group">
-                                            <input type="text" name="discount_promotion" id="discount-promotion"
+                                            <input type="number" th:field="*{phamTramKhuyenMai}"
+                                                name="discount_promotion" id="discount-promotion"
                                                 class="form-control box-shadow-none" placeholder=""
                                                 aria-describedby="discount_promotion-label">
                                             <span class="input-group-text" id="discount_promotion-label">Phần trăm
                                                 (%)</span>
                                         </div>
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('phamTramKhuyenMai')}"
+                                            th:errors="*{phamTramKhuyenMai}">..</small>
                                     </div>
                                 </div>
-                                <div class="group-fleld ">
+                                <div class="group-fleld group-fleld-03">
+                                    <div class="mb-3 form-group">
+                                        <label for="id_name_promotion" class="form-label">Tên mã giảm giá</label>
+                                        <input type="text" th:field="*{tenKhuyenMai}" name="id-name-promotion"
+                                            id="id_name_promotion" class="form-control box-shadow-none" placeholder="">
+                                            <small id="helpId" class="text-muted color-style-validate"
+                                            th:if="${#fields.hasErrors('tenKhuyenMai')}"
+                                            th:errors="*{tenKhuyenMai}">..</small>
+                                    </div>
                                     <div class="mb-3 form-group">
                                         <label for="id_promotion" class="form-label">Mã giảm giá</label>
-                                        <input type="text" name="id_promotion" id="id_promotion"
-                                            class="form-control box-shadow-none" placeholder="">
+                                        <input type="text" style="pointer-events: none; background-color: var(--gray_100);" th:field="*{idKhuyenMai}" name="id_promotion"
+                                            id="id_promotion" class="form-control box-shadow-none" placeholder="">
                                         <!-- <small id="helpId" class="text-muted">Help text</small> -->
                                     </div>
                                 </div>
 
                                 <div class="group-fleld group-fleld-04">
-                                    <button class="btn btn-style btn-clear"><i class="bi-brush"></i></button>
-                                    <button class="btn btn-style btn-update">Cập nhật</button>
-                                    <button class="btn btn-style btn-add">Thêm mới</button>
-                                </div>
-                                <hr style="width: 95%; margin: 20px auto;">
-                                <div class="group-fleld group-fleld-05">
-                                    <div class="table-responsive ">
-                                        <table class="table m-0">
-                                            <div class="on-the-table">
-                                                <h6 class="text-on-table text-title">Khuyến mãi sản phẩm</h6>
-                                            </div>
-                                            <thead>
-                                                <tr class="table-active">
-                                                    <th scope="col" style="text-align: left;">
-                                                        <form action="" method="post">
-                                                            <input class="form-check-input box-shadow-none"
-                                                                style="margin-right: 10px;" name="" id=""
-                                                                type="checkbox" value="checkedValue"
-                                                                aria-label="Text for screen reader">
-                                                         Mã giảm giá
-                                                        </form>
-                                                    </th>
-                                                    <th scope="col">Phần trăm</th>
-                                                    <th scope="col">Ngày bắt đầu</th>
-                                                    <th scope="col">Ngày kết thúc</th>
-                                                    <th scope="col">Thao tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="">
-                                                    <form action="">
-                                                        <td scope="row" class="td-first-table">
-                                                            <input class="form-check-input box-shadow-none" name=""
-                                                                id="" type="checkbox" value="checkedValue"
-                                                                aria-label="Text for screen reader">
-                                                            Nhà sản xuất
-                                                        </td>
-                                                        <td>10%</td>
-                                                        <td>13/03/2023</td>
-                                                        <td>13/05/2023</td>
-                                                        <td>
-                                                            <button class="btn" style="color: var(--gray_600);"><i
-                                                                    class="bi bi-trash-fill"></i></button>
-                                                            <button class="btn" style="color: var(--gray_600);"><i
-                                                                    class="bi bi-pen-fill"></i></button>
-                                                        </td>
-                                                    </form>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <button  formaction="/Manager/filter/khuyenMai/clear" class="btn btn-style btn-clear"><i class="bi-brush"></i></button>
+                                    <button th:if="${buttonUpdate}" id="btn-update-km" formaction="/Manager/filter/khuyenMai/update" class="btn btn-style btn-update">Cập nhật</button>
+                                    <button th:if="${buttonUpdate == false}" id="btn-add-km" class="btn btn-style btn-add">Thêm mới</button>
                                 </div>
                             </form>
+                            <hr style="width: 95%; margin: 20px auto;">
+                            <div class="group-fleld group-fleld-05">
+                                <div class="table-responsive ">
+                                    <table class="table m-0">
+                                        <div class="on-the-table">
+                                            <h6 class="text-on-table text-title">Khuyến mãi sản phẩm</h6>
+                                        </div>
+                                        <thead>
+                                            <tr class="table-active">
+                                                <th scope="col" style="text-align: left;">
+                                                    <form action="" method="post">
+                                                        Mã giảm giá
+                                                    </form>
+                                                </th>
+                                                <th scope="col">Phần trăm</th>
+                                                <th scope="col">Ngày bắt đầu</th>
+                                                <th scope="col">Ngày kết thúc</th>
+                                                <th scope="col">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:id="'row-khuyenMai' + ${khuyenMai.idKhuyenMai}" class=""
+                                                th:each="khuyenMai : ${ListKM}">
+                                                <td scope="row" class="td-first-table"
+                                                    th:text="${khuyenMai.idKhuyenMai}">
+                                                    Nhà sản xuất
+                                                </td>
+                                                <td th:text="${khuyenMai.phamTramKhuyenMai * 100}">10%</td>
+                                                <td th:text="${khuyenMai.ngayBatDau}">13/03/2023</td>
+                                                <td th:text="${khuyenMai.ngayKetThuc}">13/05/2023</td>
+                                                <td
+                                                    style="display: flex; justify-content: center; align-items: center;">
+
+                                                    <button th:onclick="deleteKhuyenMai([[${khuyenMai.idKhuyenMai}]])"
+                                                        class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-trash-fill"></i></button>
+                                                    <form
+                                                        th:action="@{/Manager/filter/khuyenMai/eidt/__${khuyenMai.idKhuyenMai}__}"
+                                                        method="post">
+                                                        <button class="btn btn-eidt" style="color: var(--gray_600);"><i
+                                                                class="bi bi-pen-fill"></i></button>
+                                                    </form>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -373,28 +463,35 @@
                                     <label for="" class="form-label">Mã nhà sản xuất</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="id-produser">SX</span>
-                                        <input type="text" name="" id="" class="form-control box-shadow-none"
-                                            placeholder="" aria-describedby="id-produser">
+                                        <input type="text" name="" id="maNhaSanXuat"
+                                            style="pointer-events: none; background-color: var(--gray_100);"
+                                            class="form-control box-shadow-none modal-input" placeholder=""
+                                            aria-describedby="id-produser">
                                     </div>
                                     <!-- <small id="helpId" class="text-muted">Help text</small> -->
                                 </div>
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Tên nhà sản xuất</label>
-                                    <input type="text" name="" id="" class="form-control box-shadow-none"
-                                        placeholder="">
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <input type="text" name="" id="tenNhaSanXuat"
+                                        class="form-control box-shadow-none modal-input" placeholder="">
+                                    <small style="display: none;" id="tenNhaSanXuat-text" class="text-muted">Vui lòng
+                                        nhập tên nhà sản xuất !</small>
                                 </div>
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Ngày tạo</label>
-                                    <input type="date" name="" id="" class="form-control box-shadow-none"
-                                        placeholder="">
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <input type="date" name="" id="ngayTaoNSX"
+                                        class="form-control box-shadow-none modal-input" placeholder="">
+                                    <small style="display: none;" id="ngayTaoNSX-text" class="text-muted">Vui lòng chọn
+                                        ngày đăng !</small>
                                 </div>
                             </div>
                             <div class="form-group-modal form-group-modal-02">
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Mô tả nhà sản xuất</label>
-                                    <textarea class="form-control box-shadow-none" name="" id="" rows="9"></textarea>
+                                    <textarea class="form-control box-shadow-none modal-input" name=""
+                                        id="moTaNhaSanXuat" rows="9"></textarea>
+                                    <small style="display: none;" id="moTaNhaSanXuat-text" class="text-muted">Vui lòng
+                                        nhập mô tả !</small>
                                 </div>
 
                             </div>
@@ -402,8 +499,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-style btn-update box-shadow-none">Cập nhật</button>
-                    <button class="btn btn-style btn-add box-shadow-none">Thêm mới</button>
+                    <button onclick="updateNhaSanXuat()" class="btn btn-style btn-update box-shadow-none">Cập
+                        nhật</button>
+                    <button onclick="insertNhaSanXuat()" class="btn btn-style btn-add box-shadow-none">Thêm mới</button>
                 </div>
             </div>
         </div>
@@ -418,36 +516,42 @@
                     <h5 class="modal-title" id="modalTitleId">Thông tin chất liệu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="container-fluid">
-                        <form action="">
+                        <form th:action="@{/Manager/filter/chatLieu/create}" method="post">
                             <div class="form-group-modal form-group-modal-01">
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Mã chất liệu</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="id-material">CL</span>
-                                        <input type="text" name="" id="" class="form-control box-shadow-none"
-                                            placeholder="" aria-describedby="id-material">
+                                        <input type="number" name="" id="maChatLieu"
+                                            style="pointer-events: none; background-color: var(--gray_100);"
+                                            class="form-control box-shadow-none modal-input" placeholder=""
+                                            aria-describedby="id-material">
                                     </div>
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
                                 </div>
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Tên chất liệu</label>
-                                    <input type="text" name="" id="" class="form-control box-shadow-none"
-                                        placeholder="">
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <input type="text" name="" id="tenChatLieu"
+                                        class="form-control box-shadow-none modal-input" placeholder="">
+                                    <small style="display: none;" id="tenChatLieu-text">Vui lòng nhập tên chất
+                                        liệu</small>
                                 </div>
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Ngày tạo</label>
-                                    <input type="date" name="" id="" class="form-control box-shadow-none"
-                                        placeholder="">
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <input type="date" name="" id="ngayTaoCL"
+                                        class="form-control box-shadow-none modal-input" placeholder="">
+                                    <small style="display: none;" id="ngayTaoCL-text">Vui lòng chọn ngày tạo chất
+                                        liệu</small>
                                 </div>
                             </div>
                             <div class="form-group-modal form-group-modal-02">
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Mô tả chất liệu</label>
-                                    <textarea class="form-control box-shadow-none" name="" id="" rows="9"></textarea>
+                                    <textarea class="form-control box-shadow-none modal-input" name="" id="moTaChatLieu"
+                                        rows="9"></textarea>
+                                    <small style="display: none;" id="moTaChatLieu-text">Vui lòng nhập mô tả</small>
                                 </div>
 
                             </div>
@@ -455,9 +559,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-style btn-update box-shadow-none">Cập nhật</button>
-                    <button class="btn btn-style btn-add box-shadow-none">Thêm mới</button>
+                    <button onclick="updateChatLieu()" class="btn btn-style btn-update box-shadow-none">Cập
+                        nhật</button>
+                    <button onclick="insertChatLieu()" class="btn btn-style btn-add box-shadow-none">Thêm
+                        mới</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -479,28 +586,34 @@
                                     <label for="" class="form-label">Mã nhóm loại</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="id-produser">NL</span>
-                                        <input type="text" name="" id="" class="form-control box-shadow-none"
-                                            placeholder="" aria-describedby="id-produser">
+                                        <input type="text" name="" id="maNhomLoai"
+                                            style="pointer-events: none; background-color: var(--gray_100);"
+                                            class="form-control box-shadow-none modal-input" placeholder=""
+                                            aria-describedby="id-produser">
                                     </div>
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
                                 </div>
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Tên nhóm loại</label>
-                                    <input type="text" name="" id="" class="form-control box-shadow-none"
-                                        placeholder="">
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <input type="text" name="" id="tenNhomLoai"
+                                        class="form-control box-shadow-none modal-input" placeholder="">
+                                    <small id="tenNhomLoai-text" style="display: none;" class="text-muted">Vui lòng nhập
+                                        tên nhóm loại !</small>
                                 </div>
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Ngày tạo</label>
-                                    <input type="date" name="" id="" class="form-control box-shadow-none"
-                                        placeholder="">
-                                    <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <input type="date" name="" id="ngayTaoNL"
+                                        class="form-control box-shadow-none modal-input" placeholder="">
+                                    <small id="ngayTaoNL-text" style="display: none;" class="text-muted">Vui lòng chọn
+                                        ngày nhóm loại !</small>
                                 </div>
                             </div>
                             <div class="form-group-modal form-group-modal-02">
                                 <div class="mb-3 form-group">
                                     <label for="" class="form-label">Mô tả nhóm loại</label>
-                                    <textarea class="form-control box-shadow-none" name="" id="" rows="9"></textarea>
+                                    <textarea class="form-control box-shadow-none modal-input" name="" id="moTaNhomLoai"
+                                        rows="9"></textarea>
+                                    <small id="moTaNhomLoai-text" style="display: none;" class="text-muted">Vui lòng
+                                        nhập mô tả !</small>
                                 </div>
 
                             </div>
@@ -508,13 +621,502 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-style btn-update box-shadow-none">Cập nhật</button>
-                    <button class="btn btn-style btn-add box-shadow-none">Thêm mới</button>
+                    <button onclick="updateNhomLoai()" class="btn btn-style btn-update box-shadow-none">Cập
+                        nhật</button>
+                    <button onclick="insertNhomLoai()" class="btn btn-style btn-add box-shadow-none">Thêm mới</button>
                 </div>
             </div>
         </div>
     </div>
 
 </body>
+<script>
+    $("#form-promotion-tab").css("background-color", "var(--gray_50)");
+    $("#form-promotion-tab").css("border", "1px solid var(--gray_300)");
+
+    
+    function deleteKhuyenMai(idKhuyenMai) {
+        if (confirm("Bạn muốn xóa mã khuyến mãi này ?")) {
+            alert("Xóa thành công!");
+            $("#row-khuyenMai" + idKhuyenMai).remove();
+            const Http = new XMLHttpRequest();
+            const url = '/Manager/filter/khuyenMai/delete/' + idKhuyenMai;
+            Http.open("POST", url);
+            Http.send();
+        }
+    }
+
+
+
+    function offButton() {
+        $(".btn-tab").css("background-color", "white");
+        $(".btn-tab").css("border", "none");
+    }
+    function changeTab(nameTab) {
+        offButton();
+        if (nameTab === 'cl') {
+            $("#chat-lieu-tab").css("background-color", "var(--gray_50)");
+            $("#chat-lieu-tab").css("border", "1px solid var(--gray_300)");
+            $("#chat-lieu").addClass("tab-pane active");
+            $("#nhaSanXuat").addClass("tab-pane");
+            $("#nhomLoai").addClass("tab-pane");
+            $("#form-promotion").addClass("tab-pane");
+        } else if (nameTab === 'nsx') {
+            $("#nhaSanXuat-tab").css("background-color", "var(--gray_50)");
+            $("#nhaSanXuat-tab").css("border", "1px solid var(--gray_300)");
+            $("#nhaSanXuat").addClass("tab-pane active");
+            $("#chat-lieu").addClass("tab-pane");
+            $("#nhomLoai").addClass("tab-pane");
+            $("#form-promotion").addClass("tab-pane");
+        } else if (nameTab === 'nl') {
+            $("#nhomLoai-tab").css("background-color", "var(--gray_50)");
+            $("#nhomLoai-tab").css("border", "1px solid var(--gray_300)");
+            $("#nhomLoai").addClass("tab-pane active");
+            $("#chat-lieu").addClass("tab-pane");
+            $("#nhaSanXuat").addClass("tab-pane");
+            $("#form-promotion").addClass("tab-pane");
+        } else if (nameTab === 'km') {
+            $("#form-promotion-tab").css("background-color", "var(--gray_50)");
+            $("#form-promotion-tab").css("border", "1px solid var(--gray_300)");
+            $("#form-promotion").addClass("tab-pane active");
+            $("#chat-lieu").addClass("tab-pane");
+            $("#nhaSanXuat").addClass("tab-pane");
+            $("#nhomLoai").addClass("tab-pane");
+        }
+    }
+
+    function onBtnCreate() {
+        $(".modal-input").val("")
+        $(".btn-add").css("display", "block");
+        $(".btn-update").css("display", "none");
+    }
+
+    // method nhà sản xuất
+    function checkFormNSX() {
+        var flag = [true, true, true];
+        if ($("#tenNhaSanXuat").val() == '') {
+            $("#tenNhaSanXuat-text").show();
+            flag[0] = false;
+        } else {
+            $("#tenNhaSanXuat-text").hide();
+        }
+        if ($("#ngayTaoNSX").val() == '') {
+            $("#ngayTaoNSX-text").show();
+            flag[1] = false;
+        } else {
+            $("#ngayTaoNSX-text").hide();
+        }
+        if ($("#moTaNhaSanXuat").val() == '') {
+            $("#moTaNhaSanXuat-text").show();
+            flag[2] = false;
+        } else {
+            $("#moTaNhaSanXuat-text").hide();
+        }
+
+        if (flag[0] && flag[1] && flag[2]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function insertNhaSanXuat() {
+        if (!checkFormNSX()) {
+            return;
+        }
+        var nhaSanXuat = {
+            idNhaSanXuat: undefined,
+            tenNhaSanXuat: $("#tenNhaSanXuat").val(),
+            ngayTao: $("#ngayTaoNSX").val(),
+            moTaNhaSanXuat: $("#moTaNhaSanXuat").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/nhaSanXuat/create",
+            data: JSON.stringify(nhaSanXuat),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Thêm nhà sản xuất thành công");
+                $('.btn-close').trigger('click');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function updateNhaSanXuat() {
+        if (!checkFormNSX()) {
+            return;
+        }
+        var nhaSanXuat = {
+            idNhaSanXuat: $("#maNhaSanXuat").val(),
+            tenNhaSanXuat: $("#tenNhaSanXuat").val(),
+            ngayTao: $("#ngayTaoNSX").val(),
+            moTaNhaSanXuat: $("#moTaNhaSanXuat").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/nhaSanXuat/update",
+            data: JSON.stringify(nhaSanXuat),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Cập nhật nhà sản xuất thành công");
+                $("#tenNhaSanXuat" + response.idNhaSanXuat).text(response.tenNhaSanXuat);
+                var date = response.ngayTao;
+                $("#ngayTaoNSX" + response.idNhaSanXuat).text(date.replace('T00:00:00.000+00:00', ''));
+                $('.btn-close').trigger('click');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function setFormNhaSanXuat(idNhaSanXuat) {
+        $(".btn-add").css("display", "none");
+        $(".btn-update").css("display", "block");
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/nhaSanXuat?idnsx=" + idNhaSanXuat,
+            contentType: "application/json",
+            success: function (response) {
+                $("#maNhaSanXuat").val(response.idNhaSanXuat);
+                $("#tenNhaSanXuat").val(response.tenNhaSanXuat);
+                $("#ngayTaoNSX").val(response.ngayTao);
+                $("#moTaNhaSanXuat").val(response.moTaNhaSanXuat);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function deleteNhaSanXuat(idNhaSanXuat) {
+        let message = "Bạn muốn xóa nhà sản xuất này ?";
+        if (confirm(message) == true) {
+            const Http = new XMLHttpRequest();
+            $("#nha-san-xuat" + idNhaSanXuat).remove();
+            const url = '/Manager/filter/nhaSanXuat/delete/' + idNhaSanXuat;
+            Http.open("POST", url);
+            Http.send();
+            alert("Xóa thành công!");
+
+        }
+    }
+
+
+    // method nhóm loại    
+
+    function checkFormNL() {
+        var flag = [true, true, true];
+        if ($("#tenNhomLoai").val() == '') {
+            $("#tenNhomLoai-text").show();
+            flag[0] = false;
+        } else {
+            $("#tenNhomLoai-text").hide();
+        }
+        if ($("#ngayTaoNL").val() == '') {
+            $("#ngayTaoNL-text").show();
+            flag[1] = false;
+        } else {
+            $("#ngayTaoNL-text").hide();
+        }
+        if ($("#moTaNhomLoai").val() == '') {
+            $("#moTaNhomLoai-text").show();
+            flag[2] = false;
+        } else {
+            $("#moTaNhomLoai-text").hide();
+        }
+
+        if (flag[0] && flag[1] && flag[2]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function insertNhomLoai() {
+        if (!checkFormNL()) {
+            return;
+        }
+        var nhomLoai = {
+            idPhanNhomLoai: undefined,
+            tenPhanLoaiNhom: $("#tenNhomLoai").val(),
+            ngayTao: $("#ngayTaoNL").val(),
+            moTaPhanLoai: $("#moTaNhomLoai").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/nhomLoai/create",
+            data: JSON.stringify(nhomLoai),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Thêm nhóm loại thành công");
+                $('.btn-close').trigger('click');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+
+    function updateNhomLoai() {
+        if (!checkFormNL()) {
+            return;
+        }
+        var nhomLoai = {
+            idPhanNhomLoai: $("#maNhomLoai").val(),
+            tenPhanLoaiNhom: $("#tenNhomLoai").val(),
+            ngayTao: $("#ngayTaoNL").val(),
+            moTaPhanLoai: $("#moTaNhomLoai").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/nhomLoai/update",
+            data: JSON.stringify(nhomLoai),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Cập nhật nhóm loại thành công");
+                $("#tenNhomLoai" + response.idPhanNhomLoai).text(response.tenPhanLoaiNhom);
+                var date = response.ngayTao;
+                $("#ngayTaoNL" + response.idPhanNhomLoai).text(date.replace('T00:00:00.000+00:00', ''));
+                $('.btn-close').trigger('click');
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function setFormNhomLoai(idNhomLoai) {
+        $(".btn-add").css("display", "none");
+        $(".btn-update").css("display", "block");
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/nhomLoai?idnl=" + idNhomLoai,
+            contentType: "application/json",
+            success: function (response) {
+                console.log(response);
+                $("#maNhomLoai").val(response.idPhanNhomLoai);
+                $("#tenNhomLoai").val(response.tenPhanLoaiNhom);
+                $("#ngayTaoNL").val(response.ngayTao);
+                $("#moTaNhomLoai").val(response.moTaPhanLoai);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function deleteNhomLoai(idNhomLoai) {
+        let message = "Bạn muốn xóa nhóm loại này ?";
+        if (confirm(message) == true) {
+            const Http = new XMLHttpRequest();
+            $("#nhom-loai" + idNhomLoai).remove();
+            const url = '/Manager/filter/delete/nhomLoai/' + idNhomLoai;
+            Http.open("POST", url);
+            Http.send();
+            alert("Xóa thành công!");
+
+        }
+    }
+
+
+    // method chất liệu 
+    function checkFormCl() {
+        var flag = [true, true, true];
+        if ($("#tenChatLieu").val() == '') {
+            $("#tenChatLieu-text").show();
+            flag[0] = false;
+        } else {
+            $("#tenChatLieu-text").hide();
+        }
+        if ($("#ngayTaoCL").val() == '') {
+            $("#ngayTaoCL-text").show();
+            flag[1] = false;
+        } else {
+            $("#ngayTaoCL-text").hide();
+        }
+        if ($("#moTaChatLieu").val() == '') {
+            $("#moTaChatLieu-text").show();
+            flag[2] = false;
+        } else {
+            $("#moTaChatLieu-text").hide();
+        }
+
+        if (flag[0] && flag[1] && flag[2]) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function insertChatLieu() {
+        if (!checkFormCl()) {
+            return;
+        }
+        var chatLieu = {
+            idChatLieu: undefined,
+            tenChatLieu: $("#tenChatLieu").val(),
+            ngayTao: $("#ngayTaoCL").val(),
+            moTaChatLieu: $("#moTaChatLieu").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/chatLieu/create",
+            data: JSON.stringify(chatLieu),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Thêm chất liệu thành công");
+                $('.btn-close').trigger('click');
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function updateChatLieu() {
+        if (!checkFormCl()) {
+            return;
+        }
+        var chatLieu = {
+            idChatLieu: $("#maChatLieu").val(),
+            tenChatLieu: $("#tenChatLieu").val(),
+            ngayTao: $("#ngayTaoCL").val(),
+            moTaChatLieu: $("#moTaChatLieu").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/chatLieu/update",
+            data: JSON.stringify(chatLieu),
+            contentType: "application/json",
+            success: function (response) {
+                alert("Cập nhật chất liệu thành công");
+                $("#tenChatLieu" + response.idChatLieu).text(response.tenChatLieu);
+                var date = response.ngayTao;
+                $("#ngayTaoCl" + response.idChatLieu).text(date.replace('T00:00:00.000+00:00', ''));
+                $('.btn-close').trigger('click');
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function deleteChatLieu(idChatLieu) {
+        let message = "Bạn muốn xóa chất liệu này ?";
+        if (confirm(message) == true) {
+            alert("Xóa thành công!");
+            $("#chatlieu" + idChatLieu).remove();
+            const Http = new XMLHttpRequest();
+            const url = '/Manager/filter/delete/chatlieu/' + idChatLieu;
+            Http.open("POST", url);
+            Http.send();
+        }
+    }
+
+    function setFormChatLieu(idChatLieu) {
+        $(".btn-add").css("display", "none");
+        $(".btn-update").css("display", "block");
+        $.ajax({
+            type: "POST",
+            url: "/Manager/filter/chatLieu?idlc=" + idChatLieu,
+            contentType: "application/json",
+            success: function (response) {
+                $("#maChatLieu").val(response.idChatLieu);
+                $("#tenChatLieu").val(response.tenChatLieu);
+                $("#ngayTaoCL").val(response.ngayTao);
+                $("#moTaChatLieu").val(response.moTaChatLieu);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+<script th:if="${TabPin == 'nsx'}">
+    var chatLieuTab = document.getElementById("chat-lieu-tab");
+    var chatLieu = document.getElementById("chat-lieu");
+
+    var nhaSanXuatTab = document.getElementById("nhaSanXuat-tab");
+    var nhaSanXuat = document.getElementById("nhaSanXuat");
+
+    var nhomLoaiTab = document.getElementById("nhomLoai-tab");
+    var nhomLoai = document.getElementById("nhomLoai");
+
+    var PromotionTab = document.getElementById("form-promotion-tab");
+    var Promotion = document.getElementById("form-promotion");
+
+    function offButton() {
+        $(".btn-tab").css("background-color", "white");
+        $(".btn-tab").css("border", "none");
+    }
+
+    offButton()
+    nhaSanXuatTab.style.backgroundColor = 'var(--gray_50)';
+    nhaSanXuatTab.style.border = '1px solid var(--gray_300)';
+    nhaSanXuat.className = "tab-pane active";
+    chatLieu.className = "tab-pane";
+    Promotion.className = "tab-pane";
+    nhomLoai.className = "tab-pane";
+</script>
+<script th:if="${TabPin == 'nl'}">
+    var chatLieuTab = document.getElementById("chat-lieu-tab");
+    var chatLieu = document.getElementById("chat-lieu");
+
+    var nhaSanXuatTab = document.getElementById("nhaSanXuat-tab");
+    var nhaSanXuat = document.getElementById("nhaSanXuat");
+
+    var nhomLoaiTab = document.getElementById("nhomLoai-tab");
+    var nhomLoai = document.getElementById("nhomLoai");
+
+    var PromotionTab = document.getElementById("form-promotion-tab");
+    var Promotion = document.getElementById("form-promotion");
+
+    function offButton() {
+        $(".btn-tab").css("background-color", "white");
+        $(".btn-tab").css("border", "none");
+    }
+    offButton();
+    nhomLoaiTab.style.backgroundColor = 'var(--gray_50)';
+    nhomLoaiTab.style.border = '1px solid var(--gray_300)';
+    nhomLoai.className = "tab-pane active";
+    chatLieu.className = "tab-pane";
+    Promotion.className = "tab-pane";
+    nhaSanXuat.className = "tab-pane";
+
+</script>
+<script th:if="${TabPin == 'cl'}">
+    var chatLieuTab = document.getElementById("chat-lieu-tab");
+    var chatLieu = document.getElementById("chat-lieu");
+
+    var nhaSanXuatTab = document.getElementById("nhaSanXuat-tab");
+    var nhaSanXuat = document.getElementById("nhaSanXuat");
+
+    var nhomLoaiTab = document.getElementById("nhomLoai-tab");
+    var nhomLoai = document.getElementById("nhomLoai");
+
+    var PromotionTab = document.getElementById("form-promotion-tab");
+    var Promotion = document.getElementById("form-promotion");
+
+    function offButton() {
+        $(".btn-tab").css("background-color", "white");
+        $(".btn-tab").css("border", "none");
+    }
+    offButton();
+    chatLieuTab.style.backgroundColor = 'var(--gray_50)';
+    chatLieuTab.style.border = '1px solid var(--gray_300)';
+    chatLieu.className = "tab-pane active";
+    nhaSanXuat.className = "tab-pane";
+    Promotion.className = "tab-pane";
+    nhomLoai.className = "tab-pane";
+
+</script>
 
 </html>
