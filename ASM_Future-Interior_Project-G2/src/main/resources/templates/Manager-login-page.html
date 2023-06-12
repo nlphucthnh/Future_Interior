@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin-Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/loginadmin.css">
@@ -17,44 +18,51 @@
         <div class="lg-container-ctent">
             <div class="lg-ct-left">
                 <div class="lg-ct-left-form">
-                    <form th:action="@{/Manager/login}" th:object="${taiKhoan}" method="post" >
-                    <div class="lg-ct-top">
-                        <div class="lg-ct-top-up">
-                            <img src="img/logoMark.png" alt="">
-                            <h2 class="lg-ct-title">Future Interior</h2>   
-                             
+                    <form th:action="@{/Manager/login}" method="post">
+                        <div class="lg-ct-top">
+                            <div class="lg-ct-top-up">
+                                <img src="img/logoMark.png" alt="">
+                                <h2 class="lg-ct-title">Future Interior</h2>
+
+                            </div>
+                            <h1>Đăng nhập</h1>
+                            <p>Form đăng nhập dành cho quản trị viên website</p>
                         </div>
-                        <h1>Đăng nhập</h1>
-                        <p>Form đăng nhập dành cho quản trị viên website</p>
-                    </div>
-                    <div class="mb-3 form-group">
-                        <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
-                        <input type="text" class="form-control" name="tenDangNhap" th:field="*{tenDangNhap}" id="tenDangNhap" placeholder="Nhập Tên Đăng Nhập">
-                   	<div class="text-danger" th:if="${#fields.hasErrors('tenDangNhap')}" th:errors="*{tenDangNhap}"></div>
-                   		
-                    </div>
-                    <div class="mb-3 form-group">
-                        <label for="matKhau" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" name="matKhau" th:field="*{matKhau}" id="matKhau" placeholder="Nhập Mật Khẩu">
-                   		<div class="text-danger" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}"></div>
-                    </div>    
-                    <div class="mb-3 form-check">
-                    	<div class="input-groups input-groups-01">
-                                <input type="checkbox" class="form-check-input" value="true" id="matKhau">
-                                <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
-                    	 </div>
-                     </div><hr>        
-                    <button type="submit" class="btn btn-login" id="liveAlertBtn">Đăng Nhập</button>
-                    
-                </form>
-               		 <div id="liveAlertPlaceholder"></div>
-                
-                	<th:if test="${not empty message}" class="alert-warning">
-						<div  th:text="${message}"></div>
-					</th:if>
-				</div>
-                
-            </div> 
+                        <div class="mb-3 form-group">
+                            <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
+                            <input type="text" class="form-control" name="tenDangNhap" id="tenDangNhap"
+                                placeholder="Nhập Tên Đăng Nhập">
+                            <div id="tenDangNhap-text" style="display: none;" class="text-danger">Vui lòng nhập tên đăng
+                                nhập</div>
+
+                        </div>
+                        <div class="mb-3 form-group">
+                            <label for="matKhau" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" name="matKhau" id="matKhau"
+                                placeholder="Nhập Mật Khẩu">
+                            <div id="matKhau-text" style="display: none;" class="text-danger">Vui lòng nhập mật khẩu
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <div class="input-groups input-groups-01">
+                                <input type="checkbox" class="form-check-input" name="remember" value="true" id="matKhaurm">
+                                <label class="form-check-label" for="matKhaurm">Nhớ mật khẩu</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <button type="submit" class="btn btn-login" id="liveAlertBtn">Đăng Nhập1</button>
+
+                    </form>
+                    <button onclick="loginDiaLogForm()" type="submit" class="btn btn-login" id="liveAlertBtn02">Đăng
+                        Nhập2</button>
+                    <div id="liveAlertPlaceholder"></div>
+
+                    <th:if test="${not empty message}" class="alert-warning">
+                        <div th:text="${message}"></div>
+                    </th:if>
+                </div>
+
+            </div>
             <div class="lg-ct-right">
                 <div class="lg-image">
                     <img src="/img/img-p-ctact.png" alt="login">
@@ -63,7 +71,7 @@
         </div>
 
     </div>
- 
+
 
 
     <!-- </div> -->
@@ -71,7 +79,64 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
-    
-    
+<script>
+    $("#liveAlertBtn").hide();
+
+    function checkFormLogin() {
+        var flag = [true, true];
+        if ($("#tenDangNhap").val() == "") {
+            $("#tenDangNhap-text").show();
+            flag[0] = false;
+        } else {
+            $("#tenDangNhap-text").hide();
+        }
+        if ($("#matKhau").val() == "") {
+            $("#matKhau-text").show();
+            flag[1] = false;
+        } else {
+            $("#matKhau-text").hide();
+        }
+
+        if (flag[0] && flag[1]) {
+            return true;
+        }
+        return false;
+    }
+
+    function loginDiaLogForm() {
+        if (!checkFormLogin()) {
+            return;
+        }
+
+        var tenDangNhap = $("#tenDangNhap").val();
+        var matKhau = $("#matKhau").val();
+        var remember = $("#matKhaurm").val();
+        $.ajax({
+            type: "POST",
+            url: "/Manager/login/json/" + tenDangNhap,
+            contentType: "application/json",
+            success: function (response) {
+                console.log(response);
+                if (response == "") {
+                    alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
+                } else {
+                    if (response.matKhau != matKhau) {
+                        alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
+                    } else {
+                        alert("Đăng nhập thành công");
+                        $("#liveAlertBtn").trigger("click");
+                    }
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+
+</script>
+
 
 </html>

@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.spring.main.entity.TaiKhoan;
-import java.util.List;
 
 
 public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String>{
