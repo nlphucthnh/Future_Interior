@@ -48,7 +48,7 @@ public class USSignInController {
         } else { // nếu không lọt vao các trường hợp trên thì tài khoản dăng ký hợp lệ nên thông báo đăng ký thành công.
             taiKhoanDAO.save(taiKhoan);
             model.addAttribute("sucess", true);//
-             return "redirect:/login-page"; //đăng ký tài khoản mới xem rồi còn thiếu gì nữa hong push lên lun 
+             return "redirect:/login-page"; 
             
         }
     }
