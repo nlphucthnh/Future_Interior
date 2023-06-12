@@ -258,23 +258,20 @@ public class productController {
         }
         if (emailExists) {
             try {
-                InternetAddress internetAddress = new InternetAddress(email);
-                internetAddress.validate();
-                TaiKhoan tk = change.get(0); // Lấy tài khoản đầu tiên từ danh sách
+
                 String subject = "Lấy Lại Mật Khẩu";
                 String body = "<p>Chào bạn,</p>"
                         + "<p>Dưới đây là mật khẩu của bạn.</p>"
-                        + "<p>Mật khẩu của bạn là " + tk.getMatKhau()+ " </p>"
+                        + "<p>Mật khẩu của bạn là: </p>"
                         + "<br>"
                         + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
 
-                mailer.queue(email, subject, body);
-                // mailer.send(email, subject, body);
+                mailer.send(email, subject, body);
 
                 model.addAttribute("success", "Mật khẩu sẽ gửi về mail của bạn trong giây lát");
 
             } catch (Exception e) {
-                System.out.println("Lỗi khi gửi email: " + e.getMessage());
+                System.out.println("Lỗi khi gửi email: " + e);
             }
 
         } else {
@@ -283,5 +280,8 @@ public class productController {
 
         return "quenmatkhau";
     }
+
+
+
 
 }

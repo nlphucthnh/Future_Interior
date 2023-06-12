@@ -4,19 +4,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-import com.spring.main.entity.MailInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
+import com.spring.main.entity.MailInfo;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 @Service
-public class MailerServiceImpl implements MailerService{
-     @Autowired
+public class MailerServiceImpl implements MailerService {
+  @Autowired
   JavaMailSender sender;
   List<MailInfo> list = new ArrayList<>();
 
@@ -64,7 +65,7 @@ public class MailerServiceImpl implements MailerService{
     queue(new MailInfo(to, subject, body));
   }
 
-  @Scheduled(fixedDelay = 3000)
+  @Scheduled(fixedDelay = 5000)
   public void run() {
     while (!list.isEmpty()) {
       MailInfo mail = list.remove(0);
@@ -75,5 +76,4 @@ public class MailerServiceImpl implements MailerService{
       }
     }
   }
-
 }

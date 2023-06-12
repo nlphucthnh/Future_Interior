@@ -39,7 +39,7 @@
             <h3 class="card-title text-center mb-5 fw-light">Quên Mật Khẩu</h3>
             <h5 th:style="${'color-green'}" th:text="${success}"></h5>
             <form action="#" th:action="${quenmatkhau}" th:object="${forgot}" method="post"
-              class="needs-validation" novalidate>
+              class="needs-validation" novalidate enctype="multipart/form-data">
 
 
               <div class="form-group my-4">
