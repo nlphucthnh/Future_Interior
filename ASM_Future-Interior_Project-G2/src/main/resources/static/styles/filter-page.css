@@ -162,7 +162,7 @@
 #Manager_Content .group-fleld .table-responsive tbody tr {
    vertical-align: middle;
    transition: 0.5s;
-  
+    border-bottom: 1px solid var(--gray_200);
 }
 
 #Manager_Content .infor-filter-container .table-responsive tbody tr:hover,
@@ -250,6 +250,10 @@ tbody, td, tfoot, th, thead, tr {
 
 #Manager_Content #form-promotion .group-fleld-02 .form-group {
     width: calc((100% - 2.5%)/3);
+}
+
+#Manager_Content #form-promotion .group-fleld-03 .form-group {
+    width: calc((100% - 2.5%)/2);
 }
 
 

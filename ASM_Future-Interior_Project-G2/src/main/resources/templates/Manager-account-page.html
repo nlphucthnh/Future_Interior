@@ -13,7 +13,9 @@
     <!-- Bootstrap CSS: -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <!-- link javaSprict -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JavaScript: -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -30,49 +32,7 @@
 
 <body>
     <div class="background-manager">
-        <nav id="Manager_Navigation">
-            <div class="header-navigation">
-                <div class="header-navigation-logo">
-                    <img src="../../img/Logo_website.png" alt="" class="header-navigation-logo-img">
-                </div>
-            </div>
-            <div class="body-navigation">
-                <ul class="body-navigation-menu menu-style">
-                    <li class="body-navigation-li"><a href="/Manager/blog" class="body-navigation-link text-link"><i
-                                class="bi bi-file-earmark-text icon-text"></i> Bài đăng</a></li>
-                    <li class="body-navigation-li"><a href="/Manager/revenue" class="body-navigation-link text-link"><i
-                                class="bi bi-bar-chart icon-text"></i> Doanh thu</a></li>
-                    <li class="body-navigation-li"><a href="/Manager/order" class="body-navigation-link text-link"><i
-                                class="bi bi-handbag icon-text"></i> Đơn hàng</a></li>
-                    <li class="body-navigation-li"><a href="/Manager/filter" class="body-navigation-link text-link"><i
-                                class="bi bi-list-ul icon-text"></i> Phân loại</a></li>
-                    <li class="body-navigation-li"><a href="/Manager/product" class="body-navigation-link text-link"><i
-                                class="bi bi-box icon-text"></i> Sản phẩm</a></li>
-                    <li class="body-navigation-li"><a href="/Manager/account" class="body-navigation-link text-link"><i
-                                class="bi bi-people icon-text"></i>Tài khoản</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-nagvigation">
-                <hr style=" border-top: 1px solid var(--gray_100) ; width: 90%; margin: 5px auto;">
-                <div class="footer-nagvigation-content">
-                    <div class="footer-nagvigation-account">
-                        <h4 class="footer-nagvigation-account-name">Olivia Rhye</h4>
-                        <h6 class="footer-nagvigation-account-email">olivia@untitledui.com</h6>
-                    </div>
-                    <div class="footer-nagvigation-logout">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                            class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
-                            <path fill-rule="evenodd"
-                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                        </svg>
-                    </div>
-                </div>
-
-            </div>
-        </nav>
+        <nav id="Manager_Navigation" th:include="components/Manager-navigation"></nav>
         <div id="Manager_Content">
             <div class="header_content">
                 <div class="header_content_text-group">
@@ -90,41 +50,51 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs body_content_tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="btn-style active" id="list-blogs-tab" data-bs-toggle="tab"
-                            data-bs-target="#list_blogs" type="button" role="tab" aria-controls="list_blogs"
-                            aria-selected="true">Danh sách tài khoản</button>
+                        <button th:onclick="TabList()" class="btn-style active" id="list-accout-tab"
+                            data-bs-toggle="tab" data-bs-target="#list_blogs" type="button" role="tab"
+                            aria-controls="list_blogs" aria-selected="true">Danh sách tài khoản</button>
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <button class="btn-style" id="form-blogs-tab" data-bs-toggle="tab" data-bs-target="#form_blogs"
-                            type="button" role="tab" aria-controls="form_blogs" aria-selected="false">Chi tiết tài
+                        <button th:onclick="TabForm()" class="btn-style" id="form-account-tab" data-bs-toggle="tab"
+                            data-bs-target="#form_blogs" type="button" role="tab" aria-controls="form_blogs"
+                            aria-selected="false">Chi tiết tài
                             khoản</button>
                     </li>
                 </ul>
                 <hr>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div class="tab-pane active" id="list_blogs" role="tabpanel" aria-labelledby="list-blogs-tab">
+                    <div class="tab-pane active" id="list_blogs" role="tabpanel" aria-labelledby="list-accout-tab">
                         <div class="list_blogs-header">
                             <div class="list_blogs-header-seletion-group">
-                                <form action="" method="post">
+                                <form action="/Manager/account/sort" method="post">
                                     <div class="mb-3" style="margin-right: 20px;">
-                                        <select class="form-select form-select-lg" name="" id="">
-                                            <option selected>Từ A đến Z</option>
-                                            <option value="">Từ Z đến A</option>
-                                            <option value="">Istanbul</option>
-                                            <option value="">Jakarta</option>
+                                        <select class="form-select form-select-lg" name="methodSort" id="">
+                                            <option value="DESC" th:selected="${inforSort[0] == 'DESC'}">Từ thấp đến cao
+                                            </option>
+                                            <option value="ASC" th:selected="${inforSort[0] == 'ASC'}">Từ cao đến thấp
+                                            </option>
                                         </select>
                                     </div>
+                                    <div class="btn-group mb-3" style="margin-right: 20px;">
+                                        <select class="form-select form-select-lg" name="fieldSort" id="">
+                                            <option value="false" th:selected="${inforSort[1] == 'false'}">Theo người
+                                                dùng</option>
+                                            <option value="true" th:selected="${inforSort[1] == 'true'}">Theo quản trị
+                                                viên</option>
+                                        </select>
+                                    </div>
+                                    <button class="mb-3 btn-style">Sắp xếp</button>
                                 </form>
                             </div>
                             <div class="list_blogs-header-search-group">
-                                <form action="">
+                                <form action="/Manager/account/search" method="post">
                                     <div class="input-group mb-3">
                                         <button class="btn btn-outline-secondary box-shadow-none" type="button"
                                             id="button-search"><i class="bi bi-search"></i></button>
-                                        <input type="text" class="form-control box-shadow-none" placeholder="Tìm kiếm"
-                                            aria-label="Example text with button addon"
+                                        <input type="text" name="usernameSearch" class="form-control box-shadow-none"
+                                            placeholder="Tìm kiếm" aria-label="Example text with button addon"
                                             aria-describedby="button-search">
                                     </div>
                                 </form>
@@ -144,49 +114,72 @@
                                                     <i class="bi bi-arrow-down"></i>
                                                 </form>
                                             </th>
-                                            <th scope="col">Mật khẩu</th>
                                             <th scope="col">Ngày đăng ký</th>
+                                            <th scope="col">Mật khẩu</th>
                                             <th scope="col">Vai trò</th>
+                                            <th scope="col">Trạng thái</th>
                                             <th scope="col">Thao tác</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="">
-                                            <form action="">
-                                                <td scope="row" class="td-first-table">
-                                                    <input class="form-check-input box-shadow-none" name="" id=""
-                                                        type="checkbox" value="checkedValue"
-                                                        aria-label="Text for screen reader">
-                                                    <div class="text-blogs-group">
-                                                        <h4 class="text-title-blogs text-title">phucThnh123</h4>
-                                                        <h6 class="text-id-blogs text-title">nlphucthnh@gmail.com</h6>
-                                                    </div>
-                                                </td>
-                                                <td>**********</td>
-                                                <td>13/03/2023</td>
-                                                <td>Khách hàng</td>
-                                                <td>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-trash-fill"></i></button>
+                                    <tbody th:if="${disnableTable == false}">
+                                        <tr th:each="account : ${PageTK.content}">
+                                            <!-- <form action=""> -->
+                                            <td scope="row" class="td-first-table">
+                                                <input class="form-check-input box-shadow-none" name="" id=""
+                                                    type="checkbox" value="checkedValue"
+                                                    aria-label="Text for screen reader">
+                                                <div class="text-blogs-group">
+                                                    <h4 class="text-title-blogs text-title"
+                                                        th:text="${account.tenDangNhap}">...</h4>
+                                                    <h6 class="text-id-blogs text-title" th:text="${account.email}">
+                                                    </h6>
+                                                </div>
+                                            </td>
+                                            <td th:text="${#dates.format(account.ngayDangKy, 'dd/MM/yyyy')}" ></td>
+                                            <td>**********</td>
+                                            <td th:if="${account.vaiTro == false}">Người dùng thường</td>
+                                            <td th:if="${account.vaiTro == true}">Quản trị viên</td>
+                                            <td th:if="${account.trangThai == false}"><span
+                                                    class="badge badge-gray">Dừng hoạt dộng</span></td>
+                                            <td th:if="${account.trangThai == true}"><span
+                                                    class="badge badge-green">Đang hoạt động</span></td>
+                                            <td style="display: flex; justify-content: center;">
+                                                <button th:onclick="confomDelete([[${account.tenDangNhap}]])"
+                                                    class="btn" style="color: var(--gray_600);"><i
+                                                        class="bi bi-trash-fill"></i></button>
+
+                                                <form th:action="@{/Manager/account/edit/__${account.tenDangNhap}__}"
+                                                    method="post">
                                                     <button class="btn" style="color: var(--gray_600);"><i
                                                             class="bi bi-pen-fill"></i></button>
-                                                </td>
-                                            </form>
+                                                </form>
+                                            </td>
+                                            <!-- </form> -->
                                         </tr>
                                     </tbody>
-                                    <tfoot>
+                                    <tfoot th:if="${disnableTable == false}">
                                         <tr>
                                             <td style="text-align: left;">
-                                                <button class="btn-style btn-prev">Trước đó</button>
-                                                <button class="btn-style btn-next">Kế tiếp</button>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
 
-                                            <td>
-                                                Trang 1 của 10
+                                                <a class="btn-style btn-prev disnable"
+                                                    th:if="${PageTK.number == 0}">Trước đó</a>
+                                                <a class="btn-style btn-prev" th:if="${PageTK.number > 0}"
+                                                    th:href="@{/Manager/account?page=__${PageTK.number-1}__}">Trước
+                                                    đó</a>
+                                                <a class="btn-style btn-next"
+                                                    th:if="${PageTK.number < PageTK.totalPages - 1}"
+                                                    th:href="@{/Manager/account?page=__${PageTK.number+1}__}">Kế
+                                                    tiếp</a>
+                                                <a class="btn-style btn-next disnable"
+                                                    th:if="${PageTK.number == PageTK.totalPages - 1}">Kế tiếp</a>
+                                                <br>
                                             </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td
+                                                th:text="'Trang ' + ${PageTK.number + 1} + ' của ' + ${PageTK.totalPages} "></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -194,60 +187,60 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="form_blogs" role="tabpanel" aria-labelledby="form-blogs-tab">
+                    <div class="tab-pane" id="form_blogs" role="tabpanel" aria-labelledby="form-account-tab">
                         <div class="form_blogs-pane">
-                            <form action="">
+                            <form th:action="@{/Manager/account/update}" th:object="${TaiKhoan}" method="post"> 
                                 <div class="group-fleld group-fleld-01">
                                     <div class="mb-3 form-group">
                                         <label for="username_account" class="form-label">Tên đăng nhập</label>
-                                        <input type="text" name="username-account" id="username_account"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="text" th:field="*{tenDangNhap}" name="username-account" id="username_account"
+                                            class="form-control box-shadow-none" placeholder="" style="pointer-events: none;">
+                                        <small id="helpId" class="text-muted color-style-validate" th:if="${#fields.hasErrors('tenDangNhap')}" th:errors="*{tenDangNhap}">...</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="password_account" class="form-label">Mật khẩu</label>
-                                        <input type="text" name="password-account" id="password_account"
+                                        <input type="password" th:field="*{matKhau}" name="password-account" id="password_account"
                                             class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <small id="helpId" class="text-muted color-style-validate" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}">...</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-02">
                                     <div class="mb-3 form-group">
                                         <label for="email_account" class="form-label">Email</label>
-                                        <input type="email"  name="email-account" id="email_account"
+                                        <input type="email" th:field="*{email}" name="email-account" id="email_account"
                                             class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                    <small id="helpId" class="text-muted color-style-validate" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">...</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="date_account" class="form-label">Ngày đăng ký</label>
-                                        <input type="date" name="date-account" id="date_account" aria-describedby="img-blog"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="date" th:field="*{ngayDangKy}" name="date-account" id="date_account"
+                                            aria-describedby="img-blog" class="form-control box-shadow-none"
+                                            placeholder="">
+                                        <small id="helpId" class="text-muted color-style-validate" th:if="${#fields.hasErrors('ngayDangKy')}" th:errors="*{ngayDangKy}">...</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-03">
                                     <div class="mb-3 form-group">
                                         <label for="status_account" class="form-label">Trạng thái</label>
-                                        <select class="form-control  box-shadow-none" name="status-account" id="status_account"
-                                            aria-describedby="calendar">
-                                            <option selected>Đang hoạt động</option>
-                                            <option value="">Dừng hoạt động</option>
+                                        <select class="form-control  box-shadow-none" name="status-account"
+                                            id="status_account"  th:field="*{trangThai}">
+                                            <option value="false" th:selected="${inforSort[4] == false}">Dừng hoạt động</option>
+                                            <option value="true" h:selected="${inforSort[4]  == true}">Đang hoạt động</option>
                                         </select>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="role_account" class="form-label">Vai trò</label>
-                                        <select class="form-control  box-shadow-none" name="role-account" id="role_account"
-                                            aria-describedby="calendar">
-                                            <option selected>phucThinh123</option>
-                                            
+                                        <select class="form-control  box-shadow-none" name="role-account"
+                                            id="role_account" th:field="*{vaiTro}" >
+                                            <option value="false" th:selected="${inforSort[3] == false}">Người dùng thường</option>
+                                            <option value="true" th:selected="${inforSort[3]  == true}">Quản trị viên</option>
                                         </select>
                                     </div>
 
                                 </div>
                                 <div class="group-fleld group-fleld-05">
-                                    <button class="btn btn-style btn-clear"><i class="bi-brush"></i></button>
+                                    <button formaction="/Manager/account/clearform" class="btn btn-style btn-clear"><i class="bi-brush"></i></button>
                                     <button class="btn btn-style btn-update">Cập nhật</button>
-                                    <button class="btn btn-style btn-add">Thêm mới</button>
                                 </div>
 
                             </form>
@@ -259,5 +252,86 @@
         </div>
     </div>
 </body>
+<script>
+    var listBlogsTab = document.getElementById("list-accout-tab");
+    var formBlogsTab = document.getElementById("form-account-tab");
+    var formBlogs = document.getElementById("form_blogs");
+    var listBlogs = document.getElementById("list_blogs");
+    var btnAdmin = document.getElementById("btn-admin");
+    var btnUser = document.getElementById("btn-user");
+    listBlogsTab.style.backgroundColor = 'var(--gray_50)';
+    listBlogsTab.style.border = '1px solid var(--gray_300)';
+
+    function TabList() {
+        listBlogsTab.style.backgroundColor = 'var(--gray_50)';
+        listBlogsTab.style.border = '1px solid var(--gray_300)';
+        formBlogsTab.style.backgroundColor = 'white';
+        formBlogsTab.style.border = 'none';
+        listBlogs.className = "tab-pane active";
+        formBlogs.className = "tab-pane";
+    }
+
+    btnUser.style.backgroundColor = "var(--gray_900)";
+    btnUser.style.color = "var(--gray_200)";
+
+    btnAdmin.addEventListener("click", function () {
+        btnAdmin.style.backgroundColor = "var(--gray_900)";
+        btnAdmin.style.color = "var(--gray_200)"
+        btnAdmin.style.pointerEvents = "none";
+        btnUser.style.backgroundColor = "var(--gray_100)";
+        btnUser.style.color = "var(--gray_900)"
+        btnUser.style.pointerEvents = "all";
+    })
+
+    btnUser.addEventListener("click", function () {
+        btnUser.style.backgroundColor = "var(--gray_900)";
+        btnUser.style.color = "var(--gray_200)"
+        btnUser.style.pointerEvents = "none";
+        btnAdmin.style.backgroundColor = "var(--gray_100)";
+        btnAdmin.style.color = "var(--gray_900)"
+        btnAdmin.style.pointerEvents = "all";
+    })
+
+    function TabForm() {
+        formBlogsTab.style.backgroundColor = 'var(--gray_50)';
+        formBlogsTab.style.border = '1px solid var(--gray_300)';
+        listBlogsTab.style.backgroundColor = 'white';
+        listBlogsTab.style.border = 'none';
+        formBlogs.className = "tab-pane active";
+        listBlogs.className = "tab-pane";
+    }
+
+    function confomDelete(tenDangNhap) {
+        let message = "Bạn muốn xóa tài khoản : " + tenDangNhap;
+
+        if (confirm(message) == true) {
+            const Http = new XMLHttpRequest();
+            const url = '/Manager/account/delete/' + tenDangNhap;
+            Http.open("POST", url);
+            Http.send();
+            alert("Xóa thành công!");
+            location.reload(true);
+        }
+    }
+
+
+
+</script>
+
+<script th:if="${ChangeTab == true}">
+   var listBlogsTab = document.getElementById("list-accout-tab");
+    var formBlogsTab = document.getElementById("form-account-tab");
+    var formBlogs = document.getElementById("form_blogs");
+    var listBlogs = document.getElementById("list_blogs");
+    function TabForm() {
+        formBlogsTab.style.backgroundColor = 'var(--gray_50)';
+        formBlogsTab.style.border = '1px solid var(--gray_300)';
+        listBlogsTab.style.backgroundColor = 'white';
+        listBlogsTab.style.border = 'none';
+        formBlogs.className = "tab-pane active";
+        listBlogs.className = "tab-pane";
+    }
+    TabForm();
+</script>
 
 </html>

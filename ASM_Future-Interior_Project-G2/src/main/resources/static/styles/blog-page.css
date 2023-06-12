@@ -208,12 +208,25 @@ tbody, td, tfoot, th, thead, tr {
     border-top: 1px solid var(--gray_300) ;
 }
 
+#Manager_Content .list_blogs-body .table-responsive tfoot td {
+    padding: 15px 5px;
+}
+
 
 #Manager_Content .list_blogs-body .table-responsive tfoot .btn-style {
-    padding: 7px 13px;
+    padding: 10px 13px;
     border-radius: 3px;
     transition: 0.4s;
+    text-decoration: none !important;
+    
 }
+
+
+#Manager_Content .list_blogs-body .table-responsive tfoot .btn-prev,
+#Manager_Content .list_blogs-body .table-responsive tfoot .btn-next {
+    margin-bottom: 20px;
+}
+
 
 #Manager_Content .list_blogs-body .table-responsive tfoot .btn-style:hover {
     background-color: var(--gray_100);

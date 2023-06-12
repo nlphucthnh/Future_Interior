@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,8 +31,9 @@ public class ChatLieu implements Serializable{
 	@Column(name = "ten_chat_lieu")
 	String tenChatLieu ;
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "ngay_tao")
-	Date ngayTao = new Date() ;
+	Date ngayTao;
 	@Column(name = "mo_ta_chat_lieu")
 	String moTaChatLieu;
 	

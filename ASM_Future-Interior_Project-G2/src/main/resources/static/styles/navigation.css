@@ -58,6 +58,7 @@
     border-radius: 3px;
     transition: 0.5s;
     cursor: pointer;
+  
 }
 
 
@@ -66,11 +67,13 @@
 }
 
 
+
 #Manager_Navigation  .body-navigation .body-navigation-link {
     color: var(--gray_100);
     font-family: 'Inter';
     font-weight: 400;
     font-size: 16px;
+    padding-right: 35%;
 }
 
 /* -------------------------------- Body - Navigation -------------------------------- */
@@ -96,10 +99,6 @@
 #Manager_Navigation  .footer-nagvigation .footer-nagvigation-content:hover {
     background-color: var(--gray_700);
  }
-
-
-
-
 
 
 #Manager_Navigation .footer-nagvigation-account .footer-nagvigation-account-name {
