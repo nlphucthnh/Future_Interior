@@ -31,6 +31,14 @@ public class ContactController {
 
 	@Autowired
 	ServletContext context;
+	
+	@GetMapping("/contact-page")
+	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
+		MailInfo lh = new MailInfo();
+		model.addAttribute("lienhe", lh);
+		return "contact";
+	}
+
 
 	@PostMapping("/contact-page")
 	public String send(ModelMap model, @RequestParam("from") String from, @RequestParam("to") String to,

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface PhanNhomLoaiDAO extends JpaRepository<PhanNhomLoai, Integer> {
 	PhanNhomLoai findByIdPhanNhomLoai(int idPhanNhomLoai);
+	
 }
