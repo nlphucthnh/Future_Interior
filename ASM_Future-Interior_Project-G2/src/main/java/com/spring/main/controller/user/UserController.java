@@ -16,15 +16,15 @@ public class UserController {
 	
 
 	
-	@GetMapping("/login-page")
-	public String getLoginPage() {
-		return "dangnhap";
-	}
+	// @GetMapping("/login-page")
+	// public String getLoginPage() {
+	// 	return "dangnhap";
+	// }
 	
-	@GetMapping("/sign-up-page")
-	public String getSiginPage() {
-		return "dangky";
-	}
+	// @GetMapping("/sign-up-page")
+	// public String getSiginPage() {
+	// 	return "dangky";
+	// }
 	
 	@GetMapping("/home-page")
 	public String getHomePage() {

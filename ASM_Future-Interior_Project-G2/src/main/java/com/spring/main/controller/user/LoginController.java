@@ -63,7 +63,7 @@ public class LoginController {
             model.addAttribute("MessageWarning", true); // tính hiện để thông báo tên đăng nhập không tồn tại.
         } else {
             if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
-                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) ) { // && taiKhoandataBase.isTrangThai()==true
+                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
                 // Account accs = new Account(un, pw);
                 session.set("tenDangNhap", tenDangNhapForm);
                 session.set("matKhau", matKhauForm);

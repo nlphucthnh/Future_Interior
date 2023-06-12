@@ -7,13 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.spring.main.entity.TaiKhoan;
 
-
-public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String>{
+public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String> {
+	// trả về tài khoản dựa trên tên đăng nhập
 	TaiKhoan findByTenDangNhap(String tenDangNhap);
-	
+
 	@Query("SELECT t FROM TaiKhoan t WHERE t.tenDangNhap LIKE CONCAT('%', ?1, '%') and t.vaiTro = ?2")
-	Page<TaiKhoan> findByTenDangNhap(String tenDangNhap,boolean vaiTro,Pageable pageable);
+	Page<TaiKhoan> findByTenDangNhap(String tenDangNhap, boolean vaiTro, Pageable pageable);
+
+	// kiểm tra xem tài khoản có tồn tại với tên đăng nhập đã cho hay không
+	boolean existsByTenDangNhap(String tenDangNhap);
+
 	
-	
-	
+
 }

@@ -19,44 +19,46 @@
         <div class="lg-container-ctent">
             <div class="lg-ct-left">
                 <div class="lg-ct-left-form" style="display: flex; flex-direction: column;">
-                    <!-- <form th:action="@{/login-page/save}" method="post"> -->
-                    <div class="lg-ct-top">
-                        <img src="/img/logoMark.png" alt="">
-                        <h2 class="lg-ct-title">Chào mừng bạn đến với Future Interior</h2>
-                    </div>
-                    <div class="mb-3 form-group">
-                        <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
-                        <input type="text" name="tenDangNhap" class="form-control" id="tenDangNhap"
-                            placeholder="Tên đăng nhập của bạn">
-                        <small id="tenDangNhap-text" style="display: none;" class="text-danger">Vui lòng nhập tên
-                            đăng
-                            nhập</small>
-                    </div>
-                    <div class="mb-3 form-group">
-                        <label for="matKhau" class="form-label">Mật khẩu</label>
-                        <input type="password" name="matKhau" class="form-control" id="matKhau">
-                        <small id="matKhau-text" style="display: none;" class="text-danger">Vui lòng nhập mật
-                            khẩu</small>
-
-                    </div>
-                    <div class="mb-3 form-check">
-                        <div class="input-groups input-groups-01">
-                            <input type="checkbox" name="remember" value="true" class="form-check-input"
-                                id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
+                    <form th:action="@{/login-page/save}" method="post">
+                        <div class="lg-ct-top">
+                            <img src="/img/logoMark.png" alt="">
+                            <h2 class="lg-ct-title">Chào mừng bạn đến với Future Interior</h2>
                         </div>
-                        <div class="input-groups input-groups-02">
-                            <a href="#">Quên Mật Khẩu</a>
+                        <div class="mb-3 form-group">
+                            <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
+                            <input type="text" name="tenDangNhap" class="form-control" id="tenDangNhap"
+                                placeholder="Tên đăng nhập của bạn">
+                            <small id="tenDangNhap-text" style="display: none;" class="text-danger">Vui lòng nhập tên
+                                đăng
+                                nhập</small>
                         </div>
-                    </div>
-                    <button onclick="LoginCheckError()" type="submit" class="btn btn-login">Đăng Nhập</button>
-                    <!-- formaction="/log-in-page/save" -->
-                    <div class="lg-ct-end">
-                        <p>Bạn chưa có tài khoản?</p>
-                        <a href="/sign-up-page">Đăng Ký</a>
-                    </div>
+                        <div class="mb-3 form-group">
+                            <label for="matKhau" class="form-label">Mật khẩu</label>
+                            <input type="password" name="matKhau" class="form-control" id="matKhau">
+                            <small id="matKhau-text" style="display: none;" class="text-danger">Vui lòng nhập mật
+                                khẩu</small>
 
-                    <!-- </form> -->
+                        </div>
+                        <div class="mb-3 form-check">
+                            <div class="input-groups input-groups-01">
+                                <input type="checkbox" name="remember" value="true" class="form-check-input"
+                                    id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
+                            </div>
+                            <div class="input-groups input-groups-02">
+                                <a href="#">Quên Mật Khẩu</a>
+                            </div>
+                        </div>
+                        <button  type="submit" id="btnLogin01" class="btn btn-login">Đăng Nhập</button>
+                        <!-- formaction="/log-in-page/save" -->
+                    </form>    
+                    <button style="width: 95%;" onclick="LoginCheckError()" id="btnLogin02" type="submit" class="btn btn-login">Đăng Nhập</button>
+                        <div class="lg-ct-end">
+                            <p>Bạn chưa có tài khoản?</p>
+                            <a href="/sign-up-page">Đăng Ký</a>
+                        </div>
+                    
+                    
                     <!-- <th:if test="${not empty message}">
                         <div style="color:red;" >
                             <small th:text="${message}">Help Text</small>
@@ -78,6 +80,8 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
 <script>
+    $("#btnLogin01").hide();
+
     function checkFormLogin() {
         var flag = [true, true];  // flag = [0,1]
         if ($("#tenDangNhap").val() == "") {
@@ -112,17 +116,15 @@
             contentType: "application/json",
             success: function (response) {
                 if (response == "") {
-                    alert("Sai tên đăng nhập hoặc mật khẩu");
+                    alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
                 } else {
                     if (response.matKhau != matKhau) {
-                        alert("Sai tên đăng nhập hoặc mật khẩu");
-                    } else {
+                        alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
+                    } else if(!response.trangThai){
+                        alert("Tài khoản đã tạm dừng hoạt động !");
+                    }else {
                         alert("Đăng nhập thành công");
-                        const Http = new XMLHttpRequest();
-                        const url = '/login-page/save';
-                        Http.open("POST", url);
-                        Http.send();
-                        window.location.replace("http://localhost:8080/home-page");
+                        $("#btnLogin01").trigger('click');
                     }
                 }
 
