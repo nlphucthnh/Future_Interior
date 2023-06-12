@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <!-- icon web  -->
+    <link rel="website icon" type="png" href="img/logo--noname.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS: -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/product.css">
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <link rel="stylesheet" href="/styles/person.css">
+    <title>Product List</title>
+</head>
+
+<body>
+    <nav th:include="navbaruser"></nav>
+    <header class="header-person">
+        <div class="banner-person">
+            <img src="/img/banner-person.png" alt="Lỗi" width="100%" height="450px">
+        </div>
+        <div class="container my-4 d-flex justify-content-between">
+            <div class="header-person-main" th:each="pe : ${people}">
+                <div class="auther-item d-flex align-items-center ">
+                    <img th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien} + '.png'}" alt="Avatar" width="160px"
+                        height="160px" class="avatar rounded-circle mx-3">
+                    <span class="navbar-text text-start me-2">
+                        <div class="text-decoration-none text-dark text-user-person" th:text="${pe.tenDangNhap}">
+                        </div>
+                        <span class="text-black-50" th:text="${pe.email}"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="btn-edit-user">
+                <button type="button" class="btn btn-edit">Chỉnh sửa thông tin</button>
+            </div>
+        </div>
+    </header>
+
+    <article class="container">
+        <div class="row">
+            <div class="col-8">
+                <table class="table">
+                    <thead>
+                        <tr class="title-cart">
+                            <th scope="col">Quản lý đơn hàng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="d-flex justify-content-between my-3" th:each="dhct : ${donhangct}">
+                            <td>
+                                <div class="d-lg-flex name-product-person pt-3 pb-3">
+                                    <div class="person-product-image">
+                                        <img th:src="${'/img/' + {dhct.sanPhamDHCT.ListHinhAnhSP[0].idHinhAnh} + '.png'}"
+                                            alt="Product 2" width="107" height="90">
+                                    </div>
+                                    <div class="person-product-text">
+                                        <h5 th:text="${dhct.sanPhamDHCT.tenSanPham}"></h5>
+                                        <span th:text="${dhct.sanPhamDHCT.giaSanPham}"></span>
+
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td class="status-person my-4">
+                                <h5 th:text="${dhct.donHangDHCT.trangThaiDonHang}"></h5>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <div class="map" th:each="pe : ${people}">
+                    <div class="title-person mb-3">Thông tin khách hàng</div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="subtotal" class="form-label profle-tile">Họ và tên:</label>
+                        </div>
+                        <div class="col-6">
+                            <label for="discount" class="form-label profle-text "
+                                th:text="${pe.thongTinTaiKhoan.hoTen}"></label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="subtotal" class="form-label profle-tile">Giới tính</label>
+                        </div>
+                        <div class="col-6">
+                            <label for="discount" class="form-label profle-text"
+                                th:text="${pe.thongTinTaiKhoan.gioiTinh ? 'Nam' : 'Nữ'}"></label>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="subtotal" class="form-label profle-tile">Số điện thoại:</label>
+                        </div>
+                        <div class="col-6">
+                            <label for="discount" class="form-label profle-text "
+                                th:text="${pe.thongTinTaiKhoan.soDienThoai}"></label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label for="subtotal" class="form-label profle-tile">Email:</label>
+                        </div>
+                        <div class="col-6">
+                            <label for="discount" class="form-label profle-text" th:text="${pe.email}"></label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="edit-profile my-3">
+                    <button class="btn btn-edit-profile">Chỉnh sửa hồ sơ</button>
+                </div>
+            </div>
+        </div>
+    </article>
+
+</body>
+
+</html>

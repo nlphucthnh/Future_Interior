@@ -1,28 +1,29 @@
 .product-list-title {
-    font-family: "EB Garamond";
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 47px;
-    letter-spacing: 0em;
-    text-align: left;
-
+  font-family: "EB Garamond";
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 47px;
+  letter-spacing: 0em;
+  text-align: left;
 }
-
 .form-select {
-    margin-bottom: 50px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: 0em;
-    text-align: left;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 .form-label {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.text-price-list{
+    font-size: 14px;  
+    margin-left: 5px;
 }

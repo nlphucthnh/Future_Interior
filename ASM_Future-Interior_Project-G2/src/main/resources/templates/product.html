@@ -32,154 +32,8 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a href="/home-page"><img src="img/Logowebsite.png" style="background-color: var(--gray_25);" alt=""></a>
-            <div class="navbar-collapse">
-                <ul class="navbar-nav item-menu">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about-page">Giới thiệu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact-page">Liên hệ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/blog-page">Bài viết</a>
-                    </li>
-                    <li class="nav-item dropdown dropdown-hover has-megamenu">
-                        <a class="nav-link " href="/product-page"> Sản phẩm <i class="bi bi-chevron-down"></i></a>
-                        <div class="dropdown-menu megamenu" role="menu">
-                            <div class="row g-3">
-                                <div class="col-lg-4 col-6 item-group">
-                                    <div class="col-megamenu">
-                                        <h6 class="title ">Loại nội thất</h6>
-                                        <ul class="list-unstyled ">
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">BÀN -
-                                                    tables</a>
-                                                <p>Bàn làm việc, bàn ăn, bàn sofa.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">SOFA -
-                                                    sofas</a>
-                                                <p>Sofa băng, sofa góc, sofa giường.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GHẾ -
-                                                    chairs</a>
-                                                <p>Ghế văn phòng, ghế ăn, ghế cafe.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÈN -
-                                                    lamps</a>
-                                                <p>Đèn sản, đèn bàn, đèn trang trí.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">KỆ, TỦ -
-                                                    sheft units,
-                                                    cabinets</a>
-                                                <p>Tử đồ, tủ TV, kệ để đồ.</p>
-                                            </li>
-                                        </ul>
-                                    </div> <!-- col-megamenu.// -->
-                                </div><!-- end col-3 -->
-                                <div class="col-lg-4 col-6 item-group">
-                                    <div class="col-megamenu">
-                                        <h6 class="title">&#160;</h6>
-                                        <ul class="list-unstyled">
+   <nav th:include="navbar"></nav>
 
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GƯƠNG -
-                                                    mirrors</a>
-                                                <p>Gường nhỏ, gương toàn thân.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">GIƯỜNG -
-                                                    beds</a>
-                                                <p>Gường sofr, gường đơn, gường đôi.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">TRANG TRÍ
-                                                    - decorations</a>
-                                                <p>Khung ảnh, kệ giá.</p>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 "><a href="/product-list-page">ĐÒ GIA
-                                                    DỤNG - household
-                                                    goods</a>
-                                                <p>Rem, thung rác.</p>
-                                            </li>
-                                        </ul>
-                                    </div> <!-- col-megamenu.// -->
-                                </div><!-- end col-3 -->
-                                <div class="col-lg-4 col-6 room-group">
-                                    <div class="col-megamenu">
-                                        <h6 class="title">Nội thất cho các phòng</h6>
-                                        <ul class="list-unstyled ">
-                                            <li class="item-opsition-menu pb-2 ">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="material-symbols-sharp ">
-                                                        chair
-                                                    </span>
-                                                    <div>
-                                                        <a href="product-list-page">Phòng khách - Living room</a>
-                                                        <p>Các nội thất phòng khách</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 ">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="material-symbols-sharp">
-                                                        bed
-                                                    </span>
-                                                    <div>
-                                                        <a href="#">Phòng ngủ - Bedroom</a>
-                                                        <p>Các nội thất phòng ngủ</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 ">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="material-symbols-sharp">
-                                                        kitchen
-                                                    </span>
-                                                    <div>
-                                                        <a href="product-list-page">Phòng ăn - Kitchen room</a>
-                                                        <p>Các nội thất nhà ăn</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 ">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="material-symbols-sharp">
-                                                        laptop_chromebook
-                                                    </span>
-                                                    <div>
-                                                        <a href="product-list-page">Phòng làm việc - Office</a>
-                                                        <p>Các nội thất phòng làm việc</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="item-opsition-menu pb-2 ">
-                                                <div class="d-flex align-items-center">
-                                                    <span class="material-symbols-sharp">
-                                                        bathtub
-                                                    </span>
-                                                    <div>
-                                                        <a href="product-list-page">Phòng tắm - Bathroom</a>
-                                                        <p>Các nội thất phòng tắm</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div> <!-- col-megamenu.// -->
-                                </div>
-                            </div><!-- end row -->
-                        </div> <!-- dropdown-mega-menu.// -->
-                    </li>
-                </ul>
-            </div>
-            <ul class="navbar-nav item-menu ms-auto signin-group">
-                <li class="nav-item">
-                    <a class="nav-link login" href="login-page">Đăng nhập</a>
-                </li>
-                <li class="nav-item sign-navbar ">
-                    <a class="nav-link sigin" href="sign-up-page">Đăng ký</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
     <header id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
         data-bs-delay="1000">
         <ol class="carousel-indicators mb-4">
@@ -247,225 +101,86 @@ khiêm tốn như phòng trọ hay căn hộ studio
             <div class="product-title-sale">
                 <h3>Sản phẩn khuyến mãi</h3>
             </div>
-            <div class="product-list-main">
-                <div class="product-list ">
-                    <a href=product-item-page>
+            <div class="product-list-main row row-cols-4">
+                <div class="product-list col my-4" th:each="pros : ${productsSales}">
+                    <a th:href="@{'/product-page/edit/' + ${pros.sanPhamSPKM.idSanPham}}">
                         <div class="zoom_color noidung">
-                            <img src="img/ghe.png" alt="Sản phẩm 1">
-                            <span class="price-sale">20%</span>
+                            <img th:src="@{'/img/' + ${pros.sanPhamSPKM.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
+                            <span class="price-sale"
+                                th:text="${#numbers.formatDecimal(pros.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0) + '%'}"></span>
                         </div>
+                        <h3 class="product-title" th:text="${pros.sanPhamSPKM.tenSanPham}"></h3>
+                    </a>
+                    <p class="product-description" th:text="${pros.sanPhamSPKM.moTaSanPham}"></p>
+                    <div class="product-price-main">
+                        <p class="product-price"
+                            th:text="${#numbers.formatDecimal(pros.sanPhamSPKM.giaSanPham * (1 - pros.khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}">
+                        </p>
+                        <span class="product-price-sale my-1 mx-4"
+                            th:text="${#numbers.formatDecimal(pros.sanPhamSPKM.giaSanPham, 0, 'COMMA', 0, 'POINT')}">
+                        </span>
+                    </div>
 
-                        <h3 class="product-title">Bàn CHIN</h3>
-                    </a>
-                    <p class="product-description">Bàn sofa, bàn gốc</p>
-                    <p class="product-price">880,000₫ <span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Ban.png" alt="Sản phẩm 2">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Bàn UNIQ</h3>
-                    </a>
-                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
-                    <p class="product-price">4,730,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe-to-br.png" alt="Sản phẩm 3">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Ghế TO-BE</h3>
-                    </a>
-                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
-                    <p class="product-price">4,250,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Den.png" alt="Sản phẩm 4">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Tủ PIXAR</h3>
-                    </a>
-                    <p class="product-description">Đèn bàn</p>
-                    <p class="product-price">450,000₫<span>5.250,000₫</span></p>
                 </div>
             </div>
         </div>
     </aside>
+
 
     <article>
         <div class="container">
             <div class="product-title-sale">
                 <h3>Sản phẩn bán chạy</h3>
             </div>
-            <div class="product-list-main">
-                <div class="product-list ">
-                    <a href=product-item-page>
+            <div class="product-list-main row row-cols-4">
+                <div class="product-list my-4 col" th:each="pro : ${products}">
+                    <a th:href="@{'/product-page/edit/' + ${pro.idSanPham}}">
                         <div class="zoom_color noidung">
-                            <img src="img/ghe.png" alt="Sản phẩm 1">
+                            <th:block th:each="khuyenMai : ${pro.ListSPKM}">
+                                <span class="price-sale"
+                                    th:text="${#numbers.formatDecimal(khuyenMai.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0)} + '%'"></span>
+                            </th:block>
+                            <img th:src="@{'/img/' + ${pro.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
                         </div>
-
-                        <h3 class="product-title">Bàn CHIN</h3>
+                        <h3 class="product-title" th:text="${pro.tenSanPham}"></h3>
                     </a>
-                    <p class="product-description">Bàn sofa, bàn gốc</p>
-                    <p class="product-price">880,000₫</p>
+                    <p class="product-description" th:text="${pro.moTaSanPham}"></p>
+                    <div class="product-price-main">
+                        <p th:unless="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price"
+                            th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>
+                        <p th:if="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price">
+                            <span 
+                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
+                            <del class="old-price mx-3" th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
+                        </p>
+                    </div>
                 </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Ban.png" alt="Sản phẩm 2">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Bàn UNIQ</h3>
-                    </a>
-                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
-                    <p class="product-price">4,730,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe-to-br.png" alt="Sản phẩm 3">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Ghế TO-BE</h3>
-                    </a>
-                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
-                    <p class="product-price">4,250,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Den.png" alt="Sản phẩm 4">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Tủ PIXAR</h3>
-                    </a>
-                    <p class="product-description">Đèn bàn</p>
-                    <p class="product-price">450,000₫<span>5.250,000₫</span></p>
-                </div>
-
             </div>
-            <div class="product-list-main">
-                <div class="product-list ">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe.png" alt="Sản phẩm 1">
-                        </div>
-
-                        <h3 class="product-title">Bàn CHIN</h3>
-                    </a>
-                    <p class="product-description">Bàn sofa, bàn gốc</p>
-                    <p class="product-price">880,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Ban.png" alt="Sản phẩm 2">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Bàn UNIQ</h3>
-                    </a>
-                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
-                    <p class="product-price">4,730,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe-to-br.png" alt="Sản phẩm 3">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Ghế TO-BE</h3>
-                    </a>
-                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
-                    <p class="product-price">4,250,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Den.png" alt="Sản phẩm 4">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Tủ PIXAR</h3>
-                    </a>
-                    <p class="product-description">Đèn bàn</p>
-                    <p class="product-price">450,000₫<span>5.250,000₫</span></p>
-                </div>
-
-            </div>
-            <div class="product-list-main line">
-                <div class="product-list ">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe.png" alt="Sản phẩm 1">
-                        </div>
-
-                        <h3 class="product-title">Bàn CHIN</h3>
-                    </a>
-                    <p class="product-description">Bàn sofa, bàn gốc</p>
-                    <p class="product-price">880,000₫</p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Ban.png" alt="Sản phẩm 2">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Bàn UNIQ</h3>
-                    </a>
-                    <p class="product-description">Bàn làm việc 140 x 60 x 74 cm</p>
-                    <p class="product-price">4,730,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/ghe-to-br.png" alt="Sản phẩm 3">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Ghế TO-BE</h3>
-                    </a>
-                    <p class="product-description">Ghế văn phòng 55,5 x 60 x 79 cm</p>
-                    <p class="product-price">4,250,000₫<span>5.250,000₫</span></p>
-                </div>
-                <div class="product-list">
-                    <a href=product-item-page>
-                        <div class="zoom_color noidung">
-                            <img src="img/Den.png" alt="Sản phẩm 4">
-                            <span class="price-sale">20%</span>
-                        </div>
-                        <h3 class="product-title">Tủ PIXAR</h3>
-                    </a>
-                    <p class="product-description">Đèn bàn</p>
-                    <p class="product-price">450,000₫<span>5.250,000₫</span></p>
-                </div>
-
-            </div>
+            <hr>
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item "><a class="page-link bg-dark text-white" href=product-item-page>
-                            << Pre</a>
+                    <li class="page-item" th:if="${currIndex}>0"><a class="page-link text-white bg-dark "
+                            th:href="@{/product-page/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
+                    <tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
+                        <li class="page-item"><a th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}"
+                                th:href="@{/product-page/page?p=__${i}__}" class="page-link text-dark" href="#"
+                                th:text="${i+1}"></a></li>
+                    </tr>
+                    <li class="page-item " th:if="(${currIndex}>-1 and (${currIndex})<${numberOfPages-1})"><a
+                            class="page-link text-white bg-dark " th:href="@{/product-page/page?p=__${currIndex+1}__}"
+                            href="#">Next</a>
                     </li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>1</a></li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>2</a></li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>3</a></li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>..</a></li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>8</a></li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>9</a></li>
-                    <li class="page-item"><a class="page-link text-dark" href=product-item-page>10</a></li>
-                    <li class="page-item "><a class="page-link bg-dark text-white" href=product-item-page>Next >></a></li>
                 </ul>
             </nav>
         </div>
 
     </article>
+
     <article class="container">
         <div class="row">
 
             <div class="col-5 title-main">
-                <h3>QUADA CONCEPT - Thấy mình trong những đơn gvb  iản.</h3><br>
+                <h3>QUADA CONCEPT - Thấy mình trong những đơn giản.</h3><br>
                 <p>Điểm lên không gian những giá trị tự nhiên từ gỗ, từ những đường cạnh vuông vắn đều mắt, QUADA
                     Concept nổi bật những điều thú vị bên trong “ngoại hình đơn giản nhưng lôi cuốn, không ngừng thôi
                     thúc sự sáng tạo.
