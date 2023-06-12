@@ -122,9 +122,9 @@ body {
 
 
 .product-list-main {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
+    /* display: flex;
+    justify-content: space-between; */
+    /* margin-bottom: 50px; */
 }
 
 .product-list-main a {
@@ -190,7 +190,7 @@ aside {
     text-align: left;
     color: #475467;
 }
-
+    
 .product-list-main .product-list .product-price {
     font-family: "Open Sans";
     font-size: 20px;

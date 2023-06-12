@@ -9,5 +9,5 @@ public class AsmFutureInteriorProjectG2Application {
 	public static void main(String[] args) {
 		SpringApplication.run(AsmFutureInteriorProjectG2Application.class, args);
 	}
-
 }
+
