@@ -3,6 +3,10 @@ package com.spring.main.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
 import com.spring.main.entity.TaiKhoan;
 
 import jakarta.persistence.Column;
@@ -42,5 +46,4 @@ public class TaiKhoan implements Serializable {
 	
 	@OneToMany(mappedBy = "taiKhoanGH")
 	List<GioHang> ListGioHang ;
-	
 }

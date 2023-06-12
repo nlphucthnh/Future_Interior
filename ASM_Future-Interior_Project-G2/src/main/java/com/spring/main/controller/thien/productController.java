@@ -1,6 +1,7 @@
 package com.spring.main.controller.thien;
 
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,15 @@ import com.spring.main.dao.SanPhamKhuyenMaiDAO;
 import com.spring.main.dao.TaiKhoanDAO;
 import com.spring.main.entity.DonHang;
 import com.spring.main.entity.DonHangChiTiet;
+import com.spring.main.entity.MailInfo;
 import com.spring.main.entity.PhanNhomLoai;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.SanPhamKhuyenMai;
 import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.MailerService;
 
 import ch.qos.logback.core.util.DirectJson;
+import jakarta.mail.internet.InternetAddress;
 
 @Controller
 public class productController {
@@ -52,6 +56,9 @@ public class productController {
 
     @Autowired
     DonHangChiTietDAO dhctDAO;
+
+    @Autowired
+    MailerService mailer;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -215,6 +222,12 @@ public class productController {
             } else if (!newPassword.equals(confirmNewPassword)) {
                 model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
             } else {
+                TaiKhoan updatedTaiKhoan = change.get(0);
+                // Cập nhật mật khẩu mới trong đối tượng TaiKhoan
+                updatedTaiKhoan.setMatKhau(newPassword);
+                // Lưu thay đổi vào CSDL
+                // System.out.println(updatedTaiKhoan);
+                tkDAO.save(updatedTaiKhoan);
                 model.addAttribute("success", "Đổi mật khẩu thành công");
             }
         } else {
@@ -226,7 +239,47 @@ public class productController {
 
     // quen mat khau ?
     @GetMapping("/quenmatkhau")
-    public String quenmatkhau() {
+    public String quenmatkhau(Model model) {
+        model.addAttribute("mailInfo", new MailInfo());
+        return "quenmatkhau";
+    }
+
+    @PostMapping("/quenmatkhau")
+    public String resetpassword(Model model, @RequestParam("forgot") String email) {
+        List<TaiKhoan> change = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("username", "thienlv");
+
+        boolean emailExists = false;
+        for (TaiKhoan tk : change) {
+            if (tk.getEmail().equals(email)) {
+                emailExists = true;
+                break;
+            }
+        }
+        if (emailExists) {
+            try {
+                InternetAddress internetAddress = new InternetAddress(email);
+                internetAddress.validate();
+                TaiKhoan tk = change.get(0); // Lấy tài khoản đầu tiên từ danh sách
+                String subject = "Lấy Lại Mật Khẩu";
+                String body = "<p>Chào bạn,</p>"
+                        + "<p>Dưới đây là mật khẩu của bạn.</p>"
+                        + "<p>Mật khẩu của bạn là " + tk.getMatKhau()+ " </p>"
+                        + "<br>"
+                        + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
+
+                mailer.queue(email, subject, body);
+                // mailer.send(email, subject, body);
+
+                model.addAttribute("success", "Mật khẩu sẽ gửi về mail của bạn trong giây lát");
+
+            } catch (Exception e) {
+                System.out.println("Lỗi khi gửi email: " + e.getMessage());
+            }
+
+        } else {
+            model.addAttribute("message", "Bạn đã nhập sai email");
+        }
 
         return "quenmatkhau";
     }
