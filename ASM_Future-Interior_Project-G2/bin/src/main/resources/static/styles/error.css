@@ -1,0 +1,54 @@
+.error h4 {
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.error h1 {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.error p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+
+.error-icon {
+    position: absolute;
+}
+
+.error-icon span {
+    position: relative;
+    left: 10px;
+    top: 37px;
+}
+
+.error-icon button {
+    margin-left: 10px; 
+}
+
+.submid-error {
+    width: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+.notification{
+    margin-top: 15%;
+}

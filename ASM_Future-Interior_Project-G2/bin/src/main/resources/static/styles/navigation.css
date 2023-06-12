@@ -1,0 +1,133 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.background-manager {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--gray_900);
+    display: flex;
+}
+
+
+#Manager_Navigation {
+    width: 20%;
+    background-color: var(--gray_900);
+    height: 100vh;
+    position: relative;
+}
+
+/* -------------------------------- Header - Navigation -------------------------------- */
+
+#Manager_Navigation  .header-navigation {
+    width: 100%;
+    padding: 25px 0;
+}
+
+
+#Manager_Navigation  .header-navigation .header-navigation-logo {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#Manager_Navigation  .header-navigation-logo .header-navigation-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* -------------------------------- Header - Navigation -------------------------------- */
+
+/* -------------------------------- Body - Navigation -------------------------------- */
+
+#Manager_Navigation  .body-navigation {
+    width: 100%;
+}
+
+#Manager_Navigation  .body-navigation {
+    width: 100%;
+}
+
+#Manager_Navigation  .body-navigation .body-navigation-li {
+    width: 85%;
+    padding: 11px;
+    margin: 3px auto;
+    border-radius: 3px;
+    transition: 0.5s;
+    cursor: pointer;
+  
+}
+
+
+#Manager_Navigation  .body-navigation .body-navigation-li:hover {
+    background: var(--gray_700);
+}
+
+
+
+#Manager_Navigation  .body-navigation .body-navigation-link {
+    color: var(--gray_100);
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 16px;
+    padding-right: 35%;
+}
+
+/* -------------------------------- Body - Navigation -------------------------------- */
+
+/* -------------------------------- Footer - Navigation -------------------------------- */
+
+#Manager_Navigation  .footer-nagvigation {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+#Manager_Navigation  .footer-nagvigation .footer-nagvigation-content {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin: 10px auto ;
+    transition: 0.5s;
+}
+
+#Manager_Navigation  .footer-nagvigation .footer-nagvigation-content:hover {
+    background-color: var(--gray_700);
+ }
+
+
+#Manager_Navigation .footer-nagvigation-account .footer-nagvigation-account-name {
+    width: fit-content;
+    margin: 0;
+    font-size: 14px;
+    font-family: "Inter";
+    font-weight: 600;
+    color: var(--gray_100);
+    padding: 2px;
+}
+
+#Manager_Navigation .footer-nagvigation-account .footer-nagvigation-account-email {
+    width: fit-content;
+    margin: 0;
+    font-size: 12px;
+    font-family: "Inter";
+    font-weight: 300;
+    color: var(--gray_100);
+    padding: 2px;
+}
+
+
+#Manager_Navigation  .footer-nagvigation  .footer-nagvigation-logout svg {
+    color: var(--gray_100);
+    transition: 0.5s;
+    
+}
+
+
+
+/* -------------------------------- Footer - Navigation -------------------------------- */
