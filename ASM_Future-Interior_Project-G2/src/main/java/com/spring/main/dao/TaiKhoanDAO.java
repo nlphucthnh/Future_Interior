@@ -1,5 +1,7 @@
 package com.spring.main.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +19,9 @@ public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String> {
 	// kiểm tra xem tài khoản có tồn tại với tên đăng nhập đã cho hay không
 	boolean existsByTenDangNhap(String tenDangNhap);
 
+	// @Query("")
+	// List<TaiKhoan> findByTenDangNhap1(String tenDangNhap);
+    TaiKhoan findByEmail (String emailString);
 	
 
 }

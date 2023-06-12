@@ -21,6 +21,7 @@ import com.spring.main.service.CookieService;
 import com.spring.main.service.ParamService;
 import com.spring.main.service.SessionService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 
@@ -35,6 +36,9 @@ public class LoginController {
 
     @Autowired
     ParamService paramService;
+
+    @Autowired
+    HttpSession sessions;
 
     @Autowired
     SessionService session;
@@ -56,37 +60,27 @@ public class LoginController {
     public String ManageLoginPage(@RequestParam(name = "tenDangNhap") String tenDangNhapForm,
             @RequestParam(name = "matKhau") String matKhauForm, Model model) {
         TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(tenDangNhapForm);
-        System.out.println(tenDangNhapForm);
-        System.out.println(taiKhoandataBase);
         boolean rm = paramService.getBoolean("remember", false);
         if (taiKhoandataBase == null) { // tức nó không có trong database
             model.addAttribute("MessageWarning", true); // tính hiện để thông báo tên đăng nhập không tồn tại.
         } else {
             if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
                     && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
-                // Account accs = new Account(un, pw);
-                session.set("tenDangNhap", tenDangNhapForm);
-                session.set("matKhau", matKhauForm);
+                session.set("TaiKhoanUser", taiKhoandataBase);
+                sessions.setAttribute("AccoutUser", taiKhoandataBase);
                 if (rm) {
-                    cookieService.add("tenDangNhap", tenDangNhapForm, 10);
-                    cookieService.add("matKhau", matKhauForm, 10);
-                    System.out.println("dang nhap thanh cong elseeee");
+                    cookieService.add("tenDangNhapUser", tenDangNhapForm, 10);
+                    cookieService.add("matKhauUser", matKhauForm, 10);
+                    System.out.println("dang nhap thanh cong");
 
                 } else {
-                    cookieService.remove("tenDangNhap");
-                    cookieService.remove("matKhau");
+                    cookieService.remove("tenDangNhapUser");
+                    cookieService.remove("matKhauUser");
                     System.out.println("dang nhap thanh cong");
                 }
-                // model.addAttribute("cookie", cookieService.getValue("user", ""));
             }
             return "redirect:/home-page";
         }
-        // if(!taikhoan.isTrangThai()) {
-        // model.addAttribute("message", "Tài khoản chưa được kích hoạt!");
-        // System.out.println("Tài khoản chưa được kích hoạt");
-        // return "dangnhap";
-
-        // }
         return "dangnhap";
     }
 

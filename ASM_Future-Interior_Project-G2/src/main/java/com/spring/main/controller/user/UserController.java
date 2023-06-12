@@ -1,15 +1,28 @@
-// package com.spring.main.controller.user;
+package com.spring.main.controller.user;
 
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestMethod;
-// import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-// @Controller
-// public class UserController {
+import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.SessionService;
+
+import jakarta.servlet.http.HttpSession;
+
+
+
+@Controller
+public class UserController {
 	
+@Autowired
+SessionService session;
 
+@Autowired
+HttpSession sessions;
 	
 // 	@GetMapping("/login-page")
 // 	public String getLoginPage() {
@@ -21,25 +34,32 @@
 // 		return "dangky";
 // 	}
 	
-// 	@GetMapping("/home-page")
-// 	public String getHomePage() {
-// 		return "index";
-// 	}
+	@GetMapping("/home-page")
+	public String getHomePage(Model model) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		// System.out.println(sessions.getAttribute("TaiKhoanUser").toString());
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}
+		model.addAttribute("onRegistered", false);
+		return "index";
+	}
 	
-// 	@GetMapping("/blog-page")
-// 	public String getBlogPage() {
-// 		return "blog";
-// 	}
+	@GetMapping("/blog-page")
+	public String getBlogPage() {
+		return "blog";
+	}
 	
-// 	@GetMapping("/blogs-item-page")
-// 	public String getBlogItemPage() {
-// 		return "blog-item";
-// 	}
+	@GetMapping("/blogs-item-page")
+	public String getBlogItemPage() {
+		return "blog-item";
+	}
 
-// 	@GetMapping("/about-page")
-// 	public String getAboutPage() {
-// 		return "about";
-// 	}
+	@GetMapping("/about-page")
+	public String getAboutPage() {
+		return "about";
+	}
 
 // 	@GetMapping("/contact-page")
 // 	public String getContactPage() {
@@ -77,4 +97,4 @@
 // 		return "demo";
 // 	}
 
-// }
+}

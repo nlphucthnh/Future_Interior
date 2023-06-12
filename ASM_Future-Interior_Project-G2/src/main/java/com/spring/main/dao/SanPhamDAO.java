@@ -11,7 +11,6 @@ import java.util.List;
 public interface SanPhamDAO extends JpaRepository<SanPham, String> {
 
     @Query(value = "SELECT p FROM SanPham p where p.phanNhomLoai.tenPhanLoaiNhom LIKE %?1%")
-
     List<SanPham> findByLoaiSanpham (String p, Sort sort);
 
     @Query(value = "SELECT p FROM SanPham p WHERE p.phanNhomLoai.tenPhanLoaiNhom LIKE ?1 AND p.giaSanPham BETWEEN ?2 AND ?3")
