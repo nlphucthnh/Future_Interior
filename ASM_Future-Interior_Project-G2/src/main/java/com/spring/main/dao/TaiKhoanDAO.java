@@ -1,12 +1,11 @@
 package com.spring.main.dao;
 
-<<<<<<< HEAD
-=======
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
->>>>>>> parent of c07f4d0 (Fix project)
-import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.spring.main.entity.TaiKhoan;
@@ -14,9 +13,7 @@ import java.util.List;
 
 @Repository
 public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String> {
-<<<<<<< HEAD
-    List<TaiKhoan> findByTenDangNhap(String tenDangNhap);
-=======
+
 	// trả về tài khoản dựa trên tên đăng nhập
 	TaiKhoan findByTenDangNhap(String tenDangNhap);
 
@@ -27,6 +24,4 @@ public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String> {
 	boolean existsByTenDangNhap(String tenDangNhap);
 
 	
-
->>>>>>> parent of c07f4d0 (Fix project)
 }

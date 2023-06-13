@@ -1,6 +1,6 @@
-// package com.spring.main.controller.user;
+ package com.spring.main.controller.user;
 
-<<<<<<< HEAD
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +15,15 @@ import com.spring.main.entity.TaiKhoan;
 @Controller
 public class UserController {
 
-	@GetMapping("/login-page")
-	public String getLoginPage() {
-		return "dangnhap";
-	}
-
-	@GetMapping("/sign-up-page")
-	public String getSiginPage() {
-		return "dangky";
-	}
+//	@GetMapping("/login-page")
+//	public String getLoginPage() {
+//		return "dangnhap";
+//	}
+//
+//	@GetMapping("/sign-up-page")
+//	public String getSiginPage() {
+//		return "dangky";
+//	}
 
 //	@GetMapping("/home-page")
 //	public String getHomePage() {
@@ -39,55 +39,17 @@ public class UserController {
 	public String getBlogItemPage() {
 		return "blog-item";
 	}
-=======
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestMethod;
-// import org.springframework.web.bind.annotation.ResponseBody;
-
-// @Controller
-// public class UserController {
-	
-
-	
-// 	@GetMapping("/login-page")
-// 	public String getLoginPage() {
-// 		return "dangnhap";
-// 	}
-	
-// 	@GetMapping("/sign-up-page")
-// 	public String getSiginPage() {
-// 		return "dangky";
-// 	}
-	
-// 	@GetMapping("/home-page")
-// 	public String getHomePage() {
-// 		return "index";
-// 	}
-	
-// 	@GetMapping("/blog-page")
-// 	public String getBlogPage() {
-// 		return "blog";
-// 	}
-	
-// 	@GetMapping("/blogs-item-page")
-// 	public String getBlogItemPage() {
-// 		return "blog-item";
-// 	}
->>>>>>> parent of c07f4d0 (Fix project)
-
 // 	@GetMapping("/about-page")
 // 	public String getAboutPage() {
 // 		return "about";
 // 	}
 
-	@GetMapping("/contact-page")
-	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
-		MailInfo lh = new MailInfo();
-		model.addAttribute("lienhe", lh);
-		return "contact";
-	}
+//	@GetMapping("/contact-page")
+//	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
+//		MailInfo lh = new MailInfo();
+//		model.addAttribute("lienhe", lh);
+//		return "contact";
+//	}
 //
 //	@GetMapping("/product-page")
 //	public String getProductPage() {
@@ -104,10 +66,10 @@ public class UserController {
 		return "product-item";
 	}
 
-	@GetMapping("/cart-page")
-	public String getCartPage() {
-		return "cart";
-	}
+//	@GetMapping("/cart-page")
+//	public String getCartPage() {
+//		return "cart";
+//	}
 
 	@GetMapping("/adreess-page")
 	public String getAddressPage() {
@@ -124,4 +86,4 @@ public class UserController {
 		return "demo";
 	}
 
-// }
+ }

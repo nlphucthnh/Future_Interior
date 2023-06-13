@@ -42,11 +42,12 @@ public class TaiKhoan implements Serializable {
 	boolean trangThai = true;
 	@Column(name = "vai_tro")
 	boolean vaiTro = false;
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "ngay_dang_ky")
-	Date ngayDangKy = new Date();
 	
+//	@Temporal(TemporalType.DATE)
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@Column(name = "ngay_dang_ky")
+//	Date ngayDangKy = new Date();
+//	
 	
 	@OneToMany(mappedBy = "taiKhoanBaiDang")
 	List<BaiDang> ListBaiDang;

@@ -27,6 +27,7 @@ public class SanPham implements Serializable {
 	String tenSanPham;
 	@Column(name = "gia_san_pham")
 	float giaSanPham;
+	
 	@Column(name = "kich_thuoc_san_pham")
 	String kichThuocSanPham ;
 	@Temporal(TemporalType.DATE)

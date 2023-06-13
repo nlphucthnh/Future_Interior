@@ -22,6 +22,7 @@ public class GioHang implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_gio_hang")
 	int idGioHang ;
+	
 	@Column(name = "so_luong")
 	int soLuong ;
 	

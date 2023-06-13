@@ -2,20 +2,17 @@ package com.spring.main.service;
 
 import java.util.Collection;
 
-import com.spring.main.entity.Item;
+import com.spring.main.entity.GioHang;
+import com.spring.main.entity.TaiKhoan;
 
 public interface CartService {
-	Item add(String id);
+	Integer add(String masp, Integer soLuong, TaiKhoan taiKhoanGH);
 
 	void remove(String id);
 
-	Item update(String id, int qty);
+	GioHang update(Integer id, int qty);
 
 	void clear();
-
-	Collection<Item> getItems();
-
-//	List<Item> getItems();
 
 	int getCount();
 

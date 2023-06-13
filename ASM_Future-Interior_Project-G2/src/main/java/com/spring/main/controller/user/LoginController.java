@@ -53,40 +53,39 @@ public class LoginController {
     }
 
     @PostMapping("/login-page/save")
-    public String ManageLoginPage(@RequestParam(name = "tenDangNhap") String tenDangNhapForm,
-            @RequestParam(name = "matKhau") String matKhauForm, Model model) {
-        TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(tenDangNhapForm);
-        System.out.println(tenDangNhapForm);
-        System.out.println(taiKhoandataBase);
-        boolean rm = paramService.getBoolean("remember", false);
-        if (taiKhoandataBase == null) { // tức nó không có trong database
-            model.addAttribute("MessageWarning", true); // tính hiện để thông báo tên đăng nhập không tồn tại.
-        } else {
-            if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
-                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
-                // Account accs = new Account(un, pw);
-                session.set("tenDangNhap", tenDangNhapForm);
-                session.set("matKhau", matKhauForm);
-                if (rm) {
-                    cookieService.add("tenDangNhap", tenDangNhapForm, 10);
-                    cookieService.add("matKhau", matKhauForm, 10);
-                    System.out.println("dang nhap thanh cong elseeee");
+    public String ManageLoginPage(@RequestParam(name = "tenDangNhap") String un,
+            @RequestParam(name = "matKhau") String pw, Model model,@RequestParam(name = "remember" , defaultValue = "false") Boolean remember) {
+    	List<TaiKhoan> list = new ArrayList<>();
+		TaiKhoan taikhoan = taiKhoanDAO.findById(un).get();
+    	// đăng nhập thành công
+    			if (un.equals(taikhoan.getTenDangNhap()) && pw.equals(taikhoan.getMatKhau()) && taikhoan.isTrangThai() == true
+    					&& taikhoan.isVaiTro() == true) {
 
-                } else {
-                    cookieService.remove("tenDangNhap");
-                    cookieService.remove("matKhau");
-                    System.out.println("dang nhap thanh cong");
-                }
-                // model.addAttribute("cookie", cookieService.getValue("user", ""));
-            }
-            return "redirect:/home-page";
-        }
-        // if(!taikhoan.isTrangThai()) {
-        // model.addAttribute("message", "Tài khoản chưa được kích hoạt!");
-        // System.out.println("Tài khoản chưa được kích hoạt");
-        // return "dangnhap";
+    				session.set("tenDangNhap", taikhoan);
+    				session.set("isLogin", true);
+    				session.set("isVaiTro", true);
+    				// lưu thông tin tài khoản và mật khẩu vào Cookie
+    				if (remember == true) {
+    					cookieService.add("tenDangNhap", un, 10);
+    					cookieService.add("matKhau", pw, 10);
+    					model.addAttribute("message", "Đăng nhập thành công!");
+    					// return "redirect:/Manager/blog";
+    				} else {
+    					cookieService.remove("tenDangNhap");
+    					cookieService.remove("matKhau");
+    					model.addAttribute("message", "Đăng nhập thành công!");
 
-        // }
+    					// return "redirect:/Manager/blog";
+    				}
+    				System.out.println("Đã chạy qua đây");
+    				return "redirect:/home-page";
+    			} else {
+    				session.set("isLogin", false);
+    				session.set("isVaiTro", false);
+    				model.addAttribute("message", "Đăng nhập thất bại!");
+
+    			}
+    	
         return "dangnhap";
     }
 

@@ -11,80 +11,75 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.spring.main.dao.GioHangDAO;
 import com.spring.main.dao.SanPhamDAO;
-import com.spring.main.entity.Item;
+import com.spring.main.entity.GioHang;
 import com.spring.main.entity.SanPham;
+import com.spring.main.entity.TaiKhoan;
 import com.spring.main.service.CartService;
 
 @SessionScope
 @Service
 public class CartServiceImpl implements CartService {
 
+	Map<Integer, GioHang> map = new HashMap<>();
+
 	@Autowired
 	SanPhamDAO dao;
 
-	Map<String, Item> map = new HashMap<>();
-
-	ArrayList<Item> list = new ArrayList<Item>();
+	@Autowired
+	GioHangDAO ghdao;
 
 	@Override
-	public Item add(String id) {
-		Item item = map.get(id);
-		if (item == null) {
-			item = new Item();
-			SanPham p = new SanPham();
-			List<SanPham> list = dao.findAll();
-			p = list.stream().filter(it -> it.getIdSanPham() == id).collect(Collectors.toList()).get(0);
-			item.setId(p.getIdSanPham());
-			item.setName(p.getTenSanPham());
-			item.setImg((p.getListHinhAnhSP()).toString());
-			item.setPrice(p.getGiaSanPham());
-			item.setQty(1);
-			map.put(id, item);
-		} else {
-			item.setQty(item.getQty() + 1);
-		}
-		return item;
+	public Integer add(String masp, Integer soLuong, TaiKhoan taiKhoanGH) {
+		Integer addQty = soLuong;
+
+		SanPham sp = dao.findById(masp).get();
+
+		// GioHang cart = ghdao.findByTaiKhoanGH(taiKhoanGH,sp);
+
+		// if (cart != null) {
+		// addQty = cart.getSoluong()+soluong;
+		// cart.setSoluong(addQty);
+		// }else {
+		GioHang cart = new GioHang();
+		cart.setTaiKhoanGH(taiKhoanGH);
+		cart.setSanPhamGH(sp);
+		cart.setSoLuong(soLuong);
+
+		ghdao.save(cart);
+
+		return addQty;
+
 	}
 
 	@Override
 	public void remove(String id) {
-		map.remove(id);
+
 	}
 
 	@Override
-	public Item update(String id, int qty) {
-		Item item = map.get(id);
-		item.setQty(qty);
+	public GioHang update(Integer id, int qty) {
+		GioHang item = map.get(id);
+		item.setSoLuong(qty);
 		return item;
 	}
 
 	@Override
 	public void clear() {
-		map.clear();
-	}
 
-	@Override
-	public Collection<Item> getItems() {
-		return map.values();
 	}
-
-//	@Override
-//	public List<Item> getItems() {
-//		for (Integer i : map.keySet()) {
-//			list.add(map.get(i));
-//		}
-//		return list;
-//	}
 
 	@Override
 	public int getCount() {
-		return map.values().stream().mapToInt(item -> item.getQty()).sum();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public double getAmount() {
-		return map.values().stream().mapToDouble(item -> item.getPrice() * item.getQty()).sum();
+		// TODO Auto-generated method stub
+		return 0;
 	}
-}
 
+}
