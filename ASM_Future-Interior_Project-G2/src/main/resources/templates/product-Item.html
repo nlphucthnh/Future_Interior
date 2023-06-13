@@ -155,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="item-more">
+                    <!-- <div class="item-more"> th:each="item : ${products}" th:href="@{/cart-page/edit/__${item.idSanPham}__}"
                         <label for="">Phụ kiện đi kèm</label>
                         <div class="option-item">
                             <select name="" id="">
@@ -164,7 +164,7 @@
                             </select>
                         </div>
                     </div> -->
-                    <div class="button-sell my-5 d-flex justify-content-between" th:each="item : ${products}">
+                    <div class="button-sell my-5 d-flex justify-content-between" th:each="item : ${spitem}">
                         <a class="link-sell" th:href="@{/pay-page}">
                             <button class="btn-sell">Mua ngay </button>
                         </a>

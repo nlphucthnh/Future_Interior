@@ -196,6 +196,7 @@
 						</tr>
 					</thead>
 					<tbody>
+<!-- 						<tr th:each="item : ${spitem}"> -->
 						<tr>
 							<td><input class="checkbox-cart" type="checkbox"></td>
 							
@@ -207,6 +208,7 @@
 										alt="Error images" width="50" height="50">
 									<!-- tên sản phẩm -->
 									<h5 th:text="${spitem.tenSanPham}">
+<!-- 									<h5 th:text="${item.tenSanPham}"> -->
 										<br>
 										<!-- Phân nhóm loại -->
 										<span th:text="${spitem.phanNhomLoai.tenPhanLoaiNhom}"></span>

@@ -65,12 +65,12 @@ public class CartController {
     
     
 //	Add SanPham nhưng kh có count
+
 	@GetMapping("/cart-page")
-	public String cartProduct(Model model) {
+	public String getCartPage(Model model) {
 		List<SanPham> phamList = spDAO.findAll();
         model.addAttribute("products", phamList);
-	
-		return "cart";
+        return "cart";
 	}
 	
 	 @GetMapping("/cart-page/edit/{idSanPham}")
@@ -82,6 +82,7 @@ public class CartController {
 	        
 	        var products = spDAO.findById(id).get();
 	        model.addAttribute("products", products);
+	       // cart.add(id);
 		   return "cart";
 	    }
 }

@@ -1,4 +1,4 @@
-package com.spring.main.controller.thien;
+package com.spring.main.controller.user;
 
 import java.util.List;
 import java.util.Locale.Category;
@@ -32,13 +32,14 @@ import com.spring.main.entity.PhanNhomLoai;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.SanPhamKhuyenMai;
 import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.CartService;
 import com.spring.main.service.MailerService;
 
 import ch.qos.logback.core.util.DirectJson;
 import jakarta.mail.internet.InternetAddress;
 
 @Controller
-public class productController {
+public class ProductController {
     @Autowired
     SanPhamDAO sanPhamDAO;
 
@@ -60,6 +61,9 @@ public class productController {
     @Autowired
     MailerService mailer;
 
+    @Autowired
+    CartService cart;
+    
     @GetMapping("/")
     public String index(Model model) {
         List<SanPham> phamList = sanPhamDAO.findAll();
@@ -97,6 +101,7 @@ public class productController {
         model.addAttribute("spitem", spitem);
         var productsSale = spkmDAO.findAll();
         model.addAttribute("productsSales", productsSale);
+        model.addAttribute("countcart", cart.getCount());
         return "product-Item";
     }
 

@@ -83,14 +83,14 @@ HttpSession sessions;
 // 		return "cart";
 // 	}
 	
-// 	@GetMapping("/adreess-page")
-// 	public String getAddressPage() {
-// 		return "adreess";
-// 	}
-// 	@GetMapping("/pay-page")
-// 	public String getPayPage() {
-// 		return "pay";
-// 	}
+ 	@GetMapping("/adreess-page")
+ 	public String getAddressPage() {
+ 		return "adreess";
+ 	}
+ 	@GetMapping("/pay-page")
+ 	public String getPayPage() {
+ 		return "pay";
+ 	}
 
 // 	@GetMapping("/demo")
 // 	public String getDemo() {
