@@ -1,5 +1,6 @@
-package com.spring.main.controller.user;
+// package com.spring.main.controller.user;
 
+<<<<<<< HEAD
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,11 +39,48 @@ public class UserController {
 	public String getBlogItemPage() {
 		return "blog-item";
 	}
+=======
+// import org.springframework.stereotype.Controller;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestMethod;
+// import org.springframework.web.bind.annotation.ResponseBody;
 
-	@GetMapping("/about-page")
-	public String getAboutPage() {
-		return "about";
-	}
+// @Controller
+// public class UserController {
+	
+
+	
+// 	@GetMapping("/login-page")
+// 	public String getLoginPage() {
+// 		return "dangnhap";
+// 	}
+	
+// 	@GetMapping("/sign-up-page")
+// 	public String getSiginPage() {
+// 		return "dangky";
+// 	}
+	
+// 	@GetMapping("/home-page")
+// 	public String getHomePage() {
+// 		return "index";
+// 	}
+	
+// 	@GetMapping("/blog-page")
+// 	public String getBlogPage() {
+// 		return "blog";
+// 	}
+	
+// 	@GetMapping("/blogs-item-page")
+// 	public String getBlogItemPage() {
+// 		return "blog-item";
+// 	}
+>>>>>>> parent of c07f4d0 (Fix project)
+
+// 	@GetMapping("/about-page")
+// 	public String getAboutPage() {
+// 		return "about";
+// 	}
 
 	@GetMapping("/contact-page")
 	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
@@ -86,4 +124,4 @@ public class UserController {
 		return "demo";
 	}
 
-}
+// }

@@ -41,7 +41,7 @@ import jakarta.mail.internet.InternetAddress;
 @Controller
 public class ProductController {
     @Autowired
-    SanPhamDAO sanPhamDAO;
+    SanPhamDAO spDAO;
 
     @Autowired
     SanPhamKhuyenMaiDAO spkmDAO;
@@ -66,10 +66,8 @@ public class ProductController {
     
     @GetMapping("/")
     public String index(Model model) {
-        List<SanPham> phamList = sanPhamDAO.findAll();
-        System.out.println(phamList);
+        List<SanPham> phamList = spDAO.findAll();
         model.addAttribute("products", phamList);
-        model.addAttribute("onRegistered", false);
         return "index";
     }
 
@@ -79,7 +77,7 @@ public class ProductController {
         var product = new SanPham();
         model.addAttribute("product", product);
         Pageable pageable = PageRequest.of(p.orElse(0), 12, Sort.by("tenSanPham").ascending());
-        var products = sanPhamDAO.findAll(pageable);
+        var products = spDAO.findAll(pageable);
         var numberOfPages = products.getTotalPages();
         model.addAttribute("currIndex", p.orElse(0));
         model.addAttribute("numberOfPages", numberOfPages);
@@ -97,7 +95,7 @@ public class ProductController {
 
     @GetMapping("/product-page/edit/{idSanPham}")
     public String productItem(Model model, @PathVariable("idSanPham") String id) {
-        SanPham spitem = sanPhamDAO.findById(id).get();
+        SanPham spitem = spDAO.findById(id).get();
         model.addAttribute("spitem", spitem);
         var productsSale = spkmDAO.findAll();
         model.addAttribute("productsSales", productsSale);
@@ -111,12 +109,12 @@ public class ProductController {
             @RequestParam("selectName") String select) {
 
         if (select.equals("AZ")) {
-            List<SanPham> prolists = sanPhamDAO.findByLoaiSanpham("%" + category + "%",
+            List<SanPham> prolists = spDAO.findByLoaiSanpham("%" + category + "%",
                     Sort.by(Direction.ASC, "tenSanPham"));
             model.addAttribute("prolists", prolists);
             model.addAttribute("messagename", "Lọc từ A - Z");
         } else {
-            List<SanPham> prolists = sanPhamDAO.findByLoaiSanpham("%" + category + "%",
+            List<SanPham> prolists = spDAO.findByLoaiSanpham("%" + category + "%",
                     Sort.by(Direction.DESC, "tenSanPham"));
             model.addAttribute("prolists", prolists);
             model.addAttribute("messagename", "Lọc từ Z - A");
@@ -130,14 +128,14 @@ public class ProductController {
         switch (selectPrice) {
             case "1":
                 model.addAttribute("messages", "Lọc từ 0 đến 1.000.000");
-                List<SanPham> prolists0_1 = sanPhamDAO.findByLoaiSanphamPrice("%" + category + "%",
+                List<SanPham> prolists0_1 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
                         Sort.by(Direction.ASC, "tenSanPham"), 0,
                         1000000);
                 model.addAttribute("prolists", prolists0_1);
                 break;
             case "2":
                 model.addAttribute("messages", "Lọc từ 1.000.000 đến 5.000.000");
-                List<SanPham> prolists1_5 = sanPhamDAO.findByLoaiSanphamPrice("%" + category + "%",
+                List<SanPham> prolists1_5 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
                         Sort.by(Direction.ASC, "tenSanPham"),
                         1000000,
                         5000000);
@@ -145,7 +143,7 @@ public class ProductController {
                 break;
             case "3":
                 model.addAttribute("messages", "Lọc từ 5.000.000 đến 10.000.000");
-                List<SanPham> prolists5_10 = sanPhamDAO.findByLoaiSanphamPrice("%" + category + "%",
+                List<SanPham> prolists5_10 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
                         Sort.by(Direction.ASC, "tenSanPham"),
                         5000000,
                         10000000);
@@ -153,7 +151,7 @@ public class ProductController {
                 break;
             case "4":
                 model.addAttribute("messages", "Lọc từ 10.000.000 đến 15.000.000");
-                List<SanPham> prolists10_15 = sanPhamDAO.findByLoaiSanphamPrice("%" + category + "%",
+                List<SanPham> prolists10_15 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
                         Sort.by(Direction.ASC, "tenSanPham"),
                         10000000,
                         15000000);
@@ -161,7 +159,7 @@ public class ProductController {
                 break;
             case "5":
                 model.addAttribute("messages", "Lọc từ 15.000.000 đến 20.000.000");
-                List<SanPham> prolists15_20 = sanPhamDAO.findByLoaiSanphamPrice("%" + category + "%",
+                List<SanPham> prolists15_20 = spDAO.findByLoaiSanphamPrice("%" + category + "%",
                         Sort.by(Direction.ASC, "tenSanPham"),
                         15000000,
                         20000000);
@@ -169,7 +167,7 @@ public class ProductController {
                 break;
             case "6":
                 model.addAttribute("messages", "Lọc từ 20.000.000 Trở lên");
-                List<SanPham> prolists20_ = sanPhamDAO.findByLoaiSanphamPrice("%" + category + "%",
+                List<SanPham> prolists20_ = spDAO.findByLoaiSanphamPrice("%" + category + "%",
                         Sort.by(Direction.ASC, "tenSanPham"),
                         2000000,
                         10000000);
@@ -186,7 +184,7 @@ public class ProductController {
     @GetMapping("/product-list-page/{category}")
     public String productListPage(Model model, @PathVariable("category") String category) {
 
-        List<SanPham> prolists = sanPhamDAO.findByLoaiSanpham("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"));
+        List<SanPham> prolists = spDAO.findByLoaiSanpham("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"));
         model.addAttribute("prolists", prolists);
         return "product-List";
     }
@@ -195,98 +193,98 @@ public class ProductController {
 
     @GetMapping("/person")
     public String person(Model model) {
-        // List<TaiKhoan> people = tkDAO.findByTenDangNhap1("thienlv");
-        // model.addAttribute("people", people);
+        List<TaiKhoan> people = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("people", people);
         List<DonHangChiTiet> tkmuahang = dhctDAO.findByTaiKhoan("thienlv");
         model.addAttribute("donhangct", tkmuahang);
         return "person";
     }
 
-    // // doi mk
-    // @GetMapping("/changePassword")
-    // public String changepass(Model model) {
-    //     return "changePassword";
-    // }
+    // doi mk
+    @GetMapping("/changePassword")
+    public String changepass(Model model) {
+        return "changePassword";
+    }
 
-    // @PostMapping("/changePassword")
-    // public String change(Model model,
-    //         @RequestParam("currentPassword") String currentPassword,
-    //         @RequestParam("newPassword") String newPassword,
-    //         @RequestParam("confirmNewPassword") String confirmNewPassword) {
+    @PostMapping("/changePassword")
+    public String change(Model model,
+            @RequestParam("currentPassword") String currentPassword,
+            @RequestParam("newPassword") String newPassword,
+            @RequestParam("confirmNewPassword") String confirmNewPassword) {
 
-    //     List<TaiKhoan> change = tkDAO.findByTenDangNhap1("thienlv");
-    //     model.addAttribute("username", "thienlv");
-    //     boolean usernameExists = false;
-    //     for (TaiKhoan tk : change) {
-    //         if (tk.getMatKhau().equals(currentPassword)) {
-    //             usernameExists = true;
-    //             break;
-    //         }
-    //     }
-    //     if (usernameExists) {
-    //         if (newPassword.length() < 4 || newPassword.length() > 20) {
-    //             model.addAttribute("length", "Mật khẩu từ 4 - 20 ký tự");
-    //         } else if (!newPassword.equals(confirmNewPassword)) {
-    //             model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
-    //         } else {
-    //             TaiKhoan updatedTaiKhoan = change.get(0);
-    //             // Cập nhật mật khẩu mới trong đối tượng TaiKhoan
-    //             updatedTaiKhoan.setMatKhau(newPassword);
-    //             // Lưu thay đổi vào CSDL
-    //             // System.out.println(updatedTaiKhoan);
-    //             tkDAO.save(updatedTaiKhoan);
-    //             model.addAttribute("success", "Đổi mật khẩu thành công");
-    //         }
-    //     } else {
-    //         model.addAttribute("message", "Nhập mật khẩu cũ sai");
-    //     }
+        List<TaiKhoan> change = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("username", "thienlv");
+        boolean usernameExists = false;
+        for (TaiKhoan tk : change) {
+            if (tk.getMatKhau().equals(currentPassword)) {
+                usernameExists = true;
+                break;
+            }
+        }
+        if (usernameExists) {
+            if (newPassword.length() < 4 || newPassword.length() > 20) {
+                model.addAttribute("length", "Mật khẩu từ 4 - 20 ký tự");
+            } else if (!newPassword.equals(confirmNewPassword)) {
+                model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
+            } else {
+                TaiKhoan updatedTaiKhoan = change.get(0);
+                // Cập nhật mật khẩu mới trong đối tượng TaiKhoan
+                updatedTaiKhoan.setMatKhau(newPassword);
+                // Lưu thay đổi vào CSDL
+                // System.out.println(updatedTaiKhoan);
+                tkDAO.save(updatedTaiKhoan);
+                model.addAttribute("success", "Đổi mật khẩu thành công");
+            }
+        } else {
+            model.addAttribute("message", "Nhập mật khẩu cũ sai");
+        }
 
-    //     return "changePassword";
-    // }
+        return "changePassword";
+    }
 
-    // // quen mat khau ?
-    // @GetMapping("/quenmatkhau")
-    // public String quenmatkhau(Model model) {
-    //     model.addAttribute("mailInfo", new MailInfo());
-    //     return "quenmatkhau";
-    // }
+    // quen mat khau ?
+    @GetMapping("/quenmatkhau")
+    public String quenmatkhau(Model model) {
+        model.addAttribute("mailInfo", new MailInfo());
+        return "quenmatkhau";
+    }
 
-    // @PostMapping("/quenmatkhau")
-    // public String resetpassword(Model model, @RequestParam("forgot") String email) {
-    //     List<TaiKhoan> change = tkDAO.findByTenDangNhap1("thienlv");
-    //     model.addAttribute("username", "thienlv");
+    @PostMapping("/quenmatkhau")
+    public String resetpassword(Model model, @RequestParam("forgot") String email) {
+        List<TaiKhoan> change = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("username", "thienlv");
 
-    //     boolean emailExists = false;
-    //     for (TaiKhoan tk : change) {
-    //         if (tk.getEmail().equals(email)) {
-    //             emailExists = true;
-    //             break;
-    //         }
-    //     }
-    //     if (emailExists) {
-    //         try {
+        boolean emailExists = false;
+        for (TaiKhoan tk : change) {
+            if (tk.getEmail().equals(email)) {
+                emailExists = true;
+                break;
+            }
+        }
+        if (emailExists) {
+            try {
 
-    //             String subject = "Lấy Lại Mật Khẩu";
-    //             String body = "<p>Chào bạn,</p>"
-    //                     + "<p>Dưới đây là mật khẩu của bạn.</p>"
-    //                     + "<p>Mật khẩu của bạn là: </p>"
-    //                     + "<br>"
-    //                     + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
+                String subject = "Lấy Lại Mật Khẩu";
+                String body = "<p>Chào bạn,</p>"
+                        + "<p>Dưới đây là mật khẩu của bạn.</p>"
+                        + "<p>Mật khẩu của bạn là: </p>"
+                        + "<br>"
+                        + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
 
-    //             mailer.send(email, subject, body);
+                mailer.send(email, subject, body);
 
-    //             model.addAttribute("success", "Mật khẩu sẽ gửi về mail của bạn trong giây lát");
+                model.addAttribute("success", "Mật khẩu sẽ gửi về mail của bạn trong giây lát");
 
-    //         } catch (Exception e) {
-    //             System.out.println("Lỗi khi gửi email: " + e);
-    //         }
+            } catch (Exception e) {
+                System.out.println("Lỗi khi gửi email: " + e);
+            }
 
-    //     } else {
-    //         model.addAttribute("message", "Bạn đã nhập sai email");
-    //     }
+        } else {
+            model.addAttribute("message", "Bạn đã nhập sai email");
+        }
 
-    //     return "quenmatkhau";
-    // }
+        return "quenmatkhau";
+    }
 
 
 

@@ -5,6 +5,7 @@
 }
 
 .banner-slide {
+    margin-top: 80px;
     width: 100%;
     height: 80vh;
     background-image: url('../img/Banner-about.png');
