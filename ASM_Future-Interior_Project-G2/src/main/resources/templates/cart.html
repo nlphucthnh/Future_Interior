@@ -225,7 +225,7 @@
 								</div>
 
 							</td>
-							<td  th:text="${item.sanPhamGH.giaSanPham}"></td>
+							<td  th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')}"></td>
 							<!-- <td class="amount" th:text="${#numbers.formatInteger(item.soLuong*item.SanPhamGH.giaSanPham,0)}"></td> -->
 							
 							<td>
