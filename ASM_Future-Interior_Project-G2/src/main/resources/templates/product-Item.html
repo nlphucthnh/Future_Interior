@@ -164,12 +164,12 @@
                             </select>
                         </div>
                     </div> -->
-                    <div class="button-sell my-5 d-flex justify-content-between">
-                        <a class="link-sell" th:href="@{mua-page}">
+                    <div class="button-sell my-5 d-flex justify-content-between" th:each="item : ${products}">
+                        <a class="link-sell" th:href="@{/pay-page}">
                             <button class="btn-sell">Mua ngay </button>
                         </a>
 
-                        <a class="link-base" th:href="@{mua-page}">
+                        <a class="link-base" th:href="@{/cart-page/edit/__${item.idSanPham}__}">
                             <button class="btn-base">Đặt ngay </button>
                         </a>
 
