@@ -1,0 +1,32 @@
+<article class="container">
+    <div class="row">
+
+        <div class="col-5 title-main">
+            <h3>QUADA CONCEPT - Thấy mình trong những đơn giản.</h3><br>
+            <p>Điểm lên không gian những giá trị tự nhiên từ gỗ, từ những đường cạnh vuông vắn đều mắt, QUADA
+                Concept nổi bật những điều thú vị bên trong “ngoại hình đơn giản nhưng lôi cuốn, không ngừng thôi
+                thúc sự sáng tạo.
+                <br><br>
+                Bộ sản phẩm và những thiết kế cho QUADA Concept sở hữu tuyệt đối giá trị tự nhiên từ gỗ và sự linh
+                hoạt trong không gian.
+            </p>
+        </div>
+
+        <div class="col-6 offset-1 product-main">
+            <div class="row">
+                <div class=" product" th:each="pro, soluong: ${products}" th:if="${soluong.index} < 4">
+        
+                    <a th:href="@{'/product-page/edit/' + ${pro.idSanPham}}">
+                        <div class="zoom_color noidung">
+                            <img th:src="@{'/img/' + ${pro.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
+                        </div>
+                        <h3 th:text="${pro.tenSanPham}"></h3>
+                    </a>
+                    <p th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')+'đ'}"></p>
+                </div>
+        
+            </div>
+        
+        </div>
+    </div>
+</article>

@@ -1,0 +1,29 @@
+<aside>
+    <div class="container">
+        <div class="product-title-sale">
+            <h3>Sản phẩn khuyến mãi</h3>
+        </div>
+        <div class="product-list-main row row-cols-4">
+            <div class="product-list col my-4" th:each="pros : ${productsSales}">
+                <a th:href="@{'/product-page/edit/' + ${pros.sanPhamSPKM.idSanPham}}">
+                    <div class="zoom_color noidung">
+                        <img th:src="@{'/img/' + ${pros.sanPhamSPKM.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
+                        <span class="price-sale"
+                            th:text="${#numbers.formatDecimal(pros.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0) + '%'}"></span>
+                    </div>
+                    <h3 class="product-title" th:text="${pros.sanPhamSPKM.tenSanPham}"></h3>
+                </a>
+                <p class="product-description" th:text="${pros.sanPhamSPKM.moTaSanPham}"></p>
+                <div class="product-price-main">
+                    <p class="product-price"
+                        th:text="${#numbers.formatDecimal(pros.sanPhamSPKM.giaSanPham * (1 - pros.khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}">
+                    </p>
+                    <span class="product-price-sale my-1 mx-4"
+                        th:text="${#numbers.formatDecimal(pros.sanPhamSPKM.giaSanPham, 0, 'COMMA', 0, 'POINT')}">
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</aside>

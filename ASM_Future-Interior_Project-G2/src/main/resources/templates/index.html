@@ -17,7 +17,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <!-- link icon -->
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -28,74 +28,16 @@
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/home.css">
     <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/product.css">
     <title>Home</title>
 
 </head>
 
 <body>
-    <nav th:if="${onRegistered == false}" th:include="components/header-unregistered"></nav>
-    <nav th:if="${onRegistered == true}" th:include="components/header-registered"></nav>
-    <header id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
-        data-bs-delay="1000">
-        <ol class="carousel-indicators mb-4">
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner banner-slide">
-            <div class="carousel-item active">
-                <div class="banner-content">
-                    <h2>Ghế AURORA</h2><br>
-                    <span class="price">3,900,000₫</span><br><br>
-                    <pre>
-Nếu như diện tích phòng bạn không cho phép 
-có đủ bộ sofa hoành tráng, thì sofa bed
-AURORA chắc chắn sẽ khiến bạn hài lòng.
-
-Với kích thước nhỏ gọn và tích hợp công năng
-của sofa lẫn giường ngủ, AURORA sẽ là món
-nội thất tiện dụng cho những không gian 
-khiêm tốn như phòng trọ hay căn hộ studio
-                   </pre>
-                </div>
-                <img src="img/Banner-slide1.jpg" class="d-block w-100 carousel-img" alt="Slide 1">
-            </div>
-            <div class="carousel-item">
-                <div class="banner-content">
-                    <h2>Ghế AURORA</h2><br>
-                    <span class="price">3,900,000₫</span><br><br>
-                    <pre>
-Nếu như diện tích phòng bạn không cho phép 
-có đủ bộ sofa hoành tráng, thì sofa bed
-AURORA chắc chắn sẽ khiến bạn hài lòng.
-
-Với kích thước nhỏ gọn và tích hợp công năng
-của sofa lẫn giường ngủ, AURORA sẽ là món
-nội thất tiện dụng cho những không gian 
-khiêm tốn như phòng trọ hay căn hộ studio
-                   </pre>
-                </div>
-                <img src="img/Banner-slide2.jpg" class="d-block w-100 carousel-img" alt="Slide 2">
-            </div>
-            <div class="carousel-item">
-                <div class="banner-content">
-                    <h2>Ghế AURORA</h2><br>
-                    <span class="price">3,900,000₫</span><br><br>
-                    <pre>
-Nếu như diện tích phòng bạn không cho phép 
-có đủ bộ sofa hoành tráng, thì sofa bed
-AURORA chắc chắn sẽ khiến bạn hài lòng.
-
-Với kích thước nhỏ gọn và tích hợp công năng
-của sofa lẫn giường ngủ, AURORA sẽ là món
-nội thất tiện dụng cho những không gian 
-khiêm tốn như phòng trọ hay căn hộ studio
-                   </pre>
-                </div>
-                <img src="img/Banner-slide3.jpg" class="d-block w-100 carousel-img" alt="Slide 3">
-            </div>
-        </div>
-    </header>
+    <!-- <nav th:if="${onRegistered == false}" th:include="components/header-unregistered"></nav>
+    <nav th:if="${onRegistered == true}" th:include="components/header-registered"></nav> -->
+    <nav th:replace="navbar"></nav>
+    <nav th:replace="banner"></nav>
     <!-- title nội dụng chính  -->
     <section class="container-fluid bg-light">
 
@@ -111,96 +53,12 @@ tạo để tạo ra một không gian sống đẹp mắt và hài hòa.
     </section>
 
     <!-- nội dung chính     -->
-    <article class="container">
-        <div class="row">
 
-            <div class="col-5 title-main">
-                <h3>QUADA CONCEPT - Thấy mình trong những đơn giản.</h3><br>
-                <p>Điểm lên không gian những giá trị tự nhiên từ gỗ, từ những đường cạnh vuông vắn đều mắt, QUADA
-                    Concept nổi bật những điều thú vị bên trong “ngoại hình đơn giản nhưng lôi cuốn, không ngừng thôi
-                    thúc sự sáng tạo.
-                    <br><br>
-                    Bộ sản phẩm và những thiết kế cho QUADA Concept sở hữu tuyệt đối giá trị tự nhiên từ gỗ và sự linh
-                    hoạt trong không gian.
-                </p>
-            </div>
-
-            <div class="col-6 offset-1 product-main" th:each="pro : ${products}">
-                <div class="row">
-
-                
-                <div class="col-6 product">
-                    <a href="product-item-page">
-                        <div class="zoom_color noidung">
-                            <img src="img/Sofa_FLYNN.png" alt="Product 1">
-                        </div>
-                        <h3 th:text="${pro.tenSanPham}"></h3>
-                    </a>
-                    <p>12,400,000₫</p>
-                </div>
-            </div>
-
-            </div>
-        </div>
-    </article>
-  
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-6 col-md-3 mb-3 menu-footer">
-                    <h5>Sản phẩm</h5>
-                    <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">BÀN - tables</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">SOFA - sofas</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">TỦ - cabinets</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">GHẾ - chairs</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">ĐÈN - lamps</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">KỆ - shelf units</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <h5>Phòng</h5>
-                    <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG KHÁCH -Living room</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG NGỦ - Bedroom</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG BẾP - Kitchen room</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG TẮM - Bathroom</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG LÀM VIỆC - Office</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <h5>Trang khác</h5>
-                    <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang giới thiệu</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang liên hệ</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang bài viết</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang cá nhân</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang cài đặt</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md-3 mb-3">
-                    <h5>Mạng xã hội</h5>
-                    <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Twitter</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Linkedln</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Facebook</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">GitHub</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">AngelList</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Dribble</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <div class="logo-footer">
-                    <a href="#"><img src="img/Logowebsite.png" alt=""></a>
-                </div>
-
-
-                <p class="text-white-50">© 2023 Company, Inc. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div th:replace="product/productQuada"></div>
+    <div class="container">
+        <div th:replace="product/productsale"></div>
+    </div>
+    <div th:replace="footer :: footer"></div>
 </body>
 
 </html>
