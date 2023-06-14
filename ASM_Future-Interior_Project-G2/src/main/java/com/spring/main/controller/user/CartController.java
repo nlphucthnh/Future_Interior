@@ -79,6 +79,7 @@ public class CartController {
 	public String getCartPage(Model model) {
 		model.addAttribute("cart", cart);
 		model.addAttribute("countcart", cart.getCount());
+
 		var productsSale = spkmDAO.findAll();
 		model.addAttribute("productsSales", productsSale);
 
@@ -108,26 +109,19 @@ public class CartController {
 		return "redirect:/cart-page";
 	}
 
-	@GetMapping("/cart-page/remove/{idGioHang}")
-	public String remove(@PathVariable("idGioHang") String id) {
+	@RequestMapping("/cart-page/update/{idGioHang}")
+	public String update(@PathVariable("idGioHang") Integer idGioHang, @RequestParam("soLuong") Integer soLuong) {
+		System.out.println(idGioHang + "---" + soLuong);
+		cart.update(idGioHang, soLuong);
+		return "redirect:/cart-page";
+	}
+
+	@RequestMapping("/cart-page/remove/{idGioHang}")
+	public String remove(@PathVariable("idGioHang") Integer id) {
 
 		ghDAO.deleteById(id);
 
 		return "redirect:/cart-page";
-	}
-
-	@RequestMapping("/cart/update/{idGioHang}")
-	public String update(@PathVariable("idGioHang") int id,
-			@RequestParam("soLuong") int qty) {
-		cart.update(id, qty);
-		return "redirect:/cart-page";
-	}
-
-	@ResponseBody
-	@PostMapping("/cart/item/update")
-	public GioHang updateCardItem(@RequestBody GioHang item) {
-		GioHang updatedItem = cart.update(item.getIdGioHang(), item.getSoLuong());
-		return updatedItem;
 	}
 
 }

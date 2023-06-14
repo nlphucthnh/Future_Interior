@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -23,12 +24,13 @@ import com.spring.main.service.CartService;
 public class CartServiceImpl implements CartService {
 
 	Map<Integer, GioHang> map = new HashMap<>();
-
+	ArrayList<GioHang> list = new ArrayList<GioHang>();
 	@Autowired
 	SanPhamDAO dao;
 
 	@Autowired
 	GioHangDAO ghdao;
+	
 
 	@Override
 	public Integer add(String masp, Integer soLuong, TaiKhoan taiKhoanGH) {
@@ -54,33 +56,43 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public void remove(String id) {
-
+	public void remove(Integer id) {
+		map.remove(id);
 	}
 
 	@Override
-	public GioHang update(Integer id, int qty) {
-		GioHang item = map.get(id);
-		item.setSoLuong(qty);
+	public GioHang update(Integer idGioHang, int soLuong) {
+		GioHang item = map.get(idGioHang);
+		System.out.println(item);
+		item.setSoLuong(soLuong);
 		return item;
 	}
 
 	@Override
 	public void clear() {
-
+		map.clear();
 	}
 
+	/**
+	 * Lấy tất cả các mặt hàng trong giỏ
+	 */
 	@Override
 	public Collection<GioHang> getGioHangs() {
 		return map.values();
 	}
 
+	/**
+	 * Lấy tổng số lượng các mặt hàng trong giỏ
+	 */
 	@Override
 	public int getCount() {
 		return map.values().stream().mapToInt(item -> item.getSoLuong()).sum();
-		
+
 	}
 
+	/**
+	 * Lấy tổng số tiền tất cả các mặt hàng trong giỏ
+	 */
 	@Override
 	public double getAmount() {
 		return map.values().stream().mapToDouble(item -> item.getSanPhamGH().getGiaSanPham() * item.getSoLuong()).sum();

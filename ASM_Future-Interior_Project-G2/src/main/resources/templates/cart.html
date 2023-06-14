@@ -201,7 +201,10 @@
 					<tbody>
 						<!-- 						<tr th:each="item : ${spitem}"> -->
 						<tr th:each="item: ${items}">
-							<form action="" method="post">
+							<form th:action="@{/cart-page/update/__${item.idGioHang}__}" method="post">
+								<td th:text="${item.idGioHang}">
+									<input type="hidden" name="idGioHang" value="${item.idGioHang}">
+								</td>
 								<td>
 									<div class="d-lg-flex name-cart pt-3 pb-3">
 										<img th:src="@{'/img/' + ${item.sanPhamGH.ListHinhAnhSP[0].idHinhAnh} + '.png'}"
@@ -213,16 +216,16 @@
 
 									<h5 style="margin-top: 50px;" th:text="${item.sanPhamGH.tenSanPham}"></h5>
 								</td>
-								<!-- <td>
-								<input class="qty" type="number" th:value="${item.soLuong}" min="1">
-
-							</td> -->
+						
 								<td>
+									
 									<div class="counter">
-										<span class="down" onClick='decreaseCount(event, this)'>-</span>
-										<input type="number" th:value="${item.soLuong}" min="1">
-										<span class="up" onClick='increaseCount(event, this)'
-											onblur="this.form.submit()">+</span>
+										<span class="down" onClick='decreaseCount(event, this)'><button style="padding: 1px 8px;" onblur="this.form.submit()">-</button></span>
+										
+										<input type="number" name="soLuong" onchange="this.form.submit()" th:value="${item.soLuong}" min="1">
+
+										<span class="up" onClick='increaseCount(event, this)'><button style="padding: 1px 6px;" onblur="this.form.submit()">+</button></span>
+										
 									</div>
 								</td>
 
@@ -277,7 +280,7 @@
 						  <label for="subtotal" class="form-label bill-text">Tạm tính</label>
 						</div>
 						<div class="col-6">
-						  <label for="discount" class="form-label bill-number ">4,250,000₫</label>
+						  <label for="discount" class="form-label bill-number "><span th:value="${total}"></span></label>
 						</div>
 					  </div>
 			

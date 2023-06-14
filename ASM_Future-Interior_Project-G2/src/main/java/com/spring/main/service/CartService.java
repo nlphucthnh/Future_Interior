@@ -8,9 +8,9 @@ import com.spring.main.entity.TaiKhoan;
 public interface CartService {
 	Integer add(String masp, Integer soLuong, TaiKhoan taiKhoanGH);
 
-	void remove(String id);
+	void remove(Integer id);
 
-	GioHang update(Integer id, int qty);
+	GioHang update(Integer idGioHang, int soLuong);
 
 	void clear();
 

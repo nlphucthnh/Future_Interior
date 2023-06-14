@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.spring.main.entity.GioHang;
 import com.spring.main.entity.TaiKhoan;
 
-public interface GioHangDAO extends JpaRepository<GioHang, String> {
+public interface GioHangDAO extends JpaRepository<GioHang, Integer> {
 
 	List<GioHang> findByTaiKhoanGH(TaiKhoan taiKhoanGH);
 }
