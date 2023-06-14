@@ -77,6 +77,8 @@ public class CartController {
 
 	@RequestMapping("/cart-page")
 	public String getCartPage(Model model) {
+		model.addAttribute("cart", cart);
+		model.addAttribute("countcart", cart.getCount());
 		var productsSale = spkmDAO.findAll();
 		model.addAttribute("productsSales", productsSale);
 

@@ -8,6 +8,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<!-- Bootstrap CSS: -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -199,33 +201,61 @@
 					<tbody>
 						<!-- 						<tr th:each="item : ${spitem}"> -->
 						<tr th:each="item: ${items}">
+							<form action="" method="post">
+								<td>
+									<div class="d-lg-flex name-cart pt-3 pb-3">
+										<img th:src="@{'/img/' + ${item.sanPhamGH.ListHinhAnhSP[0].idHinhAnh} + '.png'}"
+											alt="Error images" width="200px" height="200px">
 
-							<td><img th:src="@{'/img/' + ${item.sanPhamGH.ListHinhAnhSP[0].idHinhAnh} + '.png'}"
-									alt="Error images" width="180px" height="180px">
-							</td>
-							<td th:text="${item.sanPhamGH.tenSanPham}"></td>
-							<td>
-								<input type="number" th:value="${item.soLuong}" min="1">
+									</div>
+								</td>
+								<td>
 
-							</td>
+									<h5 style="margin-top: 50px;" th:text="${item.sanPhamGH.tenSanPham}"></h5>
+								</td>
+								<!-- <td>
+								<input class="qty" type="number" th:value="${item.soLuong}" min="1">
 
-							<td>
-								<div class="product-price-main">
-									<p th:unless="${item.SanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}"
-										class="product-price-proItem"
-										th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>
+							</td> -->
+								<td>
+									<div class="counter">
+										<span class="down" onClick='decreaseCount(event, this)'>-</span>
+										<input type="number" th:value="${item.soLuong}" min="1">
+										<span class="up" onClick='increaseCount(event, this)'
+											onblur="this.form.submit()">+</span>
+									</div>
+								</td>
+
+								<td>
+									<div class="product-price-main">
+										<h5 class="price-cart"
+											th:unless="${item.SanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}"
+											th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></h5>
 										<br>
-									<p th:if="${item.sanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}">
+									<h5 th:if="${item.sanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}">
 										<span class="product-price-proItem"
 											th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * (1 - item.sanPhamGH.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
 											<br>
 											<del class="old-price-proItem"
 											th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
-									</p>
+									</h5>
 								</div>
 
 							</td>
-							<td  th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')}"></td>
+							<!-- <td  th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')}"></td> -->
+							<td>
+								<div class="product-price-main">
+									<h5 th:unless="${item.SanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}"
+									class="price-cart"
+										th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')}"></h5>
+									<h5 th:if="${item.sanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}">
+										<h5 class="price-cart"
+											th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * (1 - item.sanPhamGH.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100)* item.soLuong, 0, 'COMMA', 0, 'POINT')}"></h5>
+		
+									</h5>
+								</div>
+
+							</td>
 							<!-- <td class="amount" th:text="${#numbers.formatInteger(item.soLuong*item.SanPhamGH.giaSanPham,0)}"></td> -->
 							
 							<td>
@@ -234,6 +264,7 @@
 									<a class="material-symbols-outlined" th:href="@{/cart-page/remove/__${item.idGioHang}__}"> delete </a>
 								</button>
 							</td>
+						</form>
 						</tr>
 					</tbody>
 				</table>
@@ -241,64 +272,57 @@
 			<div class="col-4">
 				<div class="bill">
 
-					<!-- Bên Phải -->
-					<!-- <div class="row mb-3">
-						<div class="col-6">
-							<label for="subtotal" class="form-label bill-text">Tổng
-								phụ</label>
-						</div>
-						<div class="col-6">
-							<label for="discount" class="form-label bill-number ">4,250,000₫</label>
-						</div>
-					</div>
-
 					<div class="row mb-3">
 						<div class="col-6">
-							<label for="subtotal" class="form-label bill-text">Giảm
-								giá</label>
+						  <label for="subtotal" class="form-label bill-text">Tạm tính</label>
 						</div>
 						<div class="col-6">
-							<label for="discount" class="form-label bill-number ">10%</label>
+						  <label for="discount" class="form-label bill-number ">4,250,000₫</label>
 						</div>
-					</div>
-
-
-					<div class="row mb-3">
+					  </div>
+			
+					  <div class="row mb-3">
 						<div class="col-6">
-							<label for="subtotal" class="form-label bill-text">Phụ
-								thu</label>
+						  <label for="subtotal" class="form-label bill-text">Giảm giá</label>
 						</div>
 						<div class="col-6">
-							<label for="discount" class="form-label bill-number ">50,000₫</label>
+						  <label for="discount" class="form-label bill-number ">0%</label>
 						</div>
-					</div>
-
-					<div class="row mb-3">
+					  </div>
+			
+			
+					  <div class="row mb-3">
 						<div class="col-6">
-							<label for="subtotal" class="form-label bill-text">Phí
-								vận chuyển</label>
-						</div>
-						<div class="col-6">
-							<label for="discount" class="form-label bill-number ">20,000₫</label>
-						</div>
-					</div> -->
-					<!-- <hr class="my-4"> -->
-					<div class="row mb-3">
-						<div class="col-6">
-							<label for="subtotal" class="form-label bill-text">Tổng
-								cộng:</label>
+						  <label for="subtotal" class="form-label bill-text">Phụ thu</label>
 						</div>
 						<div class="col-6">
-							<label for="discount" class="form-label bill-number ">3,890,000₫</label>
+						  <label for="discount" class="form-label bill-number ">0₫</label>
 						</div>
-					</div>
-					<div class="row mb-3">
+					  </div>
+			
+					  <div class="row mb-3">
+						<div class="col-6">
+						  <label for="subtotal" class="form-label bill-text">Phí vận chuyển</label>
+						</div>
+						<div class="col-6">
+						  <label for="discount" class="form-label bill-number ">0₫</label>
+						</div>
+					  </div>
+					  <hr class="my-4">
+					  <div class="row mb-3">
+						<div class="col-6">
+						  <label for="subtotal" class="form-label bill-text">Tổng cộng:</label>
+						</div>
+						<div class="col-6">
+						  <label for="discount" class="form-label bill-number ">3,890,000₫</label>
+						</div>
+					  </div>
+					  <div class="row mb-3">
 						<div class="pay-bill">
-							<a href="adreess-page">
-								<button class="btn-pay">Thanh toán</button>
-							</a>
+						  <a href="adreess-page">
+							<button class="btn-pay">Thanh toán </button></a>
 						</div>
-					</div>
+					  </div>
 
 				</div>
 			</div>
@@ -385,25 +409,28 @@
 			</div>
 		</div>
 	</footer>
+	<!-- Include Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+
+        function refreshCart(item,iStat) {
+            item.soLuong = $(".qty")[iStat.index].value;
+            $.ajax({
+                type: "POST",
+                url: "/cart/item/update",
+                data: JSON.stringify(item),
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response);
+                    $(".amount")[iStat.index].textContent = response.sanPhamGH.giaSanPham * response.soLuong;
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
 </body>
 <script src="js/cart.js"></script>
-<script>
 
-	function refreshCart(item,iStat) {
-		item.soLuong = $(".soLuong")[iStat.index].value;
-		$.ajax({
-			type: "POST",
-			url: "/cart/item/update",
-			data: JSON.stringify(item),
-			contentType: "application/json",
-			success: function (response) {
-				console.log(response);
-				$(".amount")[iStat.index].textContent = response.SanPhamGH.giaSanPham * response.soLuong;
-			},
-			error: function (error) {
-				console.log(error);
-			}
-		});
-	}
-</script>
 </html>

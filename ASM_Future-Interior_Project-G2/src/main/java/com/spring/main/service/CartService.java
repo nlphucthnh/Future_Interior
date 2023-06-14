@@ -14,6 +14,8 @@ public interface CartService {
 
 	void clear();
 
+	Collection<GioHang> getGioHangs();
+
 	int getCount();
 
 	double getAmount();

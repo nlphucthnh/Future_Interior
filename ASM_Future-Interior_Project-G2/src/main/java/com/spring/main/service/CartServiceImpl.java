@@ -71,15 +71,19 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
+	public Collection<GioHang> getGioHangs() {
+		return map.values();
+	}
+
+	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return map.values().stream().mapToInt(item -> item.getSoLuong()).sum();
+		
 	}
 
 	@Override
 	public double getAmount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return map.values().stream().mapToDouble(item -> item.getSanPhamGH().getGiaSanPham() * item.getSoLuong()).sum();
 	}
 
 }

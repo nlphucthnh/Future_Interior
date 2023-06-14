@@ -121,7 +121,10 @@
 
                 <div class="col-md-4 product-item-text my-4">
                     <div class="product-item-name">
+                        <!-- Ten sp-->
                         <h3 th:text="${spitem.tenSanPham}"></h3>
+
+                        <!-- Gia sp -->
                         <div class="product-price-main">
                             <p th:unless="${spitem.ListSPKM != null && !spitem.ListSPKM.isEmpty()}"
                                 class="product-price-proItem"
@@ -133,16 +136,22 @@
                                     th:text="${#numbers.formatDecimal(spitem.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
                             </p>
                         </div>
+
                     </div>
                     <div class="properties my-5">
+                        <!-- Loai -->
                         <h3>Loại : <span th:text="${spitem.phanNhomLoai.tenPhanLoaiNhom}"></span></h3>
+
+                        <!-- Kich thuoc -->
                         <h3>Kích thước : <span th:text="${spitem.kichThuocSanPham}"></span></h3>
+
+                        <!-- Chat lieu -->
                         <div th:each="spcl : ${spitem.ListSPCL}">
                             <h3>Tên chất liệu: <span th:text="${spcl.chatLieuSPCL.tenChatLieu}"></span></h3>
                         </div>
                     </div>
                     
-                    <!-- <div class="quantity">
+                    <div class="quantity">
                         <label for="quantity-input">Số lượng:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -154,7 +163,7 @@
                                 <button class="btn btn-outline-secondary" type="button" id="quantity-plus">></button>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                    
                     <div class="button-sell my-5 d-flex justify-content-between" th:each="item : ${spitem}">
                         <a class="link-sell" th:href="@{/pay-page}">
