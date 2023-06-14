@@ -43,7 +43,7 @@
     <article>
         <div class="container">
             <div class="product-list-title">
-                <h3>BÀN LÀM VIỆC - DESKS</h3>
+                <h3 th:text="${'Tất cả sản phẩm theo '+title}"></h3>
             </div>
             <div class="row">
                 <div class="col-2 flex-fill">
@@ -53,9 +53,9 @@
                             <option selected>Lọc theo khoản giá</option>
                             <option value="1">Từ 0 - 1,000,000</option>
                             <option value="2">1,000,000 - 5,000,000</option>
-                            <option value="3">1,000,000 - 5,000,000</option>
-                            <option value="4">5,000,000 - 10,000,000</option>
-                            <option value="5">10,000,000 - 20,000,000</option>
+                            <option value="3">5,000,000 - 10,000,000</option>
+                            <option value="4">10,000,000 - 25,000,000</option>
+                            <option value="5">15,000,000 - 20,000,000</option>
                             <option value="6">20,000,000 Trở lên</option>
                         </select>
                     </form>
@@ -127,7 +127,7 @@
         </div>
     </article>
     
-    <div th:replace="footer :: footer"></div>
+    <div th:replace="footer"></div>
 </body>
 
 </html>
