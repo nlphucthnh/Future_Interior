@@ -5,5 +5,7 @@
         "Pham",
         "prolist",
         "prolists"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

@@ -251,106 +251,43 @@ khiêm tốn như phòng trọ hay căn hộ studio
     <article class="container bg-light">
         <div class="card-blog-main bg-light">
             <div class="row">
-                <div class="col-4">
+                <div class="col-4" th:each="item : ${page.content}">
                     <div class="card-blog ">
                         <a href="/blogs-item-page">
                             <div class="zoom_color noidung">
                                 <img class="blog-img" src="/img/blog-1.jpg" alt="">
+                                <!-- th:src="@{'/images/'' + ${item.anhNen}}" src="/img/blog-1.jpg" -->
                             </div>
                         </a>
                         <h5>Design</h5>
-                        <div class="item-title d-flex justify-content-between mx-4">
-                            <h3><a class="text-decoration-none " href="#">UX review presentations</a> </h3>
+                        <div class="item-title d-flex justify-content-between mx-4"> 
+                            <h3><a class="text-decoration-none " href="#" th:text="${item.tieuDeBaiDang}" >UX review presentations</a> </h3>
                             <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" fill="currentColor"
                                     class="bi bi-arrow-up-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
                                 </svg></span>
                         </div>
-                        <p>How do you create compelling presentations that wow your colleagues and impress your
+                        <p th:text="${item.moTaBaiDang}">How do you create compelling presentations that wow your colleagues and impress your
                             managers?</p>
                         <div>
                             <div class="auther-item d-flex align-items-center ">
                                 <img src="/img/avatar-1.png" alt="Avatar" width="40px" height="40px"
                                     class="avatar rounded-circle mx-3">
                                 <span class="navbar-text text-start me-2">
-                                    <a href="/blogs-item-page" class="text-decoration-none text-dark ">
+                                    <a href="/blogs-item-page" class="text-decoration-none text-dark " th:text="${item.tacGiaBaiDang}">
                                         Olivia Rhye
-                                        <br> <span class="text-black-50">20 Jan 2023</span></a>
+                                        <br>
+                                    </a>
+                                     <span class="text-black-50"th:text="${item.ngayDang}" >20 Jan 2023</span>
                                 </span>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="card-blog ">
-                        <a href="/blogs-item-page">
-                            <div class="zoom_color noidung">
-                                <img class="blog-img" src="/img/blog-2.jpg" alt="">
-                            </div>
-                        </a>
-                        <h5>Product</h5>
-                        <div class="item-title d-flex justify-content-between mx-4">
-                            <h3><a class="text-decoration-none " href="#">Migrating to Linear 101</a> </h3>
-                            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" fill="currentColor"
-                                    class="bi bi-arrow-up-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
-                                </svg></span>
-                        </div>
-                        <p>Linear helps streamline software projects, sprints, tasks, and bug tracking. Here's how to
-                            get started.</p>
-                        <div>
-                            <div class="auther-item d-flex align-items-center ">
-                                <img src="/img/avatar-2.png" alt="Avatar" width="40px" height="40px"
-                                    class="avatar rounded-circle mx-3">
-                                <span class="navbar-text text-start me-2">
-                                    <a href="/blogs-item-page" class="text-decoration-none text-dark ">
-                                        Phoenix Baker
-                                        <br> <span class="text-black-50">19 Jan 2022</span></a>
-                                </span>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-4">
-                    <div class="card-blog ">
-                        <a href="/blogs-item-page">
-                            <div class="zoom_color noidung">
-                                <img class="blog-img" src="/img/blog-3.jpg" alt="">
-                            </div>
-                        </a>
-                        <h5>Software Engineering</h5>
-                        <div class="item-title d-flex justify-content-between mx-4">
-                            <h3><a class="text-decoration-none " href="#">Building your API Stack</a> </h3>
-                            <span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="28" fill="currentColor"
-                                    class="bi bi-arrow-up-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z" />
-                                </svg></span>
-                        </div>
-                        <p>The rise of RESTful APIs has been met by a rise in tools for creating, testing, and managing
-                            them.</p>
-                        <div>
-                            <div class="auther-item d-flex align-items-center ">
-                                <img src="/img/avatar-3.png" alt="Avatar" width="40px" height="40px"
-                                    class="avatar rounded-circle mx-3">
-                                <span class="navbar-text text-start me-2">
-                                    <a href="/blogs-item-page" class="text-decoration-none text-dark ">
-                                        Lana Steiner
-                                        <br> <span class="text-black-50">18 Jan 2022</span></a>
-                                </span>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+             
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-4">
                     <div class="card-blog ">
                         <a href="/blogs-item-page">
@@ -447,9 +384,9 @@ khiêm tốn như phòng trọ hay căn hộ studio
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-4">
                     <div class="card-blog ">
                         <a href="/blogs-item-page">
@@ -548,11 +485,13 @@ khiêm tốn như phòng trọ hay căn hộ studio
                     </div>
 
                 </div>
-            </div>
+            </div> -->
             <hr class="text-black-50 my-5">
             <div class="pagination justify-content-between">
                 <div class="d-flex justify-content-start">
-                    <a href="/blogs-item-page" class="page-link pagination-pre bg-light border-light ">
+                    <a th:href="@{/blog-page?p=__${page.number-1}__}" class="page-link pagination-pre bg-light border-light "> 
+                   
+                    <!-- th:if="${page.number  !=  0}"  -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-arrow-left" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -571,7 +510,9 @@ khiêm tốn như phòng trọ hay căn hộ studio
 
                 </ul>
                 <div class="d-flex justify-content-end">
-                    <a href="#" class="page-link bg-light border-light">Next
+                    <a href="#" class="page-link bg-light border-light" 
+                    th:href="@{/blog-page?p=__${page.number+1}__}">Next
+                 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-arrow-right" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -580,8 +521,15 @@ khiêm tốn như phòng trọ hay căn hộ studio
                     </a>
                 </div>
             </div>
+            <!-- <a class="btn btn-dark" th:if="${page.number  !=  0}" th:href="@{/blog-page/navigation?p=__${page.number-1}__}">Prev</a> -->
+            <!-- <a class="btn btn-dark" th:if="${page.number  !=  0}" th:href="@{/product/page?p=__${page.number-1}__}">Prev</a> -->
 
-
+            <!--  th:href="@{/blog-page/navigation?p=__${page.number-1}__}" -->
+            <!--   th:if="${page.number < page.totalPages-1}" th:href="@{/blog-page/navigation?p=__${page.number+1}__}" -->
+            
+            <!-- <a class="btn btn-dark" th:if="${page.number < page.totalPages-1}" th:href="@{/product/page?p=__${page.number+1}__}">Next</a>  -->
+            <!-- <a class="btn btn-dark" th:if="${page.number < page.totalPages-1}" th:href="@{/blog-page/navigation?p=__${page.number+1}__}">Next</a>  -->
+   
 
 
         </div>

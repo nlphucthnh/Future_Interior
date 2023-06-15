@@ -62,11 +62,12 @@ public class LoginController {
         TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(tenDangNhapForm);
         boolean rm = paramService.getBoolean("remember", false);
         if (taiKhoandataBase == null) { // tức nó không có trong database
-            model.addAttribute("MessageWarning", true); // tính hiện để thông báo tên đăng nhập không tồn tại.
+            model.addAttribute("MessageWarning", true); // tính hiệu để thông báo tên đăng nhập không tồn tại.
         } else {
             if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
                     && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
                 session.set("TaiKhoanUser", taiKhoandataBase);
+                System.out.println("đã ====");
                 sessions.setAttribute("AccoutUser", taiKhoandataBase);
                 if (rm) {
                     cookieService.add("tenDangNhapUser", tenDangNhapForm, 10);
