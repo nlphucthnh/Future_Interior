@@ -37,19 +37,22 @@ HttpSession sessions;
 	@GetMapping("/home-page")
 	public String getHomePage(Model model) {
 		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		System.out.println(taiKhoan.getTenDangNhap());
 		// System.out.println(sessions.getAttribute("TaiKhoanUser").toString());
-		if(taiKhoan != null){
+		if(taiKhoan.getTenDangNhap() != null){
 			model.addAttribute("onRegistered", true);
 			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
 		}
-		model.addAttribute("onRegistered", false);
+		
 		return "index";
 	}
 	
-	@GetMapping("/blog-page")
-	public String getBlogPage() {
-		return "blog";
-	}
+	// @GetMapping("/blog-page")
+	// public String getBlogPage() {
+	// 	return "blog";
+	// }
 	
 	@GetMapping("/blogs-item-page")
 	public String getBlogItemPage() {
