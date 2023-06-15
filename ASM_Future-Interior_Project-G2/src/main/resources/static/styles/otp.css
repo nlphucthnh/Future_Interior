@@ -1,0 +1,60 @@
+form {
+  position: relative;
+  width: 300px;
+  padding: 60px;
+}
+
+focus {
+  outline: none;
+}
+
+svg,
+line {
+  position: relative;
+  display: block;
+  width: 510px;
+  height: 2px;
+}
+
+input[maxlength="5"] {
+  color: transparent;
+  text-shadow: 0 0 0 #2196f3;
+}
+
+input[maxlength="4"] {
+  margin-left: 41px;
+  width: 500px;
+  font-size: 24px;
+  border: 0;
+  margin-left: 60px;
+  letter-spacing: 106px;
+  outline: none;
+}
+
+input[maxlength="4"] + svg line {
+  stroke-dasharray: 30;
+  stroke-dashoffset: -10;
+}
+
+.title-otp {
+  margin: 0 40px 40px 30px;
+}
+
+.card-title {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #007bff;
+}
+
+.title-otp {
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+}
+.btn-otp button {
+  margin-left: 200px;
+  width: 100px;
+}

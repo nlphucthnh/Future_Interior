@@ -356,7 +356,7 @@
 
 .registered-group .registered-group-cart  {
     position: relative;
-    margin-right: 30px;
+    margin-right: 40px;
     transition: 0.5s;
     cursor: pointer;
 }
@@ -371,7 +371,7 @@
 
 .registered-group .registered-group-cart .number-item {
     position: absolute;
-    left: -30px;
+    right: -30px;
 }
 
 .registered-group  .registered-group-account {

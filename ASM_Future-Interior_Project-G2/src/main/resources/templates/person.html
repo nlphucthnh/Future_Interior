@@ -29,30 +29,45 @@
     <link rel="stylesheet" href="/styles/home.css">
     <link rel="stylesheet" href="/styles/footer.css">
     <link rel="stylesheet" href="/styles/person.css">
-    <title>Product List</title>
+    <title>PerSon</title>
+
 </head>
 
 <body>
-    <nav th:include="navbaruser"></nav>
+    <nav th:include="components/header-registered"></nav>
+    <!-- <nav th:replace="navbaruser"></nav> -->
     <header class="header-person">
         <div class="banner-person">
             <img src="/img/banner-person.png" alt="Lỗi" width="100%" height="450px">
         </div>
         <div class="container my-4 d-flex justify-content-between">
             <div class="header-person-main" th:each="pe : ${people}">
+
                 <div class="auther-item d-flex align-items-center ">
-                    <img th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien} + '.png'}" alt="Avatar" width="160px"
-                        height="160px" class="avatar rounded-circle mx-3">
+                    <div class="avatar-container">
+                        <img th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien}}" alt="Khong tìm thấy" width="160px"
+                            height="160px" class="avatar rounded-circle mx-3" onclick="toggleButtonVisibility()">
+                        <input id="avatar-input" name="avatar" class="avatar-input" type="file" accept="image/*" onchange="checkFileSelected()">
+                    </div>
+                    
+                   
+                    
+            
+
+                    <!-- <img th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien} + '.png'}" alt="Avatar" width="160px"
+                        height="160px" class="avatar rounded-circle mx-3"> -->
                     <span class="navbar-text text-start me-2">
                         <div class="text-decoration-none text-dark text-user-person" th:text="${pe.tenDangNhap}">
                         </div>
                         <span class="text-black-50" th:text="${pe.email}"></span>
                     </span>
+                    <div class="btn-upload">
+                        <button id="confirm-button" class="btn btn-info" onclick="notify()" style="display: none;">xác nhận</button>
+                    </div>
+                    
                 </div>
             </div>
-            <div class="btn-edit-user">
-                <button type="button" class="btn btn-edit">Chỉnh sửa thông tin</button>
-            </div>
+
         </div>
     </header>
 
@@ -75,8 +90,8 @@
                                     </div>
                                     <div class="person-product-text">
                                         <h5 th:text="${dhct.sanPhamDHCT.tenSanPham}"></h5>
-                                        <span th:text="${dhct.sanPhamDHCT.giaSanPham}"></span>
-
+                                        <span
+                                            th:text="${#numbers.formatDecimal(dhct.sanPhamDHCT.giaSanPham, 0, 'COMMA', 0, 'POINT')+'đ'}"></span>
                                     </div>
 
                                 </div>
@@ -121,23 +136,99 @@
                         </div>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col-6">
-                            <label for="subtotal" class="form-label profle-tile">Email:</label>
-                        </div>
-                        <div class="col-6">
-                            <label for="discount" class="form-label profle-text" th:text="${pe.email}"></label>
-                        </div>
+                    <div class="edit-profile my-3">
+                        <button class="btn btn-edit-profile" data-bs-toggle="modal" data-bs-target="#exampleModal">Chỉnh
+                            sửa hồ sơ</button>
                     </div>
 
-                </div>
-                <div class="edit-profile my-3">
-                    <button class="btn btn-edit-profile">Chỉnh sửa hồ sơ</button>
+
                 </div>
             </div>
         </div>
     </article>
 
-</body>
 
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Chỉnh sửa hồ sơ</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/person}" th:object="${personuser}" method="post" class="needs-validation"
+                        novalidate>
+                        <div class="map2" th:each="pe : ${people}">
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <label for="fullName" class="form-label profile-title">Họ và tên:</label>
+                                </div>
+                                <div class="col-6">
+                                    <input id="fullName" name="fullName" class="form-control profile-input" type="text"
+                                        th:value="${pe.thongTinTaiKhoan.hoTen}" required />
+                                    <div class="invalid-feedback">
+                                        Không được bỏ trống.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <label class="form-label profile-title">Giới tính:</label>
+                                </div>
+                                <div class="col-6">
+                                    <input id="genderMale" class="form-check-input" type="radio" name="gender"
+                                        value="true" th:checked="${pe.thongTinTaiKhoan.gioiTinh}" />
+                                    <label for="genderMale" class="form-check-label">Nam</label>
+                                    <input id="genderFemale" class="form-check-input" type="radio" name="gender"
+                                        value="false" th:checked="${!pe.thongTinTaiKhoan.gioiTinh}" />
+                                    <label for="genderFemale" class="form-check-label">Nữ</label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <label for="phoneNumber" class="form-label profile-title">Số điện
+                                        thoại:</label>
+
+                                </div>
+                                <div class="col-6">
+                                    <input id="phoneNumber" name="sdt" class="form-control profile-input" type="text"
+                                        th:value="${pe.thongTinTaiKhoan.soDienThoai}" required maxlength="10"
+                                        minlength="10" pattern="^\d+$" />
+                                    <div class="invalid-feedback">
+                                        Phải nhập 10 só hoặc phải nhập số.
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <button class="btn btn-primary" th:href="@{'/person/user/' + ${pe.tenDangNhap}}">Xác
+                                nhận</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div th:replace="footer :: footer"></div>
+
+    <!-- Tải các tệp JavaScript của jQuery và Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="/js/changepasss.js"></script>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+<script src="/js/uploadAvatar.js"></script>
 </html>

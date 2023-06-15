@@ -60,27 +60,246 @@ public class LoginController {
     public String ManageLoginPage(@RequestParam(name = "tenDangNhap") String tenDangNhapForm,
             @RequestParam(name = "matKhau") String matKhauForm, Model model) {
         TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(tenDangNhapForm);
-        boolean rm = paramService.getBoolean("remember", false);
-        if (taiKhoandataBase == null) { // tức nó không có trong database
-            model.addAttribute("MessageWarning", true); // tính hiện để thông báo tên đăng nhập không tồn tại.
-        } else {
-            if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
-                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
-                session.set("TaiKhoanUser", taiKhoandataBase);
-                sessions.setAttribute("AccoutUser", taiKhoandataBase);
-                if (rm) {
-                    cookieService.add("tenDangNhapUser", tenDangNhapForm, 10);
-                    cookieService.add("matKhauUser", matKhauForm, 10);
-                    System.out.println("dang nhap thanh cong");
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        session.set("TaiKhoanUser", taiKhoandataBase);
+        sessions.setAttribute("AccoutUser", taiKhoandataBase);
+        // boolean rm = paramService.getBoolean("remember", false);
+        // if (taiKhoandataBase == null) { // tức nó không có trong database
+        // model.addAttribute("MessageWarning", true); // tính hiện để thông báo tên
+        // đăng nhập không tồn tại.
+        // } else {
+        // if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
+        // && matKhauForm.equals(taiKhoandataBase.getMatKhau()) &&
+        // taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
+        // session.set("TaiKhoanUser", taiKhoandataBase);
+        // sessions.setAttribute("AccoutUser", taiKhoandataBase);
+        // if (rm) {
+        // cookieService.add("tenDangNhapUser", tenDangNhapForm, 10);
+        // cookieService.add("matKhauUser", matKhauForm, 10);
+        // System.out.println("dang nhap thanh cong");
 
-                } else {
-                    cookieService.remove("tenDangNhapUser");
-                    cookieService.remove("matKhauUser");
-                    System.out.println("dang nhap thanh cong");
-                }
-            }
-            return "redirect:/home-page";
-        }
+        // } else {
+        // cookieService.remove("tenDangNhapUser");
+        // cookieService.remove("matKhauUser");
+        // System.out.println("dang nhap thanh cong");
+        // }
+        // }
+        // return "redirect:/";
+        // }
         return "dangnhap";
     }
 
