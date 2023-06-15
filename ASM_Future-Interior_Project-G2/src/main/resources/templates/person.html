@@ -41,11 +41,11 @@
             <img src="/img/banner-person.png" alt="Lỗi" width="100%" height="450px">
         </div>
         <div class="container my-4 d-flex justify-content-between">
-            <div class="header-person-main" th:each="pe : ${people}">
+            <div class="header-person-main">
 
                 <div class="auther-item d-flex align-items-center ">
                     <div class="avatar-container">
-                        <img th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien}}" alt="Khong tìm thấy" width="160px"
+                        <img src="https://firebasestorage.googleapis.com/v0/b/future-interior.appspot.com/o/Null.png?alt=media" alt="Khong tìm thấy" width="160px"
                             height="160px" class="avatar rounded-circle mx-3" onclick="toggleButtonVisibility()">
                         <input id="avatar-input" name="avatar" class="avatar-input" type="file" accept="image/*" onchange="checkFileSelected()">
                     </div>
@@ -57,9 +57,9 @@
                     <!-- <img th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien} + '.png'}" alt="Avatar" width="160px"
                         height="160px" class="avatar rounded-circle mx-3"> -->
                     <span class="navbar-text text-start me-2">
-                        <div class="text-decoration-none text-dark text-user-person" th:text="${pe.tenDangNhap}">
+                        <div class="text-decoration-none text-dark text-user-person" th:text="${TaiKhoanUser.tenDangNhap}">
                         </div>
-                        <span class="text-black-50" th:text="${pe.email}"></span>
+                        <span class="text-black-50" th:text="${TaiKhoanUser.email}"></span>
                     </span>
                     <div class="btn-upload">
                         <button id="confirm-button" class="btn btn-info" onclick="notify()" style="display: none;">xác nhận</button>
@@ -105,7 +105,7 @@
                 </table>
             </div>
             <div class="col-4">
-                <div class="map" th:each="pe : ${people}">
+                <div class="map">
                     <div class="title-person mb-3">Thông tin khách hàng</div>
                     <div class="row mb-4">
                         <div class="col-6">
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-6">
                             <label for="discount" class="form-label profle-text "
-                                th:text="${pe.thongTinTaiKhoan.hoTen}"></label>
+                                th:text="${TaiKhoanUser.thongTinTaiKhoan.hoTen}"></label>
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@
                         </div>
                         <div class="col-6">
                             <label for="discount" class="form-label profle-text"
-                                th:text="${pe.thongTinTaiKhoan.gioiTinh ? 'Nam' : 'Nữ'}"></label>
+                                th:text="${TaiKhoanUser.thongTinTaiKhoan.gioiTinh ? 'Nam' : 'Nữ'}"></label>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="col-6">
                             <label for="discount" class="form-label profle-text "
-                                th:text="${pe.thongTinTaiKhoan.soDienThoai}"></label>
+                                th:text="${TaiKhoanUser.thongTinTaiKhoan.soDienThoai}"></label>
                         </div>
                     </div>
 

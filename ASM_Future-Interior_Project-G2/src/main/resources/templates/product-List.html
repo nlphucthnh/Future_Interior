@@ -34,7 +34,8 @@
 
 <body>
     <!-- <nav th:include="navbar"></nav> -->
-    <nav th:include="navbar"></nav>
+    <nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
+    <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
     <nav th:include="banner"></nav>
 
     <!-- title nội dụng chính  -->

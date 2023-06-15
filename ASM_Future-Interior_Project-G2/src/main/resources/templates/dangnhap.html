@@ -53,7 +53,7 @@
                                 <label class="form-check-label" for="exampleCheck1">Nhớ mật khẩu</label>
                             </div>
                             <div class="input-groups input-groups-02">
-                                <a href="#">Quên Mật Khẩu</a>
+                                <a th:href="@{/quenmatkhau}">Quên Mật Khẩu</a>
                             </div>
                         </div>
                         <button  type="submit" id="btnLogin01" class="btn btn-login">Đăng Nhập</button>
@@ -64,16 +64,6 @@
                             <p>Bạn chưa có tài khoản?</p>
                             <a href="/sign-up-page">Đăng Ký</a>
                         </div>
-                        <div class="lg-ct-end quenmatkhau">           
-                            <a th:href="@{/quenmatkhau}">Quên mật khẩu</a>
-                        </div>
-                    
-                    
-                    <!-- <th:if test="${not empty message}">
-                        <div style="color:red;" >
-                            <small th:text="${message}">Help Text</small>
-                        </div>
-                    </th:if> -->
                 </div>
             </div> <!-- ------------ -->
             <div class="lg-ct-right">
@@ -89,9 +79,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
-<!-- <script>
+<script>
     $("#btnLogin01").hide();
-
     function checkFormLogin() {
         var flag = [true, true];  // flag = [0,1]
         if ($("#tenDangNhap").val() == "") {
@@ -147,6 +136,6 @@
 
     }
 
-</script> -->
+</script>
 
 </html>

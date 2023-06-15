@@ -35,7 +35,8 @@
 
 <body>
 	
-	<nav th:replace="navbar"></nav>
+	<nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
+    <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
 	
 	<div class="row container" style="background-color: var(- -gray_25);">
 		<div class="col-4 offset-2">
