@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.spring.main.entity.TaiKhoan;
 import java.text.SimpleDateFormat;
 import jakarta.persistence.Column;
@@ -47,18 +48,19 @@ public class TaiKhoan implements Serializable {
 	@Column(name = "ngay_dang_ky")
 	Date ngayDangKy = new Date();
 	
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanBaiDang")
 	List<BaiDang> ListBaiDang;
 	
 	
 //	Quan hệ 1 - 1
+	@JsonManagedReference
 	@OneToOne(mappedBy = "taiKhoanTTTK")
 	ThongTinTaiKhoan thongTinTaiKhoan;
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanMuaHang")
 	List<DonHang> ListDonHang;
-	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanGH")
 	List<GioHang> ListGioHang ;
 	

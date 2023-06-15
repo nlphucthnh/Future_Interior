@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.main.entity.BaiDang;
 import com.spring.main.entity.TaiKhoan;
 import com.spring.main.export.BaiDangExport;
+import com.spring.main.service.SessionService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerContainer;
@@ -49,10 +51,12 @@ public class BlogsController {
 	@Autowired
 	ServletContext app;
 
+	@Autowired
+	HttpSession Session;
+
 	private Sort sort = Sort.by(Direction.DESC, "tieuDeBaiDang");
 	private String informatinSort[] = { "DESC", "tieuDeBaiDang", "", "" };
 	private BaiDang baiDang = new BaiDang();
-	private File file;
 	private BaiDangExport BlogExport = new BaiDangExport();
 	private final String excelFilePath = "..\\ASM_Future-Interior_Project-G2\\src\\main\\resources\\static\\fileExport\\baiDangs.xlsx";
 	@Autowired
@@ -61,6 +65,7 @@ public class BlogsController {
 //	get data in table and paging
 	@GetMapping("/Manager/blog")
 	public String getDataTable(Model model, @RequestParam("page") Optional<Integer> page) {
+		baiDang.setTaiKhoanBaiDang((TaiKhoan) Session.getAttribute("Admin"));
 		try {
 			Pageable pageable = PageRequest.of(page.orElse(0), 10, sort);
 			Page<BaiDang> PageBD = baiDangDAO.findByTieuDeBaiDang(informatinSort[2], pageable);
@@ -83,7 +88,6 @@ public class BlogsController {
 			}
 			model.addAttribute("duongDan", excel.getName());
 			model.addAttribute("BaiDang", baiDang);
-			model.addAttribute("FileBg", file);
 			model.addAttribute("inforSort", informatinSort);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,17 +115,12 @@ public class BlogsController {
 //Update blogs
 	@PostMapping("/Manager/blog/update")
 	public String UpdateElementBlog(@Valid @ModelAttribute("BaiDang") BaiDang baiDangModel, BindingResult result,
-			Model model, @RequestParam(name = "BgBlogs") File file) {
+			Model model) {
 		Pageable pageable = PageRequest.of(0, 10, sort);
 		Page<BaiDang> PageBD = baiDangDAO.findByTieuDeBaiDang(informatinSort[2], pageable);
 		model.addAttribute("disnableTable", false);
 		model.addAttribute("PageBD", PageBD);
-		model.addAttribute("FileBg", file);
 		model.addAttribute("inforSort", informatinSort);
-		baiDangModel.setAnhNen(file.getName());
-		if (file.getName().equals("")) {
-			baiDangModel.setAnhNen(baiDang.getAnhNen());
-		}
 		baiDang.setData(baiDangModel);
 		System.out.println(baiDang.getIdBaiDang());
 		if (result.hasErrors()) {
@@ -136,14 +135,12 @@ public class BlogsController {
 
 	@PostMapping("/Manager/blog/create")
 	public String CreateElementBlog(@Valid @ModelAttribute("BaiDang") BaiDang baiDangModel, BindingResult result,
-			Model model, @RequestParam(name = "BgBlogs") File file) {
+			Model model) {
 		Pageable pageable = PageRequest.of(0, 10, sort);
 		Page<BaiDang> PageBD = baiDangDAO.findByTieuDeBaiDang(informatinSort[2], pageable);
 		model.addAttribute("disnableTable", false);
 		model.addAttribute("PageBD", PageBD);
-		model.addAttribute("FileBg", file);
 		model.addAttribute("inforSort", informatinSort);
-		baiDangModel.setAnhNen(file.getName());
 		System.out.println(baiDang.getIdBaiDang());
 		if (result.hasErrors()) {
 			return "Manager-blog-page";
@@ -160,7 +157,6 @@ public class BlogsController {
 	public String EditElementBlog(@PathVariable("idBlogs") Integer idBlogs, Model model) {
 		baiDang = baiDangDAO.findByIdBaiDang(idBlogs);
 		informatinSort[3] = baiDang.getTaiKhoanBaiDang().getTenDangNhap();
-		file = new File(baiDang.getAnhNen());
 //		System.out.println(baiDang.getTieuDeBaiDang());
 		if (baiDang != null) {
 			return "redirect:/Manager/blog";

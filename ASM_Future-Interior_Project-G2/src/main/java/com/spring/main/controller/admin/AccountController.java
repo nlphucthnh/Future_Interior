@@ -25,10 +25,14 @@ import com.spring.main.dao.TaiKhoanDAO;
 import com.spring.main.entity.BaiDang;
 import com.spring.main.entity.TaiKhoan;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
 public class AccountController {
+
+	@Autowired
+	HttpSession session;
 
 	@Autowired
 	TaiKhoanDAO taiKhoanDAO;
@@ -38,6 +42,7 @@ public class AccountController {
 	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	@GetMapping("/Manager/account")
 	public String getDateAccount(Model model, @RequestParam("page") Optional<Integer> page) {
+		System.out.println(session.getAttribute("PhucThinh"));
 		try {
 			Pageable pageable = PageRequest.of(page.orElse(0), 10, sort);
 			Page<TaiKhoan> PageTK = taiKhoanDAO.findByTenDangNhap(informatinSort[2],

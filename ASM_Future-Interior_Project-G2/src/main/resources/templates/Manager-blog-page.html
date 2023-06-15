@@ -41,7 +41,7 @@
                         quảng bá sản phẩm</h5>
                 </div>
                 <div class="header_content_button-group">
-                    <a class="btn btn-export btn-style text-title" th:href="@{/fileExport/__${duongDan}__}" 
+                    <a class="btn btn-export btn-style text-title" th:href="@{/fileExport/__${duongDan}__}"
                         download="BaiDang"><i class="bi bi-cloud-download icon-text"></i> Xuất
                         file</a>
                 </div>
@@ -240,8 +240,8 @@
                                                 aria-label="Recipient's username with two button addons">
                                             <button th:onclick="onInputName()" class="btn btn-outline-secondary"
                                                 type="button">Tên ảnh</button>
-                                            <button th:onclick="onInputFile()" class="btn btn-outline-secondary"
-                                                type="button">Tải ảnh khác</button>
+                                            <button th:onclick="UploadFile()" class="btn btn-outline-secondary"
+                                                type="button"><i class="bi bi-upload"></i></button>
                                         </div>
 
                                         <small id="helpId" class="text-muted color-style-validate"
@@ -313,71 +313,25 @@
         </div>
     </div>
 </body>
-
-
-
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
 <script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCUZaW0hNyvWSRNVD5OQjeeZ0k5vocOmNI",
+        authDomain: "future-interior.firebaseapp.com",
+        projectId: "future-interior",
+        storageBucket: "future-interior.appspot.com",
+        messagingSenderId: "103193903702",
+        appId: "1:103193903702:web:ddd07a90bb6875d323b1f7",
+        measurementId: "G-66HZGSVJRJ"
+    };
 
-    var listBlogsTab = document.getElementById("list-blogs-tab");
-    var formBlogsTab = document.getElementById("form-blogs-tab");
-    var formBlogs = document.getElementById("form_blogs");
-    var listBlogs = document.getElementById("list_blogs");
-    var NameBlogBg = document.getElementById("NameBg");
-    listBlogsTab.style.backgroundColor = 'var(--gray_50)';
-    listBlogsTab.style.border = '1px solid var(--gray_300)';
-    NameBlogBg.style.display = 'none';
-    $("#UploadFileBg").change(function () {
-        var nameFile = this.value.split(/(\\|\/)/g).pop()
-        NameBlogBg.value = nameFile;
-    });
-    function TabList() {
-        listBlogsTab.style.backgroundColor = 'var(--gray_50)';
-        listBlogsTab.style.border = '1px solid var(--gray_300)';
-        formBlogsTab.style.backgroundColor = 'white';
-        formBlogsTab.style.border = 'none';
-        listBlogs.className = "tab-pane active";
-        formBlogs.className = "tab-pane";
-    }
-
-
-    function TabForm() {
-        formBlogsTab.style.backgroundColor = 'var(--gray_50)';
-        formBlogsTab.style.border = '1px solid var(--gray_300)';
-        listBlogsTab.style.backgroundColor = 'white';
-        listBlogsTab.style.border = 'none';
-        formBlogs.className = "tab-pane active";
-        listBlogs.className = "tab-pane";
-    }
-
-    function confomDelete(nameBlogs, idBlogs) {
-        let message = "Bạn muốn xóa bài đăng : " + nameBlogs;
-
-        if (confirm(message) == true) {
-            const Http = new XMLHttpRequest();
-            const url = '/Manager/blog/delete/' + idBlogs;
-            Http.open("POST", url);
-            Http.send();
-            alert("Xóa thành công!");
-            location.reload(true);
-        }
-    }
-
-    function onInputName() {
-        var UploadFileBg = document.getElementById("UploadFileBg");
-        var NameBg = document.getElementById("NameBg");
-        UploadFileBg.style.display = 'none';
-        NameBg.style.display = 'block';
-    }
-
-    function onInputFile() {
-        var UploadFileBg = document.getElementById("UploadFileBg");
-        var NameBg = document.getElementById("NameBg");
-        NameBg.style.display = 'none';
-        UploadFileBg.style.display = 'block';
-    }
-
+    firebase.initializeApp(firebaseConfig);
 </script>
 
+
+<script src="/javascripts/Manager-blog.js"></script>
 <script th:if="${ChangeTab == true}">
     var listBlogsTab = document.getElementById("list-blogs-tab");
     var formBlogsTab = document.getElementById("form-blogs-tab");

@@ -59,9 +59,13 @@ public class LoginAdminController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/Manager/login/json/{id}")
-	public TaiKhoan getJsonData(@PathVariable("id") String username){
+	@RequestMapping("/Manager/login/json")
+	public TaiKhoan getJsonData(@RequestParam(name = "username") String username){
 		TaiKhoan taiKhoan = taiKhoanDAO.findByTenDangNhap(username);
+		List<TaiKhoan> list = taiKhoanDAO.findAll();
+		for (TaiKhoan taiKhoan2 : list) {
+			System.out.println(taiKhoan2.getTenDangNhap());
+		}
 		return taiKhoan;
 	}
 
@@ -103,7 +107,7 @@ public class LoginAdminController {
 		if (un.equals(taikhoan.getTenDangNhap()) && pw.equals(taikhoan.getMatKhau()) && taikhoan.isTrangThai() == true
 				&& taikhoan.isVaiTro() == true) {
 
-			session.set("tenDangNhap", taikhoan);
+			session.set("Admin", taikhoan);
 			session.set("isLogin", true);
 			session.set("isVaiTro", true);
 			// lưu thông tin tài khoản và mật khẩu vào Cookie

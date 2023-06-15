@@ -3,6 +3,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -37,6 +39,7 @@ public class DonHang implements Serializable{
 	@Column(name = "trang_thai_don_hang")
 	String trangThaiDonHang;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "tai_khoan_mua")
 	TaiKhoan taiKhoanMuaHang;

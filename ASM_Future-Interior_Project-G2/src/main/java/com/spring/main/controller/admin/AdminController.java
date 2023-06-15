@@ -30,10 +30,10 @@ public class AdminController {
 		return "Manager-order-page";
 	}
 	
-	@GetMapping("/Manager/product")
-	public String ManageProductPage() {
-		return "Manager-product-page";
-	}
+	// @GetMapping("/Manager/product")
+	// public String ManageProductPage() {
+	// 	return "Manager-product-page";
+	// }
 	
 	
 //	@GetMapping("/Manager/filter")

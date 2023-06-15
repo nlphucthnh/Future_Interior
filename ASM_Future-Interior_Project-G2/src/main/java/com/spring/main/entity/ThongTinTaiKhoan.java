@@ -2,6 +2,8 @@ package com.spring.main.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,6 +42,7 @@ public class ThongTinTaiKhoan implements Serializable {
 	
 	
 //	Quan hệ 1 - 1	
+	@JsonBackReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ten_dang_nhap")
 	TaiKhoan taiKhoanTTTK;
