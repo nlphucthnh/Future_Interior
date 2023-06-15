@@ -1,8 +1,9 @@
+
 .card-title {
-  font-size: 35px;
-  font-weight: 700;
-  line-height: 60px;
-  letter-spacing: -0.02em;
-  text-align: center;
-  color: #101828;
-}
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 60px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #007bff;
+  }

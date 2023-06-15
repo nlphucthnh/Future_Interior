@@ -1,6 +1,8 @@
 package com.spring.main.controller.thien;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale.Category;
@@ -298,8 +300,10 @@ public class productController {
         return "quenmatkhau";
     }
 
+    private String generatedOTP; // Lưu trữ mã OTP đã tạo
+
     private String generateOTP() {
-        int otpLength = 6;
+        int otpLength = 4;
         String otpCharacters = "0123456789";
         Random random = new Random();
 
@@ -313,19 +317,23 @@ public class productController {
     }
 
     @PostMapping("/quenmatkhau")
-    public String resetpassword(Model model, @RequestParam("forgot") String email) {
+    public String resetPassword(Model model, @RequestParam("forgot") String email) {
         TaiKhoan tk = tkDAO.findByTenDangNhap("thienlv");
         model.addAttribute("username", "thienlv");
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
 
         if (tk.getEmail().equals(email)) {
             try {
-                generateOTP();
+                generatedOTP = generateOTP(); // Lưu trữ mã OTP đã tạo
+
                 String subject = "Lấy Lại Mật Khẩu";
-                String body = "<p>Chào bạn,</p>"
+                String body = "<p>Chào bạn, Cảm ơn bạn đã ủng hộ Shop</p>"
                         + "<p>Dưới đây là mã OTP của bạn.</p>"
-                        + "<p>Mã OTP của bạn là: " + generateOTP() + "</p>"
-                        + "<br>"
-                        + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
+                        + "<p>Mã này được tạo vào lúc: " + formattedDateTime + "</p>"
+                        + "<p>Mã OTP của bạn là: " + generatedOTP + "</p>"
+                        + "<p>Mail này dược tạo tự động, Vui lòng không trả lời. </p>";
                 mailer.send(email, subject, body);
 
                 model.addAttribute("success", "Mã sẽ gửi về mail của bạn trong giây lát");
@@ -345,39 +353,73 @@ public class productController {
 
         return "confirm-otp";
     }
-@PostMapping("/confirm-otp")
-public String confirmOTP(Model model, @RequestParam("otp") int otp) {
-    String generatedOTP = "123123"; // Tạo mã OTP
-System.out.println(otp);
-    try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date otpCreationTime = new Date(); // Thời gian tạo mã OTP
-        Date otpExpiry = new Date(otpCreationTime.getTime() + TimeUnit.MINUTES.toMillis(1)); // Thời gian hết hạn sau 1 phút
 
-        if (otp == Integer.parseInt(generatedOTP) && new Date().before(otpExpiry)) {
-            // Mã OTP hợp lệ và vẫn trong thời gian hiệu lực
-            model.addAttribute("messageotp", "Xác thực mã OTP thành công");
-            System.out.println("đúng");
-            return "redirect:/person";
-        }else if(otp != Integer.parseInt(generatedOTP)) {
-                  model.addAttribute("messageotp", "Nhập sai mã OTP");
-            System.out.println("Ko đúng");
+    @PostMapping("/confirm-otp")
+    public String confirmOTP(Model model, @RequestParam("otp") String otp) {
+
+        try {
+            // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date otpCreationTime = new Date(); // Thời gian tạo mã OTP
+            Date otpExpiry = new Date(otpCreationTime.getTime() + TimeUnit.MINUTES.toMillis(1)); // Thời gian hết hạn
+                                                                                                 // sau 1 phút
+
+            if (otp.equals(generatedOTP) && new Date().before(otpExpiry)) {
+                // Mã OTP hợp lệ và vẫn trong thời gian hiệu lực
+                System.out.println("Thanhcong");
+                model.addAttribute("messager", "Xác thực mã OTP thành công");
+
+                return "redirect:/resetpassword";
+            } else if (!otp.equals(generatedOTP)) {
+                model.addAttribute("messager", "Nhập lại mật khẩu không đúng");
+                System.out.println("sai");
+                return "redirect:/confirm-otp";
+            } else {
+                // Mã OTP không hợp lệ hoặc đã hết hạn
+                model.addAttribute("messager", "Mã OTP đã hết hạn");
+
+                System.out.println("Hết hạn");
+                return "redirect:/confirm-otp";
+            }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ khi chuyển đổi ngày
+            model.addAttribute("messager", "Lỗi chuyển đổi ngày");
+            System.out.println(e + "Lỗi luôn rồi");
             return "redirect:/confirm-otp";
         }
-        else {
-            // Mã OTP không hợp lệ hoặc đã hết hạn
-            model.addAttribute("messageotp", "Mã OTP đã hết hạn");
-            System.out.println("Hết hạn");
-            return "redirect:/confirm-otp";
-        }
-    } catch (Exception e) {
-        // Xử lý ngoại lệ khi chuyển đổi ngày
-        model.addAttribute("messageotp", "Lỗi chuyển đổi ngày");
-        System.out.println(e + "Lỗi luôn rồi");
-        return "redirect:/confirm-otp";
     }
-}
 
+    @GetMapping("/resetpassword")
+    public String restpassword() {
+        return "resetpassword";
+    }
+
+    @Transactional
+    @PostMapping("/resetpassword")
+    public String passwordNew(Model model, @RequestParam("passwordNew") String passwordnewm,
+            @RequestParam("rePasswordNew") String repasswordnew) {
+        // Kiểm tra độ dài mật khẩu mới
+        if (passwordnewm.length() < 4 || passwordnewm.length() > 20) {
+            model.addAttribute("error", "Mật khẩu phải từ 4 - 20 ký tự");
+            return "resetpassword"; // Trả về trang resetpassword với thông báo lỗi
+        } else
+
+        // Kiểm tra độ dài mật khẩu nhập lại
+        if (repasswordnew.length() < 4 || repasswordnew.length() > 20) {
+            model.addAttribute("error1", "Mật khẩu phải từ 4 - 20 ký tự");
+            return "resetpassword"; // Trả về trang resetpassword với thông báo lỗi
+        } else
+
+        // Kiểm tra mật khẩu mới và mật khẩu nhập lại
+        if (!passwordnewm.equals(repasswordnew)) {
+            model.addAttribute("error1", "Mật khẩu mới và mật khẩu nhập lại không khớp.");
+            return "resetpassword"; // Trả về trang resetpassword với thông báo lỗi
+        } else {
+            tkDAO.updatePassword(repasswordnew, "thienlv");
+            model.addAttribute("sussuc", "Tạo mật khẩu thành công");
+        }
+
+        return "redirect:/login-page"; // Điều hướng đến trang thành công sau khi đặt lại mật khẩu thành công
+    }
 
     // dang xuat
     @GetMapping("/dangxuat")

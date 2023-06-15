@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.spring.main.entity.TaiKhoan;
 
@@ -22,8 +24,13 @@ public interface TaiKhoanDAO extends JpaRepository<TaiKhoan, String> {
 
 	// @Query("")
 	// List<TaiKhoan> findByTenDangNhap1(String tenDangNhap);
-    TaiKhoan findByEmail (String emailString);
-	
+	TaiKhoan findByEmail(String emailString);
+
 	List<TaiKhoan> findByTenDangNhapLike(String tenDangNhap);
+
+	@Modifying
+	@Query("UPDATE TaiKhoan SET matKhau = :matKhau WHERE tenDangNhap LIKE %:tenDangNhap%")
+	void updatePassword(@Param("matKhau") String matKhau,
+			@Param("tenDangNhap") String tenDangNhap);
 
 }

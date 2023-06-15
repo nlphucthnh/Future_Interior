@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+  <html xmlns:th="https://www.thymeleaf.org">
 <head>
   <!-- icon web  -->
   <link rel="website icon" type="png" href="img/logo--noname.png">
@@ -36,7 +36,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card border-0 shadow rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
-            <h3 class="card-title text-center mb-5 fw-light">Quên Mật Khẩu</h3>
+            <h3 class="card-title text-center mb-5 ">Quên Mật Khẩu</h3>
             <h5 th:style="${'color-green'}" th:text="${success}"></h5>
             <form action="#" th:action="${quenmatkhau}" th:object="${forgot}" method="post"
               class="needs-validation" novalidate enctype="multipart/form-data">
