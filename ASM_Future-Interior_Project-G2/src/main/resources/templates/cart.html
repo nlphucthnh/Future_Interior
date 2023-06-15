@@ -202,9 +202,9 @@
 						<!-- 						<tr th:each="item : ${spitem}"> -->
 						<tr th:each="item: ${items}">
 							<form th:action="@{/cart-page/update/__${item.idGioHang}__}" method="post">
-								<td th:text="${item.idGioHang}">
+								
 									<input type="hidden" name="idGioHang" value="${item.idGioHang}">
-								</td>
+								
 								<td>
 									<div class="d-lg-flex name-cart pt-3 pb-3">
 										<img th:src="@{'/img/' + ${item.sanPhamGH.ListHinhAnhSP[0].idHinhAnh} + '.png'}"
