@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
@@ -69,7 +70,7 @@ public class BaiDang implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	Date ngayDang = new Date();
 	
-	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "ten_dang_nhap")
 	TaiKhoan taiKhoanBaiDang;

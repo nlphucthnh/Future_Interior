@@ -15,28 +15,48 @@ import com.spring.main.entity.TaiKhoan;
 @Controller
 public class UserController {
 
-//	@GetMapping("/login-page")
-//	public String getLoginPage() {
-//		return "dangnhap";
-//	}
-//
-//	@GetMapping("/sign-up-page")
-//	public String getSiginPage() {
-//		return "dangky";
-//	}
+@Autowired
+HttpSession sessions;
+	
+// 	@GetMapping("/login-page")
+// 	public String getLoginPage() {
+// 		return "dangnhap";
+// 	}
+	
+// 	@GetMapping("/sign-up-page")
+// 	public String getSiginPage() {
+// 		return "dangky";
+// 	}
 
-//	@GetMapping("/home-page")
-//	public String getHomePage() {
-//		return "index";
-//	}
+	
 
-	@GetMapping("/blog-page")
-	public String getBlogPage() {
-		return "blog";
+	
+	@GetMapping("/home-page")
+	public String getHomePage(Model model) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
+		}
+		return "index";
 	}
-
+	
+	// @GetMapping("/blog-page")
+	// public String getBlogPage() {
+	// 	return "blog";
+	// }
+	
 	@GetMapping("/blogs-item-page")
-	public String getBlogItemPage() {
+	public String getBlogItemPage(Model model) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
+		}
 		return "blog-item";
 	}
 // 	@GetMapping("/about-page")
@@ -44,26 +64,16 @@ public class UserController {
 // 		return "about";
 // 	}
 
-//	@GetMapping("/contact-page")
-//	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
-//		MailInfo lh = new MailInfo();
-//		model.addAttribute("lienhe", lh);
-//		return "contact";
-//	}
-//
-//	@GetMapping("/product-page")
-//	public String getProductPage() {
-//		return "product";
-//	}
-
-//	@GetMapping("/products-list-page")
-//	public String getProductList() {
-//		return "product-list";
-//	}
-
-	@GetMapping("/product-item-page")
-	public String getProductItem() {
-		return "product-item";
+	@GetMapping("/about-page")
+	public String getAboutPage(Model model) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
+		}
+		return "about";
 	}
 
 //	@GetMapping("/cart-page")

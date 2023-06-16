@@ -14,6 +14,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Bootstrap JavaScript: -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -29,7 +32,7 @@
 
 <body>
     <div class="background-manager">
-        <nav id="Manager_Navigation" th:include="components/Manager-navigation" ></nav>
+        <nav id="Manager_Navigation" th:include="components/Manager-navigation"></nav>
         <div id="Manager_Content">
             <div class="header_content">
                 <div class="header_content_text-group">
@@ -65,33 +68,37 @@
                     <div class="tab-pane active" id="list_blogs" role="tabpanel" aria-labelledby="list-blogs-tab">
                         <div class="list_blogs-header">
                             <div class="list_blogs-header-seletion-group">
-                                <form action="" method="post">
+                                <form action="/Manager/product/sort" method="post">
                                     <div class="mb-3" style="margin-right: 20px;">
-                                        <select class="form-select form-select-lg" name="" id="">
-                                            <option selected>Từ A đến Z</option>
-                                            <option value="">Từ Z đến A</option>
-                                            <option value="">Istanbul</option>
-                                            <option value="">Jakarta</option>
+                                        <select class="form-select form-select-lg" name="sortOrder" id="sortOrder">
+                                            <option value="ASC" th:selected="${inforSort[0] == 'ASC'}">Từ Thấp đến Cao
+                                            </option>
+                                            <option value="DESC" th:selected="${inforSort[0] == 'DESC'}">Từ Cao đến Thấp
+                                            </option>
                                         </select>
                                     </div>
-
                                     <div class="mb-3" style="margin-right: 20px;">
-                                        <select class="form-select form-select-lg" name="" id="">
-                                            <option selected>Nhóm loại</option>
-                                            <option value="">New Delhi</option>
-                                            <option value="">Istanbul</option>
-                                            <option value="">Jakarta</option>
+                                        <select class="form-select form-select-lg" name="sortField" id="sortField">
+                                            <option value="tenSanPham" th:selected="${inforSort[1] == 'tenSanPham'}">Tên
+                                                sản phẩm</option>
+                                            <option value="giaSanPham" th:selected="${inforSort[1] == 'giaSanPham'}">Đơn
+                                                giá sản phẩm</option>
+                                            <option value="ngayTaoSanPham"
+                                                th:selected="${inforSort[1] == 'ngayTaoSanPham'}">Ngày tạo</option>
+                                            <option value="soLuong" th:selected="${inforSort[1] == 'soLuong'}">Số lượng
+                                            </option>
                                         </select>
                                     </div>
+                                    <button style="display: none;" id="Sort">Sắp sếp</button>
                                 </form>
                             </div>
                             <div class="list_blogs-header-search-group">
-                                <form action="">
+                                <form action="/Manager/product/search" method="post">
                                     <div class="input-group mb-3">
                                         <button class="btn btn-outline-secondary box-shadow-none" type="button"
                                             id="button-search"><i class="bi bi-search"></i></button>
-                                        <input type="text" class="form-control box-shadow-none" placeholder="Tìm kiếm"
-                                            aria-label="Example text with button addon"
+                                        <input type="text" class="form-control box-shadow-none" name="searchText"
+                                            placeholder="Tìm kiếm" aria-label="Example text with button addon"
                                             aria-describedby="button-search">
                                     </div>
                                 </form>
@@ -107,7 +114,7 @@
                                                     <input class="form-check-input box-shadow-none"
                                                         style="margin-right: 10px;" name="" id="" type="checkbox"
                                                         value="checkedValue" aria-label="Text for screen reader">
-                                                   Sản phẩm
+                                                    Sản phẩm
                                                     <i class="bi bi-arrow-down"></i>
                                                 </form>
                                             </th>
@@ -118,43 +125,55 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="">
-                                            <form action="">
-                                                <td scope="row" class="td-first-table">
-                                                    <input class="form-check-input box-shadow-none" name="" id=""
-                                                        type="checkbox" value="checkedValue"
-                                                        aria-label="Text for screen reader">
-
-                                                    <div class="text-blogs-group">
-                                                        <h4 class="text-title-blogs text-title">Bàn QUADA</h4>
-                                                        <h6 class="text-id-blogs text-title">SP2013</h6>
-                                                    </div>
-                                                </td>
-                                                <td>10023 cái</td>
-                                                <td>2,130,000 đ</td>
-                                                <td>13/03/2023</td>
-                                                <td>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-trash-fill"></i></button>
-                                                    <button class="btn" style="color: var(--gray_600);"><i
-                                                            class="bi bi-pen-fill"></i></button>
-                                                </td>
-                                            </form>
+                                        <tr th:id="'idSanPham' + ${sanPham.idSanPham}"
+                                            th:each="sanPham : ${pageSP.content}">
+                                            <!-- <form action=""> -->
+                                            <td scope="row" class="td-first-table">
+                                                <input class="form-check-input box-shadow-none" name="" id=""
+                                                    type="checkbox" value="checkedValue"
+                                                    aria-label="Text for screen reader">
+                                                <div class="text-blogs-group">
+                                                    <h4 class="text-title-blogs text-title"
+                                                        th:text="${sanPham.tenSanPham}">Bàn QUADA</h4>
+                                                    <h6 class="text-id-blogs text-title" th:text="${sanPham.idSanPham}">
+                                                    </h6>
+                                                </div>
+                                            </td>
+                                            <td th:text="${sanPham.soLuong}+ ' Cái'">...</td>
+                                            <td th:text="${sanPham.giaSanPham} + ' VNĐ'">...</td>
+                                            <td th:text="${#dates.format(sanPham.ngayTaoSanPham,'dd/MM/yyyy')}">
+                                                13/03/2023</td>
+                                            <td>
+                                                <button th:onclick="deleteSanPham([[${sanPham.idSanPham}]])" class="btn"
+                                                    style="color: var(--gray_600);"><i
+                                                        class="bi bi-trash-fill"></i></button>
+                                                <button class="btn" style="color: var(--gray_600);"><i
+                                                        class="bi bi-pen-fill"></i></button>
+                                            </td>
+                                            <!-- </form> -->
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td style="text-align: left;">
-                                                <button class="btn-style btn-prev">Trước đó</button>
-                                                <button class="btn-style btn-next">Kế tiếp</button>
+                                                <a class="btn-style btn-prev disnable"
+                                                    th:if="${pageSP.number == 0}">Trước đó</a>
+                                                <a class="btn-style btn-prev" th:if="${pageSP.number > 0}"
+                                                    th:href="@{/Manager/product?page=__${pageSP.number-1}__}">Trước
+                                                    đó</a>
+                                                <a class="btn-style btn-next"
+                                                    th:if="${pageSP.number < pageSP.totalPages - 1}"
+                                                    th:href="@{/Manager/product?page=__${pageSP.number+1}__}">Kế
+                                                    tiếp</a>
+                                                <a class="btn-style btn-next disnable"
+                                                    th:if="${pageSP.number == pageSP.totalPages - 1}">Kế tiếp</a>
                                             </td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
 
-                                            <td>
-                                                Trang 1 của 10
-                                            </td>
+                                            <td
+                                                th:text="'Trang ' + ${pageSP.number + 1} + ' của ' + ${pageSP.totalPages}">
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -164,38 +183,42 @@
                     </div>
                     <div class="tab-pane" id="form_blogs" role="tabpanel" aria-labelledby="form-blogs-tab">
                         <div class="form_blogs-pane">
-                            <form action="">
+                            <form th:action="@{/Manager/product/create}" th:object="${SanPham}" method="post">
                                 <div class="group-fleld group-fleld-01">
                                     <div class="mb-3 form-group">
                                         <label for="id_product" class="form-label">Mã sản phẩm</label>
-                                        <input type="text" min="0" name="id-product" id="id_product"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="text" th:field="*{idSanPham}" min="0" name="id-product"
+                                            id="id_product" class="form-control box-shadow-none" placeholder="">
+                                        <small class="text-muted" th:if="${#fields.hasErrors('idSanPham')}"
+                                            th:errors="*{idSanPham}">...</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="name_product" class="form-label">Tên sản phẩm</label>
-                                        <input type="text" min="0" name="name-product" id="name_product"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="text" min="0" th:field="*{tenSanPham}" name="name-product"
+                                            id="name_product" class="form-control box-shadow-none" placeholder="">
+                                        <small class="text-muted" th:if="${#fields.hasErrors('tenSanPham')}"
+                                            th:errors="*{tenSanPham}">...</small>
                                     </div>
                                     <div class="mb-3 form-group">
-                                        <label for="price_product" class="form-label">Ngày tạo</label>
+                                        <label for="price_product" class="form-label">Đơn giá</label>
                                         <div class="input-group">
-                                            <input type="number" name="price-product" id="price_product"
-                                                class="form-control box-shadow-none" placeholder=""
+                                            <input type="number" th:field="*{giaSanPham}" name="price-product"
+                                                id="price_product" class="form-control box-shadow-none" placeholder=""
                                                 aria-describedby="price_product-span">
                                             <span class="input-group-text" id="price_product-span">VND</span>
                                         </div>
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <small class="text-muted" th:if="${#fields.hasErrors('giaSanPham')}"
+                                            th:errors="*{giaSanPham}">...</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-02">
                                     <div class="mb-3 form-group">
                                         <label for="producer_product" class="form-label">Nhà sản xuất</label>
-                                        <select class="form-control form-select box-shadow-none" name="producer-product"
+                                        <select class="form-control form-select box-shadow-none" name="producer-product" th:field="*{nhaSanXuat.idNhaSanXuat}"
                                             id="producer_product">
-                                            <option selected>Make my home</option>
-                                            <option value="">Uinest</option>
+                                            <option th:each="nhaSanXuat : ${NhaSanXuat}"
+                                                th:value="${nhaSanXuat.idNhaSanXuat}"
+                                                th:text="${nhaSanXuat.tenNhaSanXuat}">...</option>
                                         </select>
                                     </div>
                                     <div class="mb-3 form-group">
@@ -203,11 +226,12 @@
                                         <div class="input-group">
                                             <span class="input-group-text" id="card-credit"><i class="bi-layers-fill"
                                                     style="color: var(--gray_700);"></i></span>
-                                            <select class="form-control form-select box-shadow-none"
+                                            <select class="form-control form-select box-shadow-none" th:field="*{phanNhomLoai.idPhanNhomLoai}"
                                                 name="type-group-product" id="type-group_product"
                                                 aria-describedby="card-credit">
-                                                <option selected>Bàn làm việc, bàn ăn</option>
-                                                <option value="">Ghế làm việc, ghế ăn</option>
+                                                <option th:each="phanNhomLoai : ${PhanNhomLoai}"
+                                                    th:value="${phanNhomLoai.idPhanNhomLoai}"
+                                                    th:text="${phanNhomLoai.tenPhanLoaiNhom}">...</option>
                                             </select>
                                         </div>
                                     </div>
@@ -215,8 +239,9 @@
                                         <label for="promotion_product" class="form-label">Mã khuyến mãi</label>
                                         <select class="form-control form-select box-shadow-none"
                                             name="promotion-product" id="promotion_product">
-                                            <option selected>KM-120223-210323-10</option>
-                                            <option value="">KM-210223-210323-10</option>
+                                            <option th:each="khuyenMai : ${KhuyenMai}"
+                                                th:value="${khuyenMai.idKhuyenMai}" th:text="${khuyenMai.idKhuyenMai}">
+                                                ...</option>
 
                                         </select>
                                     </div>
@@ -224,55 +249,57 @@
                                 <div class="group-fleld group-fleld-03">
                                     <div class="mb-3 form-group">
                                         <label for="quatity_product" class="form-label">Số lượng sản phẩm</label>
-                                        <input type="text" name="quatity-product" id="quatity_product"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="text" th:field="*{soLuong}" name="quatity-product"
+                                            id="quatity_product" class="form-control box-shadow-none" placeholder="">
+                                        <small class="text-muted" th:if="${#fields.hasErrors('soLuong')}"
+                                            th:errors="*{soLuong}">...</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="date_product" class="form-label">Ngày đăng</label>
-                                        <input type="date" name="date-product" id="date_product"
-                                            class="form-control box-shadow-none" placeholder="">
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                                        <input type="date" th:field="*{ngayTaoSanPham}" name="date-product"
+                                            id="date_product" class="form-control box-shadow-none" placeholder="">
+                                        <small class="text-muted" th:if="${#fields.hasErrors('ngayTaoSanPham')}"
+                                            th:errors="*{ngayTaoSanPham}">...</small>
                                     </div>
                                 </div>
-                                <div class="group-fleld group-fleld-04">
+                                <!-- <div class="group-fleld group-fleld-04">
                                     <div class="mb-3 form-group">
                                         <label for="link-video_product" class="form-label">Link video lắp đặt</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="youtube"><i class="bi-youtube"
                                                     style="color: var(--gray_700);"></i></span>
-                                            <input type="text" name="link-video-product" id="link-video_product"
+                                            <input type="text" th:field="*{}" name="link-video-product" id="link-video_product"
                                                 class="form-control box-shadow-none" placeholder=""
                                                 aria-describedby="youtube">
                                         </div>
-                                        <!-- <small id="helpId" class="text-muted">Help text</small> -->
+                  
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="group-fleld group-fleld-05">
                                     <div class="mb-3 form-group">
                                         <label for="length_product" class="form-label">Chiều dài</label>
                                         <div class="input-group">
-                                            <input type="number" name="length-product" id="length_product"
-                                            class="form-control box-shadow-none" placeholder=""
-                                            aria-describedby="youtube">
+                                            <input type="number" min="0" name="length-product" id="length_product"
+                                                class="form-control box-shadow-none" placeholder="0"
+                                                aria-describedby="youtube">
                                             <span class="input-group-text" id="length_product-span">CM</span>
                                         </div>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="width_product" class="form-label">Chiều rộng</label>
                                         <div class="input-group">
-                                            <input type="number" name="width-product" id="width_product"
-                                            class="form-control box-shadow-none" placeholder=""
-                                            aria-describedby="youtube">
+                                            <input type="number" min="0" name="width-product" id="width_product"
+                                                class="form-control box-shadow-none" placeholder="0"
+                                                aria-describedby="youtube">
                                             <span class="input-group-text" id="width_product-span">CM</span>
                                         </div>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="height_product" class="form-label">Chiều cao</label>
                                         <div class="input-group">
-                                            <input type="number" name="height-product" id="height_product"
-                                            class="form-control box-shadow-none" placeholder=""
-                                            aria-describedby="youtube">
+                                            <input type="number" min="0" name="height-product" id="height_product"
+                                                class="form-control box-shadow-none" placeholder="0"
+                                                aria-describedby="youtube">
                                             <span class="input-group-text" id="height_product-span">CM</span>
                                         </div>
                                     </div>
@@ -282,7 +309,11 @@
                                         <table class="table  m-0 table-hover ">
                                             <div class="on-the-table">
                                                 <h6 class="on-the-table-title text-title">Chất liệu sản phẩm</h6>
-                                                <button class="on-the-table-button btn-style"><i class="bi-plus-lg"></i>Thêm chất liệu</button>
+                                                <a style="cursor: pointer;" data-bs-toggle="modal"
+                                                    data-bs-target="#add-chatLieu"
+                                                    class="on-the-table-button btn-style hover-zoom"><i
+                                                        class="bi-plus-lg"></i>Thêm
+                                                    chất liệu</a>
                                             </div>
                                             <thead>
                                                 <tr class="table-active">
@@ -292,7 +323,7 @@
                                                                 style="margin-right: 10px;" name="" id=""
                                                                 type="checkbox" value="checkedValue"
                                                                 aria-label="Text for screen reader">
-                                                           chất liệu
+                                                            chất liệu
                                                             <i class="bi bi-arrow-down"></i>
                                                         </form>
                                                     </th>
@@ -300,30 +331,31 @@
                                                     <th scope="col">Thao tác</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr class="">
-                                                    <form action="">
-                                                        <td scope="row" class="td-first-table">
-                                                            <input class="form-check-input box-shadow-none" name=""
-                                                                id="" type="checkbox" value="checkedValue"
-                                                                aria-label="Text for screen reader">
-
-                                                            <div class="text-blogs-group">
-                                                                <h4 class="text-title-blogs text-title">Tên chất liệu
-                                                                </h4>
-                                                                <h6 class="text-id-blogs text-title">Mã chất liệu</h6>
-                                                            </div>
-                                                        </td>
-                                                        <td>13/03/2023</td>
-                                                        <td>
-                                                            <button class="btn" style="color: var(--gray_600);"><i
-                                                                    class="bi bi-trash-fill"></i></button>
-                                                            <button class="btn" style="color: var(--gray_600);"><i
-                                                                    class="bi bi-pen-fill"></i></button>
-                                                        </td>
-                                                    </form>
+                                            <tbody id="body-table-chatlieu">
+                                                <tr th:id="'clsp' + ${chatLieuSanPham.chatLieuSPCL.idChatLieu}"
+                                                    th:each="chatLieuSanPham : ${SanPham.ListSPCL}">
+                                                    <!-- <form action=""> -->
+                                                    <td scope="row" class="td-first-table">
+                                                        <div class="text-blogs-group">
+                                                            <h4 class="text-title-blogs text-title"
+                                                                th:text="${chatLieuSanPham.chatLieuSPCL.tenChatLieu}">
+                                                                Tên chất liệu
+                                                            </h4>
+                                                            <h6 class="text-id-blogs text-title"
+                                                                th:text="${chatLieuSanPham.chatLieuSPCL.idChatLieu}">
+                                                                Mã chất liệu</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td th:text="${chatLieuSanPham.chatLieuSPCL.ngayTao}">13/03/2023
+                                                    </td>
+                                                    <td>
+                                                        <a th:onclick="deleteSPCL([[${chatLieuSanPham.chatLieuSPCL.idChatLieu}]])"
+                                                            class="btn" style="color: var(--gray_600);"><i
+                                                                class="bi bi-trash-fill"></i></a>
+                                                    </td>
+                                                    <!-- </form> -->
                                                 </tr>
-                                                
+
                                             </tbody>
 
                                         </table>
@@ -336,8 +368,18 @@
                                             <div class="on-the-table">
                                                 <h6 class="on-the-table-title text-title">Hình ảnh sản phẩm</h6>
                                                 <div class="btn-group">
-                                                    <button class="btn-style"><i class="bi-download"></i> Tải ảnh xuống</button>
-                                                    <button class="on-the-table-button btn-style"><i class="bi-upload"></i> Thêm ảnh lên</button>
+                                                    <button id="btn-loading" class="btn on-the-table-button btn-style"
+                                                        style="background-color: var(--gray_900); display: none;"
+                                                        type="button" disabled>
+                                                        <span class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
+                                                        đăng tải ...
+                                                    </button>
+                                                    <a style="cursor: pointer;" onclick="UploadImg()" id="uploadImg"
+                                                        class="on-the-table-button btn-style"><i class="bi-upload"></i>
+                                                        Thêm ảnh lên</a>
+                                                    <input id="fileUpload" type="file" style="display: none;"
+                                                        accept="image/png, image/gif, image/jpeg">
                                                 </div>
                                             </div>
                                             <thead>
@@ -357,33 +399,24 @@
                                                     <th scope="col">Thao tác</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr class="">
-                                                    <form action="">
-                                                        <td scope="row" class="td-first-table">
-                                                            <input class="form-check-input box-shadow-none" name=""
-                                                                id="" type="checkbox" value="checkedValue"
-                                                                aria-label="Text for screen reader">
-
-                                                            <div class="text-blogs-group">
-                                                                <h4 class="text-title-blogs text-title">Tên ảnh
-                                                                </h4>
-                                                                <h6 class="text-id-blogs text-title">Mã ảnh</h6>
-                                                            </div>
-                                                        </td>
-                                                        <td>12 MB</td>
-                                                        <td>13/03/2023</td>
-                                                    
-                                                        <td>
-                                                            <button class="btn" style="color: var(--gray_600);"><i
-                                                                    class="bi bi-trash-fill"></i></button>
-                                                            <button class="btn" style="color: var(--gray_600);"><i
-                                                                    class="bi bi-pen-fill"></i></button>
-                                                        </td>
-                                                    </form>
+                                            <tbody id="body-table-hinhanh">
+                                                <tr th:id="'dtbase' + ${status.index}"
+                                                    th:each="hinhAnh, status : ${SanPham.ListHinhAnhSP}">
+                                                    <!-- <form action=""> -->
+                                                    <td scope="row" style="text-align: left;"
+                                                        th:text="${hinhAnh.tenHinhAnh}"></td>
+                                                    <td th:text="${hinhAnh.dungLuongAnh/1000} + KB">...</td>
+                                                    <td th:text="${hinhAnh.ngayDang}">...</td>
+                                                    <td>
+                                                        <a th:onclick="deleteHA02([[${status.index}]],[[${hinhAnh.tenHinhAnh}]])"
+                                                            class="btn btn-deleteHinhAnh"
+                                                            style="color: var(--gray_600);"><i
+                                                                class="bi bi-trash-fill"></i></a>
+                                                    </td>
+                                                    <!-- </form> -->
                                                 </tr>
-                                                
-                                               
+
+
                                             </tbody>
 
                                         </table>
@@ -393,11 +426,14 @@
                                 <div class="group-fleld group-fleld-011">
                                     <div class="mb-3 form-group">
                                         <label for="" class="form-label">Mô tả sản phẩm</label>
-                                        <textarea class="form-control" name="" id="" rows="9"></textarea>
+                                        <textarea th:field="*{moTaSanPham}" class="form-control" name="" id=""
+                                            rows="9"></textarea>
+                                        <small class="text-muted" th:if="${#fields.hasErrors('moTaSanPham')}"
+                                            th:errors="*{moTaSanPham}">...</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-012">
-                                    <button class="btn btn-style btn-update">Cập nhật</button>
+                                    <!-- <button class="btn btn-style btn-update">Cập nhật</button> -->
                                     <button class="btn btn-style btn-add">Thêm mới</button>
                                 </div>
 
@@ -407,8 +443,191 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="add-chatLieu" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">Thêm chất liệu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive" style="height: 400px; overflow: auto;">
+                                <table class="table  m-0 table-hover ">
+                                    <thead>
+                                        <tr class="table-active">
+                                            <th scope="col" style="text-align: left;">
+                                                <form action="" method="post">
+                                                    chất liệu
+                                                    <i class="bi bi-arrow-down"></i>
+                                                </form>
+                                            </th>
+                                            <th scope="col">Mã chất liệu</th>
+                                            <th scope="col">Ngày đăng</th>
+                                            <th scope="col">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="" style="border-bottom: 1px solid var(--gray_200);"
+                                            th:each="chatLieu : ${ChatLieu}">
+                                            <!-- <form action=""> -->
+                                            <td scope="row" style="text-align: left;" th:text="${chatLieu.tenChatLieu}">
+                                            </td>
+                                            <td th:text="${chatLieu.idChatLieu}">...</td>
+                                            <td th:text="${chatLieu.ngayTao}">...</td>
+                                            <td>
+                                                <button th:onclick="addChatLieu([[${chatLieu.idChatLieu}]])" class="btn"
+                                                    style="color: var(--gray_600);"><i
+                                                        class="bi bi-plus-lg"></i></button>
+                                            </td>
+                                            <!-- </form> -->
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+<script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCUZaW0hNyvWSRNVD5OQjeeZ0k5vocOmNI",
+        authDomain: "future-interior.firebaseapp.com",
+        projectId: "future-interior",
+        storageBucket: "future-interior.appspot.com",
+        messagingSenderId: "103193903702",
+        appId: "1:103193903702:web:ddd07a90bb6875d323b1f7",
+        measurementId: "G-66HZGSVJRJ"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+</script>
+
+<script th:if="${trungMa}">
+    alert("Mã sản phẩm đã tồn tại, hãy nhập lại");
+</script>
+
+<script>
+    $("#sortField").change(function () {
+        $("#Sort").trigger("click");
+    })
+
+    $("#sortOrder").change(function () {
+        $("#Sort").trigger("click");
+    })
+
+
+    function deleteSanPham(idSanPham) {
+        let message = "Bạn có muốn xóa sản phẩm này không ?";
+        if (confirm(message)) {
+            const Http = new XMLHttpRequest();
+            $("#idSanPham" + idSanPham).remove();
+            const url = '/Manager/product/delete?idSanPham=' + idSanPham;
+            Http.open("POST", url);
+            Http.send();
+            alert("Xóa thành công!");
+        }
+    }
+
+    function UploadImg() {
+        $("#fileUpload").trigger("click");
+    }
+
+    var number = 0;
+    function addHinhAnh(idHinhAnh, size, name) {
+        $.ajax({
+            type: "POST",
+            url: "/Manager/product/addHinhAnh?idHinhAnh=" + idHinhAnh + "&&size=" + size + "&&name=" + name,
+            success: function (response) {
+                console.log(response);
+                var date = response.ngayDang.slice(0, response.ngayDang.indexOf("T"));
+                var duongDan = "'" + response.idHinhAnh + "'";
+                var tenAnh = "'" + response.tenHinhAnh + "'";
+                $("#body-table-hinhanh").append('<tr class="" id="jquery' + number + '"> <form action=""> <td scope="row" style="text-align: left;"> ' + response.tenHinhAnh + ' </td> <td>' + response.dungLuongAnh / 1000 + ' KB</td> <td>' + date + '</td> <td> <a  onclick="deleteHA01(' + number + ',' + tenAnh + ')" class="btn btn-deleteHinhAnh" style="color: var(--gray_600);"><i class="bi bi-trash-fill"></i></a> </td> </form></tr>');
+                number++;
+            }
+        });
+    }
+
+    $("#fileUpload").change(function () {
+        $("#btn-loading").show();
+        $("#uploadImg").hide();
+        const ref = firebase.storage().ref();
+        const file = document.querySelector("#fileUpload").files[0];
+        const metadata = {
+            contentType: 'image/jpeg'
+        };
+        const nameFile = $("#fileUpload").val().split(/(\\|\/)/g).pop();
+        const uploadIMG = ref.child(nameFile).put(file, metadata);
+        uploadIMG
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                console.log(url);
+                $("#btn-loading").hide();
+                $("#uploadImg").show();
+                addHinhAnh(url, file.size, nameFile);
+                // console.log(file.size);
+            })
+            .catch(console.error)
+    });
+
+    function addChatLieu(idChatLieu) {
+        $.ajax({
+            type: "POST",
+            url: "/Manager/product/addChatLieu?idChatLieu=" + idChatLieu,
+            success: function (response) {
+                console.log(response);
+                $("#body-table-chatlieu").append('<tr class="" id="clsp' + response.idChatLieu + '"> <form action=""> <td scope="row" class="td-first-table">  <div class="text-blogs-group"> <h4 class="text-title-blogs text-title">' + response.tenChatLieu + '</h4> <h6 class="text-id-blogs text-title">' + response.idChatLieu + '</h6> </div> </td> <td>' + response.ngayTao + '</td> <td> <a onclick="deleteSPCL(' + response.idChatLieu + ')" class="btn" style="color: var(--gray_600);"><i class="bi bi-trash-fill"></i></a> </td> </form></tr>');
+            }
+        });
+    }
+
+
+
+    function deleteSPCL(idChatLieu) {
+        if (confirm("Bạn muốn xóa chất liệu này ?")) {
+            $("#clsp" + idChatLieu).remove();
+        }
+
+    }
+
+
+    function deleteHA01(number, tenAnh) {
+        if (confirm("Bạn muốn xóa hình ảnh này ?")) {
+            $("#jquery" + number).remove();
+            const storageRef = firebase.storage().ref();
+            var desertRef = storageRef.child(tenAnh);
+            desertRef.delete().then(() => {
+                alert("xóa thành công");
+            }).catch((error) => {
+                console.log(error);
+            });
+        }
+    }
+
+    function deleteHA02(number, tenAnh) {
+        if (confirm("Bạn muốn xóa hình ảnh này ?")) {
+            $("#dtbase" + number).remove();
+            const storageRef = firebase.storage().ref();
+            var desertRef = storageRef.child(tenAnh);
+            desertRef.delete().then(() => {
+                alert("xóa thành công");
+            }).catch((error) => {
+                console.log("không tìm thấy ảnh");
+            });
+        }
+    }
+
+
+</script>
 
 </html>

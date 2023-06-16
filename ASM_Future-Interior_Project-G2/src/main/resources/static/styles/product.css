@@ -62,3 +62,41 @@ article nav {
     text-align: left;
     color: #98A2B3;
 }
+
+/* product slideshow */
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .slideproduct {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  .prev-btn {
+    left: 10px;
+  }
+  
+  .next-btn {
+    right: 10px;
+  }

@@ -1,6 +1,8 @@
 package com.spring.main.entity;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,11 +25,12 @@ public class SanPhamChatLieu implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_san_pham_chat_lieu")
 	int idSanPhamChatLieu;
-	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_san_pham")
 	SanPham sanPhamSPCL;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_chat_lieu")
 	ChatLieu chatLieuSPCL;

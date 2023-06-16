@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <link rel="website icon" type="png" href="img/logo--noname.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Đăng Ký</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -36,6 +37,9 @@
                                 id="tenDangNhap" placeholder="Tên đăng nhập của bạn">
                             <small id="helpId" class="text-danger" th:if="${#fields.hasErrors('tenDangNhap')}"
                                 th:errors="*{tenDangNhap}">Help text</small>
+                            <small id="helpId" class="text-danger" th:if="${tenDangNhapError}">Tên đăng nhập từ 5 đến 10
+                                kí tự và không được có dấu.</small>
+
                             <small class="text-danger" th:if="${duplicateUsername}">Tên đăng nhập đã tồn tại</small>
 
                         </div>
@@ -54,6 +58,8 @@
                                 id="matKhau">
                             <small id="helpId" class="text-danger" th:if="${#fields.hasErrors('matKhau')}"
                                 th:errors="*{matKhau}">Help text</small>
+                            <small id="helpId" class="text-danger" th:if="${matKhauError}">mật khẩu có ít nhất 8 ký tự
+                                bao gồm chữ hoa, chữ thường và số</small>
 
                         </div>
                         <div class="mb-3 form-group">

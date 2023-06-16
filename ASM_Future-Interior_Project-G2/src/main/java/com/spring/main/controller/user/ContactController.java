@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.main.bean.MailInfo;
 import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.SessionService;
 
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.ServletContext;
@@ -31,10 +32,20 @@ public class ContactController {
 
 	@Autowired
 	ServletContext context;
+
+	@Autowired
+	SessionService session;
 	
 	@GetMapping("/contact-page")
 	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
 		MailInfo lh = new MailInfo();
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
+		}
 		model.addAttribute("lienhe", lh);
 		return "contact";
 	}
