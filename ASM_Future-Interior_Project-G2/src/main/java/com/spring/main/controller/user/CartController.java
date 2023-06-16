@@ -73,23 +73,29 @@ public class CartController {
 	}
 
 	@PostMapping("/cart-page/add")
-	public String addToCart(@Param("soLuong") Integer soLuong, @Param("idSanPham") String idSanPham, Model model) {
-		System.out.println(soLuong + "-----" + idSanPham);
+	public String addToCart(@Param("soLuong") Integer soLuong, @Param("idSanPham") String idSanPham, Model model,
+			@Param("slTonKho") Integer slTonKho) {
+		System.out.println(soLuong + "-----" + idSanPham + "-----------------" + slTonKho);
 
-		// Add to cart
-		SanPham spitem = spDAO.findById(idSanPham).get();
-		model.addAttribute("spitem", spitem);
-		var productsSale = spkmDAO.findAll();
-		model.addAttribute("productsSales", productsSale);
+		if (soLuong <= slTonKho) {
+			// Add to cart
+			SanPham spitem = spDAO.findById(idSanPham).get();
+			model.addAttribute("spitem", spitem);
+			var productsSale = spkmDAO.findAll();
+			model.addAttribute("productsSales", productsSale);
 
-		TaiKhoan tenDangNhap = tkDAO.findById("thao").get();
+			TaiKhoan tenDangNhap = tkDAO.findById("thao").get();
 
-		List<GioHang> phamList = ghDAO.findByTaiKhoanGH(tenDangNhap);
-		model.addAttribute("items", phamList);
+			List<GioHang> phamList = ghDAO.findByTaiKhoanGH(tenDangNhap);
+			model.addAttribute("items", phamList);
 
-		Integer sl = cart.add(idSanPham, soLuong, tenDangNhap);
+			Integer sl = cart.add(idSanPham, soLuong, tenDangNhap);
+			return "redirect:/cart-page";
+		} else {
+			System.out.println("Mua quá số lượng");
+			
+		}
 
-		return "redirect:/cart-page";
 	}
 
 	@RequestMapping("/cart-page/update/{idGioHang}")

@@ -139,7 +139,8 @@
                                     th:text="${#numbers.formatDecimal(spitem.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
                             </p>
                         </div>
-
+                        <label name="slTonKho" th:text="'Còn lại: '+${spitem.soLuong}"></label><br>
+                        <input type="number" hidden name="slTonKho" th:value="${spitem.soLuong}">
                     </div>
                     <div class="properties my-5">
                         <!-- Loai -->
@@ -153,11 +154,15 @@
                             <h3>Tên chất liệu: <span th:text="${spcl.chatLieuSPCL.tenChatLieu}"></span></h3>
                         </div>
                     </div>
-                   
+                
+                        
+                       
+
                     <div class="quantity">
                         <label for="quantity-input">Số lượng:</label>
                         <div class="input-group">
-                            <input type="number" name="soLuong" id="soLuong" min="1" th:value="${spitem.soLuong}">
+                            <input type="number" name="soLuong" id="soLuong" min="1" value="1">
+                            <div class="text-danger" th:text="${message}"></div>
                         </div>
                     </div>
                     
