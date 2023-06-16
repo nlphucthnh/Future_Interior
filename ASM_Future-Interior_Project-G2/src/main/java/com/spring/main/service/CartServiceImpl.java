@@ -30,7 +30,6 @@ public class CartServiceImpl implements CartService {
 
 	@Autowired
 	GioHangDAO ghdao;
-	
 
 	@Override
 	public Integer add(String idSanPham, Integer soLuong, TaiKhoan taiKhoanGH) {

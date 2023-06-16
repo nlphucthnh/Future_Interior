@@ -1,4 +1,5 @@
 package com.spring.main.entity;
+
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,22 +18,22 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "gio_hang")
-public class GioHang implements Serializable{
+public class GioHang implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_gio_hang")
-	int idGioHang ;
-	
+	int idGioHang;
+
 	@Column(name = "so_luong")
-	int soLuong ;
-	
-	
+	int soLuong;
+
 	@ManyToOne
 	@JoinColumn(name = "id_san_pham")
 	SanPham sanPhamGH;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ten_dang_nhap")
 	TaiKhoan taiKhoanGH;
+
 }

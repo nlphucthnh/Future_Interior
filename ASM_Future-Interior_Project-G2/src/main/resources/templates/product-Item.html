@@ -120,8 +120,10 @@
                 </div>
 
                 <div class="col-md-4 product-item-text my-4">
+                   <!-- Thông báo mua quá số lượng tồn kho -->
+                    <div class="text-danger" th:text="${message}">Thông báo:</div>
                     <!-- Dat form star -->
-                    <form th:action="@{/cart-page/add}" method="post" th:object="${spitem}">
+                    <form th:action="@{/addToCart}" method="post" th:object="${spitem}">
                         <input type="text" hidden name="idSanPham" th:value="${spitem.idSanPham}">
                     <div class="product-item-name">
                         <!-- Ten sp-->
@@ -161,7 +163,7 @@
                     <div class="quantity">
                         <label for="quantity-input">Số lượng:</label>
                         <div class="input-group">
-                            <input type="number" name="soLuong" id="soLuong" min="1" value="1">
+                            <input type="number" width="10px" name="soLuong" id="soLuong" min="1" value="1">
                             <div class="text-danger" th:text="${message}"></div>
                         </div>
                     </div>
@@ -173,7 +175,7 @@
                         </a>
                         
                         <a class="link-base" >
-                            <button type="submit" class="btn-base" th:fomation="@{/cart-page/add}">Thêm vào giỏ hàng</button>
+                            <button type="submit" class="btn-base" th:fomation="@{/addToCart}">Thêm vào giỏ hàng</button>
                         </a>
 
                     </div>
@@ -182,6 +184,7 @@
                 </div>
                  <!-- End form add to cart -->
                 </form>
+                
             </div>
         </div>
 

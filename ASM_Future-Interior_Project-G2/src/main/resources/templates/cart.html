@@ -228,7 +228,7 @@
 										
 									</div>
 								</td>
-
+									<!-- Phân loại giá tiền sản phẩm giữa khuyến mãi và không KM -->
 								<td>
 									<div class="product-price-main">
 										<h5 class="price-cart"
@@ -247,6 +247,7 @@
 							</td>
 							<!-- <td  th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')}"></td> -->
 							<td>
+								<!-- Thành tiền = giá KM * soLuong HOẶC giá không KM * soLuong -->
 								<div class="product-price-main">
 									<h5 th:unless="${item.SanPhamGH.ListSPKM != null && !item.sanPhamGH.ListSPKM.isEmpty()}"
 									class="price-cart"

@@ -29,6 +29,7 @@ import com.spring.main.entity.GioHang;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.TaiKhoan;
 import com.spring.main.service.CartService;
+import com.spring.main.service.SessionService;
 
 @Controller
 public class CartController {
@@ -57,6 +58,9 @@ public class CartController {
 	@Autowired
 	DonHangChiTietDAO dhctDAO;
 
+	@Autowired
+	SessionService session;
+
 	@RequestMapping("/cart-page")
 	public String getCartPage(Model model) {
 		model.addAttribute("cart", cart);
@@ -72,10 +76,11 @@ public class CartController {
 		return "cart";
 	}
 
-	@PostMapping("/cart-page/add")
+	@PostMapping("/addToCart")
 	public String addToCart(@Param("soLuong") Integer soLuong, @Param("idSanPham") String idSanPham, Model model,
 			@Param("slTonKho") Integer slTonKho) {
-		System.out.println(soLuong + "-----" + idSanPham + "-----------------" + slTonKho);
+		System.out.println("addToCart---slmua:" + soLuong + "-----idSanPham:" + idSanPham + "-----------------slTonKho:"
+				+ slTonKho);
 
 		if (soLuong <= slTonKho) {
 			// Add to cart
@@ -93,15 +98,16 @@ public class CartController {
 			return "redirect:/cart-page";
 		} else {
 			System.out.println("Mua quá số lượng");
-			
+			model.addAttribute("message", "Mua quá số lượng");
+			return "redirect:/product-page/edit/" + idSanPham;
 		}
 
 	}
 
 	@RequestMapping("/cart-page/update/{idGioHang}")
 	public String update(@PathVariable("idGioHang") Integer idGioHang, @RequestParam("soLuong") Integer soLuong) {
-		System.out.println(idGioHang + "---" + soLuong);
-		cart.update(idGioHang, soLuong);
+		System.out.println("UpdateSoLuong-----idGioHang:" + idGioHang + "---soLuongUpdate:" + soLuong);
+		ghDAO.updateSoLuong(soLuong, idGioHang);
 		return "redirect:/cart-page";
 	}
 
