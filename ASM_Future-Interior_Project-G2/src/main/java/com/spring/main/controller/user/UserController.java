@@ -38,13 +38,12 @@ public class UserController {
 		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
 		System.out.println(taiKhoan.getTenDangNhap());
 		// System.out.println(sessions.getAttribute("TaiKhoanUser").toString());
-		if (taiKhoan.getTenDangNhap() != null) {
+		if(taiKhoan.getTenDangNhap() != null){
 			model.addAttribute("onRegistered", true);
 			model.addAttribute("TaiKhoanUser", taiKhoan);
 		} else {
 			model.addAttribute("onRegistered", false);
 		}
-
 		return "index";
 	}
 
