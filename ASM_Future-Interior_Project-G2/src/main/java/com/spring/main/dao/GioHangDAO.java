@@ -11,11 +11,14 @@ import org.springframework.data.repository.query.Param;
 import com.spring.main.entity.GioHang;
 import com.spring.main.entity.TaiKhoan;
 
+import jakarta.transaction.Transactional;
+
 public interface GioHangDAO extends JpaRepository<GioHang, Integer> {
 
 	List<GioHang> findByTaiKhoanGH(TaiKhoan taiKhoanGH);
 
+	@Modifying(clearAutomatically = true)
+	@Transactional
 	@Query("Update GioHang gh set gh.soLuong = ?1 where gh.idGioHang = ?2")
-	@Modifying
 	public void updateSoLuong(Integer soLuong, Integer idGioHang);
 }

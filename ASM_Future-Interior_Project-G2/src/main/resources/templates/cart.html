@@ -222,7 +222,7 @@
 									<div class="counter">
 										<span class="down" onClick='decreaseCount(event, this)'><button style="padding: 1px 8px;" onblur="this.form.submit()">-</button></span>
 										
-										<input type="number" name="soLuong" onchange="this.form.submit()" th:value="${item.soLuong}" min="1">
+										<input type="number" min="1" name="soLuong" onchange="this.form.submit()" th:value="${item.soLuong}" >
 
 										<span class="up" onClick='increaseCount(event, this)'><button style="padding: 1px 6px;" onblur="this.form.submit()">+</button></span>
 										
