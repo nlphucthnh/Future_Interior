@@ -30,15 +30,12 @@ public class SanPham implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "id_san_pham")
-	@NotBlank(message = "Vui lòng nhập mã Sản phẩm")
 	String idSanPham;
 
 	@Column(name = "ten_san_pham")
-	@NotBlank(message = "Vui lòng nhập tên Sản phẩm")
 	String tenSanPham;
 
 	@Column(name = "gia_san_pham")
-	@NotNull(message = "Vui lòng nhập đơn giá Sản phẩm")
 	@Min(0)
 	float giaSanPham;
 
@@ -47,12 +44,10 @@ public class SanPham implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_tao_san_pham")
-	@NotNull(message = "Vui lòng nhập ngày tạo Sản phẩm")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date ngayTaoSanPham = new Date();
 
 	@Column(name = "mo_ta_san_pham")
-	@NotBlank(message = "Vui lòng nhập mô tả Sản phẩm")
 	String moTaSanPham ;
 
 	@Column(name = "so_luong")
@@ -90,7 +85,10 @@ public class SanPham implements Serializable {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "sanPhamSPCL")
 	List<SanPhamChatLieu> ListSPCL;
-	@JsonManagedReference
-	@OneToMany(mappedBy = "sanPhamSPKM")
-	List<SanPhamKhuyenMai> ListSPKM; 
+
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name = "id_khuyen_mai")
+	KhuyenMai khuyenMai;
+	
 }

@@ -66,7 +66,11 @@ public class ProductManagerController {
     private List<ChatLieu> LISTCL_ADD = new ArrayList<>();
     private List<HinhAnh> LISTHA_ADD = new ArrayList<>();
     private String information[] = { "DESC", "tenSanPham", "" };// DESC,tenSanPham,search
+    private boolean flag = false;
 
+    // ----------------------HÀM XỬ LÝ TRANG----------------------//
+
+    // Lấy dữ liệu và phân trang
     @GetMapping("/Manager/product")
     public String ManageProductPage(Model model, @RequestParam("page") Optional<Integer> pageSP) {
         Pageable pageableSP = PageRequest.of(pageSP.orElse(0), 5, sort);
@@ -74,16 +78,19 @@ public class ProductManagerController {
         model.addAttribute("pageSP", pageSanPham);
         // sanPham = sanPhamDAO.findByIdSanPham("SP002");
         model.addAttribute("SanPham", sanPham);
+        model.addAttribute("flag", flag);
         model.addAttribute("inforSort", information);
         return "Manager-product-page";
     }
 
+    // Xử lý tìm kiếm bằng tên sản phẩm
     @PostMapping("/Manager/product/search")
     public String searchProduct(@RequestParam(name = "searchText") String searchText) {
         information[2] = searchText;
         return "redirect:/Manager/product";
     }
 
+    // Xử lý sắp xếp sản phẩm theo các thuộc tính
     @PostMapping("/Manager/product/sort")
     public String sortProduct(@RequestParam(name = "sortOrder") String sortOrder,
             @RequestParam(name = "sortField") String sortField) {
@@ -93,6 +100,7 @@ public class ProductManagerController {
         return "redirect:/Manager/product";
     }
 
+    // Xử lý xóa sản phẩm
     @RequestMapping("/Manager/product/delete")
     public String deleteProduct(@RequestParam(name = "idSanPham") String idSanPham) {
         SanPham sanPhamGet = sanPhamDAO.findByIdSanPham(idSanPham);
@@ -102,57 +110,93 @@ public class ProductManagerController {
         return "redirect:/Manager/product";
     }
 
-    @RequestMapping("/Manager/product/eidt")
-    public String editProduct(@RequestParam(name = "idSanPham") String idSanPham) {
+    // Xử lý hiển thị nội dung từ bảng sang form chi tiết hơn
+    @PostMapping("/Manager/product/eidt")
+    public String editProduct(@RequestParam(name = "idSanPham") String idSanPham, Model model) {
         SanPham sanPhamGet = sanPhamDAO.findByIdSanPham(idSanPham);
+        System.out.println(sanPhamGet.getIdSanPham());
         if (sanPhamGet != null) {
-            sanPhamDAO.delete(sanPhamGet);
+            model.addAttribute("SanPham", sanPhamGet);
+            // String ktSP = sanPhamGet.getKichThuocSanPham();
+            // Double chieuDai = Double.parseDouble(ktSP.substring(0, ktSP.indexOf("*")));
+            // Double chieuRong = Double.parseDouble(ktSP.substring(ktSP.indexOf("*")+1, ktSP.lastIndexOf("*")));
+            // Double chieuCao = Double.parseDouble(ktSP.substring(ktSP.lastIndexOf("*")+1));
+            // Double kichThuoc[] = { chieuDai, chieuRong, chieuCao };
+            // model.addAttribute("kichThuoc", kichThuoc);
+            flag = true;
+        } else {
+            model.addAttribute("SanPham", sanPham);
+            flag = false;
         }
-        return "redirect:/Manager/product";
+        Pageable pageableSP = PageRequest.of(0, 5, sort);
+        Page<SanPham> pageSanPham = sanPhamDAO.findByTenSanPham(information[2], pageableSP);
+        model.addAttribute("pageSP", pageSanPham);
+        model.addAttribute("flag", flag);
+        model.addAttribute("inforSort", information);
+        return "Manager-product-page";
     }
 
     @RequestMapping("/Manager/product/create")
-    public String createProduct(@Valid @ModelAttribute("SanPham") SanPham sanPham, BindingResult result, Model model,
+    public String createProduct(@ModelAttribute("SanPham") SanPham sanPham, Model model,
             @RequestParam(name = "length-product", defaultValue = "0.0") double length,
             @RequestParam(name = "width-product", defaultValue = "0.0") double width,
             @RequestParam(name = "height-product", defaultValue = "0.0") double height) {
-        if (result.hasErrors()) {
-            Pageable pageableSP = PageRequest.of(0, 5, sort);
-            Page<SanPham> pageSanPham = sanPhamDAO.findByTenSanPham(information[2], pageableSP);
-            model.addAttribute("pageSP", pageSanPham);
-            model.addAttribute("SanPham", sanPham);
-            model.addAttribute("inforSort", information);
-            return "Manager-product-page";
-        } else {
-            SanPham sanPhamTest = sanPhamDAO.findByIdSanPham(sanPham.getIdSanPham());
-            if (sanPhamTest != null) {
-                Pageable pageableSP = PageRequest.of(0, 5, sort);
-                Page<SanPham> pageSanPham = sanPhamDAO.findByTenSanPham(information[2], pageableSP);
-                model.addAttribute("pageSP", pageSanPham);
-                model.addAttribute("SanPham", sanPham);
-                model.addAttribute("trungMa", true);
-                model.addAttribute("inforSort", information);
-                return "Manager-product-page";
-            }
-            sanPham.setKichThuocSanPham(length + "*" + width + "*" + height);
-            sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
-            sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
-            SanPham sanPhamDataBase = sanPhamDAO.save(sanPham);
-            for(ChatLieu chatLieu: LISTCL_ADD){
+        sanPham.setKichThuocSanPham(length + "*" + width + "*" + height);
+        sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
+        sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
+        sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
+        SanPham sanPhamDataBase = sanPhamDAO.save(sanPham);
+        if (LISTCL_ADD.size() != 0) {
+            for (ChatLieu chatLieu : LISTCL_ADD) {
                 SanPhamChatLieu sanPhamChatLieu = new SanPhamChatLieu();
                 sanPhamChatLieu.setChatLieuSPCL(chatLieu);
                 sanPhamChatLieu.setSanPhamSPCL(sanPhamDataBase);
                 sanPhamChatLieuDAO.save(sanPhamChatLieu);
             }
-            for(HinhAnh hinhAnh: LISTHA_ADD){
+        }
+        if (LISTHA_ADD.size() != 0) {
+            for (HinhAnh hinhAnh : LISTHA_ADD) {
                 hinhAnh.setSanPhamHA(sanPhamDataBase);
                 hinhAnhDAO.save(hinhAnh);
             }
-            LISTCL_ADD.clear();
-            LISTHA_ADD.clear();
         }
+        LISTCL_ADD.clear();
+        LISTHA_ADD.clear();
+        flag = false;
         return "redirect:/Manager/product";
     }
+
+    @RequestMapping("/Manager/product/update")
+    public String updateProduct(@ModelAttribute("SanPham") SanPham sanPham, Model model,
+            @RequestParam(name = "length-product", defaultValue = "0.0") double length,
+            @RequestParam(name = "width-product", defaultValue = "0.0") double width,
+            @RequestParam(name = "height-product", defaultValue = "0.0") double height) {
+        sanPham.setKichThuocSanPham(length + "*" + width + "*" + height);
+        sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
+        sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
+        sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
+        SanPham sanPhamDataBase = sanPhamDAO.save(sanPham);
+        if (LISTCL_ADD.size() != 0) {
+            for (ChatLieu chatLieu : LISTCL_ADD) {
+                SanPhamChatLieu sanPhamChatLieu = new SanPhamChatLieu();
+                sanPhamChatLieu.setChatLieuSPCL(chatLieu);
+                sanPhamChatLieu.setSanPhamSPCL(sanPhamDataBase);
+                sanPhamChatLieuDAO.save(sanPhamChatLieu);
+            }
+        }
+        if (LISTHA_ADD.size() != 0) {
+            for (HinhAnh hinhAnh : LISTHA_ADD) {
+                hinhAnh.setSanPhamHA(sanPhamDataBase);
+                hinhAnhDAO.save(hinhAnh);
+            }
+        }
+        LISTCL_ADD.clear();
+        LISTHA_ADD.clear();
+        flag = false;
+        return "redirect:/Manager/product";
+    }
+
+    // ----------------------HÀM LẤY DỮ LIỆU JSON----------------------//
 
     @ResponseBody
     @RequestMapping("/Manager/product/addChatLieu")
@@ -176,8 +220,19 @@ public class ProductManagerController {
         return hinhAnh;
     }
 
-    // getData
+    @ResponseBody
+    @RequestMapping("/Manager/product/json")
+    public boolean checkDuplicateId(@RequestParam(name = "idProduct") String idProduct) {
+        SanPham sanPham = sanPhamDAO.findByIdSanPham(idProduct);
+        if (sanPham == null) {
+            return true;
+        }
+        return false;
+    }
 
+    // ---------------------HÀM LẤY DỮ LIỆU TỪ DATABASE-----------------------//
+
+    // getData
     @ModelAttribute("NhaSanXuat")
     public List<NhaSanXuat> getDataNSX() {
         List<NhaSanXuat> ListNSX = nhaSanXuatDAO.findAll();

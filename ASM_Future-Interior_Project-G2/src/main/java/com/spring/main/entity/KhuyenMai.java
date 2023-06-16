@@ -53,6 +53,6 @@ public class KhuyenMai implements Serializable{
 	@Max(message = "Tối đa là 100%", value =  100)
 	float phamTramKhuyenMai;
 	
-	@OneToMany(mappedBy = "khuyenMaiSPKM")
-	List<SanPhamKhuyenMai> ListSPKM;
+	@OneToMany(mappedBy = "khuyenMai")
+	List<SanPham> ListSanPhamkKM;
 }

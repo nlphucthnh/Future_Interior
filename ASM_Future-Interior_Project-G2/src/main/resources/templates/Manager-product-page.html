@@ -143,12 +143,17 @@
                                             <td th:text="${sanPham.giaSanPham} + ' VNĐ'">...</td>
                                             <td th:text="${#dates.format(sanPham.ngayTaoSanPham,'dd/MM/yyyy')}">
                                                 13/03/2023</td>
-                                            <td>
+                                            <td style="display: flex; align-items: center;">
                                                 <button th:onclick="deleteSanPham([[${sanPham.idSanPham}]])" class="btn"
                                                     style="color: var(--gray_600);"><i
                                                         class="bi bi-trash-fill"></i></button>
-                                                <button class="btn" style="color: var(--gray_600);"><i
-                                                        class="bi bi-pen-fill"></i></button>
+                                                <form
+                                                    th:action="@{/Manager/product/eidt?idSanPham=__${sanPham.idSanPham}__}"
+                                                    method="post">
+                                                    <button class="btn" style="color: var(--gray_600);"><i
+                                                            class="bi bi-pen-fill"></i></button>
+                                                </form>
+
                                             </td>
                                             <!-- </form> -->
                                         </tr>
@@ -183,39 +188,42 @@
                     </div>
                     <div class="tab-pane" id="form_blogs" role="tabpanel" aria-labelledby="form-blogs-tab">
                         <div class="form_blogs-pane">
-                            <form th:action="@{/Manager/product/create}" th:object="${SanPham}" method="post">
+                            <form action="/Manager/product/create" th:object="${SanPham}" method="post">
                                 <div class="group-fleld group-fleld-01">
                                     <div class="mb-3 form-group">
                                         <label for="id_product" class="form-label">Mã sản phẩm</label>
-                                        <input type="text" th:field="*{idSanPham}" min="0" name="id-product"
-                                            id="id_product" class="form-control box-shadow-none" placeholder="">
-                                        <small class="text-muted" th:if="${#fields.hasErrors('idSanPham')}"
-                                            th:errors="*{idSanPham}">...</small>
+                                        <input
+                                            th:style="${flag} ? 'pointer-events: none; background-color: var(--gray_200)' : 'pointer-events: all;background-color: white'"
+                                            type="text" th:field="*{idSanPham}" name="id-product" id="id_product"
+                                            class="form-control box-shadow-none input-form" placeholder="">
+                                        <small id="id_product-text" class="text-muted" style="display: none;">Vui lòng
+                                            nhập mã sản phẩm</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="name_product" class="form-label">Tên sản phẩm</label>
-                                        <input type="text" min="0" th:field="*{tenSanPham}" name="name-product"
-                                            id="name_product" class="form-control box-shadow-none" placeholder="">
-                                        <small class="text-muted" th:if="${#fields.hasErrors('tenSanPham')}"
-                                            th:errors="*{tenSanPham}">...</small>
+                                        <input type="text" th:field="*{tenSanPham}" name="name-product"
+                                            id="name_product" class="form-control box-shadow-none  input-form"
+                                            placeholder="">
+                                        <small id="name_product-text" class="text-muted" style="display: none;">Vui lòng
+                                            nhập tên sản phẩm</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="price_product" class="form-label">Đơn giá</label>
                                         <div class="input-group">
                                             <input type="number" th:field="*{giaSanPham}" name="price-product"
-                                                id="price_product" class="form-control box-shadow-none" placeholder=""
-                                                aria-describedby="price_product-span">
+                                                id="price_product" class="form-control box-shadow-none input-form"
+                                                placeholder="" aria-describedby="price_product-span">
                                             <span class="input-group-text" id="price_product-span">VND</span>
                                         </div>
-                                        <small class="text-muted" th:if="${#fields.hasErrors('giaSanPham')}"
-                                            th:errors="*{giaSanPham}">...</small>
+                                        <small id="price_product-text" class="text-muted" style="display: none;">Vui
+                                            lòng nhập đơn giá sản phẩm</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-02">
                                     <div class="mb-3 form-group">
                                         <label for="producer_product" class="form-label">Nhà sản xuất</label>
-                                        <select class="form-control form-select box-shadow-none" name="producer-product" th:field="*{nhaSanXuat.idNhaSanXuat}"
-                                            id="producer_product">
+                                        <select class="form-control form-select box-shadow-none" name="producer-product"
+                                            th:field="*{nhaSanXuat.idNhaSanXuat}" id="producer_product">
                                             <option th:each="nhaSanXuat : ${NhaSanXuat}"
                                                 th:value="${nhaSanXuat.idNhaSanXuat}"
                                                 th:text="${nhaSanXuat.tenNhaSanXuat}">...</option>
@@ -226,9 +234,9 @@
                                         <div class="input-group">
                                             <span class="input-group-text" id="card-credit"><i class="bi-layers-fill"
                                                     style="color: var(--gray_700);"></i></span>
-                                            <select class="form-control form-select box-shadow-none" th:field="*{phanNhomLoai.idPhanNhomLoai}"
-                                                name="type-group-product" id="type-group_product"
-                                                aria-describedby="card-credit">
+                                            <select class="form-control form-select box-shadow-none"
+                                                th:field="*{phanNhomLoai.idPhanNhomLoai}" name="type-group-product"
+                                                id="type-group_product" aria-describedby="card-credit">
                                                 <option th:each="phanNhomLoai : ${PhanNhomLoai}"
                                                     th:value="${phanNhomLoai.idPhanNhomLoai}"
                                                     th:text="${phanNhomLoai.tenPhanLoaiNhom}">...</option>
@@ -238,70 +246,73 @@
                                     <div class="mb-3 form-group">
                                         <label for="promotion_product" class="form-label">Mã khuyến mãi</label>
                                         <select class="form-control form-select box-shadow-none"
-                                            name="promotion-product" id="promotion_product">
+                                            th:field="*{khuyenMai.idKhuyenMai}" name="promotion-product"
+                                            id="promotion_product">
                                             <option th:each="khuyenMai : ${KhuyenMai}"
                                                 th:value="${khuyenMai.idKhuyenMai}" th:text="${khuyenMai.idKhuyenMai}">
                                                 ...</option>
-
                                         </select>
                                     </div>
                                 </div>
-                                <div class="group-fleld group-fleld-03">
+                                <div class="group-fleld group-fleld-02">
                                     <div class="mb-3 form-group">
                                         <label for="quatity_product" class="form-label">Số lượng sản phẩm</label>
                                         <input type="text" th:field="*{soLuong}" name="quatity-product"
-                                            id="quatity_product" class="form-control box-shadow-none" placeholder="">
-                                        <small class="text-muted" th:if="${#fields.hasErrors('soLuong')}"
-                                            th:errors="*{soLuong}">...</small>
+                                            id="quatity_product" class="form-control box-shadow-none input-form"
+                                            placeholder="">
+                                        <small id="quatity_product-text" class="text-muted" style="display: none;">Vui
+                                            lòng nhập số lượng sản phẩm</small>
+                                    </div>
+                                    <div class="mb-3 form-group">
+                                        <label for="quatity_product" class="form-label">Khối lượng sản phẩm</label>
+                                        <input type="text" th:field="*{khoiLuong}" name="mass-product" id="mass_product"
+                                            class="form-control box-shadow-none input-form" placeholder="">
+                                        <small id="mass_product-text" class="text-muted" style="display: none;">Vui
+                                            lòng nhập khối lượng sản phẩm</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="date_product" class="form-label">Ngày đăng</label>
                                         <input type="date" th:field="*{ngayTaoSanPham}" name="date-product"
-                                            id="date_product" class="form-control box-shadow-none" placeholder="">
-                                        <small class="text-muted" th:if="${#fields.hasErrors('ngayTaoSanPham')}"
-                                            th:errors="*{ngayTaoSanPham}">...</small>
+                                            id="date_product" class="form-control box-shadow-none input-form"
+                                            placeholder="">
+                                        <small id="date_product-text" class="text-muted" style="display: none;">Vui lòng
+                                            nhập ngày đăng sản phẩm</small>
                                     </div>
                                 </div>
-                                <!-- <div class="group-fleld group-fleld-04">
-                                    <div class="mb-3 form-group">
-                                        <label for="link-video_product" class="form-label">Link video lắp đặt</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="youtube"><i class="bi-youtube"
-                                                    style="color: var(--gray_700);"></i></span>
-                                            <input type="text" th:field="*{}" name="link-video-product" id="link-video_product"
-                                                class="form-control box-shadow-none" placeholder=""
-                                                aria-describedby="youtube">
-                                        </div>
-                  
-                                    </div>
-                                </div> -->
                                 <div class="group-fleld group-fleld-05">
                                     <div class="mb-3 form-group">
                                         <label for="length_product" class="form-label">Chiều dài</label>
                                         <div class="input-group">
                                             <input type="number" min="0" name="length-product" id="length_product"
-                                                class="form-control box-shadow-none" placeholder="0"
-                                                aria-describedby="youtube">
+                                                class="form-control box-shadow-none input-form" th:value="${kichThuoc[0]}"
+                                                placeholder="Nhập vào chiều dài" aria-describedby="youtube">
                                             <span class="input-group-text" id="length_product-span">CM</span>
                                         </div>
+                                        <small id="length_product-text" class="text-muted" style="display: none;">Vui
+                                            lòng nhập chiều dài sản phẩm</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="width_product" class="form-label">Chiều rộng</label>
                                         <div class="input-group">
                                             <input type="number" min="0" name="width-product" id="width_product"
-                                                class="form-control box-shadow-none" placeholder="0"
-                                                aria-describedby="youtube">
+                                                class="form-control box-shadow-none input-form" th:value="${kichThuoc[1]}"
+                                                placeholder="Nhập vào chiều rộng" aria-describedby="youtube">
                                             <span class="input-group-text" id="width_product-span">CM</span>
                                         </div>
+                                        <small id="width_product-text" class="text-muted" style="display: none;">Vui
+                                            lòng nhập chiều rộng sản phẩm</small>
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="height_product" class="form-label">Chiều cao</label>
                                         <div class="input-group">
                                             <input type="number" min="0" name="height-product" id="height_product"
-                                                class="form-control box-shadow-none" placeholder="0"
-                                                aria-describedby="youtube">
+                                                class="form-control box-shadow-none input-form" th:value="${kichThuoc[2]}"
+                                                placeholder="Nhập vào chiều rộng" aria-describedby="youtube">
                                             <span class="input-group-text" id="height_product-span">CM</span>
                                         </div>
+                                        <small id="height_product-text" class="text-muted" style="display: none;">Vui
+                                            lòng
+                                            nhập chiều cao sản phẩm</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-06">
@@ -426,18 +437,23 @@
                                 <div class="group-fleld group-fleld-011">
                                     <div class="mb-3 form-group">
                                         <label for="" class="form-label">Mô tả sản phẩm</label>
-                                        <textarea th:field="*{moTaSanPham}" class="form-control" name="" id=""
-                                            rows="9"></textarea>
-                                        <small class="text-muted" th:if="${#fields.hasErrors('moTaSanPham')}"
-                                            th:errors="*{moTaSanPham}">...</small>
+                                        <textarea th:field="*{moTaSanPham}" class="form-control input-form" name=""
+                                            id="description_product" rows="9"></textarea>
+                                        <small id="description_product-text" class="text-muted"
+                                            style="display: none;">Vui lòng nhập mô tả sản phẩm</small>
                                     </div>
                                 </div>
                                 <div class="group-fleld group-fleld-012">
-                                    <!-- <button class="btn btn-style btn-update">Cập nhật</button> -->
-                                    <button class="btn btn-style btn-add">Thêm mới</button>
+                                    <button formaction="/Manager/product/update" id="btn-update-01" disabled class="btn btn-style btn-update d-none">Cập nhật</button>
+                                    <button id="btn-add-01" disabled class="btn btn-style btn-add d-none">Thêm mới</button>
                                 </div>
-
                             </form>
+                        </div>
+                        <div class="group-fleld group-fleld-012">
+                            <button th:if="${flag}" id="btn-update-02" class="btn btn-style btn-update">Cập
+                                nhật</button>
+                            <button th:unless="${flag}" id="btn-add-02" class="btn btn-style btn-add">Thêm
+                                mới</button>
                         </div>
 
                     </div>
@@ -512,122 +528,14 @@
     firebase.initializeApp(firebaseConfig);
 </script>
 
-<script th:if="${trungMa}">
-    alert("Mã sản phẩm đã tồn tại, hãy nhập lại");
-</script>
-
-<script>
-    $("#sortField").change(function () {
-        $("#Sort").trigger("click");
-    })
-
-    $("#sortOrder").change(function () {
-        $("#Sort").trigger("click");
-    })
-
-
-    function deleteSanPham(idSanPham) {
-        let message = "Bạn có muốn xóa sản phẩm này không ?";
-        if (confirm(message)) {
-            const Http = new XMLHttpRequest();
-            $("#idSanPham" + idSanPham).remove();
-            const url = '/Manager/product/delete?idSanPham=' + idSanPham;
-            Http.open("POST", url);
-            Http.send();
-            alert("Xóa thành công!");
-        }
-    }
-
-    function UploadImg() {
-        $("#fileUpload").trigger("click");
-    }
-
-    var number = 0;
-    function addHinhAnh(idHinhAnh, size, name) {
-        $.ajax({
-            type: "POST",
-            url: "/Manager/product/addHinhAnh?idHinhAnh=" + idHinhAnh + "&&size=" + size + "&&name=" + name,
-            success: function (response) {
-                console.log(response);
-                var date = response.ngayDang.slice(0, response.ngayDang.indexOf("T"));
-                var duongDan = "'" + response.idHinhAnh + "'";
-                var tenAnh = "'" + response.tenHinhAnh + "'";
-                $("#body-table-hinhanh").append('<tr class="" id="jquery' + number + '"> <form action=""> <td scope="row" style="text-align: left;"> ' + response.tenHinhAnh + ' </td> <td>' + response.dungLuongAnh / 1000 + ' KB</td> <td>' + date + '</td> <td> <a  onclick="deleteHA01(' + number + ',' + tenAnh + ')" class="btn btn-deleteHinhAnh" style="color: var(--gray_600);"><i class="bi bi-trash-fill"></i></a> </td> </form></tr>');
-                number++;
-            }
-        });
-    }
-
-    $("#fileUpload").change(function () {
-        $("#btn-loading").show();
-        $("#uploadImg").hide();
-        const ref = firebase.storage().ref();
-        const file = document.querySelector("#fileUpload").files[0];
-        const metadata = {
-            contentType: 'image/jpeg'
-        };
-        const nameFile = $("#fileUpload").val().split(/(\\|\/)/g).pop();
-        const uploadIMG = ref.child(nameFile).put(file, metadata);
-        uploadIMG
-            .then(snapshot => snapshot.ref.getDownloadURL())
-            .then(url => {
-                console.log(url);
-                $("#btn-loading").hide();
-                $("#uploadImg").show();
-                addHinhAnh(url, file.size, nameFile);
-                // console.log(file.size);
-            })
-            .catch(console.error)
-    });
-
-    function addChatLieu(idChatLieu) {
-        $.ajax({
-            type: "POST",
-            url: "/Manager/product/addChatLieu?idChatLieu=" + idChatLieu,
-            success: function (response) {
-                console.log(response);
-                $("#body-table-chatlieu").append('<tr class="" id="clsp' + response.idChatLieu + '"> <form action=""> <td scope="row" class="td-first-table">  <div class="text-blogs-group"> <h4 class="text-title-blogs text-title">' + response.tenChatLieu + '</h4> <h6 class="text-id-blogs text-title">' + response.idChatLieu + '</h6> </div> </td> <td>' + response.ngayTao + '</td> <td> <a onclick="deleteSPCL(' + response.idChatLieu + ')" class="btn" style="color: var(--gray_600);"><i class="bi bi-trash-fill"></i></a> </td> </form></tr>');
-            }
-        });
-    }
-
-
-
-    function deleteSPCL(idChatLieu) {
-        if (confirm("Bạn muốn xóa chất liệu này ?")) {
-            $("#clsp" + idChatLieu).remove();
-        }
-
-    }
-
-
-    function deleteHA01(number, tenAnh) {
-        if (confirm("Bạn muốn xóa hình ảnh này ?")) {
-            $("#jquery" + number).remove();
-            const storageRef = firebase.storage().ref();
-            var desertRef = storageRef.child(tenAnh);
-            desertRef.delete().then(() => {
-                alert("xóa thành công");
-            }).catch((error) => {
-                console.log(error);
-            });
-        }
-    }
-
-    function deleteHA02(number, tenAnh) {
-        if (confirm("Bạn muốn xóa hình ảnh này ?")) {
-            $("#dtbase" + number).remove();
-            const storageRef = firebase.storage().ref();
-            var desertRef = storageRef.child(tenAnh);
-            desertRef.delete().then(() => {
-                alert("xóa thành công");
-            }).catch((error) => {
-                console.log("không tìm thấy ảnh");
-            });
-        }
-    }
-
-
+<script src="/javascripts/Manager-product.js"></script>
+<script th:if="${flag}">
+    $('#form-blogs-tab').css("background-color", "var(--gray_50)");
+    $('#form-blogs-tab').css("border", "1px solid var(--gray_300)");
+    $('#list-blogs-tab').css("background-color", "white");
+    $('#list-blogs-tab').css("border", "none");
+    $('#list_blogs').hide();
+    $('#form_blogs').show();
 </script>
 
 </html>
