@@ -61,7 +61,7 @@ public class CartController {
 	public String getCartPage(Model model) {
 		model.addAttribute("cart", cart);
 		model.addAttribute("countcart", cart.getCount());
-
+		System.out.println("countcart "+ cart.getCount());
 		var productsSale = spkmDAO.findAll();
 		model.addAttribute("productsSales", productsSale);
 
