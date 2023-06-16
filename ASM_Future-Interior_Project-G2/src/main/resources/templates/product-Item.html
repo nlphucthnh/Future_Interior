@@ -120,9 +120,6 @@
                 </div>
 
                 <div class="col-md-4 product-item-text my-4">
-                    <!-- Dat form star -->
-                    <form th:action="@{/cart-page/add}" method="post" th:object="${spitem}">
-                        <input type="text" hidden name="idSanPham" th:value="${spitem.idSanPham}">
                     <div class="product-item-name">
                         <!-- Ten sp-->
                         <h3 th:text="${spitem.tenSanPham}"></h3>
@@ -153,30 +150,33 @@
                             <h3>Tên chất liệu: <span th:text="${spcl.chatLieuSPCL.tenChatLieu}"></span></h3>
                         </div>
                     </div>
-                   
+                    
                     <div class="quantity">
                         <label for="quantity-input">Số lượng:</label>
                         <div class="input-group">
-                            <input type="number" name="soLuong" id="soLuong" min="1" th:value="${spitem.soLuong}">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="button" id="quantity-minus">
+                                    < </button>
+                            </div>
+                            <input type="number" class="quantity-input" name="quantity" min="1" value="1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="quantity-plus">></button>
+                            </div>
                         </div>
                     </div>
-                    
-               
-                    <div class="button-sell my-5 d-flex justify-content-between">
+                   
+                    <div class="button-sell my-5 d-flex justify-content-between" th:each="item : ${spitem}">
                         <a class="link-sell" th:href="@{/pay-page}">
                             <button class="btn-sell">Mua ngay </button>
                         </a>
                         
-                        <a class="link-base" >
-                            <button type="submit" class="btn-base" th:fomation="@{/cart-page/add}">Thêm vào giỏ hàng</button>
+                        <a class="link-base" th:href="@{/cart-page/edit/__${item.idSanPham}__}">
+                            <button class="btn-base">Đặt ngay </button>
                         </a>
 
                     </div>
-                   
 
                 </div>
-                 <!-- End form add to cart -->
-                </form>
             </div>
         </div>
 

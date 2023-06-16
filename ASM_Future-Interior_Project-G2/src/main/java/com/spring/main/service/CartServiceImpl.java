@@ -33,10 +33,10 @@ public class CartServiceImpl implements CartService {
 	GioHangDAO ghdao;
 
 	@Override
-	public Integer add(String idSanPham, Integer soLuong, TaiKhoan taiKhoanGH) {
+	public Integer add(String masp, Integer soLuong, TaiKhoan taiKhoanGH) {
 		Integer addQty = soLuong;
 
-		SanPham sp = dao.findById(idSanPham).get();
+		SanPham sp = dao.findById(masp).get();
 
 		// GioHang cart = ghdao.findByTaiKhoanGHAndSanPham(taiKhoanGH,sp);
 		// if (cart != null) {

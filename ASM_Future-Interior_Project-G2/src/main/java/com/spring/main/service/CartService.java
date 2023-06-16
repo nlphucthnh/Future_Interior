@@ -6,7 +6,7 @@ import com.spring.main.entity.GioHang;
 import com.spring.main.entity.TaiKhoan;
 
 public interface CartService {
-	Integer add(String idSanPham, Integer soLuong, TaiKhoan taiKhoanGH);
+	Integer add(String masp, Integer soLuong, TaiKhoan taiKhoanGH);
 
 	void remove(Integer id);
 

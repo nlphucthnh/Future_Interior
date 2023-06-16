@@ -56,6 +56,24 @@ public class CartController {
 
 	@Autowired
 	DonHangChiTietDAO dhctDAO;
+	// Impl Item
+	// @RequestMapping("/cart-page")
+	// public String cartProduct(Model model) {
+	// List<SanPham> phamList = spDAO.findAll();
+	// model.addAttribute("products", phamList);
+	//
+	// model.addAttribute("cart", cart);
+	// model.addAttribute("countcart", cart.getCount());
+	// return "cart";
+	// }
+	//
+	// @RequestMapping("/cart-page/edit/{idSanPham}")
+	// public String add(@PathVariable("idSanPham") String id) {
+	// cart.add(id);
+	// return "redirect:/cart";
+	// }
+
+	// Add SanPham nhưng kh có count
 
 	@RequestMapping("/cart-page")
 	public String getCartPage(Model model) {
@@ -72,22 +90,21 @@ public class CartController {
 		return "cart";
 	}
 
-	@PostMapping("/cart-page/add")
-	public String addToCart(@Param("soLuong") Integer soLuong, @Param("idSanPham") String idSanPham, Model model) {
-		System.out.println(soLuong + "-----" + idSanPham);
+	@RequestMapping("/cart-page/edit/{idSanPham}")
+	public String add(Model model,
+			@PathVariable("idSanPham") String id) {
 
-		// Add to cart
-		SanPham spitem = spDAO.findById(idSanPham).get();
+		SanPham spitem = spDAO.findById(id).get();
 		model.addAttribute("spitem", spitem);
 		var productsSale = spkmDAO.findAll();
 		model.addAttribute("productsSales", productsSale);
 
-		TaiKhoan tenDangNhap = tkDAO.findById("thao").get();
+		TaiKhoan tk = tkDAO.findById("thao").get();
 
-		List<GioHang> phamList = ghDAO.findByTaiKhoanGH(tenDangNhap);
+		List<GioHang> phamList = ghDAO.findByTaiKhoanGH(tk);
 		model.addAttribute("items", phamList);
 
-		Integer sl = cart.add(idSanPham, soLuong, tenDangNhap);
+		Integer sl = cart.add(id, 2, tk);
 
 		return "redirect:/cart-page";
 	}
