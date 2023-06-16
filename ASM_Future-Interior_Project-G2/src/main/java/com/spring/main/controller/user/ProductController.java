@@ -60,7 +60,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class productController {
+public class ProductController {
 
     @Autowired
     SanPhamDAO spDAO;
@@ -94,7 +94,7 @@ public class productController {
 
     @GetMapping("/")
     public String index(Model model) {
-        List<SanPham> phamList = sanPhamDAO.findAll();
+        List<SanPham> phamList = spDAO.findAll();
 
         model.addAttribute("products", phamList);
         model.addAttribute("onRegistered", false);
@@ -131,7 +131,7 @@ public class productController {
         model.addAttribute("spitem", spitem);
         var productsSale = spkmDAO.findAll();
         model.addAttribute("productsSales", productsSale);
-        model.addAttribute("countcart", cart.getCount());
+
         return "product-Item";
     }
 
@@ -217,7 +217,7 @@ public class productController {
     @GetMapping("/product-list-page/{category}")
     public String productListPage(Model model, @PathVariable("category") String category) {
         model.addAttribute("title", category);
-        List<SanPham> prolists = sanPhamDAO.findByLoaiSanpham("%" + category + "%",
+        List<SanPham> prolists = spDAO.findByLoaiSanpham("%" + category + "%",
                 Sort.by(Direction.ASC, "tenSanPham"));
         model.addAttribute("prolists", prolists);
         return "product-List";
@@ -451,6 +451,4 @@ public class productController {
         return "redirect:/person";
     }
 
-
-  
 }

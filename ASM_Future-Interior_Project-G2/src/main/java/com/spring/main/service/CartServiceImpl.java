@@ -37,6 +37,11 @@ public class CartServiceImpl implements CartService {
 		Integer addQty = soLuong;
 
 		SanPham sp = dao.findById(masp).get();
+<<<<<<< HEAD
+=======
+
+		// GioHang cart = ghdao.findByTaiKhoanGH(taiKhoanGH,sp);
+>>>>>>> parent of db2fab5 (fixSoluongfromAddtoCart)
 
 		// GioHang cart = ghdao.findByTaiKhoanGHAndSanPham(taiKhoanGH,sp);
 		// if (cart != null) {
