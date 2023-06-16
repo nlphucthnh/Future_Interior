@@ -61,6 +61,8 @@ public class CartController {
 	@Autowired
 	SessionService session;
 
+	public Double thanhtien =0.0;
+
 	@RequestMapping("/cart-page")
 	public String getCartPage(Model model) {
 		model.addAttribute("cart", cart);
@@ -95,6 +97,8 @@ public class CartController {
 			model.addAttribute("items", phamList);
 
 			Integer sl = cart.add(idSanPham, soLuong, tenDangNhap);
+			double thanhTien =+ soLuong + spitem.getGiaSanPham();
+			System.out.println("ThanhTienAddToCart-----"+thanhTien);
 			return "redirect:/cart-page";
 		} else {
 			System.out.println("Mua quá số lượng");
