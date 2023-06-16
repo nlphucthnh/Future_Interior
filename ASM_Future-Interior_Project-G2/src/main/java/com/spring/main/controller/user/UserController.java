@@ -27,19 +27,19 @@ HttpSession sessions;
 // 	public String getSiginPage() {
 // 		return "dangky";
 // 	}
-
-	
-
 	
 	@GetMapping("/home-page")
 	public String getHomePage(Model model) {
 		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-		if(taiKhoan != null){
+		System.out.println(taiKhoan.getTenDangNhap());
+		// System.out.println(sessions.getAttribute("TaiKhoanUser").toString());
+		if(taiKhoan.getTenDangNhap() != null){
 			model.addAttribute("onRegistered", true);
 			model.addAttribute("TaiKhoanUser", taiKhoan);
 		}else {
 			model.addAttribute("onRegistered", false);
 		}
+		
 		return "index";
 	}
 	
@@ -49,14 +49,7 @@ HttpSession sessions;
 	// }
 	
 	@GetMapping("/blogs-item-page")
-	public String getBlogItemPage(Model model) {
-		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-		if(taiKhoan != null){
-			model.addAttribute("onRegistered", true);
-			model.addAttribute("TaiKhoanUser", taiKhoan);
-		}else {
-			model.addAttribute("onRegistered", false);
-		}
+	public String getBlogItemPage() {
 		return "blog-item";
 	}
 // 	@GetMapping("/about-page")
@@ -65,14 +58,7 @@ HttpSession sessions;
 // 	}
 
 	@GetMapping("/about-page")
-	public String getAboutPage(Model model) {
-		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-		if(taiKhoan != null){
-			model.addAttribute("onRegistered", true);
-			model.addAttribute("TaiKhoanUser", taiKhoan);
-		}else {
-			model.addAttribute("onRegistered", false);
-		}
+	public String getAboutPage() {
 		return "about";
 	}
 

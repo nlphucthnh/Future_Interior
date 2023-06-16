@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.main.dao.BaiDangDAO;
 import com.spring.main.entity.BaiDang;
-import com.spring.main.entity.TaiKhoan;
-import com.spring.main.service.SessionService;
-
-import jakarta.mail.Session;
 
 @Controller
 public class BlogController {
@@ -28,18 +24,13 @@ public class BlogController {
     @Autowired
     BaiDangDAO baiDangDAO;
 
-    @Autowired
-    SessionService session;
-
     @RequestMapping("/blog-page")
     public String blogPage(Model model, @RequestParam("p") Optional<Integer> p) {
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-		if(taiKhoan != null){
-			model.addAttribute("onRegistered", true);
-			model.addAttribute("TaiKhoanUser", taiKhoan);
-		}else {
-			model.addAttribute("onRegistered", false);
-		}
+        // List<BaiDang> list = new ArrayList<>();
+        // List<BaiDang> baiDang = baiDangDAO.findAll();
+        // for (BaiDang baiDang2 : baiDang) {
+        // System.out.println(baiDang2.getTieuDeBaiDang());
+        // }
         Pageable pageable = PageRequest.of(0, 9);
         pageable = PageRequest.of(p.orElse(0), 9);
         Page<BaiDang> page = baiDangDAO.findAll(pageable);

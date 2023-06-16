@@ -30,8 +30,7 @@
     <title>Product</title>
 </head>
 <body>
-    <nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
-    <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
+   <nav th:replace="navbar"></nav>
    <nav th:replace="banner"></nav>
   
     <!-- title nội dụng chính  -->

@@ -42,8 +42,7 @@
 </head>
 
 <body>
-    <nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
-    <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
+    <nav th:replace="navbar"></nav>
     <header class="container product-item-title my-5">
         <h3>Chi tiết sản phẩm</h3>
         <p class="duongdancon"><a href="product-page">Sản phẩm</a> / <a href="product-item-page">bàn làm việc</a></p>

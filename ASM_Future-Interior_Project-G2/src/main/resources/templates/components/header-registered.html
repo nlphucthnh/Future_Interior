@@ -151,7 +151,7 @@
                 </li>
             </ul>
         </div>
-        <div class="registered-group">
+        <div class="registered-group" th:each="pe : ${people}">
             <!-- <div class="registered-group-search registered-item">
                 <i class="bi bi-search"></i>
             </div> -->
@@ -161,11 +161,11 @@
             </div>
             <div class="registered-group-account registered-item">
                 <div class="registered-group-account-text">
-                    <div class="registered-group-account-name-text" th:text="${TaiKhoanUser.tenDangNhap}"></div>
-                    <div class="registered-group-account-email-text" th:text="${TaiKhoanUser.email}"></div>
+                    <div class="registered-group-account-name-text" th:text="${pe.thongTinTaiKhoan.hoTen}"></div>
+                    <div class="registered-group-account-email-text" th:text="${pe.email}"></div>
                 </div>
                 <div class="registered-group-account-img dropdown">
-                    <img class="img-avata-registered"  src="https://firebasestorage.googleapis.com/v0/b/future-interior.appspot.com/o/Null.png?alt=media" alt="Avatar" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="img-avata-registered"  th:src="@{'/img/' + ${pe.thongTinTaiKhoan.anhDaiDien}}" alt="Avatar" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton"  style="right: 50%; left: auto;  transform: translateX(50%); ">
                         <li><a class="dropdown-item" th:href="@{/person}">Hồ sơ cá nhân</a></li>
                         <li><a class="dropdown-item" th:href="@{/changePassword}">Đổi mật khẩu</a></li>

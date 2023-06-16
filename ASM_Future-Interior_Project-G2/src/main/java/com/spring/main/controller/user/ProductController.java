@@ -95,13 +95,7 @@ public class productController {
     @GetMapping("/")
     public String index(Model model) {
         List<SanPham> phamList = sanPhamDAO.findAll();
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-        if (taiKhoan != null) {
-            model.addAttribute("onRegistered", true);
-            model.addAttribute("TaiKhoanUser", taiKhoan);
-        } else {
-            model.addAttribute("onRegistered", false);
-        }
+
         model.addAttribute("products", phamList);
         model.addAttribute("onRegistered", false);
         var productsSale = spkmDAO.findAll();
@@ -111,13 +105,7 @@ public class productController {
 
     @GetMapping("/product-page")
     public String getProduct(Model model, @RequestParam("p") Optional<Integer> p) {
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-        if (taiKhoan.getTenDangNhap() != null) {
-            model.addAttribute("onRegistered", true);
-            model.addAttribute("TaiKhoanUser", taiKhoan);
-        } else {
-            model.addAttribute("onRegistered", false);
-        }
+
         var product = new SanPham();
         model.addAttribute("product", product);
         Pageable pageable = PageRequest.of(p.orElse(0), 12, Sort.by("tenSanPham").ascending());
@@ -238,14 +226,9 @@ public class productController {
     /// person
     @GetMapping("/person")
     public String person(Model model) {
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-        if (taiKhoan.getTenDangNhap() != null) {
-            model.addAttribute("onRegistered", true);
-            model.addAttribute("TaiKhoanUser", taiKhoan);
-        } else {
-            model.addAttribute("onRegistered", false);
-        }
-        List<DonHangChiTiet> tkmuahang = dhctDAO.findByTaiKhoan(taiKhoan.getTenDangNhap());
+        TaiKhoan people = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("people", people);
+        List<DonHangChiTiet> tkmuahang = dhctDAO.findByTaiKhoan("thienlv");
         model.addAttribute("donhangct", tkmuahang);
         return "person";
     }
@@ -271,8 +254,9 @@ public class productController {
     // doi mk
     @GetMapping("/changePassword")
     public String changepass(Model model) {
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-        model.addAttribute("TaiKhoanUser", taiKhoan);
+        TaiKhoan people = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("people", people);
+
         return "changePassword";
     }
 
@@ -282,20 +266,20 @@ public class productController {
             @RequestParam("newPassword") String newPassword,
             @RequestParam("confirmNewPassword") String confirmNewPassword) {
         // List<TaiKhoan> change = tkDAO.findByTenDangNhapLike("thienlc");
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-        if (taiKhoan.getTenDangNhap() != null) {
-            model.addAttribute("TaiKhoanUser", taiKhoan);
-        }
-        if (taiKhoan.getMatKhau().equals(currentPassword)) {
+        TaiKhoan tk = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("username", "thienlv");
+        model.addAttribute("people", tk);
+
+        if (tk.getMatKhau().equals(currentPassword)) {
             if (newPassword.length() < 4 || newPassword.length() > 20) {
                 model.addAttribute("length", "Mật khẩu từ 4 - 20 ký tự");
-            } else if (taiKhoan.getMatKhau().equals(confirmNewPassword)) {
+            } else if (tk.getMatKhau().equals(confirmNewPassword)) {
                 model.addAttribute("length", "Mật khẩu đã chùng với mật khẩu củ");
             } else if (!newPassword.equals(confirmNewPassword)) {
                 model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
             } else {
 
-                TaiKhoan updatedTaiKhoan = tkDAO.findByTenDangNhap(taiKhoan.getTenDangNhap());
+                TaiKhoan updatedTaiKhoan = tkDAO.findByTenDangNhap("thienlv");
                 // Cập nhật mật khẩu mới trong đối tượng TaiKhoan
                 updatedTaiKhoan.setMatKhau(newPassword);
                 // Lưu thay đổi vào CSDL
@@ -336,9 +320,8 @@ public class productController {
 
     @PostMapping("/quenmatkhau")
     public String resetPassword(Model model, @RequestParam("forgot") String email) {
-        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-        TaiKhoan tk = tkDAO.findByTenDangNhap(taiKhoan.getTenDangNhap());
-        model.addAttribute("username", taiKhoan.getTenDangNhap());
+        TaiKhoan tk = tkDAO.findByTenDangNhap("thienlv");
+        model.addAttribute("username", "thienlv");
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         String formattedDateTime = currentDateTime.format(formatter);
@@ -443,7 +426,8 @@ public class productController {
     // dang xuat
     @GetMapping("/dangxuat")
     public String dangxuat() {
-        session.remove("TaiKhoanUser");
+
+        session.remove("AccoutUser");
         return "redirect:/login-page";
     }
 
@@ -452,8 +436,12 @@ public class productController {
     public String uploadAvatar(@RequestParam("avatar") MultipartFile avatar) {
         if (!avatar.isEmpty()) {
             try {
+
                 String fileName = avatar.getOriginalFilename();
+
+                // Bỏ ss vào đây
                 tttkDAO.updateAvatar(fileName, "thienlv");
+
             } catch (Exception e) {
                 System.out.println(e + " Lỗi rồi");
             }
@@ -463,4 +451,6 @@ public class productController {
         return "redirect:/person";
     }
 
+
+  
 }
