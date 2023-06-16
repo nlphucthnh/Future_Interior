@@ -117,12 +117,6 @@ public class ProductManagerController {
         System.out.println(sanPhamGet.getIdSanPham());
         if (sanPhamGet != null) {
             model.addAttribute("SanPham", sanPhamGet);
-            // String ktSP = sanPhamGet.getKichThuocSanPham();
-            // Double chieuDai = Double.parseDouble(ktSP.substring(0, ktSP.indexOf("*")));
-            // Double chieuRong = Double.parseDouble(ktSP.substring(ktSP.indexOf("*")+1, ktSP.lastIndexOf("*")));
-            // Double chieuCao = Double.parseDouble(ktSP.substring(ktSP.lastIndexOf("*")+1));
-            // Double kichThuoc[] = { chieuDai, chieuRong, chieuCao };
-            // model.addAttribute("kichThuoc", kichThuoc);
             flag = true;
         } else {
             model.addAttribute("SanPham", sanPham);
@@ -141,7 +135,6 @@ public class ProductManagerController {
             @RequestParam(name = "length-product", defaultValue = "0.0") double length,
             @RequestParam(name = "width-product", defaultValue = "0.0") double width,
             @RequestParam(name = "height-product", defaultValue = "0.0") double height) {
-        sanPham.setKichThuocSanPham(length + "*" + width + "*" + height);
         sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
         sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
         sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
@@ -171,7 +164,6 @@ public class ProductManagerController {
             @RequestParam(name = "length-product", defaultValue = "0.0") double length,
             @RequestParam(name = "width-product", defaultValue = "0.0") double width,
             @RequestParam(name = "height-product", defaultValue = "0.0") double height) {
-        sanPham.setKichThuocSanPham(length + "*" + width + "*" + height);
         sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
         sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
         sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
@@ -196,6 +188,13 @@ public class ProductManagerController {
         return "redirect:/Manager/product";
     }
 
+    @RequestMapping("/Manager/product/clear")
+    public String clearForm(){
+        sanPham = new SanPham();
+        flag = false;
+        return "redirect:/Manager/product";
+    }
+
     // ----------------------HÀM LẤY DỮ LIỆU JSON----------------------//
 
     @ResponseBody
@@ -206,6 +205,30 @@ public class ProductManagerController {
             LISTCL_ADD.add(chatLieu);
         }
         return chatLieu;
+    }
+
+    @ResponseBody
+    @RequestMapping("/Manager/product/deleteChatLieu")
+    public boolean deleteChatLieuProduct(@RequestParam(name = "idSanPhamChatLieu") int idSanPhamChatLieu) {
+        System.out.println(idSanPhamChatLieu);
+        SanPhamChatLieu sanPhamChatLieu = sanPhamChatLieuDAO.findByIdSanPhamChatLieu(idSanPhamChatLieu);
+        if (sanPhamChatLieu != null) {
+            sanPhamChatLieuDAO.delete(sanPhamChatLieu);
+            return true;
+        }
+        return false;
+    }
+
+    @ResponseBody
+    @RequestMapping("/Manager/product/deleteHinhAnh")
+    public boolean deleteHinhAnhProduct(@RequestParam(name = "tenHinhAnh") String tenHinhAnh) {
+        System.out.println(tenHinhAnh);
+        HinhAnh hinhAnhs = hinhAnhDAO.findByTenHinhAnh(tenHinhAnh);
+        if (hinhAnhs != null) {
+            hinhAnhDAO.delete(hinhAnhs);
+            return true;
+        }
+        return false;
     }
 
     @ResponseBody

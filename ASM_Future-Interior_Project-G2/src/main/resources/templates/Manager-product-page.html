@@ -283,8 +283,8 @@
                                     <div class="mb-3 form-group">
                                         <label for="length_product" class="form-label">Chiều dài</label>
                                         <div class="input-group">
-                                            <input type="number" min="0" name="length-product" id="length_product"
-                                                class="form-control box-shadow-none input-form" th:value="${kichThuoc[0]}"
+                                            <input type="number" min="0" name="length-product" id="length_product" th:field="*{chieuDai}"
+                                                class="form-control box-shadow-none input-form" 
                                                 placeholder="Nhập vào chiều dài" aria-describedby="youtube">
                                             <span class="input-group-text" id="length_product-span">CM</span>
                                         </div>
@@ -294,8 +294,8 @@
                                     <div class="mb-3 form-group">
                                         <label for="width_product" class="form-label">Chiều rộng</label>
                                         <div class="input-group">
-                                            <input type="number" min="0" name="width-product" id="width_product"
-                                                class="form-control box-shadow-none input-form" th:value="${kichThuoc[1]}"
+                                            <input type="number" min="0" name="width-product" id="width_product" th:field="*{chieuRong}"
+                                                class="form-control box-shadow-none input-form" 
                                                 placeholder="Nhập vào chiều rộng" aria-describedby="youtube">
                                             <span class="input-group-text" id="width_product-span">CM</span>
                                         </div>
@@ -305,8 +305,8 @@
                                     <div class="mb-3 form-group">
                                         <label for="height_product" class="form-label">Chiều cao</label>
                                         <div class="input-group">
-                                            <input type="number" min="0" name="height-product" id="height_product"
-                                                class="form-control box-shadow-none input-form" th:value="${kichThuoc[2]}"
+                                            <input type="number" min="0" name="height-product" id="height_product" th:field="*{chieuCao}"
+                                                class="form-control box-shadow-none input-form" 
                                                 placeholder="Nhập vào chiều rộng" aria-describedby="youtube">
                                             <span class="input-group-text" id="height_product-span">CM</span>
                                         </div>
@@ -360,7 +360,7 @@
                                                     <td th:text="${chatLieuSanPham.chatLieuSPCL.ngayTao}">13/03/2023
                                                     </td>
                                                     <td>
-                                                        <a th:onclick="deleteSPCL([[${chatLieuSanPham.chatLieuSPCL.idChatLieu}]])"
+                                                        <a th:onclick="deleteSPCL02([[${chatLieuSanPham.chatLieuSPCL.idChatLieu}]],[[${chatLieuSanPham.idSanPhamChatLieu}]])"
                                                             class="btn" style="color: var(--gray_600);"><i
                                                                 class="bi bi-trash-fill"></i></a>
                                                     </td>
@@ -450,6 +450,7 @@
                             </form>
                         </div>
                         <div class="group-fleld group-fleld-012">
+                            <a href="/Manager/product/clear"  class="btn btn-style btn-clear">Làm mới</a>
                             <button th:if="${flag}" id="btn-update-02" class="btn btn-style btn-update">Cập
                                 nhật</button>
                             <button th:unless="${flag}" id="btn-add-02" class="btn btn-style btn-add">Thêm
@@ -492,7 +493,7 @@
                                             <td th:text="${chatLieu.idChatLieu}">...</td>
                                             <td th:text="${chatLieu.ngayTao}">...</td>
                                             <td>
-                                                <button th:onclick="addChatLieu([[${chatLieu.idChatLieu}]])" class="btn"
+                                                <button th:onclick="addChatLieu([[${chatLieu.idChatLieu}]],[[SanPham.idSanPham]])" class="btn"
                                                     style="color: var(--gray_600);"><i
                                                         class="bi bi-plus-lg"></i></button>
                                             </td>

@@ -39,8 +39,13 @@ public class SanPham implements Serializable {
 	@Min(0)
 	float giaSanPham;
 
-	@Column(name = "kich_thuoc_san_pham")
-	String kichThuocSanPham ;
+
+	@Column(name = "chieu_dai")
+	Double chieuDai ;
+	@Column(name = "chieu_rong")
+	Double chieuRong ;
+	@Column(name = "chieu_cao")
+	Double chieuCao ;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_tao_san_pham")

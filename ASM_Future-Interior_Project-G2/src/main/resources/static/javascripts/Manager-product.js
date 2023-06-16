@@ -67,13 +67,13 @@ $("#fileUpload").change(function () {
 });
 
 var listIdChatLieu = [];
-function addChatLieu(idChatLieu) {
+function addChatLieu(idChatLieu,idSanPham) {
     $.ajax({
         type: "POST",
         url: "/Manager/product/addChatLieu?idChatLieu=" + idChatLieu,
         success: function (response) {
             if (listIdChatLieu.find(element => element == idChatLieu) == undefined) {
-                $("#body-table-chatlieu").append('<tr class="" id="clsp' + response.idChatLieu + '"> <form action=""> <td scope="row" class="td-first-table">  <div class="text-blogs-group"> <h4 class="text-title-blogs text-title">' + response.tenChatLieu + '</h4> <h6 class="text-id-blogs text-title">' + response.idChatLieu + '</h6> </div> </td> <td>' + response.ngayTao + '</td> <td> <a onclick="deleteSPCL(' + response.idChatLieu + ')" class="btn" style="color: var(--gray_600);"><i class="bi bi-trash-fill"></i></a> </td> </form></tr>');
+                $("#body-table-chatlieu").append('<tr class="" id="clsp' + response.idChatLieu + '"> <form action=""> <td scope="row" class="td-first-table">  <div class="text-blogs-group"> <h4 class="text-title-blogs text-title">' + response.tenChatLieu + '</h4> <h6 class="text-id-blogs text-title">' + response.idChatLieu + '</h6> </div> </td> <td>' + response.ngayTao + '</td> <td> <a onclick="deleteSPCL01(' + response.idChatLieu + ')" class="btn" style="color: var(--gray_600);"><i class="bi bi-trash-fill"></i></a> </td> </form></tr>');
                 listIdChatLieu.push(idChatLieu);
             }else {
                 alert("Chất liệu đã được thêm");
@@ -84,13 +84,28 @@ function addChatLieu(idChatLieu) {
 }
 
 
-function deleteSPCL(idChatLieu) {
+function deleteSPCL01(idChatLieu) {
     if (confirm("Bạn muốn xóa chất liệu này ?")) {
         $("#clsp" + idChatLieu).remove();
         var index = listIdChatLieu.indexOf(idChatLieu)
         listIdChatLieu.splice(index, 1);
     }
+}
 
+function deleteSPCL02(idChatLieu,idChatLieuSanPham) {
+    if (confirm("Bạn muốn xóa chất liệu này ?")) {
+        $("#clsp" + idChatLieu).remove();
+        var index = listIdChatLieu.indexOf(idChatLieu)
+        listIdChatLieu.splice(index, 1);
+        $.ajax({
+            type: "POST",
+            url: "/Manager/product/deleteChatLieu?idSanPhamChatLieu=" + idChatLieuSanPham,
+            contentType: "application/json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
+    }
 }
 
 
@@ -117,6 +132,15 @@ function deleteHA02(number, tenAnh) {
         }).catch((error) => {
             console.log("không tìm thấy ảnh");
         });
+        $.ajax({
+            type: "POST",
+            url: "/Manager/product/deleteHinhAnh?tenHinhAnh=" + tenAnh,
+            contentType: "application/json",
+            success: function (response) {
+                console.log(response);
+            }
+        });
+
     }
 }
 
