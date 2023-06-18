@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- icon web  -->
+    <link rel="icon" type="image/x-icon" href="../../img/logoMark.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS: -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- link icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/blog.css">
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="/styles/footer.css">
+    <title>Blog</title>
+</head>
+
+<body class="bg-light">
+    <nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
+    <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
+    <nav th:replace="banner"></nav>
+    <br>
+    <article class="container bg-light">
+        <div class="card-blog-main bg-light">
+            <div class="card-blog" th:each="item : ${page.content}">
+                <a class="img-link" th:href="@{/User/blog/__${item.idBaiDang}__}">
+                    <div class="zoom_color noidung">
+                        <img class="blog-img" th:src="${item.anhNen}" alt="">
+                    </div>
+                </a>
+                <h5 class="name-brand">Future Interior</h5>
+                <h3><a class="text-decoration-none " href="#" th:text="${item.tieuDeBaiDang}"></a></h3>
+                <p th:text="${item.moTaBaiDang}"></p>
+
+                <div class="auther-item">
+                    <span class="text-black-50" th:text="${item.tacGiaBaiDang}"></span>
+                    <span class="text-black-50" th:text="${item.ngayDang}"></span>
+                </div>
+            </div>
+        </div>
+
+        <hr class="text-black-50 my-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:if="${page.number}>0"><a class="page-link text-white bg-dark "
+                        th:href="@{/User/blog?p=__${page.number-1}__}" href="#">Previous</a></li>
+                <tr th:each="i: ${#numbers.sequence(0,  page.totalPages - 1)}">
+                    <li class="page-item"><a th:style="${'background-color:' + (i==page.number?'lightgrey':'white')}"
+                            th:href="@{/User/blog?p=__${i}__}" class="page-link text-dark" href="#" th:text="${i+1}"></a>
+                    </li>
+                </tr>
+                <li class="page-item " th:if="(${page.number}>-1 and (${page.number})<${ page.totalPages-1})"><a
+                        class="page-link text-white bg-dark " th:href="@{/User/blog?p=__${page.number+1}__}"
+                        href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+
+
+    </article>
+
+
+    <nav th:replace="footer"></nav>
+</body>
+
+</html>

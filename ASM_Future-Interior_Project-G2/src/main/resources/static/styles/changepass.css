@@ -1,9 +1,29 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font_tertiary);
+}
 
-.card-title {
-    font-size: 34px;
-    font-weight: 600;
-    line-height: 60px;
-    letter-spacing: -0.02em;
-    text-align: center;
-    color: #007bff;
-  }
+.container .content-group{
+  width: 50%;
+  margin: 10px auto;
+}
+.title-page-main {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--gray_900);
+  margin-bottom: 10px;
+}
+
+.title-page-sub{
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray_400);
+}
+
+.btn-dark {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
+}

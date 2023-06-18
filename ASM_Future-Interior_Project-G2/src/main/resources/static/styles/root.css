@@ -47,6 +47,19 @@
 .text-title {
     margin: 0;
     padding: 0;
+    padding: 2px 10px;
+    text-decoration: none;
+}
+
+
+.text-titles {
+    margin: 0;
+    padding: 0;
+    padding: 2px 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--gray_900);
 }
 
 .btn-style {

@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import com.spring.main.entity.TaiKhoan;
 import com.spring.main.entity.ThongTinTaiKhoan;
+import java.util.List;
+
 
 public interface ThongTinTaiKhoanDAO extends JpaRepository<ThongTinTaiKhoan, Integer> {
 
@@ -31,5 +33,7 @@ public interface ThongTinTaiKhoanDAO extends JpaRepository<ThongTinTaiKhoan, Int
   @Query("UPDATE ThongTinTaiKhoan SET anhDaiDien = :anhDaiDien WHERE taiKhoanTTTK.tenDangNhap LIKE %:taiKhoanTTTK%")
   void updateAvatar(@Param("anhDaiDien") String anhDaiDien,
       @Param("taiKhoanTTTK") String taiKhoanTTTK);
+
+   ThongTinTaiKhoan findByTaiKhoanTTTK(TaiKhoan taiKhoanTTTK);   
 
 }

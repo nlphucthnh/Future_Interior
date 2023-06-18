@@ -22,11 +22,12 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	 <link rel="stylesheet" href="styles/root.css">
-    <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/product.css">
-    <link rel="stylesheet" href="styles/home.css">
-    <link rel="stylesheet" href="styles/footer.css">
+	
+        <link rel="stylesheet" href="/styles/root.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="stylesheet" href="/styles/product.css">
+    <link rel="stylesheet" href="/styles/home.css">
+    <link rel="stylesheet" href="/styles/footer.css">
     <title>Product</title>
 </head>
 <body>
@@ -34,34 +35,25 @@
     <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
    <nav th:replace="banner"></nav>
   
-    <!-- title nội dụng chính  -->
-    <div th:replace="product/productsale"></div>
-
-
     <article>
         <div class="container">
             <div class="product-title-sale">
-                <h3>Sản phẩn bán chạy</h3>
+                <h3>Các sản phẩm đề xuất</h3>
             </div>
             <div class="product-list-main row row-cols-4">
                 <div class="product-list my-4 col" th:each="pro : ${products}">
-                    <a th:href="@{'/product-page/edit/' + ${pro.idSanPham}}">
+                    <a th:href="@{'/User/product/edit/' + ${pro.idSanPham}}">
                         <div class="zoom_color noidung">
-                            <th:block th:each="khuyenMai : ${pro.ListSPKM}">
-                                <span class="price-sale"
-                                    th:text="${#numbers.formatDecimal(khuyenMai.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0)} + '%'"></span>
-                            </th:block>
-                            <img th:src="@{'/img/' + ${pro.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
+                            <img th:src="${pro.ListHinhAnhSP[0].idHinhAnh}" alt="Hình ảnh">
                         </div>
                         <h3 class="product-title" th:text="${pro.tenSanPham}"></h3>
                     </a>
-                    <p class="product-description" th:text="${pro.moTaSanPham}"></p>
                     <div class="product-price-main">
-                        <p th:unless="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price"
+                        <p th:unless="${pro.khuyenMai != null}" class="product-price"
                             th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>
-                        <p th:if="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price">
+                        <p th:if="${pro.khuyenMai != null}" class="product-price">
                             <span 
-                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
+                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.khuyenMai.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
                             <del class="old-price mx-3" th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
                         </p>
                     </div>
@@ -71,14 +63,14 @@
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item" th:if="${currIndex}>0"><a class="page-link text-white bg-dark "
-                            th:href="@{/product-page/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
+                            th:href="@{/User/product/page?p=__${currIndex-1}__}" href="#">Previous</a></li>
                     <tr th:each="i: ${#numbers.sequence(0, numberOfPages - 1)}">
                         <li class="page-item"><a th:style="${'background-color:' + (i==currIndex?'lightgrey':'white')}"
-                                th:href="@{/product-page/page?p=__${i}__}" class="page-link text-dark" href="#"
+                                th:href="@{/User/product/page?p=__${i}__}" class="page-link text-dark" href="#"
                                 th:text="${i+1}"></a></li>
                     </tr>
                     <li class="page-item " th:if="(${currIndex}>-1 and (${currIndex})<${numberOfPages-1})"><a
-                            class="page-link text-white bg-dark " th:href="@{/product-page/page?p=__${currIndex+1}__}"
+                            class="page-link text-white bg-dark " th:href="@{/User/product/page?p=__${currIndex+1}__}"
                             href="#">Next</a>
                     </li>
                 </ul>
@@ -87,7 +79,7 @@
 
     </article>
 
-  <div th:replace="product/productQuada"></div>
+  <!-- <div th:replace="product/productQuada"></div> -->
    
     <nav th:replace="footer"></nav>
 </body>

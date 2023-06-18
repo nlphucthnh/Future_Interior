@@ -43,20 +43,19 @@ public class LoginController {
     @Autowired
     SessionService session;
 
-    @GetMapping("/login-page")
+    @GetMapping("/User/login")
     public String form(@ModelAttribute("sv") TaiKhoan TaiKhoan, Model model) {
-        return "dangnhap";
+        return "User-login-page";
     }
 
     @ResponseBody
-    @RequestMapping("/login-page/json/data")
+    @RequestMapping("/User/login/json/data")
     public TaiKhoan getData(@RequestParam(name = "tenDangNhap") String tenDangNhap) {
-        System.out.println(tenDangNhap);
         TaiKhoan taiKhoan = taiKhoanDAO.findByTenDangNhap(tenDangNhap);
         return taiKhoan;
     }
 
-    @PostMapping("/login-page/save")
+    @PostMapping("/User/login/handle")
     public String ManageLoginPage(@RequestParam(name = "tenDangNhap") String tenDangNhapForm,
             @RequestParam(name = "matKhau") String matKhauForm, Model model) {
         TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(tenDangNhapForm);
@@ -65,24 +64,19 @@ public class LoginController {
             model.addAttribute("MessageWarning", true); // tính hiệu để thông báo tên đăng nhập không tồn tại.
         } else {
             if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
-                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
+                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { //taiKhoandataBase.isTrangThai()==true
                 session.set("TaiKhoanUser", taiKhoandataBase);
-                System.out.println("đã ====");
-                sessions.setAttribute("AccoutUser", taiKhoandataBase);
                 if (rm) {
                     cookieService.add("tenDangNhapUser", tenDangNhapForm, 10);
                     cookieService.add("matKhauUser", matKhauForm, 10);
-                    System.out.println("dang nhap thanh cong");
-
                 } else {
                     cookieService.remove("tenDangNhapUser");
                     cookieService.remove("matKhauUser");
-                    System.out.println("dang nhap thanh cong");
                 }
             }
             return "redirect:/home-page";
         }
-        return "dangnhap";
+        return "User-login-page";
     }
 
 }

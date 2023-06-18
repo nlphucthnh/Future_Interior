@@ -27,26 +27,21 @@ import lombok.Data;
 public class TaiKhoan implements Serializable {
 	@Id
 	@Column(name = "ten_dang_nhap")
-	@NotNull(message = "Không để trống tên đăng nhập")
-	@NotBlank(message = "Không để trống tên đăng nhập")
 	String tenDangNhap;
 
 	@Column(name = "mat_khau")
-	@NotNull(message = "Không để trống mật khẩu")
-	@NotBlank(message = "Không để trống mật khẩu")
 	String matKhau;
 	@Column(name = "email")
-	@NotNull(message = "Không để trống email")
-	@NotBlank(message = "Không để trống email")
 	String email;
 	@Column(name = "trang_thai")
 	boolean trangThai = true;
 	@Column(name = "vai_tro")
 	boolean vaiTro = false;
-	// @Temporal(TemporalType.DATE)
-	// @DateTimeFormat(pattern = "yyyy-MM-dd")
-	// @Column(name = "ngay_dang_ky")
-	// Date ngayDangKy = new Date();
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "ngay_dang_ky")
+	Date ngayDangKy = new Date();
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanBaiDang")

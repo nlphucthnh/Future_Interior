@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,7 +32,7 @@ public class BlogController {
     @Autowired
     SessionService session;
 
-    @RequestMapping("/blog-page")
+    @GetMapping("/User/blog")
     public String blogPage(Model model, @RequestParam("p") Optional<Integer> p) {
         TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
 		if(taiKhoan != null){
@@ -44,24 +45,25 @@ public class BlogController {
         pageable = PageRequest.of(p.orElse(0), 9);
         Page<BaiDang> page = baiDangDAO.findAll(pageable);
         model.addAttribute("page", page);
-        return "/blogcopy";
+        return "User-blog-page";
     }
 
-    // @RequestMapping("/blog-page/navigation")
-    // public String paginate(Model model, @RequestParam("p") Optional<Integer> p) {
-    //     Pageable pageable = PageRequest.of(p.orElse(0), 9);
-    //     System.out.println("halaoahduad"+p);
-    //     Page<BaiDang> page = baiDangDAO.findAll(pageable);
-    //     model.addAttribute("page", page);
-    //     return "/blogcopy";
-    // }
-
-    // @RequestMapping("/product/page")
-    // public String paginate(Model model, @RequestParam("p") Optional<Integer> p) {
-    // Pageable pageable = PageRequest.of(p.orElse(0), 5);
-    // Page<Product> page = dao.findAll(pageable);
-    // model.addAttribute("page", page);
-    // return "page";
-    // }
+    
+    @GetMapping("/User/blog/{idBaiDang}")
+    public String blogPage(@PathVariable("idBaiDang") int idBaiDang  ,Model model) {
+        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
+		}
+        BaiDang baiDang = baiDangDAO.findByIdBaiDang(idBaiDang);
+        int view = baiDang.getLuotXemBaiDang();
+        baiDang.setLuotXemBaiDang(++view);
+        baiDangDAO.save(baiDang);
+        model.addAttribute("BaiDang",baiDang);        
+        return "User-blog-item-page";
+    }
 
 }

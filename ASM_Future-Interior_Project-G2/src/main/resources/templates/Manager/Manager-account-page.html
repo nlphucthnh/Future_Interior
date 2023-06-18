@@ -70,7 +70,7 @@
                             <div class="list_blogs-header-seletion-group">
                                 <form action="/Manager/account/sort" method="post">
                                     <div class="mb-3" style="margin-right: 20px;">
-                                        <select class="form-select form-select-lg" name="methodSort" id="">
+                                        <select class="form-select form-select-lg" name="methodSort">
                                             <option value="DESC" th:selected="${inforSort[0] == 'DESC'}">Từ thấp đến cao
                                             </option>
                                             <option value="ASC" th:selected="${inforSort[0] == 'ASC'}">Từ cao đến thấp
@@ -78,7 +78,7 @@
                                         </select>
                                     </div>
                                     <div class="btn-group mb-3" style="margin-right: 20px;">
-                                        <select class="form-select form-select-lg" name="fieldSort" id="">
+                                        <select class="form-select form-select-lg" name="fieldSort">
                                             <option value="false" th:selected="${inforSort[1] == 'false'}">Theo người
                                                 dùng</option>
                                             <option value="true" th:selected="${inforSort[1] == 'true'}">Theo quản trị
@@ -257,8 +257,6 @@
     var formBlogsTab = document.getElementById("form-account-tab");
     var formBlogs = document.getElementById("form_blogs");
     var listBlogs = document.getElementById("list_blogs");
-    var btnAdmin = document.getElementById("btn-admin");
-    var btnUser = document.getElementById("btn-user");
     listBlogsTab.style.backgroundColor = 'var(--gray_50)';
     listBlogsTab.style.border = '1px solid var(--gray_300)';
 
@@ -270,28 +268,6 @@
         listBlogs.className = "tab-pane active";
         formBlogs.className = "tab-pane";
     }
-
-    btnUser.style.backgroundColor = "var(--gray_900)";
-    btnUser.style.color = "var(--gray_200)";
-
-    btnAdmin.addEventListener("click", function () {
-        btnAdmin.style.backgroundColor = "var(--gray_900)";
-        btnAdmin.style.color = "var(--gray_200)"
-        btnAdmin.style.pointerEvents = "none";
-        btnUser.style.backgroundColor = "var(--gray_100)";
-        btnUser.style.color = "var(--gray_900)"
-        btnUser.style.pointerEvents = "all";
-    })
-
-    btnUser.addEventListener("click", function () {
-        btnUser.style.backgroundColor = "var(--gray_900)";
-        btnUser.style.color = "var(--gray_200)"
-        btnUser.style.pointerEvents = "none";
-        btnAdmin.style.backgroundColor = "var(--gray_100)";
-        btnAdmin.style.color = "var(--gray_900)"
-        btnAdmin.style.pointerEvents = "all";
-    })
-
     function TabForm() {
         formBlogsTab.style.backgroundColor = 'var(--gray_50)';
         formBlogsTab.style.border = '1px solid var(--gray_300)';

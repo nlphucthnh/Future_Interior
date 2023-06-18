@@ -39,7 +39,7 @@ public class ChatLieu implements Serializable{
 	@Column(name = "mo_ta_chat_lieu")
 	String moTaChatLieu;
 	
-	@JsonManagedReference
+	
 	@OneToMany(mappedBy = "chatLieuSPCL")
 	List<SanPhamChatLieu> ListSPCL;
 }

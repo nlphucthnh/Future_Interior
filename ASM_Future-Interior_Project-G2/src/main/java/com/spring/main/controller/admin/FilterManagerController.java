@@ -3,12 +3,14 @@ package com.spring.main.controller.admin;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,7 +36,7 @@ import com.spring.main.entity.PhanNhomLoai;
 import jakarta.validation.Valid;
 
 @Controller
-public class FilterController {
+public class FilterManagerController {
 
 	@Autowired
 	ChatLieuDAO chatLieuDAO;
@@ -71,16 +74,21 @@ public class FilterController {
 		Page<PhanNhomLoai> pageNhomLoai = nhomLoaiDAO.findAll(pageableNL);
 		Page<NhaSanXuat> pageNSX = nhaSanXuatDAO.findAll(pageableNSX);
 		List<KhuyenMai> ListKM = khuyenMaiDAO.findAll();
+
 		model.addAttribute("ListKM", ListKM);
 		model.addAttribute("buttonUpdate", buttonUpdate);
 		model.addAttribute("khuyenMaiMain", khuyenMaiMain);
+		model.addAttribute("chatLieuMain", chatLieuMain);
+		model.addAttribute("nhaSanXuatMain", nhaSanXuatMain);
+		model.addAttribute("nhomLoaiMain", nhomLoaiMain);
 		model.addAttribute("pageChatLieu", pageChatLieu);
 		model.addAttribute("pageNhomLoai", pageNhomLoai);
 		model.addAttribute("pageNSX", pageNSX);
-		return "Manager-filter-page";
+
+		return "Manager/Manager-filter-page";
 	}
 
-// method khuyen mai
+	// method khuyen mai
 
 	@PostMapping("/Manager/filter/khuyenMai/eidt/{id}")
 	public String setFormKhuyenMai(@PathVariable("id") String idKhuyenMai) {
@@ -121,36 +129,37 @@ public class FilterController {
 		if (result.hasErrors()) {
 			fillData(model);
 			return "Manager-filter-page";
-		}else {
+		} else {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			String startDate = simpleDateFormat.format(khuyenMai.getNgayBatDau());
 			String endDate = simpleDateFormat.format(khuyenMai.getNgayKetThuc());
 			startDate = startDate.replace("/", "");
 			endDate = endDate.replace("/", "");
-			String maKhuyenMai = "KM-" + startDate + "-" + endDate + "-" + String.valueOf((int)khuyenMai.getPhamTramKhuyenMai());
+			String maKhuyenMai = "KM-" + startDate + "-" + endDate + "-"
+					+ String.valueOf((int) khuyenMai.getPhamTramKhuyenMai());
 			khuyenMai.setIdKhuyenMai(maKhuyenMai);
 			System.out.println(maKhuyenMai);
 			khuyenMaiDAO.save(khuyenMai);
 			khuyenMaiMain = new KhuyenMai();
 			return "redirect:/Manager/filter";
 		}
-		
+
 	}
-	
+
 	@PostMapping("/Manager/filter/khuyenMai/update")
 	public String updateKhuyenMai(@Valid @ModelAttribute("khuyenMaiMain") KhuyenMai khuyenMai, BindingResult result,
 			Model model) {
 		if (result.hasErrors()) {
 			fillData(model);
 			return "Manager-filter-page";
-		}else {
+		} else {
 			khuyenMaiDAO.save(khuyenMai);
 			khuyenMaiMain = new KhuyenMai();
 			return "redirect:/Manager/filter";
 		}
-		
+
 	}
-	
+
 	@PostMapping("/Manager/filter/khuyenMai/clear")
 	public String clearKhuyenMai() {
 		buttonUpdate = false;
@@ -158,7 +167,7 @@ public class FilterController {
 		return "redirect:/Manager/filter";
 	}
 
-// method nhomloai
+	// method nhomloai
 
 	@ResponseBody
 	@RequestMapping("/Manager/filter/nhomLoai")
@@ -177,21 +186,23 @@ public class FilterController {
 		return "redirect:/Manager/filter";
 	}
 
-	@ResponseBody
 	@PostMapping("/Manager/filter/nhomLoai/create")
-	public PhanNhomLoai createNhomLoai(@RequestBody PhanNhomLoai nhomLoai) {
-		PhanNhomLoai nhomLoai2 = nhomLoaiDAO.save(nhomLoai);
-		return nhomLoai2;
-	}
-
-	@ResponseBody
-	@PostMapping("/Manager/filter/nhomLoai/update")
-	public PhanNhomLoai updateNhomLoai(@RequestBody PhanNhomLoai nhomLoai) {
+	public String createNhomLoai(@ModelAttribute("nhomLoaiMain") PhanNhomLoai nhomLoai) {
 		nhomLoaiDAO.save(nhomLoai);
-		return nhomLoai;
+		nhomLoaiMain = new PhanNhomLoai();
+		arryTab[2] = -1;
+		return "redirect:/Manager/filter";
 	}
 
-//	Method form chất liệu
+	@PostMapping("/Manager/filter/nhomLoai/update")
+	public String updateNhomLoai(@ModelAttribute("nhomLoaiMain") PhanNhomLoai nhomLoai) {
+		nhomLoaiDAO.save(nhomLoai);
+		nhomLoaiMain = new PhanNhomLoai();
+		arryTab[2] = -1;
+		return "redirect:/Manager/filter";
+	}
+
+	// Method form chất liệu
 
 	@ResponseBody
 	@RequestMapping("/Manager/filter/chatLieu")
@@ -210,21 +221,24 @@ public class FilterController {
 		return "redirect:/Manager/filter";
 	}
 
-	@ResponseBody
-	@PostMapping("/Manager/filter/chatLieu/create")
-	public ChatLieu createChatLieu(@RequestBody ChatLieu chatLieu) {
-		ChatLieu chatLieu2 = chatLieuDAO.save(chatLieu);
-		return chatLieu2;
-	}
-
-	@ResponseBody
-	@PostMapping("/Manager/filter/chatLieu/update")
-	public ChatLieu updateChatLieu(@RequestBody ChatLieu chatLieu) {
+	@RequestMapping("/Manager/filter/chatLieu/create")
+	public String createChatLieu(@ModelAttribute("chatLieuMain") ChatLieu chatLieu) {
+		System.out.println(chatLieu.getTenChatLieu());
 		chatLieuDAO.save(chatLieu);
-		return chatLieu;
+		chatLieuMain = new ChatLieu();
+		arryTab[0] = -1;
+		return "redirect:/Manager/filter";
 	}
 
-// method nhà sản xuất	
+	@PostMapping("/Manager/filter/chatLieu/update")
+	public String updateChatLieu(@ModelAttribute("chatLieuMain") ChatLieu chatLieu) {
+		chatLieuDAO.save(chatLieu);
+		chatLieuMain = new ChatLieu();
+		arryTab[0] = -1;
+		return "redirect:/Manager/filter";
+	}
+
+	// method nhà sản xuất
 	@ResponseBody
 	@RequestMapping("/Manager/filter/nhaSanXuat")
 	public NhaSanXuat getDataNhaSanXuat(@RequestParam("idnsx") int idNhaSanXuat) {
@@ -242,19 +256,20 @@ public class FilterController {
 		return "redirect:/Manager/filter";
 	}
 
-	@ResponseBody
 	@PostMapping("/Manager/filter/nhaSanXuat/create")
-	public NhaSanXuat createNhaSanXuat(@RequestBody NhaSanXuat nhaSanXuat) {
-		NhaSanXuat nhaSanXuat2 = nhaSanXuatDAO.save(nhaSanXuat);
-		return nhaSanXuat2;
+	public String createNhaSanXuat(@ModelAttribute("nhaSanXuatMain") NhaSanXuat nhaSanXuat) {
+		nhaSanXuatDAO.save(nhaSanXuat);
+		nhaSanXuatMain = new NhaSanXuat();
+		arryTab[1] = -1;
+		return "redirect:/Manager/filter";
 	}
 
-	@ResponseBody
 	@PostMapping("/Manager/filter/nhaSanXuat/update")
-	public NhaSanXuat updateNhaSanXuat(@RequestBody NhaSanXuat nhaSanXuat) {
-		System.out.println(nhaSanXuat.getIdNhaSanXuat());
+	public String updateNhaSanXuat(@ModelAttribute("nhaSanXuatMain") NhaSanXuat nhaSanXuat) {
 		nhaSanXuatDAO.save(nhaSanXuat);
-		return nhaSanXuat;
+		nhaSanXuatMain = new NhaSanXuat();
+		arryTab[1] = -1;
+		return "redirect:/Manager/filter";
 	}
 
 }

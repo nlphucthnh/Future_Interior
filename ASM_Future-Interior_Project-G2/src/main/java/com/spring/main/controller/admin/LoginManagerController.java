@@ -36,7 +36,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-public class LoginAdminController {
+public class LoginManagerController {
 
 	@Autowired
 	TaiKhoanDAO taiKhoanDAO;
@@ -62,24 +62,12 @@ public class LoginAdminController {
 	@RequestMapping("/Manager/login/json")
 	public TaiKhoan getJsonData(@RequestParam(name = "username") String username){
 		TaiKhoan taiKhoan = taiKhoanDAO.findByTenDangNhap(username);
-		List<TaiKhoan> list = taiKhoanDAO.findAll();
-		for (TaiKhoan taiKhoan2 : list) {
-			System.out.println(taiKhoan2.getTenDangNhap());
-		}
 		return taiKhoan;
 	}
 
 	// đăng nhập
 	@PostMapping("/Manager/login")
 	public String ManageLoginPage( @RequestParam(name = "tenDangNhap" , defaultValue = "") String un ,@RequestParam(name = "matKhau", defaultValue = "") String pw ,@RequestParam(name = "remember", defaultValue = "false") Boolean remember, Model model) {
-
-		//
-		// if (result.hasErrors()) {
-		// 	model.addAttribute("message", "Vui lòng nhập đúng thông tin!");
-		// 	System.out.println(result.getErrorCount());
-
-		// 	return "Manager-login-page";
-		// }
 		if ("".equals(un.trim())) {
 			model.addAttribute("message", "Tên đăng nhập không được để trống!");
 			return "Manager-login-page";
@@ -87,10 +75,8 @@ public class LoginAdminController {
 			model.addAttribute("message", "Mật khẩu không được để trống!");
 			return "Manager-login-page";
 		}
-		List<TaiKhoan> list = new ArrayList<>();
-		TaiKhoan taikhoan = taiKhoanDAO.findById(un).get();
-		// Chưa bắt sai tenDangNhap
-		System.out.println("taikhoan == " + taikhoan);
+		
+		TaiKhoan taikhoan = taiKhoanDAO.findByTenDangNhap(un);
 		if (taiKhoanDAO.existsById(un) == false || !pw.equals(taikhoan.getMatKhau())) {
 			model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
 			System.out.println("Sai tên đăng nhập hoặc mật khẩu");
@@ -102,11 +88,11 @@ public class LoginAdminController {
 			return "Manager-login-page";
 
 		}
+		System.out.println("Đã qua đây 01");
 
 		// đăng nhập thành công
 		if (un.equals(taikhoan.getTenDangNhap()) && pw.equals(taikhoan.getMatKhau()) && taikhoan.isTrangThai() == true
 				&& taikhoan.isVaiTro() == true) {
-
 			session.set("Admin", taikhoan);
 			session.set("isLogin", true);
 			session.set("isVaiTro", true);
@@ -115,13 +101,10 @@ public class LoginAdminController {
 				cookieService.add("tenDangNhap", un, 10);
 				cookieService.add("matKhau", pw, 10);
 				model.addAttribute("message", "Đăng nhập thành công!");
-				// return "redirect:/Manager/blog";
 			} else {
 				cookieService.remove("tenDangNhap");
 				cookieService.remove("matKhau");
 				model.addAttribute("message", "Đăng nhập thành công!");
-
-				// return "redirect:/Manager/blog";
 			}
 			System.out.println("Đã chạy qua đây");
 			return "redirect:/Manager/blog";
@@ -131,16 +114,16 @@ public class LoginAdminController {
 			model.addAttribute("message", "Đăng nhập thất bại!");
 
 		}
-
+		System.out.println("Đã qua đây 02");
 		return "Manager-login-page";
 	}
 
 	// đăng xuất
 	@RequestMapping("/Manager/logout")
 	public String logout() {
-		session.remove("ten_dang_nhap");
+		session.remove("Admin");
 		session.remove("isLogin");
-		session.remove("isAdmin");
+		session.remove("isVaiTro");
 		cookieService.remove("ten_dang_nhap");
 		cookieService.remove("mat_khau");
 		return "redirect:/Manager/login";

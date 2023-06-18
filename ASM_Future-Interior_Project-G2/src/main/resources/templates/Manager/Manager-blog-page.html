@@ -230,7 +230,6 @@
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="image_blog" class="form-label">Link ảnh nền</label>
-
                                         <div class="input-group">
                                             <input id="NameBg" type="text" class="form-control" th:field="*{anhNen}"
                                                 aria-label="Recipient's username with two button addons"
@@ -239,7 +238,7 @@
                                                 class="form-control" accept="image/png, image/gif, image/jpeg"
                                                 aria-label="Recipient's username with two button addons">
                                             <button th:onclick="onInputName()" class="btn btn-outline-secondary"
-                                                type="button">Tên ảnh</button>
+                                                type="button"><i class="bi-image"></i></button>
                                             <button th:onclick="UploadFile()" class="btn btn-outline-secondary"
                                                 type="button"><i class="bi bi-upload"></i></button>
                                         </div>

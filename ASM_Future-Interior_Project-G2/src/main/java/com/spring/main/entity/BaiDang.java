@@ -56,8 +56,6 @@ public class BaiDang implements Serializable {
 	
 	
 	@Column(name = "anh_nen")
-//	@NotNull(message = "Vui lòng chọn ảnh")
-//	@NotBlank(message = "Vui lòng chọn ảnh")
 	String anhNen;
 	
 	@Column(name = "luot_xem_bai_dang")

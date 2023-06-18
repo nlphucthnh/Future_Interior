@@ -7,10 +7,9 @@ var NameBlogBg = document.getElementById("NameBg");
 listBlogsTab.style.backgroundColor = 'var(--gray_50)';
 listBlogsTab.style.border = '1px solid var(--gray_300)';
 NameBlogBg.style.display = 'none';
-$("#UploadFileBg").change(function () {
-    var nameFile = this.value.split(/(\\|\/)/g).pop()
-    NameBlogBg.value = nameFile;
-});
+// $("#UploadFileBg").change(function () {
+//     NameBlogBg.value = this.value;
+// });
 function TabList() {
     listBlogsTab.style.backgroundColor = 'var(--gray_50)';
     listBlogsTab.style.border = '1px solid var(--gray_300)';

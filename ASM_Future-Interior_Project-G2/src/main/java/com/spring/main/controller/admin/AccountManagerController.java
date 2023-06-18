@@ -29,7 +29,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
-public class AccountController {
+public class AccountManagerController {
 
 	@Autowired
 	HttpSession session;
@@ -66,7 +66,7 @@ public class AccountController {
 			e.printStackTrace();
 		}
 
-		return "Manager-account-page";
+		return "Manager/Manager-account-page";
 	}
 
 	// Set type sort in table

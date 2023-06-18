@@ -40,7 +40,7 @@ import com.spring.main.dao.BaiDangDAO;
 import com.spring.main.dao.TaiKhoanDAO;
 
 @Controller
-public class BlogsController {
+public class BlogsManagerController {
 
 	@Autowired
 	BaiDangDAO baiDangDAO;
@@ -92,7 +92,7 @@ public class BlogsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "Manager-blog-page";
+		return "Manager/Manager-blog-page";
 	}
 
 // Set type sort in table
@@ -143,7 +143,7 @@ public class BlogsController {
 		model.addAttribute("inforSort", informatinSort);
 		System.out.println(baiDang.getIdBaiDang());
 		if (result.hasErrors()) {
-			return "Manager-blog-page";
+			return "Manager/Manager-blog-page";
 		} else {
 			baiDangDAO.save(baiDangModel);
 			baiDang = new BaiDang();

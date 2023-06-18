@@ -80,7 +80,7 @@ public class ProductManagerController {
         model.addAttribute("SanPham", sanPham);
         model.addAttribute("flag", flag);
         model.addAttribute("inforSort", information);
-        return "Manager-product-page";
+        return "Manager/Manager-product-page";
     }
 
     // Xử lý tìm kiếm bằng tên sản phẩm
@@ -127,7 +127,7 @@ public class ProductManagerController {
         model.addAttribute("pageSP", pageSanPham);
         model.addAttribute("flag", flag);
         model.addAttribute("inforSort", information);
-        return "Manager-product-page";
+        return "Manager/Manager-product-page";
     }
 
     @RequestMapping("/Manager/product/create")

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
+
 <head>
   <!-- icon web  -->
   <link rel="website icon" type="png" href="img/logo--noname.png">
@@ -28,44 +29,47 @@
   <!-- <link rel="stylesheet" href="/styles/changepass.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/person.css"> -->
-  
-    <link rel="stylesheet" href="/styles/otp.css">
+  <link rel="stylesheet" href="/styles/root.css">
+  <link rel="stylesheet" href="/styles/otp.css">
+
   <title>Đổi mật khẩu</title>
 </head>
 
 <body>
 
-
-
-
   <div class="container">
-    <div class="row">
-      <div class="col-sm-7 col-md-7 col-lg-7 mx-auto">
-        <div class="card border-0 shadow rounded-3 my-5">
-          <div class="card-body p-4 p-sm-5">
-            <h3 class="card-title text-center">Quên Mật Khẩu</h3>
-            <p th:text="${massager}"></p>
-            <form th:action="@{/confirm-otp}" method="post">
-              <input type="hidden" name="otpExpiry" th:value="${otpExpiry}">
-              <label class="title-otp" for="otp">Mã OTP:</label>
-              <input type="text" id="otp" name="otp" maxlength="4" required>
-              <svg viewBox="0 0 240 1" xmlns="http://www.w3.org/2000/svg">
-                <line x1="0" y1="0" x2="240" y2="1" stroke="black" />
-              </svg>
-              <div class="btn-otp">
-                <button class="btn btn-outline-primary my-5 " type="submit">Xác thực</button>
-              </div>
-            </form>
-          </div>
-        </div>
+    <div class="card-body content-group">
+      <div class="content-group-title">
+        <h3 class="card-title text-center title-page-main">Nhập mã xác thực</h3>
+        <h5 th:style="${'color-green'}" class="text-center title-page-sub">Form nhập mã xác nhận</h5>
+        <h5 th:text="${massager}" class="text-center title-page-sub"></h5>
       </div>
+      <form th:action="@{/User/confirm}" method="post">
+        <input type="hidden" name="otpExpiry" th:value="${otpExpiry}">
+        <label class="title-otp" for="otp">Mã OTP:</label>
+        <input type="text" id="otp" name="otp" maxlength="4" required>
+        <svg viewBox="0 0 240 1" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="0" x2="240" y2="1" stroke="black" />
+        </svg>
+        <div class="btn-otp">
+          <button class="btn btn-dark my-5 d-none" id="btn-confim01" type="submit">Xác thực</button>
+        </div>
+        
+      </form>
+      <button class="btn btn-dark" id="btn-confim02" type="submit">Xác thực</button>
     </div>
+
   </div>
 
 
 </body>
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script>  $("input").keypress(function () {
+<script>
+$('#btn-confim02').click(function(){
+  $('#btn-confim01').trigger('click');
+})
+
+$("input").keypress(function () {
     if ($(this).val().length > 1) {
       $(this).addClass('active');
     }

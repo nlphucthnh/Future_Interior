@@ -1,7 +1,7 @@
 form {
   position: relative;
   width: 300px;
-  padding: 60px;
+  padding: 40px 70px;
 }
 
 focus {
@@ -56,5 +56,52 @@ input[maxlength="4"] + svg line {
 }
 .btn-otp button {
   margin-left: 200px;
-  width: 100px;
+  width: 100%;
+}
+
+#btn-confim02{
+  display: flex;
+  justify-content: center;
+  width: 68%;
+  margin: 20px auto;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font_tertiary);
+}
+
+.container {
+  margin: auto;
+  padding: 0;
+}
+
+.container .content-group{
+  width: 50%;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+.title-page-main {
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--gray_900);
+  margin-bottom: 10px;
+}
+
+.title-page-sub{
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray_400);
+}
+
+.btn-dark {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 0;
 }

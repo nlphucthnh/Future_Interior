@@ -29,16 +29,16 @@ public class ThongTinTaiKhoan implements Serializable {
 	@Column(name = "id_thong_tin_tai_khoan")
 	int idThongTinTaiKhoan ;
 	@Column(name = "ho_ten")
-	String hoTen ;
+	String hoTen = "Nguyễn Văn A";
 	@Column(name = "gioi_tinh")
-	boolean gioiTinh ;
+	boolean gioiTinh = true;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_sinh")
 	Date ngaySinh = new Date() ;
 	@Column(name = "so_dien_thoai")
-	String soDienThoai ;
+	String soDienThoai = "0000000001";
 	@Column(name = "anh_dai_dien")
-	String anhDaiDien ;
+	String anhDaiDien = "https://firebasestorage.googleapis.com/v0/b/future-interior.appspot.com/o/Null.png?alt=media";
 	
 	
 //	Quan hệ 1 - 1	

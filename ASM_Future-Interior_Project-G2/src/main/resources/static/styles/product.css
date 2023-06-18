@@ -1,13 +1,13 @@
 /* title sale  */
 
 .product-title-sale h3 {
-    font-family: "EB Garamond";
-    font-size: 36px;
-    font-weight: 700;
+    font-family: var(--font_tertiary);
+    font-size: 30px;
+    font-weight: 500;
     line-height: 47px;
     letter-spacing: 0em;
     text-align: left;
-    margin: 50px 0 32px;
+    margin: 40px 0 20px;
 }
 
 .noidung {

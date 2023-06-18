@@ -94,29 +94,26 @@
                     </form>
                     <h3 class="text-price-list" th:text="${messagename}"></h3>
                 </div>
-
             </div>
-
-
             <div class="product-list-main row row-cols-4">
                 <div class="product-list my-4 col" th:each="pro : ${prolists}">
                     <a th:href="@{'/product-page/edit/' + ${pro.idSanPham}}">
                         <div class="zoom_color noidung">
-                            <th:block th:each="khuyenMai : ${pro.ListSPKM}">
-                                <span class="price-sale"
-                                    th:text="${#numbers.formatDecimal(khuyenMai.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0)} + '%'"></span>
-                            </th:block>
+
+                            <span class="price-sale" th:if="${pro.khuyenMai != null}"
+                                th:text="${#numbers.formatDecimal(pro.khuyenMai.phamTramKhuyenMai, 0, 0)} + '%'"></span>
+
                             <img th:src="@{'/img/' + ${pro.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
                         </div>
                         <h3 class="product-title" th:text="${pro.tenSanPham}"></h3>
                     </a>
                     <p class="product-description" th:text="${pro.moTaSanPham}"></p>
                     <div class="product-price-main">
-                        <p th:unless="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price"
+                        <p th:unless="${pro.khuyenMai != null }" class="product-price"
                             th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>
-                        <p th:if="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price">
+                        <p th:if="${pro.khuyenMai != null}" class="product-price">
                             <span
-                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
+                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.khuyenMai.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
                             <del class="old-price mx-3"
                                 th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
                         </p>
@@ -124,10 +121,10 @@
                 </div>
             </div>
             <hr>
-            
+
         </div>
     </article>
-    
+
     <div th:replace="footer"></div>
 </body>
 

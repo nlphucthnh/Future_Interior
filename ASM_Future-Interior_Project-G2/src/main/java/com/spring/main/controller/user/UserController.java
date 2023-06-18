@@ -34,8 +34,17 @@ HttpSession sessions;
 // 		return "dangky";
 // 	}
 
-	
-
+	@GetMapping("/")
+	public String getIndex(Model model) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		if(taiKhoan != null){
+			model.addAttribute("onRegistered", true);
+			model.addAttribute("TaiKhoanUser", taiKhoan);
+		}else {
+			model.addAttribute("onRegistered", false);
+		}
+		return "index";
+	}
 	
 	@GetMapping("/home-page")
 	public String getHomePage(Model model) {
@@ -53,18 +62,7 @@ HttpSession sessions;
 	// public String getBlogPage() {
 	// 	return "blog";
 	// }
-	
-	@GetMapping("/blogs-item-page")
-	public String getBlogItemPage(Model model) {
-		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
-		if(taiKhoan != null){
-			model.addAttribute("onRegistered", true);
-			model.addAttribute("TaiKhoanUser", taiKhoan);
-		}else {
-			model.addAttribute("onRegistered", false);
-		}
-		return "blog-item";
-	}
+
 
 	@GetMapping("/about-page")
 	public String getAboutPage(Model model) {
@@ -77,41 +75,5 @@ HttpSession sessions;
 		}
 		return "about";
 	}
-
-// 	@GetMapping("/contact-page")
-// 	public String getContactPage() {
-// 		return "contact";
-// 	}
-// 	@GetMapping("/product-page")
-// 	public String getProductPage() {
-// 		return "product";
-// 	}
-
-// 	@GetMapping("/products-list-page")
-// 	public String getProductList() {
-// 		return "product-list";
-// 	}
-// 	@GetMapping("/product-item-page")
-// 	public String getProductItem() {
-// 		return "product-item";
-// 	}
-// 	@GetMapping("/cart-page")
-// 	public String getCartPage() {
-// 		return "cart";
-// 	}
-	
-// 	@GetMapping("/adreess-page")
-// 	public String getAddressPage() {
-// 		return "adreess";
-// 	}
-// 	@GetMapping("/pay-page")
-// 	public String getPayPage() {
-// 		return "pay";
-// 	}
-
-// 	@GetMapping("/demo")
-// 	public String getDemo() {
-// 		return "demo";
-// 	}
 
 }
