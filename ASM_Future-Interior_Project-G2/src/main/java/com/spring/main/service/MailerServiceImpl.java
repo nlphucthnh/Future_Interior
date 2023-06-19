@@ -17,7 +17,7 @@ import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class MailerServiceImpl implements MailerService {
-  @Autowired
+  @Autowired(required = true)
   JavaMailSender sender;
   List<MailInfo> list = new ArrayList<>();
 
