@@ -25,10 +25,10 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="/styles/root.css">
     <link rel="stylesheet" href="/styles/navbar.css">
-    <link rel="stylesheet" href="/styles/product.css">
     <link rel="stylesheet" href="/styles/home.css">
     <link rel="stylesheet" href="/styles/footer.css">
     <link rel="stylesheet" href="/styles/product-list.css">
+    <link rel="stylesheet" href="/styles/product.css">
     <title>Product List</title>
 </head>
 
@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-2 flex-fill">
                     <label for="selectPrice" class="form-label">Mức giá</label>
-                    <form th:action="@{/product-list-page/{category}/price(category=${category})}" method="POST">
+                    <form th:action="@{/User/product/list/{category}/price(category=${category})}" method="POST">
                         <select class="form-select" name="selectPrice" onchange="this.form.submit()">
                             <option selected>Lọc theo khoản giá</option>
                             <option value="1">Từ 0 - 1,000,000</option>
@@ -63,29 +63,10 @@
                     <h3 class="text-price-list" th:text="${messages}"></h3>
 
                 </div>
-                <!-- <div class="col-2 flex-fill ">
-                    <label for="select3" class="form-label">Màu sắc</label>
-                  <select class="form-select">
-                    <option selected>Trắng gỗ</option>
-                    <option value="1">Lựa chọn 1</option>
-                    <option value="2">Lựa chọn 2</option>
-                    <option value="3">Lựa chọn 3</option>
-                  </select>
-                </div> -->
-                <!-- <div class="col-2 flex-fill ">
-                    <label for="select3" class="form-label">Chất liệu</label>
-                    <select class="form-select">
-                        <option selected>Gỗ ép</option>
-                        <option value="1">Lựa chọn 1</option>
-                        <option value="2">Lựa chọn 2</option>
-                        <option value="3">Lựa chọn 3</option>
-                    </select>
-                </div> -->
-
                 <div class="col-4 "></div>
                 <div class="col-2 flex-fill">
                     <label for="selectName" class="form-label">Sắp xếp</label>
-                    <form th:action="@{/product-list-page/{category}/name(category=${category})}" method="POST">
+                    <form th:action="@{/User/product/list/{category}/name(category=${category})}" method="POST">
                         <select id="selectName" class="form-select" name="selectName" onchange="this.form.submit()">
                             <option selected>Lọc theo A - Z</option>
                             <option value="AZ">Từ A đến Z</option>
@@ -97,17 +78,14 @@
             </div>
             <div class="product-list-main row row-cols-4">
                 <div class="product-list my-4 col" th:each="pro : ${prolists}">
-                    <a th:href="@{'/product-page/edit/' + ${pro.idSanPham}}">
+                    <a th:href="@{'/User/product/edit/' + ${pro.idSanPham}}">
                         <div class="zoom_color noidung">
-
                             <span class="price-sale" th:if="${pro.khuyenMai != null}"
                                 th:text="${#numbers.formatDecimal(pro.khuyenMai.phamTramKhuyenMai, 0, 0)} + '%'"></span>
-
-                            <img th:src="@{'/img/' + ${pro.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
+                            <img th:src="${pro.ListHinhAnhSP[0].idHinhAnh}" alt="Hình ảnh">
                         </div>
                         <h3 class="product-title" th:text="${pro.tenSanPham}"></h3>
                     </a>
-                    <p class="product-description" th:text="${pro.moTaSanPham}"></p>
                     <div class="product-price-main">
                         <p th:unless="${pro.khuyenMai != null }" class="product-price"
                             th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>

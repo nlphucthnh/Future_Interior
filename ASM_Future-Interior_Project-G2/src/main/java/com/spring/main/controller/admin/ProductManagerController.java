@@ -137,7 +137,11 @@ public class ProductManagerController {
             @RequestParam(name = "height-product", defaultValue = "0.0") double height) {
         sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
         sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
-        sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
+        if(sanPham.getKhuyenMai() != null){
+            sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
+        }else {
+            sanPham.setKhuyenMai(null);
+        }
         SanPham sanPhamDataBase = sanPhamDAO.save(sanPham);
         if (LISTCL_ADD.size() != 0) {
             for (ChatLieu chatLieu : LISTCL_ADD) {
@@ -166,7 +170,11 @@ public class ProductManagerController {
             @RequestParam(name = "height-product", defaultValue = "0.0") double height) {
         sanPham.setNhaSanXuat(nhaSanXuatDAO.findByIdNhaSanXuat(sanPham.getNhaSanXuat().getIdNhaSanXuat()));
         sanPham.setPhanNhomLoai(nhomLoaiDAO.findByIdPhanNhomLoai(sanPham.getPhanNhomLoai().getIdPhanNhomLoai()));
-        sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
+        if(sanPham.getKhuyenMai() != null){
+            sanPham.setKhuyenMai(khuyenMaiDAO.findByIdKhuyenMai(sanPham.getKhuyenMai().getIdKhuyenMai()));
+        }else {
+            sanPham.setKhuyenMai(null);
+        }
         SanPham sanPhamDataBase = sanPhamDAO.save(sanPham);
         if (LISTCL_ADD.size() != 0) {
             for (ChatLieu chatLieu : LISTCL_ADD) {

@@ -4,7 +4,7 @@
 
 <head>
     <!-- icon web  -->
-    <link rel="website icon" type="png" href="img/logo--noname.png">
+    <link rel="icon" type="image/x-icon" href="../../img/logoMark.ico">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,19 +22,20 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	
-        <link rel="stylesheet" href="/styles/root.css">
+
+    <link rel="stylesheet" href="/styles/root.css">
     <link rel="stylesheet" href="/styles/navbar.css">
     <link rel="stylesheet" href="/styles/product.css">
     <link rel="stylesheet" href="/styles/home.css">
     <link rel="stylesheet" href="/styles/footer.css">
     <title>Product</title>
 </head>
+
 <body>
     <nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
     <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
-   <nav th:replace="banner"></nav>
-  
+    <nav th:replace="banner"></nav>
+
     <article>
         <div class="container">
             <div class="product-title-sale">
@@ -42,6 +43,9 @@
             </div>
             <div class="product-list-main row row-cols-4">
                 <div class="product-list my-4 col" th:each="pro : ${products}">
+                    <div class="ticker-sale" th:if="${pro.khuyenMai != null}">
+                        <span class="price-sale" th:text="${#numbers.formatDecimal(pro.khuyenMai.phamTramKhuyenMai, 0, 0)} + '%'"></span>
+                    </div>
                     <a th:href="@{'/User/product/edit/' + ${pro.idSanPham}}">
                         <div class="zoom_color noidung">
                             <img th:src="${pro.ListHinhAnhSP[0].idHinhAnh}" alt="Hình ảnh">
@@ -50,11 +54,12 @@
                     </a>
                     <div class="product-price-main">
                         <p th:unless="${pro.khuyenMai != null}" class="product-price"
-                            th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>
+                            th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')} + ' đ'"></p>
                         <p th:if="${pro.khuyenMai != null}" class="product-price">
-                            <span 
-                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.khuyenMai.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
-                            <del class="old-price mx-3" th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
+                            <span
+                                th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.khuyenMai.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')} + ' đ'"></span>
+                            <del class="old-price mx-3"
+                                th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')} + ' đ'"></del>
                         </p>
                     </div>
                 </div>
@@ -79,8 +84,8 @@
 
     </article>
 
-  <!-- <div th:replace="product/productQuada"></div> -->
-   
+    <!-- <div th:replace="product/productQuada"></div> -->
+
     <nav th:replace="footer"></nav>
 </body>
 

@@ -248,6 +248,7 @@
                                         <select class="form-control form-select box-shadow-none"
                                             th:field="*{khuyenMai.idKhuyenMai}" name="promotion-product"
                                             id="promotion_product">
+                                            <option value="null" selected>Không khuyến mãi</option>
                                             <option th:each="khuyenMai : ${KhuyenMai}"
                                                 th:value="${khuyenMai.idKhuyenMai}" th:text="${khuyenMai.idKhuyenMai}">
                                                 ...</option>
