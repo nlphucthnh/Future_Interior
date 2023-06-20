@@ -50,6 +50,7 @@
 							<th scope="col">Tên sản phẩm</th>
 							<th scope="col">Số lượng</th>
 							<th scope="col">Giá tiền</th>
+							<th scope="col">Thành tiền</th>
 							<th scope="col">Thao tác</th>
 						</tr>
 					</thead>
@@ -67,9 +68,18 @@
 									th:max="${item.sanPhamGH.soLuong}" th:value="${item.soLuong}"
 									class="form-control box-shadow-none qty" name="quatityCart" style="width: 10rem;">
 							</td>
+							<td th:if="${item.sanPhamGH.khuyenMai == null}"
+								th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+							</td>
+							
+							<td th:if="${item.sanPhamGH.khuyenMai != null}" 
+								th:text="${#numbers.formatDecimal((item.sanPhamGH.giaSanPham * (1 - item.sanPhamGH.khuyenMai.phamTramKhuyenMai / 100)), 0, 'COMMA', 0, 'POINT')} + ' VND'">
+							</td>
+							<!-- <td th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham, 0, 'COMMA', 0, 'POINT')} + ' VND'"></td> -->
 							<td th:if="${item.sanPhamGH.khuyenMai == null}" class="amount"
 								th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')} + ' VND'">
 							</td>
+							
 							<td th:if="${item.sanPhamGH.khuyenMai != null}" class="amount"
 								th:text="${#numbers.formatDecimal((item.sanPhamGH.giaSanPham * (1 - item.sanPhamGH.khuyenMai.phamTramKhuyenMai / 100)) * item.soLuong  , 0, 'COMMA', 0, 'POINT')} + ' VND'">
 							</td>
