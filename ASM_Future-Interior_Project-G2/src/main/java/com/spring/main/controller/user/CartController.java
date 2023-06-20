@@ -114,16 +114,16 @@ public class CartController {
 	public GioHang getDataJsonPushIdGioHang(@RequestParam(name = "idGioHang") int idGioHang,
 			@RequestParam(name = "delete") boolean delete) {
 		GioHang gioHang2 = ghDAO.findByIdGioHang(idGioHang);
-		
+
 		if (delete) {
 			System.out.println(idGioHang);
 			System.out.println(delete);
 			for (int index = 0; index < ListCart.size(); index++) {
-				if(ListCart.get(index).getIdGioHang() == idGioHang){
+				if (ListCart.get(index).getIdGioHang() == idGioHang) {
 					ListCart.remove(ListCart.get(index));
 				}
 			}
-		}else {
+		} else {
 			System.out.println(idGioHang);
 			System.out.println(delete);
 			ListCart.add(gioHang2);

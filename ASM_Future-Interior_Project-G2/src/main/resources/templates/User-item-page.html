@@ -76,7 +76,7 @@
                 <div class="col-4 product-item-text">
                     <div class="product-item-name">
                         <h3 th:text="${spitem.tenSanPham}"></h3>
-                        
+                        <h6 th:text="'Còn lại: '+${spitem.soLuong}"></h6>
                         <div class="product-price-main">
                             <p th:unless="${spitem.khuyenMai != null}" class="product-price-proItem"
                                 th:text="${#numbers.formatDecimal(spitem.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>

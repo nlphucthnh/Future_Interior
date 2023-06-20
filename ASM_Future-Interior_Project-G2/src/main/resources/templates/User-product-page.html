@@ -39,7 +39,7 @@
     <article>
         <div class="container">
             <div class="product-title-sale">
-                <h3>Các sản phẩm đề xuất</h3>
+                <h3>Danh sách các sản phẩm</h3>
             </div>
             <div class="product-list-main row row-cols-4">
                 <div class="product-list my-4 col" th:each="pro : ${products}">
@@ -51,7 +51,7 @@
                             <img th:src="${pro.ListHinhAnhSP[0].idHinhAnh}" alt="Hình ảnh">
                         </div>
                         <h3 class="product-title" th:text="${pro.tenSanPham}"></h3>
-                     
+                        <h6 th:text="'Còn lại: '+${pro.soLuong}"></h6>
                     </a>
                     <div class="product-price-main">
                         <p th:unless="${pro.khuyenMai != null}" class="product-price"
