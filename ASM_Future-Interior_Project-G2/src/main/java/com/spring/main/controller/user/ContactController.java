@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.main.bean.MailInfo;
 import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.DisplayHeader;
 
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.ServletContext;
@@ -28,12 +29,14 @@ public class ContactController {
 
 	@Autowired
 	JavaMailSender mailer;
-
+	@Autowired
+	DisplayHeader displayHeader;
 	@Autowired
 	ServletContext context;
 	
 	@GetMapping("/contact-page")
 	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
+		displayHeader.displayHeader(model); // hiển thị người dùng trên header
 		MailInfo lh = new MailInfo();
 		model.addAttribute("lienhe", lh);
 		return "contact";

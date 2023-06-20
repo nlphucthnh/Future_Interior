@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.main.dao.TaiKhoanDAO;
 import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.DisplayHeader;
+import com.spring.main.service.SessionService;
 
 import jakarta.validation.Valid;
 
@@ -24,6 +26,8 @@ import jakarta.validation.Valid;
 public class USSignInController {
     @Autowired
     TaiKhoanDAO taiKhoanDAO;
+    @Autowired
+    SessionService ss;
 
     @GetMapping("/sign-up-page")
     public String form(@ModelAttribute("sv") TaiKhoan taiKhoan, Model model) {
@@ -63,9 +67,11 @@ public class USSignInController {
             return "dangky";
         } else { // nếu không lọt vao các trường hợp trên thì tài khoản dăng ký hợp lệ nên thông
                  // báo đăng ký thành công.
+            ss.remove("TaiKhoanUser");
+            ss.set("TaiKhoanUser", taiKhoan);
             taiKhoanDAO.save(taiKhoan);
             model.addAttribute("sucess", true);//
-            return "redirect:/login-page";
+            return "redirect:/home-page";
 
         }
     }

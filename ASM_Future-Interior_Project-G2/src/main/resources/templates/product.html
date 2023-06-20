@@ -22,7 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-	 <link rel="stylesheet" href="styles/root.css">
+    <link rel="stylesheet" href="styles/root.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/product.css">
     <link rel="stylesheet" href="styles/home.css">
@@ -32,7 +32,9 @@
 </head>
 
 <body>
-   <nav th:include="navbar"></nav>
+    <!-- <nav th:include="navbar"></nav> -->
+    <nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
+    <nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
 
     <header id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
         data-bs-delay="1000">
@@ -105,7 +107,8 @@ khiêm tốn như phòng trọ hay căn hộ studio
                 <div class="product-list col my-4" th:each="pros : ${productsSales}">
                     <a th:href="@{'/product-page/edit/' + ${pros.sanPhamSPKM.idSanPham}}">
                         <div class="zoom_color noidung">
-                            <img th:src="@{'/img/' + ${pros.sanPhamSPKM.ListHinhAnhSP[0].idHinhAnh} + '.png'}" alt="Hình ảnh">
+                            <img th:src="@{'/img/' + ${pros.sanPhamSPKM.ListHinhAnhSP[0].idHinhAnh} + '.png'}"
+                                alt="Hình ảnh">
                             <span class="price-sale"
                                 th:text="${#numbers.formatDecimal(pros.khuyenMaiSPKM.phamTramKhuyenMai, 0, 0) + '%'}"></span>
                         </div>
@@ -149,9 +152,10 @@ khiêm tốn như phòng trọ hay căn hộ studio
                         <p th:unless="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price"
                             th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></p>
                         <p th:if="${pro.ListSPKM != null && !pro.ListSPKM.isEmpty()}" class="product-price">
-                            <span 
+                            <span
                                 th:text="${#numbers.formatDecimal(pro.giaSanPham * (1 - pro.ListSPKM[0].khuyenMaiSPKM.phamTramKhuyenMai / 100), 0, 'COMMA', 0, 'POINT')}"></span>
-                            <del class="old-price mx-3" th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
+                            <del class="old-price mx-3"
+                                th:text="${#numbers.formatDecimal(pro.giaSanPham, 0, 'COMMA', 0, 'POINT')}"></del>
                         </p>
                     </div>
                 </div>
@@ -239,32 +243,48 @@ khiêm tốn như phòng trọ hay căn hộ studio
                 <div class="col-6 col-md-3 mb-3">
                     <h5>Sản phẩm</h5>
                     <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">BÀN - tables</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">SOFA - sofas</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">TỦ - cabinets</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">GHẾ - chairs</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">ĐÈN - lamps</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">KỆ - shelf units</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">BÀN - tables</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">SOFA - sofas</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">TỦ - cabinets</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">GHẾ - chairs</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">ĐÈN - lamps</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">KỆ - shelf
+                                units</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md-3 mb-3">
                     <h5>Phòng</h5>
                     <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG KHÁCH -Living room</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG NGỦ - Bedroom</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG BẾP - Kitchen room</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG TẮM - Bathroom</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG LÀM VIỆC - Office</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG KHÁCH -Living
+                                room</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG NGỦ -
+                                Bedroom</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG BẾP - Kitchen
+                                room</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG TẮM -
+                                Bathroom</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">PHÒNG LÀM VIỆC -
+                                Office</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-md-3 mb-3">
                     <h5>Trang khác</h5>
                     <ul class="nav flex-column footer-link">
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang giới thiệu</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang liên hệ</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang bài viết</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang cá nhân</a></li>
-                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang cài đặt</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang giới
+                                thiệu</a></li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang liên hệ</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang bài viết</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang cá nhân</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href=product-item-page class="text-footer p-0 ">Trang cài đặt</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-6 col-md-3 mb-3">

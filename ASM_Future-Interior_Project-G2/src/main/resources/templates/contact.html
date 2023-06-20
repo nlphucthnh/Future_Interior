@@ -1,185 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<!-- icon web  -->
-<link rel="website icon" type="png" href="img/logo--noname.png">
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap CSS: -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
 
-<!-- Bootstrap JavaScript: -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
-<!-- link icon -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<link rel="stylesheet" href="styles/root.css">
-<link rel="stylesheet" href="/styles/navbar.css">
-<link rel="stylesheet" href="/styles/contact.css">
-<link rel="stylesheet" href="/styles/footer.css">
-<title>Contact</title>
+<head>
+	<!-- icon web  -->
+	<link rel="website icon" type="png" href="img/logo--noname.png">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap CSS: -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<!-- Bootstrap JavaScript: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+	<!-- link icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet" href="styles/root.css">
+	<link rel="stylesheet" href="/styles/navbar.css">
+	<link rel="stylesheet" href="/styles/contact.css">
+	<link rel="stylesheet" href="/styles/footer.css">
+	<title>Contact</title>
 
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light">
-		<div class="container">
-			<a href="/home-page"><img src="img/Logowebsite.png"
-				style="background-color: var(- -gray_25);" alt=""></a>
-			<div class="navbar-collapse">
-				<ul class="navbar-nav item-menu">
-					<li class="nav-item"><a class="nav-link" href="/about-page">Giới
-							thiệu</a></li>
-					<li class="nav-item"><a class="nav-link" href="/contact-page">Liên
-							hệ</a></li>
-					<li class="nav-item"><a class="nav-link " aria-current="page"
-						href="/blog-page">Bài viết</a></li>
-					<li class="nav-item dropdown dropdown-hover has-megamenu"><a
-						class="nav-link " href="/product-page"> Sản phẩm <i
-							class="bi bi-chevron-down"></i></a>
-						<div class="dropdown-menu megamenu" role="menu">
-							<div class="row g-3">
-								<div class="col-lg-4 col-6 item-group">
-									<div class="col-megamenu">
-										<h6 class="title ">Loại nội thất</h6>
-										<ul class="list-unstyled ">
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">BÀN - tables</a>
-												<p>Bàn làm việc, bàn ăn, bàn sofa.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">SOFA - sofas</a>
-												<p>Sofa băng, sofa góc, sofa giường.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">GHẾ - chairs</a>
-												<p>Ghế văn phòng, ghế ăn, ghế cafe.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">ĐÈN - lamps</a>
-												<p>Đèn sản, đèn bàn, đèn trang trí.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">KỆ, TỦ - sheft units, cabinets</a>
-												<p>Tử đồ, tủ TV, kệ để đồ.</p></li>
-										</ul>
-									</div>
-									<!-- col-megamenu.// -->
-								</div>
-								<!-- end col-3 -->
-								<div class="col-lg-4 col-6 item-group">
-									<div class="col-megamenu">
-										<h6 class="title">&#160;</h6>
-										<ul class="list-unstyled">
+	<nav th:unless="${onRegistered}" th:include="components/header-unregistered"></nav>
+	<nav th:if="${onRegistered}" th:include="components/header-registered"></nav>
 
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">GƯƠNG - mirrors</a>
-												<p>Gường nhỏ, gương toàn thân.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">GIƯỜNG - beds</a>
-												<p>Gường sofr, gường đơn, gường đôi.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">TRANG TRÍ - decorations</a>
-												<p>Khung ảnh, kệ giá.</p></li>
-											<li class="item-opsition-menu pb-2 "><a
-												href="/product-list-page">ĐÒ GIA DỤNG - household goods</a>
-												<p>Rem, thung rác.</p></li>
-										</ul>
-									</div>
-									<!-- col-megamenu.// -->
-								</div>
-								<!-- end col-3 -->
-								<div class="col-lg-4 col-6 room-group">
-									<div class="col-megamenu">
-										<h6 class="title">Nội thất cho các phòng</h6>
-										<ul class="list-unstyled ">
-											<li class="item-opsition-menu pb-2 ">
-												<div class="d-flex align-items-center">
-													<span class="material-symbols-sharp "> chair </span>
-													<div>
-														<a href="product-list-page">Phòng khách - Living room</a>
-														<p>Các nội thất phòng khách</p>
-													</div>
-												</div>
-											</li>
-											<li class="item-opsition-menu pb-2 ">
-												<div class="d-flex align-items-center">
-													<span class="material-symbols-sharp"> bed </span>
-													<div>
-														<a href="#">Phòng ngủ - Bedroom</a>
-														<p>Các nội thất phòng ngủ</p>
-													</div>
-												</div>
-											</li>
-											<li class="item-opsition-menu pb-2 ">
-												<div class="d-flex align-items-center">
-													<span class="material-symbols-sharp"> kitchen </span>
-													<div>
-														<a href="product-list-page">Phòng ăn - Kitchen room</a>
-														<p>Các nội thất nhà ăn</p>
-													</div>
-												</div>
-											</li>
-											<li class="item-opsition-menu pb-2 ">
-												<div class="d-flex align-items-center">
-													<span class="material-symbols-sharp">
-														laptop_chromebook </span>
-													<div>
-														<a href="product-list-page">Phòng làm việc - Office</a>
-														<p>Các nội thất phòng làm việc</p>
-													</div>
-												</div>
-											</li>
-											<li class="item-opsition-menu pb-2 ">
-												<div class="d-flex align-items-center">
-													<span class="material-symbols-sharp"> bathtub </span>
-													<div>
-														<a href="product-list-page">Phòng tắm - Bathroom</a>
-														<p>Các nội thất phòng tắm</p>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</div>
-									<!-- col-megamenu.// -->
-								</div>
-							</div>
-							<!-- end row -->
-						</div> <!-- dropdown-mega-menu.// --></li>
-				</ul>
-			</div>
-			<ul class="navbar-nav item-menu ms-auto signin-group">
-				<li class="nav-item"><a class="nav-link login"
-					href="login-page">Đăng nhập</a></li>
-				<li class="nav-item sign-navbar "><a class="nav-link sigin"
-					href="sign-up-page">Đăng ký</a></li>
-			</ul>
-		</div>
-	</nav>
-	
 	<div class="row container" style="background-color: var(- -gray_25);">
 		<div class="col-4 offset-2">
-			<form class="form-contact my-5" th:action="@{/contact-page}" th:object="${lienhe}"
-				method="post" enctype="multipart/form-data">
+			<form class="form-contact my-5" th:action="@{/contact-page}" th:object="${lienhe}" method="post"
+				enctype="multipart/form-data">
 				<div class="title-contact my-5">
 					<h3>Liên hệ với chúng tôi</h3>
 					<p>Đội ngũ thân thiện của chúng tôi rất thích nghe từ bạn.</p>
 				</div>
-				
+
 				<div class="my-4">
-							<label class="form-label" for="name">Họ và tên của bạn</label> <input
-								type="text" class="form-control" th:field="*{subject}" id="subject" name="subject"
-								placeholder="Nhập họ và tên của bạn">
-								<div class="text-danger" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></div>
-                   		
+					<label class="form-label" for="name">Họ và tên của bạn</label> <input type="text"
+						class="form-control" th:field="*{subject}" id="subject" name="subject"
+						placeholder="Nhập họ và tên của bạn">
+					<div class="text-danger" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></div>
+
 				</div>
 				<!-- <div class="row d-flex">
 					<div class="col-6">
@@ -199,46 +66,45 @@
 					</div>
 				</div> -->
 				<div class="my-4">
-					<label class="form-label" for="name">Email</label> <input
-						type="text" class="form-control" id="name" name="from" th:field="*{from}"	placeholder="you@company.com">
-						<input hidden="true" type="text" value="lehoangthao2410@gmail.com" id="admin" name="to"/>
-						<div class="text-danger" th:if="${#fields.hasErrors('from')}" th:errors="*{from}"></div>
-                   		
-						
+					<label class="form-label" for="name">Email</label> <input type="text" class="form-control" id="name"
+						name="from" th:field="*{from}" placeholder="you@company.com">
+					<input hidden="true" type="text" value="lehoangthao2410@gmail.com" id="admin" name="to" />
+					<div class="text-danger" th:if="${#fields.hasErrors('from')}" th:errors="*{from}"></div>
+
+
 				</div>
 				<div class="my-4">
-					<label for="" class="form-label">Số điện thoại</label> <input
-						type="text" name="body" id="" class="form-control"
-						placeholder="Nhập số điện thoại ">
-						<!-- <div class="text-danger" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></div> -->
-                   		
+					<label for="" class="form-label">Số điện thoại</label> <input type="text" name="body" id=""
+						class="form-control" placeholder="Nhập số điện thoại ">
+					<!-- <div class="text-danger" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></div> -->
+
 					<!-- <select name="" id="" class="form-control">
                         
                         <option value="">+84 (555) 000-0000</option>
                       </select> -->
 				</div>
 				<div class="my-4">
-					<input type="file" name="attach" class="form-control"/>
+					<input type="file" name="attach" class="form-control" />
 				</div>
-				
+
 				<div class="my-4">
 					<label for="" class="form-label">Lời nhắn</label>
 					<textarea class="form-control" name="body" id="" cols="30" rows="6"></textarea>
 					<!-- <div class="text-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></div> -->
 				</div>
-				
+
 				<div class="my-2 d-flex">
-					<input type="checkbox" class="form-check" id="dieukhoan" checked name="dieukhoan"> 
+					<input type="checkbox" class="form-check" id="dieukhoan" checked name="dieukhoan">
 					<label for="dieukhoan" class="form-label px-2 dieukhoan">Bạn đồng ý với chính
 						sách bảo mật của chúng tôi.</label>
 				</div>
 				<button class="btn btn-contact">Gửi lời nhắn</button>
 			</form>
 			<div class="text-primary" th:text="${message}"></div>
-			
-		    <div class="text-danger" th:text="${error}"></div>
-			
-			
+
+			<div class="text-danger" th:text="${error}"></div>
+
+
 		</div>
 		<div class="col-4 offset-1">
 			<div class="banner-contact my-5">
@@ -256,47 +122,40 @@
 		</div>
 
 		<ul class="nav nav-tabs nav-fill mb-3" id="ex1" role="tablist">
-			<li class="nav-item" role="presentation"><a
-				class="nav-link active" id="ex2-tab-1" data-bs-toggle="tab"
-				href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1"
-				aria-selected="true">
+			<li class="nav-item" role="presentation"><a class="nav-link active" id="ex2-tab-1" data-bs-toggle="tab"
+					href="#ex2-tabs-1" role="tab" aria-controls="ex2-tabs-1" aria-selected="true">
 					<h3>Hồ Chí Minh</h3>
 					<p>100 Flinders Street Melbourne VIC 3000 AU</p>
-			</a></li>
-			<li class="nav-item" role="presentation"><a class="nav-link"
-				id="ex2-tab-2" data-bs-toggle="tab" href="#ex2-tabs-2" role="tab"
-				aria-controls="ex2-tabs-2" aria-selected="false">
+				</a></li>
+			<li class="nav-item" role="presentation"><a class="nav-link" id="ex2-tab-2" data-bs-toggle="tab"
+					href="#ex2-tabs-2" role="tab" aria-controls="ex2-tabs-2" aria-selected="false">
 					<h3>Hà Nội</h3>
 					<p>100 Flinders Street Melbourne VIC 3000 AU</p>
-			</a></li>
-			<li class="nav-item" role="presentation"><a class="nav-link"
-				id="ex2-tab-3" data-bs-toggle="tab" href="#ex2-tabs-3" role="tab"
-				aria-controls="ex2-tabs-3" aria-selected="false">
+				</a></li>
+			<li class="nav-item" role="presentation"><a class="nav-link" id="ex2-tab-3" data-bs-toggle="tab"
+					href="#ex2-tabs-3" role="tab" aria-controls="ex2-tabs-3" aria-selected="false">
 					<h3>Cần Thơ</h3>
 					<p>100 Flinders Street Melbourne VIC 3000 AU</p>
-			</a></li>
+				</a></li>
 		</ul>
 		<div class="tab-content my-5" id="ex2-content">
-			<div class="tab-pane fade show active" id="ex2-tabs-1"
-				role="tabpanel" aria-labelledby="ex2-tab-1">
+			<div class="tab-pane fade show active" id="ex2-tabs-1" role="tabpanel" aria-labelledby="ex2-tab-1">
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d5106.166259128002!2d106.7978438026478!3d10.850642996045755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1685191926937!5m2!1svi!2s"
-					width="100%" height="450" style="border: 0;" allowfullscreen=""
-					loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					width="100%" height="450" style="border: 0;" allowfullscreen="" loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
-			<div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel"
-				aria-labelledby="ex2-tab-2">
+			<div class="tab-pane fade" id="ex2-tabs-2" role="tabpanel" aria-labelledby="ex2-tab-2">
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d550.4482556125214!2d105.78289027260473!3d21.031021312425917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1685191978261!5m2!1svi!2s"
-					width="100%" height="450" style="border: 0;" allowfullscreen=""
-					loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					width="100%" height="450" style="border: 0;" allowfullscreen="" loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
-			<div class="tab-pane fade" id="ex2-tabs-3" role="tabpanel"
-				aria-labelledby="ex2-tab-3">
+			<div class="tab-pane fade" id="ex2-tabs-3" role="tabpanel" aria-labelledby="ex2-tab-3">
 				<iframe
 					src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11329.058991494338!2d105.72637674347642!3d10.013201253665699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1685192131269!5m2!1svi!2s"
-					width="100%" height="450" style="border: 0;" allowfullscreen=""
-					loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					width="100%" height="450" style="border: 0;" allowfullscreen="" loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"></iframe>
 			</div>
 		</div>
 	</article>
@@ -307,71 +166,48 @@
 				<div class="col-6 col-md-3 mb-3">
 					<h5>Sản phẩm</h5>
 					<ul class="nav flex-column footer-link">
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">BÀN - tables</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">SOFA - sofas</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">TỦ - cabinets</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">GHẾ - chairs</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">ĐÈN - lamps</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">KỆ - shelf units</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">BÀN - tables</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">SOFA - sofas</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">TỦ - cabinets</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">GHẾ - chairs</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">ĐÈN - lamps</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">KỆ - shelf units</a></li>
 					</ul>
 				</div>
 				<div class="col-6 col-md-3 mb-3">
 					<h5>Phòng</h5>
 					<ul class="nav flex-column footer-link">
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">PHÒNG KHÁCH -Living room</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">PHÒNG NGỦ - Bedroom</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">PHÒNG BẾP - Kitchen room</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">PHÒNG TẮM - Bathroom</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">PHÒNG LÀM VIỆC - Office</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG KHÁCH -Living room</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG NGỦ - Bedroom</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG BẾP - Kitchen room</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG TẮM - Bathroom</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">PHÒNG LÀM VIỆC - Office</a></li>
 					</ul>
 				</div>
 				<div class="col-6 col-md-3 mb-3">
 					<h5>Trang khác</h5>
 					<ul class="nav flex-column footer-link">
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Trang giới thiệu</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Trang liên hệ</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Trang bài viết</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Trang cá nhân</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Trang cài đặt</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang giới thiệu</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang liên hệ</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang bài viết</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang cá nhân</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Trang cài đặt</a></li>
 					</ul>
 				</div>
 				<div class="col-6 col-md-3 mb-3">
 					<h5>Mạng xã hội</h5>
 					<ul class="nav flex-column footer-link">
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Twitter</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Linkedln</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Facebook</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">GitHub</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">AngelList</a></li>
-						<li class="nav-item mb-2"><a href="#"
-							class="text-footer p-0 ">Dribble</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Twitter</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Linkedln</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Facebook</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">GitHub</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">AngelList</a></li>
+						<li class="nav-item mb-2"><a href="#" class="text-footer p-0 ">Dribble</a></li>
 					</ul>
 				</div>
 			</div>
 
-			<div
-				class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+			<div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
 				<div class="logo-footer">
 					<a href="#"><img src="img/Logowebsite.png" alt=""></a>
 				</div>
@@ -382,7 +218,7 @@
 			</div>
 		</div>
 	</footer>
-	
+
 </body>
-						
+
 </html>

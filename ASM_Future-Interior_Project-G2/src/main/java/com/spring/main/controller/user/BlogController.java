@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.main.dao.BaiDangDAO;
 import com.spring.main.entity.BaiDang;
+import com.spring.main.service.DisplayHeader;
 
 @Controller
 public class BlogController {
 
     @Autowired
     BaiDangDAO baiDangDAO;
+    @Autowired
+    DisplayHeader displayHeader;
 
     @RequestMapping("/blog-page")
     public String blogPage(Model model, @RequestParam("p") Optional<Integer> p) {
@@ -31,6 +34,7 @@ public class BlogController {
         // for (BaiDang baiDang2 : baiDang) {
         // System.out.println(baiDang2.getTieuDeBaiDang());
         // }
+        displayHeader.displayHeader(model); // hiển thị người dùng trên header
         Pageable pageable = PageRequest.of(0, 9);
         pageable = PageRequest.of(p.orElse(0), 9);
         Page<BaiDang> page = baiDangDAO.findAll(pageable);

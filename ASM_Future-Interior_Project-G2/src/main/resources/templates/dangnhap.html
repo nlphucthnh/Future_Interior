@@ -20,26 +20,31 @@
         <div class="lg-container-ctent">
             <div class="lg-ct-left">
                 <div class="lg-ct-left-form" style="display: flex; flex-direction: column;">
-                    <form th:action="@{/login-page/save}" method="post">
+                    <form th:action="@{/login-page}" th:object="${login}" method="post">
                         <div class="lg-ct-top">
                             <img src="/img/logoMark.png" alt="">
                             <h2 class="lg-ct-title">Chào mừng bạn đến với Future Interior</h2>
                         </div>
                         <div class="mb-3 form-group">
                             <label for="tenDangNhap" class="form-label">Tên đăng nhập</label>
-                            <input type="text" name="tenDangNhap" class="form-control" id="tenDangNhap"
-                                placeholder="Tên đăng nhập của bạn">
-                            <small id="tenDangNhap-text" style="display: none;" class="text-danger">Vui lòng nhập tên
+                            <input type="text" th:field="*{tenDangNhap}" th:name="tenDangNhap" class="form-control"
+                                id="tenDangNhap" placeholder="Nhập tên đăng nhập">
+                            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('tenDangNhap')}"
+                                th:errors="*{tenDangNhap}"></div>
+                            <!-- <small id="tenDangNhap-text" style="display: none;" class="text-danger">Vui lòng nhập tên
                                 đăng
-                                nhập</small>
+                                nhập</small> -->
                         </div>
                         <div class="mb-3 form-group">
                             <label for="matKhau" class="form-label">Mật khẩu</label>
-                            <input type="password" name="matKhau" class="form-control" id="matKhau">
-                            <small id="matKhau-text" style="display: none;" class="text-danger">Vui lòng nhập mật
-                                khẩu</small>
+                            <input type="password" placeholder="Nhập mật khẩu" th:field="*{matKhau}" name="matKhau" class="form-control" id="matKhau">
+                            <!-- <small id="matKhau-text" style="display: none;" class="text-danger">Vui lòng nhập mật
+                                khẩu</small> -->
+                            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('matKhau')}"
+                                th:errors="*{matKhau}"></div>
 
                         </div>
+                        <div class="alert alert-danger" role="alert" th:if="${message}" th:text="${message}"></div>
                         <div class="mb-3 form-check">
                             <div class="input-groups input-groups-01">
                                 <input type="checkbox" name="remember" value="true" class="form-check-input"
@@ -50,16 +55,17 @@
                                 <a href="#">Quên Mật Khẩu</a>
                             </div>
                         </div>
-                        <button  type="submit" id="btnLogin01" class="btn btn-login">Đăng Nhập</button>
+                        <button type="submit" id="btnLogin01" class="btn btn-login">Đăng Nhập</button>
                         <!-- formaction="/log-in-page/save" -->
-                    </form>    
-                    <button style="width: 95%;" onclick="LoginCheckError()" id="btnLogin02" type="submit" class="btn btn-login">Đăng Nhập</button>
-                        <div class="lg-ct-end">
-                            <p>Bạn chưa có tài khoản?</p>
-                            <a href="/sign-up-page">Đăng Ký</a>
-                        </div>
-                    
-                    
+                    </form>
+                    <!-- <button style="width: 95%;" onclick="LoginCheckError()" id="btnLogin02" type="submit"
+                        class="btn btn-login">Đăng Nhập</button> -->
+                    <div class="lg-ct-end">
+                        <p>Bạn chưa có tài khoản?</p>
+                        <a href="/sign-up-page">Đăng Ký</a>
+                    </div>
+
+
                     <!-- <th:if test="${not empty message}">
                         <div style="color:red;" >
                             <small th:text="${message}">Help Text</small>
@@ -80,7 +86,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
-<script>
+<!-- <script>
     $("#btnLogin01").hide();
 
     function checkFormLogin() {
@@ -121,9 +127,9 @@
                 } else {
                     if (response.matKhau != matKhau) {
                         alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
-                    } else if(!response.trangThai){
+                    } else if (!response.trangThai) {
                         alert("Tài khoản đã tạm dừng hoạt động !");
-                    }else {
+                    } else {
                         alert("Đăng nhập thành công");
                         $("#btnLogin01").trigger('click');
                     }
@@ -138,6 +144,6 @@
 
     }
 
-</script>
+</script> -->
 
 </html>

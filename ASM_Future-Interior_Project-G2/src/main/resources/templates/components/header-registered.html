@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <a href="/"><img src="img/Logowebsite.png" style="background-color: var(--gray_25);" alt=""></a>
+        <a href="/home-page"><img src="/img/Logowebsite.png" style="background-color: var(--gray_25);" alt=""></a>
         <div class="navbar-collapse">
             <ul class="navbar-nav item-menu">
                 <li class="nav-item">
@@ -145,13 +145,27 @@
                 <span class="number-item">+99</span>
             </div>
             <div class="registered-group-account registered-item">
-                <div class="registered-group-account-text">
-                    <div class="registered-group-account-name-text">PhucThnh</div>
-                    <div class="registered-group-account-email-text">phucthinh@gmail.com</div>
-                </div>
-                <div class="registered-group-account-img">
-                    <img class="img-avata-registered" src="../img/PhucThinh.png" alt="">
-                </div>
+                <a th:href="@{/home-page/profile?user=__${username}__}">
+                    <div class="registered-group-account-text">
+                        <!-- Hiển thị tên đăng nhập + email lên header -->
+                        <a th:href="@{/profile/__${username}__}"
+                            style="text-decoration: none; color: black;">
+                            <div class="registered-group-account-name-text" th:text="${usernameHeader}"></div>
+                            <div class="registered-group-account-email-text" th:text="${emailHeader}"></div>
+                        </a>
+                    </div>
+                    <div class="registered-group-account-img">
+                        <img class="img-avata-registered" src="../img/PhucThinh.png" alt="">
+                    </div>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-bs-toggle="dropdown" aria-expanded="false" ></a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" th:href="@{/profile/__${username}__}">Tài khoản</a></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                    <!-- </a> -->
             </div>
         </div>
     </div>

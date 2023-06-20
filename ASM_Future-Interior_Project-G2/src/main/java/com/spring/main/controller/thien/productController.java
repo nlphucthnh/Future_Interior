@@ -32,6 +32,7 @@ import com.spring.main.entity.PhanNhomLoai;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.SanPhamKhuyenMai;
 import com.spring.main.entity.TaiKhoan;
+import com.spring.main.service.DisplayHeader;
 import com.spring.main.service.MailerService;
 
 import ch.qos.logback.core.util.DirectJson;
@@ -60,6 +61,9 @@ public class productController {
     @Autowired
     MailerService mailer;
 
+    @Autowired
+    DisplayHeader displayHeader;
+
     @GetMapping("/")
     public String index(Model model) {
         List<SanPham> phamList = sanPhamDAO.findAll();
@@ -71,7 +75,7 @@ public class productController {
 
     @GetMapping("/product-page")
     public String getProduct(Model model, @RequestParam("p") Optional<Integer> p) {
-
+        displayHeader.displayHeader(model); // hiển thị người dùng trên header
         var product = new SanPham();
         model.addAttribute("product", product);
         Pageable pageable = PageRequest.of(p.orElse(0), 12, Sort.by("tenSanPham").ascending());
@@ -181,7 +185,8 @@ public class productController {
     @GetMapping("/product-list-page/{category}")
     public String productListPage(Model model, @PathVariable("category") String category) {
 
-        List<SanPham> prolists = sanPhamDAO.findByLoaiSanpham("%" + category + "%", Sort.by(Direction.ASC, "tenSanPham"));
+        List<SanPham> prolists = sanPhamDAO.findByLoaiSanpham("%" + category + "%",
+                Sort.by(Direction.ASC, "tenSanPham"));
         model.addAttribute("prolists", prolists);
         return "product-List";
     }
@@ -200,90 +205,89 @@ public class productController {
     // // doi mk
     // @GetMapping("/changePassword")
     // public String changepass(Model model) {
-    //     return "changePassword";
+    // return "changePassword";
     // }
 
     // @PostMapping("/changePassword")
     // public String change(Model model,
-    //         @RequestParam("currentPassword") String currentPassword,
-    //         @RequestParam("newPassword") String newPassword,
-    //         @RequestParam("confirmNewPassword") String confirmNewPassword) {
+    // @RequestParam("currentPassword") String currentPassword,
+    // @RequestParam("newPassword") String newPassword,
+    // @RequestParam("confirmNewPassword") String confirmNewPassword) {
 
-    //     List<TaiKhoan> change = tkDAO.findByTenDangNhap1("thienlv");
-    //     model.addAttribute("username", "thienlv");
-    //     boolean usernameExists = false;
-    //     for (TaiKhoan tk : change) {
-    //         if (tk.getMatKhau().equals(currentPassword)) {
-    //             usernameExists = true;
-    //             break;
-    //         }
-    //     }
-    //     if (usernameExists) {
-    //         if (newPassword.length() < 4 || newPassword.length() > 20) {
-    //             model.addAttribute("length", "Mật khẩu từ 4 - 20 ký tự");
-    //         } else if (!newPassword.equals(confirmNewPassword)) {
-    //             model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
-    //         } else {
-    //             TaiKhoan updatedTaiKhoan = change.get(0);
-    //             // Cập nhật mật khẩu mới trong đối tượng TaiKhoan
-    //             updatedTaiKhoan.setMatKhau(newPassword);
-    //             // Lưu thay đổi vào CSDL
-    //             // System.out.println(updatedTaiKhoan);
-    //             tkDAO.save(updatedTaiKhoan);
-    //             model.addAttribute("success", "Đổi mật khẩu thành công");
-    //         }
-    //     } else {
-    //         model.addAttribute("message", "Nhập mật khẩu cũ sai");
-    //     }
+    // List<TaiKhoan> change = tkDAO.findByTenDangNhap1("thienlv");
+    // model.addAttribute("username", "thienlv");
+    // boolean usernameExists = false;
+    // for (TaiKhoan tk : change) {
+    // if (tk.getMatKhau().equals(currentPassword)) {
+    // usernameExists = true;
+    // break;
+    // }
+    // }
+    // if (usernameExists) {
+    // if (newPassword.length() < 4 || newPassword.length() > 20) {
+    // model.addAttribute("length", "Mật khẩu từ 4 - 20 ký tự");
+    // } else if (!newPassword.equals(confirmNewPassword)) {
+    // model.addAttribute("message1", "Nhập lại mật khẩu không đúng");
+    // } else {
+    // TaiKhoan updatedTaiKhoan = change.get(0);
+    // // Cập nhật mật khẩu mới trong đối tượng TaiKhoan
+    // updatedTaiKhoan.setMatKhau(newPassword);
+    // // Lưu thay đổi vào CSDL
+    // // System.out.println(updatedTaiKhoan);
+    // tkDAO.save(updatedTaiKhoan);
+    // model.addAttribute("success", "Đổi mật khẩu thành công");
+    // }
+    // } else {
+    // model.addAttribute("message", "Nhập mật khẩu cũ sai");
+    // }
 
-    //     return "changePassword";
+    // return "changePassword";
     // }
 
     // // quen mat khau ?
     // @GetMapping("/quenmatkhau")
     // public String quenmatkhau(Model model) {
-    //     model.addAttribute("mailInfo", new MailInfo());
-    //     return "quenmatkhau";
+    // model.addAttribute("mailInfo", new MailInfo());
+    // return "quenmatkhau";
     // }
 
     // @PostMapping("/quenmatkhau")
-    // public String resetpassword(Model model, @RequestParam("forgot") String email) {
-    //     List<TaiKhoan> change = tkDAO.findByTenDangNhap1("thienlv");
-    //     model.addAttribute("username", "thienlv");
+    // public String resetpassword(Model model, @RequestParam("forgot") String
+    // email) {
+    // List<TaiKhoan> change = tkDAO.findByTenDangNhap1("thienlv");
+    // model.addAttribute("username", "thienlv");
 
-    //     boolean emailExists = false;
-    //     for (TaiKhoan tk : change) {
-    //         if (tk.getEmail().equals(email)) {
-    //             emailExists = true;
-    //             break;
-    //         }
-    //     }
-    //     if (emailExists) {
-    //         try {
+    // boolean emailExists = false;
+    // for (TaiKhoan tk : change) {
+    // if (tk.getEmail().equals(email)) {
+    // emailExists = true;
+    // break;
+    // }
+    // }
+    // if (emailExists) {
+    // try {
 
-    //             String subject = "Lấy Lại Mật Khẩu";
-    //             String body = "<p>Chào bạn,</p>"
-    //                     + "<p>Dưới đây là mật khẩu của bạn.</p>"
-    //                     + "<p>Mật khẩu của bạn là: </p>"
-    //                     + "<br>"
-    //                     + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
+    // String subject = "Lấy Lại Mật Khẩu";
+    // String body = "<p>Chào bạn,</p>"
+    // + "<p>Dưới đây là mật khẩu của bạn.</p>"
+    // + "<p>Mật khẩu của bạn là: </p>"
+    // + "<br>"
+    // + "<p>Cảm ơn bạn đã ủng hộ shop </p>";
 
-    //             mailer.send(email, subject, body);
+    // mailer.send(email, subject, body);
 
-    //             model.addAttribute("success", "Mật khẩu sẽ gửi về mail của bạn trong giây lát");
+    // model.addAttribute("success", "Mật khẩu sẽ gửi về mail của bạn trong giây
+    // lát");
 
-    //         } catch (Exception e) {
-    //             System.out.println("Lỗi khi gửi email: " + e);
-    //         }
-
-    //     } else {
-    //         model.addAttribute("message", "Bạn đã nhập sai email");
-    //     }
-
-    //     return "quenmatkhau";
+    // } catch (Exception e) {
+    // System.out.println("Lỗi khi gửi email: " + e);
     // }
 
+    // } else {
+    // model.addAttribute("message", "Bạn đã nhập sai email");
+    // }
 
-
+    // return "quenmatkhau";
+    // }
 
 }

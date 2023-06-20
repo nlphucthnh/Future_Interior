@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.spring.main.dao.TaiKhoanDAO;
 import com.spring.main.entity.TaiKhoan;
 import com.spring.main.service.CookieService;
+import com.spring.main.service.DisplayHeader;
 import com.spring.main.service.ParamService;
 import com.spring.main.service.SessionService;
+import com.spring.main.validation.Login;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -43,10 +45,10 @@ public class LoginController {
     @Autowired
     SessionService session;
 
-    @GetMapping("/login-page")
-    public String form(@ModelAttribute("sv") TaiKhoan TaiKhoan, Model model) {
-        return "dangnhap";
-    }
+    // @GetMapping("/login-page")
+    // public String form(@ModelAttribute("sv") TaiKhoan TaiKhoan, Model model) {
+    //     return "dangnhap";
+    // }
 
     @ResponseBody
     @RequestMapping("/login-page/json/data")
@@ -56,33 +58,47 @@ public class LoginController {
         return taiKhoan;
     }
 
-    @PostMapping("/login-page/save")
-    public String ManageLoginPage(@RequestParam(name = "tenDangNhap") String tenDangNhapForm,
-            @RequestParam(name = "matKhau") String matKhauForm, Model model) {
-        TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(tenDangNhapForm);
+    @RequestMapping("/logout")
+    public String logout() {
+        sessions.removeAttribute("TaiKhoanUser");
+        cookieService.remove("tenDangNhap");
+        return "redirect:/home-page";
+    }
+
+    @GetMapping("/login-page")
+    public String login(Model model, @ModelAttribute("login") Login login) {
+        return "dangnhap";
+    }
+
+    @PostMapping("/login-page")
+    public String ManageLoginPage(@Valid @ModelAttribute("login") Login login,
+            BindingResult result, Model model) {
+        // Lấy tên đăng nhập
+        TaiKhoan taiKhoandataBase = taiKhoanDAO.findByTenDangNhap(login.getTenDangNhap());
         boolean rm = paramService.getBoolean("remember", false);
+        //Tên đăng nhập rỗng
         if (taiKhoandataBase == null) { // tức nó không có trong database
             model.addAttribute("MessageWarning", true); // tính hiệu để thông báo tên đăng nhập không tồn tại.
-        } else {
-            if (tenDangNhapForm.equals(taiKhoandataBase.getTenDangNhap())
-                    && matKhauForm.equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // && taiKhoandataBase.isTrangThai()==true
+        } else { //Tên đăng nhập ko rỗng
+            // check mật khẩu
+            if (login.getTenDangNhap().equals(taiKhoandataBase.getTenDangNhap())
+                    && login.getMatKhau().equals(taiKhoandataBase.getMatKhau()) && taiKhoandataBase.isTrangThai()) { // &&
+                                                                                                              // taiKhoandataBase.isTrangThai()==true
                 session.set("TaiKhoanUser", taiKhoandataBase);
                 System.out.println("đã ====");
                 sessions.setAttribute("AccoutUser", taiKhoandataBase);
                 if (rm) {
-                    cookieService.add("tenDangNhapUser", tenDangNhapForm, 10);
-                    cookieService.add("matKhauUser", matKhauForm, 10);
-                    System.out.println("dang nhap thanh cong");
-
+                    cookieService.add("tenDangNhap", login.getTenDangNhap(), 10);
                 } else {
-                    cookieService.remove("tenDangNhapUser");
-                    cookieService.remove("matKhauUser");
-                    System.out.println("dang nhap thanh cong");
+                    cookieService.remove("tenDangNhap");
                 }
+                return "redirect:/home-page";
+            } else {
+                model.addAttribute("message", "Tài khoản hoặc mật khẩu không chính xác.");
             }
-            return "redirect:/home-page";
         }
         return "dangnhap";
     }
+
 
 }
