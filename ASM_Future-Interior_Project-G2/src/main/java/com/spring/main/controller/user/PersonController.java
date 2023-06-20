@@ -181,16 +181,26 @@ public class PersonController {
         }
 
         if (falg) {
-            try {
+           try {
                 generatedOTP = generateOTP(); // Lưu trữ mã OTP đã tạo
 
                 String subject = "Lấy Lại Mật Khẩu";
-                String body = "<p>Chào bạn, Cảm ơn bạn đã ủng hộ Shop</p>"
-                        + "<p>Dưới đây là mã OTP của bạn.</p>"
-                        + "<p>Mã này được tạo vào lúc: " + formattedDateTime + "</p>"
-                        + "<p>Mã OTP của bạn là: " + generatedOTP + "</p>"
-                        + "<p>Mail này dược tạo tự động, Vui lòng không trả lời. </p>";
+                String body = "<html>"
+                        + "<body>"
+                        + "<div style=\"text-align: center;\">"
+                        + "<img src=\"../img/Logowebsite.png\" alt=\"Logo\" style=\"width: 200px; height: auto; margin-bottom: 20px;\">"
+                        + "<p style=\"font-size: 18px;\">Chào bạn, Cảm ơn bạn đã ủng hộ Shop</p>"
+                        + "<p style=\"font-size: 18px;\">Dưới đây là mã OTP của bạn.</p>"
+                        + "<p style=\"font-size: 18px;\">Mã này được tạo vào lúc: " + formattedDateTime + "</p>"
+                        + "<p style=\"font-size: 24px; color: #FF0000; font-weight: bold;\">Mã OTP của bạn là: "
+                        + generatedOTP + "</p>"
+                        + "<p style=\"font-size: 18px;\">Mail này được tạo tự động, Vui lòng không trả lời.</p>"
+                        + "</div>"
+                        + "</body>"
+                        + "</html>";
                 mailer.send(email, subject, body);
+
+           
 
                 model.addAttribute("success", "Mã sẽ gửi về mail của bạn trong giây lát");
 

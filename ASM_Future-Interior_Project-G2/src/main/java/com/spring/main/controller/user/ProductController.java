@@ -39,7 +39,7 @@ public class ProductController {
         }
         var product = new SanPham();
         model.addAttribute("product", product);
-        Pageable pageable = PageRequest.of(p.orElse(0), 12, Sort.by("tenSanPham").ascending());
+        Pageable pageable = PageRequest.of(p.orElse(0),8, Sort.by("tenSanPham").ascending());
         var products = sanPhamDAO.findAll(pageable);
         var numberOfPages = products.getTotalPages();
         model.addAttribute("currIndex", p.orElse(0));

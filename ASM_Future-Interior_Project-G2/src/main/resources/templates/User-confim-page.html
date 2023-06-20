@@ -51,10 +51,15 @@
         <svg viewBox="0 0 240 1" xmlns="http://www.w3.org/2000/svg">
           <line x1="0" y1="0" x2="240" y2="1" stroke="black" />
         </svg>
+
+
+        <div class="message-error" th:style="${'color: red'}" th:if="${messager}">
+          <p th:text="${messager}"></p>
+        </div>
         <div class="btn-otp">
           <button class="btn btn-dark my-5 d-none" id="btn-confim01" type="submit">Xác thực</button>
         </div>
-        
+
       </form>
       <button class="btn btn-dark" id="btn-confim02" type="submit">Xác thực</button>
     </div>
@@ -65,11 +70,11 @@
 </body>
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
-$('#btn-confim02').click(function(){
-  $('#btn-confim01').trigger('click');
-})
+  $('#btn-confim02').click(function () {
+    $('#btn-confim01').trigger('click');
+  })
 
-$("input").keypress(function () {
+  $("input").keypress(function () {
     if ($(this).val().length > 1) {
       $(this).addClass('active');
     }
