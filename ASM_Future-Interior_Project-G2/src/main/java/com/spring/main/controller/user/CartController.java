@@ -100,7 +100,6 @@ public class CartController {
 		return "User-cart-page";
 	}
 
-
 	@ResponseBody
 	@RequestMapping("/User/cart/json")
 	public GioHang getDataJson(@RequestBody GioHang gioHang) {
@@ -111,24 +110,40 @@ public class CartController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/User/cart/jsonPush/idGioHang")
-	public GioHang getDataJsonPushIdGioHang(@RequestParam(name = "idGioHang") int idGioHang) {
+	@RequestMapping("/User/cart/json/idGioHang")
+	public GioHang getDataJsonPushIdGioHang(@RequestParam(name = "idGioHang") int idGioHang,
+			@RequestParam(name = "delete") boolean delete) {
 		GioHang gioHang2 = ghDAO.findByIdGioHang(idGioHang);
-		ListCart.add(gioHang2);
-		return gioHang2;
-	}
-
-	@ResponseBody
-	@RequestMapping("/User/cart/jsonPop/idGioHang")
-	public GioHang getDataJsonPopIdGioHang(@RequestParam(name = "idGioHang") int idGioHang) {
-		GioHang gioHang2 = ghDAO.findByIdGioHang(idGioHang);
-		for (GioHang gioHang : ListCart) {
-			if (gioHang.getIdGioHang() == gioHang2.getIdGioHang()) {
-				ListCart.remove(ListCart.indexOf(gioHang));
+		
+		if (delete) {
+			System.out.println(idGioHang);
+			System.out.println(delete);
+			for (int index = 0; index < ListCart.size(); index++) {
+				if(ListCart.get(index).getIdGioHang() == idGioHang){
+					ListCart.remove(ListCart.get(index));
+				}
 			}
+		}else {
+			System.out.println(idGioHang);
+			System.out.println(delete);
+			ListCart.add(gioHang2);
+			System.out.println(ListCart.size());
 		}
 		return gioHang2;
 	}
+
+	// @ResponseBody
+	// @RequestMapping("/User/cart/jsonPop/idGioHang")
+	// public GioHang getDataJsonPopIdGioHang(@RequestParam(name = "idGioHang") int
+	// idGioHang) {
+	// GioHang gioHang2 = ghDAO.findByIdGioHang(idGioHang);
+	// for (GioHang gioHang : ListCart) {
+	// if (gioHang.getIdGioHang() == gioHang2.getIdGioHang()) {
+	// ListCart.remove(ListCart.indexOf(gioHang));
+	// }
+	// }
+	// return gioHang2;
+	// }
 
 	@PostMapping("/User/card/order")
 	public String addOrder() {
@@ -142,13 +157,14 @@ public class CartController {
 		float moneyShip = 30000;
 		float Total = 0;
 		for (GioHang gioHang : ListCart) {
-			DonHangChiTiet donHangChiTiet = new DonHangChiTiet(0,gioHang.getSoLuong(),gioHang.getSanPhamGH(),donHang2);
+			DonHangChiTiet donHangChiTiet = new DonHangChiTiet(0, gioHang.getSoLuong(), gioHang.getSanPhamGH(),
+					donHang2);
 			dhctDAO.save(donHangChiTiet);
-			if(gioHang.getSanPhamGH().getKhuyenMai() != null){
-				Float discount = (1 - gioHang.getSanPhamGH().getKhuyenMai().getPhamTramKhuyenMai()/100);
-				subTotal += (gioHang.getSanPhamGH().getGiaSanPham() * discount)  *  gioHang.getSoLuong();
-			}else {
-				subTotal += gioHang.getSanPhamGH().getGiaSanPham() *  gioHang.getSoLuong();
+			if (gioHang.getSanPhamGH().getKhuyenMai() != null) {
+				Float discount = (1 - gioHang.getSanPhamGH().getKhuyenMai().getPhamTramKhuyenMai() / 100);
+				subTotal += (gioHang.getSanPhamGH().getGiaSanPham() * discount) * gioHang.getSoLuong();
+			} else {
+				subTotal += gioHang.getSanPhamGH().getGiaSanPham() * gioHang.getSoLuong();
 			}
 			System.out.println(subTotal);
 		}

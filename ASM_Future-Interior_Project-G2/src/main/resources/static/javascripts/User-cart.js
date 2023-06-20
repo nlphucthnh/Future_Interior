@@ -2,15 +2,17 @@ var listIdGioHang = [];
 var listIdSanPham = [];
 var subTotal = 0;
 var Total = 0;
+var ondelete = false;
 const formatter = new Intl.NumberFormat('it-IT', {
     style: 'currency',
     currency: 'VND',
 });
 $("input:checkbox.input-check").change(function () {
+    ondelete = false;
     if (this.checked) {
         $.ajax({
             type: "POST",
-            url: "/User/cart/jsonPush/idGioHang?idGioHang=" + $(this).val(),
+            url: "/User/cart/json/idGioHang?idGioHang=" + $(this).val() + "&&delete=" + ondelete,
             contentType: "application/json",
             success: function (response) {
                 var discount = 1 - $("#km" + response.idGioHang).val() / 100;
@@ -22,7 +24,6 @@ $("input:checkbox.input-check").change(function () {
                 $("#subtotal").text(formatter.format(subTotal));
                 $('#Total').text(formatter.format(subTotal + 30000));
                 listIdSanPham.push(response.sanPhamGH.idSanPham);
-
             }
         });
 
@@ -32,11 +33,12 @@ $("input:checkbox.input-check").change(function () {
     }
 });
 $("input:checkbox.input-check").click(function () {
+    ondelete = true;
     if (!$(this).is(":checked")) {
         var valueUnCheck = $(this).val();
         $.ajax({
             type: "POST",
-            url: "/User/cart/jsonPop/idGioHang?idGioHang=" + valueUnCheck,
+            url: "/User/cart/json/idGioHang?idGioHang=" + valueUnCheck + "&&delete=" + ondelete,
             contentType: "application/json",
             success: function (response) {
                 if (subTotal > 0) {
