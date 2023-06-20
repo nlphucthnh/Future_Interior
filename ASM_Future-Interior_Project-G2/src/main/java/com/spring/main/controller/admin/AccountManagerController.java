@@ -133,7 +133,7 @@ public class AccountManagerController {
 				model.addAttribute("PageTK", PageTK);
 			}
 			model.addAttribute("inforSort", informatinSort);
-			return "Manager-account-page";
+			return "Manager/Manager-account-page";
 		} else {
 			taiKhoanDAO.save(taiKhoanModel);
 			taiKhoan = new TaiKhoan();

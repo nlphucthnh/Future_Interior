@@ -50,7 +50,6 @@ public class KhuyenMai implements Serializable{
 
 	@Column(name = "pham_tram_khuyen_mai")
 	@Min(message = "Tối thiểu là 0.0 %",value = 0)
-	@Max(message = "Tối đa là 100%", value =  100)
 	float phamTramKhuyenMai;
 	
 	@OneToMany(mappedBy = "khuyenMai")

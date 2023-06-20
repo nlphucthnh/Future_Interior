@@ -14,6 +14,6 @@ public class interceptorCofig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(mainWeb)
                 .addPathPatterns("/Manager/**")
-                .excludePathPatterns("/assets/**","/**");
+                .excludePathPatterns("/assets/**","/Manager/login/**");
     }
 }

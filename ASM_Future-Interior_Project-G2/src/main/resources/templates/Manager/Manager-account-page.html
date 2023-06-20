@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="password_account" class="form-label">Mật khẩu</label>
-                                        <input type="password" th:field="*{matKhau}" name="password-account" id="password_account"
+                                        <input type="text" th:field="*{matKhau}" name="password-account" id="password_account"
                                             class="form-control box-shadow-none" placeholder="">
                                     <small id="helpId" class="text-muted color-style-validate" th:if="${#fields.hasErrors('matKhau')}" th:errors="*{matKhau}">...</small>
                                     </div>

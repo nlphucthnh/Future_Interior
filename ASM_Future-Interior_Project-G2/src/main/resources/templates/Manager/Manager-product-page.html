@@ -266,8 +266,13 @@
                                     </div>
                                     <div class="mb-3 form-group">
                                         <label for="quatity_product" class="form-label">Khối lượng sản phẩm</label>
-                                        <input type="text" th:field="*{khoiLuong}" name="mass-product" id="mass_product"
-                                            class="form-control box-shadow-none input-form" placeholder="">
+                                        <div class="input-group">
+                                            <input type="text" th:field="*{khoiLuong}" name="mass-product" id="mass_product"
+                                                class="form-control box-shadow-none input-form" placeholder="">
+                                            <span class="input-group-text" id="length_product-span">KG</span>
+                                        </div>
+
+                                        
                                         <small id="mass_product-text" class="text-muted" style="display: none;">Vui
                                             lòng nhập khối lượng sản phẩm</small>
                                     </div>
