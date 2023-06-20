@@ -255,19 +255,19 @@ public class PersonController {
         // Kiểm tra độ dài mật khẩu mới
         if (passwordnewm.length() < 4 || passwordnewm.length() > 20) {
             model.addAttribute("error", "Mật khẩu phải từ 4 - 20 ký tự");
-            return "User-respass-page"; // Trả về trang resetpassword với thông báo lỗi
+            return "/User-respass-page"; // Trả về trang resetpassword với thông báo lỗi
         } else
 
         // Kiểm tra độ dài mật khẩu nhập lại
         if (repasswordnew.length() < 4 || repasswordnew.length() > 20) {
             model.addAttribute("error1", "Mật khẩu phải từ 4 - 20 ký tự");
-            return "User-respass-page"; // Trả về trang resetpassword với thông báo lỗi
+            return "/User-respass-page"; // Trả về trang resetpassword với thông báo lỗi
         } else
 
         // Kiểm tra mật khẩu mới và mật khẩu nhập lại
         if (!passwordnewm.equals(repasswordnew)) {
             model.addAttribute("error1", "Mật khẩu mới và mật khẩu nhập lại không khớp.");
-            return "User-respass-page"; // Trả về trang resetpassword với thông báo lỗi
+            return "/User-respass-page"; // Trả về trang resetpassword với thông báo lỗi
         } else {
             TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanfogot");
             tkDAO.updatePassword(repasswordnew, taiKhoan.getTenDangNhap());

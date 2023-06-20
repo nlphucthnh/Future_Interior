@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.spring.main.entity.TaiKhoan;
 import java.text.SimpleDateFormat;
@@ -27,11 +29,14 @@ import lombok.Data;
 public class TaiKhoan implements Serializable {
 	@Id
 	@Column(name = "ten_dang_nhap")
+	@NotBlank(message = "Vui lòng nhập tên đăng nhập")
 	String tenDangNhap;
 
 	@Column(name = "mat_khau")
+	@NotBlank(message = "Vui lòng nhập mật khẩu")
 	String matKhau;
 	@Column(name = "email")
+	@NotBlank(message = "Vui lòng nhập email")
 	String email;
 	@Column(name = "trang_thai")
 	boolean trangThai = true;
@@ -43,20 +48,23 @@ public class TaiKhoan implements Serializable {
 	@Column(name = "ngay_dang_ky")
 	Date ngayDangKy = new Date();
 	
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanBaiDang")
+	@JsonIgnore
 	List<BaiDang> ListBaiDang;
 	
 	
 //	Quan hệ 1 - 1
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToOne(mappedBy = "taiKhoanTTTK")
 	ThongTinTaiKhoan thongTinTaiKhoan;
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanMuaHang")
+	@JsonIgnore
 	List<DonHang> ListDonHang;
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "taiKhoanGH")
+	@JsonIgnore
 	List<GioHang> ListGioHang ;
 	
 }

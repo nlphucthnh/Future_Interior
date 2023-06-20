@@ -59,9 +59,14 @@ public class ProductController {
     @GetMapping("/User/product/edit/{idSanPham}")
     public String productItem(Model model, @PathVariable("idSanPham") String id) {
         SanPham spitem = sanPhamDAO.findById(id).get();
+        TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+        if (taiKhoan != null) {
+            model.addAttribute("onRegistered", true);
+            model.addAttribute("TaiKhoanUser", taiKhoan);
+        } else {
+            model.addAttribute("onRegistered", false);
+        }
         model.addAttribute("spitem", spitem);
-        // var productsSale = spkmDAO.findAll();
-        // model.addAttribute("productsSales", productsSale);
         return "User-item-page";
     }
 

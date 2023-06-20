@@ -16,6 +16,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "chi_phi_don_hang")
 public class ChiPhiDonHang implements Serializable{
@@ -27,8 +29,6 @@ public class ChiPhiDonHang implements Serializable{
 	@Column(name = "tong_phu")
 	float tongPhu ;
 	
-	@Column(name = "phu_thu")
-	float phuThu ;
 	@Column(name = "phi_van_chuyen")
 	float phiVanChuyen ;
 	

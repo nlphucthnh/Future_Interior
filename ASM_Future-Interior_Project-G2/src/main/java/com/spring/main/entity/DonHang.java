@@ -4,9 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,34 +28,37 @@ import lombok.NoArgsConstructor;
 public class DonHang implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_don_hang")
-	String idDonHang ;
+	int idDonHang ;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_tao")
 	Date ngayTao = new Date();
 	
 	
 	@Column(name = "phuong_thuc_thanh_toan")
-	boolean phuongThucThanhToan ;
+	boolean phuongThucThanhToan = false;
 	@Column(name = "trang_thai_thanh_toan")
-	boolean trangThaiThanhToan ;
+	boolean trangThaiThanhToan = false ;
 	@Column(name = "trang_thai_don_hang")
-	String trangThaiDonHang;
+	String trangThaiDonHang = "Đang xử lý";
 	
-	@JsonBackReference
+	// @JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "tai_khoan_mua")
+	@JsonIgnore
 	TaiKhoan taiKhoanMuaHang;
 	
 	@OneToOne(mappedBy = "donHangCPDH")
+	@JsonIgnore
 	ChiPhiDonHang chiPhiDonHang;
 	
 	@OneToOne(mappedBy = "donHangTTGH")
+	@JsonIgnore
 	ThongTinGiaoHang thongTinGiaoHang;
 	
-	@OneToOne(mappedBy = "donHangTTTT")
-	ThongTinThanhToan thongTinThanhToan;
 	
 	@OneToMany(mappedBy = "donHangDHCT")
+	@JsonIgnore
 	List<DonHangChiTiet> ListDHCT;
 }

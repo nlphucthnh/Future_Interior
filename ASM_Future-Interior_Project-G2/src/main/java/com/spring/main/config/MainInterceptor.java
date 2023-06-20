@@ -19,15 +19,25 @@ public class MainInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+
+        String url = request.getRequestURI();
         TaiKhoan taiKhoanAdmin = (TaiKhoan) session.get("Admin");
-        // String uri = request.getRequestURI();
-        if (taiKhoanAdmin == null) {
+        TaiKhoan taiKhoanUser = (TaiKhoan) session.get("TaiKhoanUser");
+        boolean adminLogin = (taiKhoanAdmin != null) && (taiKhoanUser == null);
+        boolean userLogin = (taiKhoanAdmin == null) && (taiKhoanUser != null);
+        System.out.println(url);
+        // System.out.println(taiKhoanUser);
+        if (taiKhoanAdmin == null && url.startsWith("/Manager/")) {
             response.sendRedirect("/Manager/login");
             return false;
-        }else if(!taiKhoanAdmin.isVaiTro()){
-            response.sendRedirect("/error-404");
+        }
+
+        if(!userLogin && url.contains("/User/person")){
+            System.out.println("Hello");
+            response.sendRedirect("/User/login");
             return false;
         }
+
         return true;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.spring.main.entity.GioHang;
+import com.spring.main.entity.SanPham;
 import com.spring.main.entity.TaiKhoan;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +17,10 @@ import jakarta.transaction.Transactional;
 public interface GioHangDAO extends JpaRepository<GioHang, Integer> {
 
 	List<GioHang> findByTaiKhoanGH(TaiKhoan taiKhoanGH);
+
+	GioHang findByIdGioHang(int idGioHang);
+
+	GioHang findBySanPhamGHAndTaiKhoanGH (SanPham sanPhamGH,TaiKhoan taiKhoanGH);
 
 	@Modifying(clearAutomatically = true)
 	@Transactional

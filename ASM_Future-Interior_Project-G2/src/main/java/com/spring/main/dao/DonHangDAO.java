@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.spring.main.entity.DonHang;
 
-public interface DonHangDAO extends JpaRepository<DonHang, String>{
-    
+public interface DonHangDAO extends JpaRepository<DonHang, Integer>{
+    DonHang findByIdDonHang(int idDonHang);
 }

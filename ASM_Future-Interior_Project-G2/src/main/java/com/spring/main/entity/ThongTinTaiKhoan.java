@@ -30,8 +30,10 @@ public class ThongTinTaiKhoan implements Serializable {
 	int idThongTinTaiKhoan ;
 	@Column(name = "ho_ten")
 	String hoTen = "Nguyễn Văn A";
+
 	@Column(name = "gioi_tinh")
 	boolean gioiTinh = true;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "ngay_sinh")
 	Date ngaySinh = new Date() ;

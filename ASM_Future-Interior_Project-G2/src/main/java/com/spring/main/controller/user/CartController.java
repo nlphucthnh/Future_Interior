@@ -1,6 +1,7 @@
 package com.spring.main.controller.user;
 
 import java.util.List;
+import java.util.*;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.spring.main.dao.ChiPhiDonHangDAO;
 import com.spring.main.dao.DonHangChiTietDAO;
 import com.spring.main.dao.DonHangDAO;
 import com.spring.main.dao.GioHangDAO;
 import com.spring.main.dao.PhanNhomLoaiDAO;
 import com.spring.main.dao.SanPhamDAO;
-import com.spring.main.dao.SanPhamKhuyenMaiDAO;
 import com.spring.main.dao.TaiKhoanDAO;
+import com.spring.main.entity.ChiPhiDonHang;
+import com.spring.main.entity.DonHang;
+import com.spring.main.entity.DonHangChiTiet;
 import com.spring.main.entity.GioHang;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.TaiKhoan;
@@ -44,9 +48,6 @@ public class CartController {
 	GioHangDAO ghDAO;
 
 	@Autowired
-	SanPhamKhuyenMaiDAO spkmDAO;
-
-	@Autowired
 	PhanNhomLoaiDAO pnlDao;
 
 	@Autowired
@@ -59,53 +60,103 @@ public class CartController {
 	DonHangChiTietDAO dhctDAO;
 
 	@Autowired
+	ChiPhiDonHangDAO chiPhiDonHangDAO;
+
+	@Autowired
 	SessionService session;
 
-	public Double thanhtien =0.0;
+	private List<GioHang> ListCart = new ArrayList();
+	public Double thanhtien = 0.0;
 
-	@RequestMapping("/cart-page")
-	public String getCartPage(Model model) {
-		model.addAttribute("cart", cart);
-		model.addAttribute("countcart", cart.getCount());
-
-		var productsSale = spkmDAO.findAll();
-		model.addAttribute("productsSales", productsSale);
-
-		TaiKhoan tk = tkDAO.findById("thao").get();
-
-		List<GioHang> phamList = ghDAO.findByTaiKhoanGH(tk);
-		model.addAttribute("items", phamList);
-		return "cart";
+	@RequestMapping("/User/cart/add")
+	public String addCart(@RequestParam(name = "idSanPham") String idSanPham,
+			@RequestParam(name = "quantityProduct") int quantityProduct, Model model) {
+		SanPham sanPhamAddCart = spDAO.findByIdSanPham(idSanPham);
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		TaiKhoan taiKhoan2 = tkDAO.findByTenDangNhap(taiKhoan.getTenDangNhap());
+		GioHang gioHangTest = ghDAO.findBySanPhamGHAndTaiKhoanGH(sanPhamAddCart, taiKhoan2);
+		if (gioHangTest == null) {
+			GioHang gioHang = new GioHang(0, quantityProduct, sanPhamAddCart, taiKhoan2);
+			ghDAO.save(gioHang);
+		} else {
+			int soLuong = gioHangTest.getSoLuong() + quantityProduct;
+			if (soLuong <= sanPhamAddCart.getSoLuong()) {
+				gioHangTest.setSoLuong(soLuong);
+				ghDAO.save(gioHangTest);
+			}
+		}
+		model.addAttribute("onRegistered", true);
+		model.addAttribute("TaiKhoanUser", taiKhoan);
+		model.addAttribute("spitem", sanPhamAddCart);
+		return "User-item-page";
 	}
 
-	@PostMapping("/addToCart")
-	public String addToCart(@Param("soLuong") Integer soLuong, @Param("idSanPham") String idSanPham, Model model,
-			@Param("slTonKho") Integer slTonKho) {
-		System.out.println("addToCart---slmua:" + soLuong + "-----idSanPham:" + idSanPham + "-----------------slTonKho:"
-				+ slTonKho);
+	@GetMapping("/User/cart")
+	public String getCartPage(Model model) {
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		List<GioHang> ListGioHangs = ghDAO.findByTaiKhoanGH(taiKhoan);
+		model.addAttribute("TaiKhoanUser", taiKhoan);
+		model.addAttribute("items", ListGioHangs);
+		return "User-cart-page";
+	}
 
-		if (soLuong <= slTonKho) {
-			// Add to cart
-			SanPham spitem = spDAO.findById(idSanPham).get();
-			model.addAttribute("spitem", spitem);
-			var productsSale = spkmDAO.findAll();
-			model.addAttribute("productsSales", productsSale);
 
-			TaiKhoan tenDangNhap = tkDAO.findById("thao").get();
+	@ResponseBody
+	@RequestMapping("/User/cart/json")
+	public GioHang getDataJson(@RequestBody GioHang gioHang) {
+		GioHang gioHang2 = ghDAO.findBySanPhamGHAndTaiKhoanGH(gioHang.getSanPhamGH(), gioHang.getTaiKhoanGH());
+		gioHang2.setSoLuong(gioHang.getSoLuong());
+		ghDAO.save(gioHang2);
+		return gioHang2;
+	}
 
-			List<GioHang> phamList = ghDAO.findByTaiKhoanGH(tenDangNhap);
-			model.addAttribute("items", phamList);
+	@ResponseBody
+	@RequestMapping("/User/cart/jsonPush/idGioHang")
+	public GioHang getDataJsonPushIdGioHang(@RequestParam(name = "idGioHang") int idGioHang) {
+		GioHang gioHang2 = ghDAO.findByIdGioHang(idGioHang);
+		ListCart.add(gioHang2);
+		return gioHang2;
+	}
 
-			Integer sl = cart.add(idSanPham, soLuong, tenDangNhap);
-			double thanhTien =+ soLuong + spitem.getGiaSanPham();
-			System.out.println("ThanhTienAddToCart-----"+thanhTien);
-			return "redirect:/cart-page";
-		} else {
-			System.out.println("Mua quá số lượng");
-			model.addAttribute("message", "Mua quá số lượng");
-			return "redirect:/product-page/edit/" + idSanPham;
+	@ResponseBody
+	@RequestMapping("/User/cart/jsonPop/idGioHang")
+	public GioHang getDataJsonPopIdGioHang(@RequestParam(name = "idGioHang") int idGioHang) {
+		GioHang gioHang2 = ghDAO.findByIdGioHang(idGioHang);
+		for (GioHang gioHang : ListCart) {
+			if (gioHang.getIdGioHang() == gioHang2.getIdGioHang()) {
+				ListCart.remove(ListCart.indexOf(gioHang));
+			}
 		}
+		return gioHang2;
+	}
 
+	@PostMapping("/User/card/order")
+	public String addOrder() {
+		DonHang donHang = new DonHang();
+		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
+		TaiKhoan taiKhoan2 = tkDAO.findByTenDangNhap(taiKhoan.getTenDangNhap());
+		donHang.setTaiKhoanMuaHang(taiKhoan2);
+		DonHang donHang2 = dhDAO.save(donHang);
+		session.set("idOrdering", donHang2.getIdDonHang());
+		float subTotal = 0;
+		float moneyShip = 30000;
+		float Total = 0;
+		for (GioHang gioHang : ListCart) {
+			DonHangChiTiet donHangChiTiet = new DonHangChiTiet(0,gioHang.getSoLuong(),gioHang.getSanPhamGH(),donHang2);
+			dhctDAO.save(donHangChiTiet);
+			if(gioHang.getSanPhamGH().getKhuyenMai() != null){
+				Float discount = (1 - gioHang.getSanPhamGH().getKhuyenMai().getPhamTramKhuyenMai()/100);
+				subTotal += (gioHang.getSanPhamGH().getGiaSanPham() * discount)  *  gioHang.getSoLuong();
+			}else {
+				subTotal += gioHang.getSanPhamGH().getGiaSanPham() *  gioHang.getSoLuong();
+			}
+			System.out.println(subTotal);
+		}
+		Total = subTotal + moneyShip;
+		ChiPhiDonHang chiPhiDonHang = new ChiPhiDonHang(0, subTotal, moneyShip, Total, donHang2);
+		chiPhiDonHangDAO.save(chiPhiDonHang);
+		ListCart.clear();
+		return "redirect:/User/address";
 	}
 
 	@RequestMapping("/cart-page/update/{idGioHang}")
@@ -115,12 +166,10 @@ public class CartController {
 		return "redirect:/cart-page";
 	}
 
-	@RequestMapping("/cart-page/remove/{idGioHang}")
+	@RequestMapping("/User/cart/delete/{idGioHang}")
 	public String remove(@PathVariable("idGioHang") Integer id) {
-
 		ghDAO.deleteById(id);
-
-		return "redirect:/cart-page";
+		return "redirect:/User/cart";
 	}
 
 }

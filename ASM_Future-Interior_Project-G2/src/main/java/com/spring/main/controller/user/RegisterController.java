@@ -99,7 +99,9 @@ public class RegisterController {
         if (taiKhoanDAO.existsByTenDangNhap(taiKhoan.getTenDangNhap())) {
             model.addAttribute("duplicateUsername", true);
             return "User-register-page"; // [a-zA-Z0-9]{5,10}
-
+        }else if (taiKhoanDAO.findByEmail(taiKhoan.getEmail()) != null) {
+            model.addAttribute("emailMessage", true);
+            return "User-register-page";
         } else if (!taiKhoan.getTenDangNhap().matches("[a-zA-Z0-9]{5,20}")) {
             model.addAttribute("tenDangNhapError", "Tên đăng nhập không hợp lệ");
             return "User-register-page"; // ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$
@@ -109,9 +111,6 @@ public class RegisterController {
             return "User-register-page";
         } else if (!taiKhoan.getMatKhau().equals(confirmpw)) {// trường hợp này mình bắt lỗi xác nhận với mật khẩu
             model.addAttribute("confirnMessage", true); // tính hiệu để bật thông báo
-            return "User-register-page";
-        } else if (taiKhoanDAO.findByEmail(taiKhoan.getEmail()) != null) {
-            model.addAttribute("emailMessage", true);
             return "User-register-page";
         } else { // nếu không lọt vao các trường hợp trên thì tài khoản dăng ký hợp lệ nên thông
                  // báo đăng ký thành công.

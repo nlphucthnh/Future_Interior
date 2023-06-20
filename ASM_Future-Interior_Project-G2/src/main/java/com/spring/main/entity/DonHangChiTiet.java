@@ -14,6 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "don_hang_chi_tiet")
 public class DonHangChiTiet implements Serializable {

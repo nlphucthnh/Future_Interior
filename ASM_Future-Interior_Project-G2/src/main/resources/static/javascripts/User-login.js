@@ -38,6 +38,7 @@ function LoginCheckError() {
         url: "/User/login/json/data?tenDangNhap=" + tenDangNhap,
         contentType: "application/json",
         success: function (response) {
+            console.log(response);
             if (response == "") {
                 alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
             } else {

@@ -40,6 +40,7 @@ function loginDiaLogForm() {
         url: "/Manager/login/json?username=" + tenDangNhap,
         contentType: "application/json",
         success: function (response) {
+            console.log(response);
             if (response.tenDangNhap == "") {
                 alert("Đăng nhập thất bại, có thể sai tên đăng nhập hoặc mật khẩu");
             } else {

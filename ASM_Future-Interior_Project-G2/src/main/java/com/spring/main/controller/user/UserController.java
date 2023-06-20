@@ -34,6 +34,11 @@ HttpSession sessions;
 // 		return "dangky";
 // 	}
 
+	@GetMapping("/404")
+	public String get404(){
+		return "Message-404-page";
+	}
+
 	@GetMapping("/")
 	public String getIndex(Model model) {
 		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
@@ -64,7 +69,7 @@ HttpSession sessions;
 	// }
 
 
-	@GetMapping("/about-page")
+	@GetMapping("/User/about")
 	public String getAboutPage(Model model) {
 		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
 		if(taiKhoan != null){
@@ -73,7 +78,7 @@ HttpSession sessions;
 		}else {
 			model.addAttribute("onRegistered", false);
 		}
-		return "about";
+		return "User-about-page";
 	}
 
 }

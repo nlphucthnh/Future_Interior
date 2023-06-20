@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -67,33 +68,40 @@ public class SanPham implements Serializable {
 	boolean trangThaiTonKho = true;
 
 	
-	@JsonBackReference
+	// @JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_nha_san_xuat")
+	@JsonIgnore
 	NhaSanXuat nhaSanXuat;
 	
-	@JsonBackReference
+	// @JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_phan_nhom_loai")
+	@JsonIgnore
 	PhanNhomLoai phanNhomLoai;
 	
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "sanPhamHA")
+	@JsonIgnore
 	List<HinhAnh> ListHinhAnhSP;
 
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "sanPhamDHCT")
+	@JsonIgnore
 	List<DonHangChiTiet> ListDHCT;
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "sanPhamGH")
+	@JsonIgnore
 	List<GioHang> ListGioHang;
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToMany(mappedBy = "sanPhamSPCL")
+	@JsonIgnore
 	List<SanPhamChatLieu> ListSPCL;
 
-	@JsonBackReference
+	// @JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "id_khuyen_mai")
+	@JsonIgnore
 	KhuyenMai khuyenMai;
 	
 }

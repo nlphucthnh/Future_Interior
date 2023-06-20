@@ -36,7 +36,7 @@ public class ContactController {
 	@Autowired
 	SessionService session;
 	
-	@GetMapping("/contact-page")
+	@GetMapping("/User/contact")
 	public String getContactPage(@ModelAttribute("lh") MailInfo lienhe, Model model) {
 		MailInfo lh = new MailInfo();
 		TaiKhoan taiKhoan = (TaiKhoan) session.get("TaiKhoanUser");
@@ -47,11 +47,11 @@ public class ContactController {
 			model.addAttribute("onRegistered", false);
 		}
 		model.addAttribute("lienhe", lh);
-		return "contact";
+		return "User-contact-page";
 	}
 
 
-	@PostMapping("/contact-page")
+	@PostMapping("/User/contact")
 	public String send(ModelMap model, @RequestParam("from") String from, @RequestParam("to") String to,
 			@RequestParam("subject") String subject, @RequestParam("body") String body,
 			@RequestParam("attach") MultipartFile attach,@Valid @ModelAttribute("lienhe") MailInfo lienhe, BindingResult result) {
@@ -82,10 +82,10 @@ public class ContactController {
 			if(body.equals(",")) {
 				model.addAttribute("error", "Vui lòng nhập SDT!");
 				System.out.println(body);
-				return "contact";
+				return "User-contact-page";
 			}else if(!body.equals(body)) {
 				model.addAttribute("error", "Vui lòng nhập lời nhắn!");
-				return "contact";
+				return "User-contact-page";
 				
             }else {
 				// Gửi mail
@@ -100,7 +100,7 @@ public class ContactController {
 			model.addAttribute("error", "Gửi email thất bại!");
 		}
 		
-		return "contact";
+		return "User-contact-page";
 	}
 
 }

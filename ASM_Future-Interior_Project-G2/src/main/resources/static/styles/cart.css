@@ -102,7 +102,7 @@
   .bill {
     padding: 15px;
     border: 1px solid #D0D5DD;
-    
+    width: 100%;
   }
 
   .bill-text {
@@ -134,3 +134,64 @@
     line-height: 24px;
     letter-spacing: 0em;
   }
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var( --font_tertiary);
+  }
+  
+  .product-item-title h3 {
+    font-family: "EB Garamond";
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 43px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  
+  .container-cart {
+    display: flex;
+    justify-content: space-between;
+    height: 500px;
+  }
+  
+  .container-cart .container-cart-products {
+    width: 60%;
+  }
+  
+  .container-cart .container-cart-money {
+    width: 30%;
+  }
+  
+  .table-responsive .table {
+    /* border: none; */
+  }
+  
+  table th {
+    font-weight: 500;
+    color: var(--gray_600);
+  }
+  
+  tbody, td, tfoot, th, thead, tr {
+    border-color: white; 
+    border-style: none;
+    border-width: 0;
+  }
+  
+  .table thead th {
+    vertical-align: middle;
+    border-bottom: none;
+  }
+  .table tbody tr {
+    padding: 10px 0;
+    overflow: hidden;
+  }
+  
+  .table tbody tr td {
+    vertical-align: middle;
+  }
+
+  

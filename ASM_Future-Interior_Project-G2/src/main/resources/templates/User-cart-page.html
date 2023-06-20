@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<!-- icon web  -->
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- Bootstrap CSS: -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap JavaScript: -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+		</script>
+	<!-- link icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="/styles/root.css">
+	<link rel="stylesheet" href="/styles/cart.css">
+	<link rel="stylesheet" href="/styles/navbar.css">
+	<link rel="stylesheet" href="/styles/footer.css">
+	<title>Cart</title>
+</head>
+
+
+<body>
+
+	<nav th:include="components/header-registered"></nav>
+
+	<header class="container product-item-title" style="margin: 20px auto;">
+		<h3>Giỏ hàng</h3>
+		<p class="duongdancon"><a href="/User/product">Giỏ hàng của bạn</a></p>
+	</header>
+	<div class="container container-cart">
+		<div class="container-cart-products">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Sản phẩm</th>
+							<th scope="col">Tên sản phẩm</th>
+							<th scope="col">Số lượng</th>
+							<th scope="col">Giá tiền</th>
+							<th scope="col">Thao tác</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:id="'cart' + ${item.idGioHang}" th:each="item, status : ${items}">
+							<td scope="row">
+								<div class="img-block" style="width: 100px; height: 80px;">
+									<img th:src="${item.sanPhamGH.ListHinhAnhSP[0].idHinhAnh}" alt="Không tìm thấy"
+										style="width: 100%; height: 100%; object-fit: cover;">
+								</div>
+							</td>
+							<td th:text="${item.sanPhamGH.tenSanPham}"></td>
+							<td>
+								<input th:onchange="refreshCart([[${item}]],[[${status}]])" type="number" min="1"
+									th:max="${item.sanPhamGH.soLuong}" th:value="${item.soLuong}"
+									class="form-control box-shadow-none qty" name="quatityCart" style="width: 10rem;">
+							</td>
+							<td th:if="${item.sanPhamGH.khuyenMai == null}" class="amount"
+								th:text="${#numbers.formatDecimal(item.sanPhamGH.giaSanPham * item.soLuong, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+							</td>
+							<td th:if="${item.sanPhamGH.khuyenMai != null}" class="amount"
+								th:text="${#numbers.formatDecimal((item.sanPhamGH.giaSanPham * (1 - item.sanPhamGH.khuyenMai.phamTramKhuyenMai / 100)) * item.soLuong  , 0, 'COMMA', 0, 'POINT')} + ' VND'">
+							</td>
+							<td>
+								<input th:if="${item.sanPhamGH.khuyenMai != null}" type="hidden"
+									th:id="'km' + ${item.idGioHang}"
+									th:value="${item.sanPhamGH.khuyenMai.phamTramKhuyenMai}">
+								<button th:onclick="deleteCart([[${item.idGioHang}]])" class="btn box-shadow-none"><i
+										class="bi-trash"></i></button>
+								<input type="checkbox" th:value="${item.idGioHang}" class="input-check"
+									name="ProductList" id="">
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+		<div class="container-cart-money">
+			<div class="bill">
+
+				<div class="row mb-3">
+					<div class="col-6">
+						<label for="subtotal" class="form-label bill-text">Tạm tính</label>
+					</div>
+					<div class="col-6">
+						<label for="discount" class="form-label bill-number "><span id="subtotal">0 VND</span></label>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-6">
+						<label for="subtotal" class="form-label bill-text">Phí vận chuyển</label>
+					</div>
+					<div class="col-6">
+						<label for="discount" class="form-label bill-number ">30,000 ₫</label>
+					</div>
+				</div>
+				<hr class="my-4">
+				<div class="row mb-3">
+					<div class="col-6">
+						<label for="subtotal" class="form-label bill-text">Tổng cộng:</label>
+					</div>
+					<div class="col-6">
+						<label for="discount" class="form-label bill-number" id="Total">0 VND</label>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="pay-bill">
+						<form action="/User/card/order" method="post">
+							<button  id="pay-bill-id" class="btn-pay">Thanh toán</button></a>
+						</form>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+	<nav th:replace="footer"></nav>
+	<!-- Include Bootstrap JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	
+</body>
+<script src="/javascripts/User-cart.js"></script>
+
+</html>

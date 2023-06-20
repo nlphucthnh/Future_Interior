@@ -2,6 +2,8 @@ package com.spring.main.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "gio_hang")
 public class GioHang implements Serializable {
@@ -35,5 +39,6 @@ public class GioHang implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ten_dang_nhap")
 	TaiKhoan taiKhoanGH;
+
 
 }

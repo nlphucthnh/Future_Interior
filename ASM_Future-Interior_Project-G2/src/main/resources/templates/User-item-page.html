@@ -87,24 +87,23 @@
                             </p>
                         </div>
                     </div>
-                    <form action="" method="post">
+                    <form action="/User/cart/add" method="post">
                         <div class="properties">
                             <h3>Loại : <span th:text="${spitem.phanNhomLoai.tenPhanLoaiNhom}"></span></h3>
                             <h3>Kích thước : <span
-                                    th:text="${spitem.chieuDai} + 'X' + ${spitem.chieuRong} + 'X' + ${spitem.chieuCao}"></span>
+                                    th:text="${spitem.chieuDai} + 'X' + ${spitem.chieuRong} + 'X' + ${spitem.chieuCao} + ' CM'"></span>
                             </h3>
                             <div>
                                 <h3>Tên chất liệu: <span th:each="spcl : ${spitem.ListSPCL}"
                                         th:text="${spcl.chatLieuSPCL.tenChatLieu} + ', '"></span></h3>
                             </div>
-
+                            <input type="hidden" name="idSanPham" th:value="${spitem.idSanPham}">
                             <div class="mb-3 d-flex" style="margin-top: 15px;">
                                 <h3 class="col-4 m-0">Số lượng </h3>
-                                <input type="number" name="" id="" class="form-control box-shadow-none" placeholder=""
-                                    aria-describedby="helpId">
+                                <input type="number" value="1" name="quantityProduct" min="1" class="form-control box-shadow-none" placeholder="">
                             </div>
                         </div>
-                        <a href="" class="btn btn-style btn-cart box-shadow-none">Thêm vào giỏ hàng</a>
+                        <button class="btn btn-style btn-cart box-shadow-none">Thêm vào giỏ hàng</button>
                     </form>
                 </div>
             </div>
