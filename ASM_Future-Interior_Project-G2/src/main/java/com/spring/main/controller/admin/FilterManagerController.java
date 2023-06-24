@@ -59,7 +59,6 @@ public class FilterManagerController {
 		Pageable pageableCL = PageRequest.of(pageCL.orElse(0), 5);
 		Pageable pageableNSX = PageRequest.of(pageNSXS.orElse(0), 5);
 		Pageable pageableNL = PageRequest.of(pageNL.orElse(0), 5);
-
 		if (arryTab[0] != pageableCL.getPageNumber()) {
 			model.addAttribute("TabPin", "cl");
 			arryTab[0] = pageableCL.getPageNumber();
