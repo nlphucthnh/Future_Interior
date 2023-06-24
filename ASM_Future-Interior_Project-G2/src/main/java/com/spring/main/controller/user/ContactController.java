@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 @Controller
 public class ContactController {
 
-	@Autowired
+	@Autowired(required=true)
 	JavaMailSender mailer;
 
 	@Autowired
