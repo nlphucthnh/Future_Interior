@@ -22,7 +22,6 @@ public class MainInterceptor implements HandlerInterceptor {
 
         String url = request.getRequestURI();
         TaiKhoan taiKhoanAdmin = (TaiKhoan) session.get("Admin");
-        TaiKhoan taiKhoanUser = (TaiKhoan) session.get("TaiKhoanUser");
         if (taiKhoanAdmin == null && url.startsWith("/Manager/")) {
             response.sendRedirect("/Manager/login");
             return false;

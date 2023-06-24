@@ -6,7 +6,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.spring.main.entity.BaiDang;
 import com.spring.main.entity.SanPham;
 import java.util.List;
 

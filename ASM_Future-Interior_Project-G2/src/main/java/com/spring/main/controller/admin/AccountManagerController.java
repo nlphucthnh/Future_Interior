@@ -1,7 +1,5 @@
 package com.spring.main.controller.admin;
 
-import java.io.File;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import com.spring.main.dao.TaiKhoanDAO;
-import com.spring.main.entity.BaiDang;
 import com.spring.main.entity.TaiKhoan;
 
 import jakarta.servlet.http.HttpSession;
@@ -39,7 +34,6 @@ public class AccountManagerController {
 	private Sort sort = Sort.by(Direction.DESC, "tenDangNhap");
 	private String informatinSort[] = { "DESC", "false", "", "false", "true" };
 	private TaiKhoan taiKhoan = new TaiKhoan();
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	@GetMapping("/Manager/account")
 	public String getDateAccount(Model model, @RequestParam("page") Optional<Integer> page) {
 		System.out.println(session.getAttribute("PhucThinh"));

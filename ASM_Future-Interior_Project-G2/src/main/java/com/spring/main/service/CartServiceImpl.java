@@ -3,11 +3,7 @@ package com.spring.main.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
@@ -17,7 +13,6 @@ import com.spring.main.dao.SanPhamDAO;
 import com.spring.main.entity.GioHang;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.TaiKhoan;
-import com.spring.main.service.CartService;
 
 @SessionScope
 @Service

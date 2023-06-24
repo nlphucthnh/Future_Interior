@@ -1,10 +1,6 @@
 package com.spring.main.controller.admin;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +16,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.main.entity.BaiDang;
 import com.spring.main.entity.TaiKhoan;
 import com.spring.main.export.BaiDangExport;
-import com.spring.main.service.SessionService;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
-import jakarta.websocket.server.ServerContainer;
 
 import com.spring.main.dao.BaiDangDAO;
 import com.spring.main.dao.TaiKhoanDAO;

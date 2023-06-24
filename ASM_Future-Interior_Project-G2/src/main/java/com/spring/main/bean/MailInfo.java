@@ -1,8 +1,4 @@
 package com.spring.main.bean;
-
-import org.springframework.format.annotation.NumberFormat;
-
-import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

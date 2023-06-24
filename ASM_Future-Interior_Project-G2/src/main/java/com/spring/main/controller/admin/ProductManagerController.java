@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,10 +33,6 @@ import com.spring.main.entity.NhaSanXuat;
 import com.spring.main.entity.PhanNhomLoai;
 import com.spring.main.entity.SanPham;
 import com.spring.main.entity.SanPhamChatLieu;
-
-import jakarta.validation.Valid;
-import lombok.var;
-
 @Controller
 public class ProductManagerController {
     @Autowired
@@ -118,9 +113,6 @@ public class ProductManagerController {
         if (sanPhamGet != null) {
             model.addAttribute("SanPham", sanPhamGet);
             flag = true;
-        } else {
-            model.addAttribute("SanPham", sanPham);
-            flag = false;
         }
         Pageable pageableSP = PageRequest.of(0, 5, sort);
         Page<SanPham> pageSanPham = sanPhamDAO.findByTenSanPham(information[2], pageableSP);

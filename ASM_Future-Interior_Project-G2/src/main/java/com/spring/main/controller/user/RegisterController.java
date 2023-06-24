@@ -2,15 +2,12 @@ package com.spring.main.controller.user;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale.Category;
-import java.util.Objects;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +22,6 @@ import com.spring.main.entity.ThongTinTaiKhoan;
 import com.spring.main.service.MailerService;
 
 import jakarta.mail.MessagingException;
-import jakarta.mail.Session;
 import jakarta.validation.Valid;
 
 @Controller

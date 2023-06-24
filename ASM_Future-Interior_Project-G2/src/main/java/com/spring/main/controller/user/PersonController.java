@@ -1,17 +1,10 @@
 package com.spring.main.controller.user;
 
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale.Category;
-import java.util.Optional;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.main.bean.MailInfo;
 import com.spring.main.dao.DonHangChiTietDAO;
@@ -31,10 +23,6 @@ import com.spring.main.entity.TaiKhoan;
 import com.spring.main.entity.ThongTinTaiKhoan;
 import com.spring.main.service.MailerService;
 import com.spring.main.service.SessionService;
-
-import ch.qos.logback.core.util.DirectJson;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 
 

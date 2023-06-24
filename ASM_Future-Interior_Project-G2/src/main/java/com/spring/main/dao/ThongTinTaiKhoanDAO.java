@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.spring.main.entity.TaiKhoan;
 import com.spring.main.entity.ThongTinTaiKhoan;
-import java.util.List;
 
 
 public interface ThongTinTaiKhoanDAO extends JpaRepository<ThongTinTaiKhoan, Integer> {
