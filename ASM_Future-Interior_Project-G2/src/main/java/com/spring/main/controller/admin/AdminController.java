@@ -25,10 +25,10 @@ public class AdminController {
 		return "Manager-revenue-page";
 	}
 	
-	@GetMapping("/Manager/order")
-	public String ManageOrderPage() {
-		return "Manager-order-page";
-	}
+	// @GetMapping("/Manager/order")
+	// public String ManageOrderPage() {
+	// 	return "Manager-order-page";
+	// }
 	
 	// @GetMapping("/Manager/product")
 	// public String ManageProductPage() {

@@ -12,6 +12,8 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap JavaScript: -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -44,22 +46,81 @@
         <div class="title-blog-main ">
             <!-- <p class="date-post" th:text="'Ngày đăng : ' + ${BaiDang.ngayDang}"></p> -->
             <h3 class="title-blogs" th:text="${BaiDang.tieuDeBaiDang}"></h3>
-            <div class="content-description-text" th:text="${BaiDang.moTaBaiDang}"></div>
+            <div class="content-description-text" style="font-size: 18px; font-weight: 500;" th:text="${BaiDang.moTaBaiDang}"></div>
         </div>
         <header class="banner-blog">
             <img th:src="${BaiDang.anhNen}" alt="">
         </header>
     </div>
     <article class="container">
-        <div class="content-text" th:text="${BaiDang.noiDungBaiDang}" ></div>
+        <div class="content-text" style="text-align: justify;" id="content-blog" th:text="${BaiDang.noiDungBaiDang}"></div>
         <hr>
         <div class="sub-content d-flex">
-            <h4 class="author-blog"  th:text="'Tác giả : ' + ${BaiDang.tacGiaBaiDang}"></h4>
-            <h4 class="view-blogs"  th:text="'Lược xem : ' + ${BaiDang.luotXemBaiDang}"></h4>
-            <h4 class="date-post"  th:text="'Ngày đăng : ' + ${BaiDang.ngayDang}"></h4>
+            <h4 class="author-blog" th:text="'Tác giả : ' + ${BaiDang.tacGiaBaiDang}"></h4>
+            <h4 class="view-blogs" th:text="'Lược xem : ' + ${BaiDang.luotXemBaiDang}"></h4>
+            <h4 class="date-post" th:text="'Ngày đăng : ' + ${BaiDang.ngayDang}"></h4>
         </div>
     </article>
     <nav th:replace="footer"></nav>
 </body>
+<script>
+    function convert() {
+        var input_str; //store input
+        var text_input; //store input after beging trim()med
+        var output_html = ""; //store output
+        var counter;
+        input_str = $("#content-blog").text(); //get input and store it in input_str
+        text_input = input_str.trim(); //trim() input
+        if (text_input.length > 0) {
+            output_html += "<p>"; //begin by creating paragraph
+            for (counter = 0; counter < text_input.length; counter++) {
+                switch (text_input[counter]) {
+                    case '\n':
+                        if (text_input[counter + 1] === '\n') {
+                            output_html += "</p>\n<p>";
+                            counter++;
+                        }
+                        else output_html += "<br>";
+                        break;
+
+                    case ' ':
+                        if (text_input[counter - 1] != ' ' && text_input[counter - 1] != '\t')
+                            output_html += " ";
+                        break;
+
+                    case '\t':
+                        if (text_input[counter - 1] != '\t')
+                            output_html += " ";
+                        break;
+
+                    case '&':
+                        output_html += "&amp;";
+                        break;
+
+                    case '"':
+                        output_html += "&quot;";
+                        break;
+
+                    case '>':
+                        output_html += "&gt;";
+                        break;
+
+                    case '<':
+                        output_html += "&lt;";
+                        break;
+
+                    default:
+                        output_html += text_input[counter];
+
+                }
+
+            }
+            output_html += "</p>"; //finally close paragraph
+        }
+        $("#content-blog").html(output_html); // display output html	
+    }
+
+    setTimeout(convert(),500)
+</script>
 
 </html>

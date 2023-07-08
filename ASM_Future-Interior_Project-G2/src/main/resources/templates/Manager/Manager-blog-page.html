@@ -40,11 +40,11 @@
                     <h5 class="header_content_sub-text text-title">Quản lý nội dung những bài đăng của website nhằm
                         quảng bá sản phẩm</h5>
                 </div>
-                <div class="header_content_button-group">
+                <!-- <div class="header_content_button-group">
                     <a class="btn btn-export btn-style text-title" th:href="@{/fileExport/__${duongDan}__}"
                         download="BaiDang"><i class="bi bi-cloud-download icon-text"></i> Xuất
                         file</a>
-                </div>
+                </div> -->
             </div>
             <div class="body_content">
                 <!-- Nav tabs -->
@@ -95,7 +95,7 @@
                                                 th:selected="${inforSort[1] == 'luotXemBaiDang'}">Theo lượt xem</option>
                                         </select>
                                     </div>
-                                    <button class="btn-style mb-3" style="margin: 0 10px;">Sắp xếp</button>
+                                    <button class="btn-style mb-3 d-none" id="btn-sort" style="margin: 0 10px;">Sắp xếp</button>
                                 </form>
                             </div>
                             <div class="list_blogs-header-search-group">
@@ -135,11 +135,7 @@
                                     <tbody th:if="${disnableTable == false}">
                                         <tr style="border-bottom: 1px solid var(--gray_200);" class=""
                                             th:each="baiDang : ${PageBD.content}">
-                                            <!-- <form th:action="@{/Manager/blog/__${baiDang.idBaiDang}__}"> -->
-                                            <td scope="row" class="td-first-table">
-                                                <input class="form-check-input box-shadow-none" name="" id=""
-                                                    type="checkbox" value="checkedValue"
-                                                    aria-label="Text for screen reader">
+                                            <td scope="row" class="td-first-table"  th:id="'td-first-table' + ${baiDang.idBaiDang}">
                                                 <div class="text-blogs-group">
                                                     <h4 class="text-title-blogs text-title"
                                                         th:text="${baiDang.tieuDeBaiDang}">...</h4>
@@ -148,6 +144,7 @@
                                                         </p>
                                                     </h6>
                                                 </div>
+                                                <p class="row-hover-text"  th:text="${baiDang.tieuDeBaiDang}"></p>
                                             </td>
                                             <td th:text="${baiDang.ngayDang}">...</td>
                                             <td th:text="${baiDang.tacGiaBaiDang}">...</td>
@@ -158,16 +155,12 @@
                                                     th:onclick="confomDelete([[${baiDang.tieuDeBaiDang}]],[[${baiDang.idBaiDang}]])"
                                                     class="btn" style="color: var(--gray_600);"><i
                                                         class="bi bi-trash-fill"></i></button>
-
                                                 <form th:action="@{/Manager/blog/edit/__${baiDang.idBaiDang}__}"
                                                     method="post">
                                                     <button class="btn" style="color: var(--gray_600);"><i
                                                             class="bi bi-pen-fill"></i></button>
                                                 </form>
-
-
                                             </td>
-                                            <!-- </form> -->
                                         </tr>
                                     </tbody>
                                     <tfoot th:if="${disnableTable == false}">
@@ -260,7 +253,7 @@
                                         <div class="input-group">
                                             <span class="input-group-text bg-white" id="calendar"><i
                                                     class="bi-person-fill" style="color: var(--gray_700);"></i></span>
-                                            <input type="text" min="0" name="date-blogs" id="date_blogs"
+                                            <input type="text" style="pointer-events: none;" min="0" name="date-blogs" id="date_blogs"
                                                 class=" form-control box-shadow-none" placeholder=""
                                                 th:field="*{taiKhoanBaiDang.tenDangNhap}">
 

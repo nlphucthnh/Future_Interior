@@ -73,5 +73,27 @@ $("#UploadFileBg").change(function () {
 })
 
 
+$(".td-first-table").hover(function () {
+    var rowHoverText = $(this).children()[1];
+     rowHoverText.style.display = "block";
+
+}, function () {
+    var rowHoverText = $(this).children()[1];
+    rowHoverText.style.display = "none";
+});
+
+
+
+
+$("#methodSort_id").change(function (e) { 
+    $("#btn-sort").trigger("click");
+});
+
+$("#fieldSort_id").change(function (e) { 
+    $("#btn-sort").trigger("click");
+});
+
+
+
 
 

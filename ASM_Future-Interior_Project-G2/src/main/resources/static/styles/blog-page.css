@@ -49,29 +49,29 @@
 
 /* ------------------------------- body Manager_Content ------------------------------- */
 
-#Manager_Content  .body_content {
+#Manager_Content .body_content {
     width: 95%;
     margin: 0 auto;
 }
 
 
-#Manager_Content  .body_content .body_content_tabs {
+#Manager_Content .body_content .body_content_tabs {
     width: fit-content;
     border: none;
     border-radius: 3px;
 }
 
 
-#Manager_Content  .body_content .body_content_tabs .btn-style  {
+#Manager_Content .body_content .body_content_tabs .btn-style {
     padding: 8px 12px;
     border-radius: 3px;
-    border: none; 
+    border: none;
     background-color: white;
 }
 
-#Manager_Content  .body_content .body_content_tabs .btn-style:focus-within  {
+#Manager_Content .body_content .body_content_tabs .btn-style:focus-within {
     background-color: var(--gray_50);
-    border: 1px solid var(--gray_300) ;
+    border: 1px solid var(--gray_300);
 }
 
 
@@ -89,10 +89,10 @@
     display: flex;
 }
 
- 
-#Manager_Content #list_blogs .list_blogs-header-seletion-group .form-select  {
+
+#Manager_Content #list_blogs .list_blogs-header-seletion-group .form-select {
     font-size: 15px;
-    padding: 6px 30px 6px 12px ;
+    padding: 6px 30px 6px 12px;
     font-family: var(--font_tertiary);
     font-weight: 500;
     color: var(--gray_800);
@@ -118,7 +118,7 @@
 }
 
 #Manager_Content .list_blogs-body .table-responsive thead {
-    border-bottom:1px solid var(--gray_300) ;
+    border-bottom: 1px solid var(--gray_300);
 }
 
 #Manager_Content .list_blogs-body .table-responsive thead th {
@@ -136,48 +136,77 @@
 } */
 
 #Manager_Content .list_blogs-body .table-responsive thead th:first-child {
-    width: 35% !important;      
+    width: 35% !important;
 }
 
 #Manager_Content .list_blogs-body .table-responsive .table tbody {
     border: none !important;
-    border-style:none !important ;
+    border-style: none !important;
 }
 
 
 
 #Manager_Content .list_blogs-body .table-responsive tbody tr {
-   vertical-align: middle;
-   transition: 0.5s;
-  
+    vertical-align: middle;
+    transition: 0.5s;
+
 }
 
 #Manager_Content .list_blogs-body .table-responsive tbody tr:hover {
     background-color: var(--gray_200);
-   
+
 }
 
 
 
-#Manager_Content .list_blogs-body  .td-first-table {
+
+#Manager_Content .list_blogs-body .td-first-table {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
-#Manager_Content .list_blogs-body  .text-blogs-group {
+.row-hover-text {
+    position: absolute;
+    bottom: -20px;
+    right: -40px;
+    left: 150px;
+    z-index: 2;
+    width: fit-content;
+    height: 40px;
+    text-align: justify;
+    border: 1px solid var(--gray_300);
+    background-color: var(--gray_100);
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin: 0;
+    display: none;
+}
+
+
+#Manager_Content .list_blogs-body .text-blogs-group {
     margin-left: 10px;
 }
 
-#Manager_Content .list_blogs-body  .text-blogs-group .text-title-blogs {
+
+
+#Manager_Content .list_blogs-body .text-blogs-group .text-title-blogs {
     font-size: 15px;
     font-family: var(--font_tertiary);
     font-weight: 600;
     margin: 3px 0;
     text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
-#Manager_Content .list_blogs-body  .text-blogs-group .text-id-blogs {
+#Manager_Content .list_blogs-body .text-blogs-group .text-id-blogs {
     font-size: 13px;
     font-family: var(--font_tertiary);
     font-weight: 400;
@@ -205,7 +234,7 @@ tbody, td, tfoot, th, thead, tr {
 
 
 #Manager_Content .list_blogs-body .table-responsive tfoot {
-    border-top: 1px solid var(--gray_300) ;
+    border-top: 1px solid var(--gray_300);
 }
 
 #Manager_Content .list_blogs-body .table-responsive tfoot td {
@@ -218,7 +247,7 @@ tbody, td, tfoot, th, thead, tr {
     border-radius: 3px;
     transition: 0.4s;
     text-decoration: none !important;
-    
+
 }
 
 
@@ -242,7 +271,7 @@ tbody, td, tfoot, th, thead, tr {
 
 
 /* ------------ form blogs Manager_Content ---------------- */
-#Manager_Content  #form_blogs  .form_blogs-pane {
+#Manager_Content #form_blogs .form_blogs-pane {
     width: 100%;
     border: 2px solid var(--gray_200);
     border-radius: 5px;
@@ -292,7 +321,7 @@ tbody, td, tfoot, th, thead, tr {
 
 #Manager_Content #form_blogs .group-fleld-05 .btn:last-child:hover {
     background-color: var(--gray_1000);
-  
+
 }
 
 #Manager_Content #form_blogs .group-fleld-05 .btn-update {
@@ -330,5 +359,3 @@ tbody, td, tfoot, th, thead, tr {
 
 
 /* ------------------------------- body Manager_Content ------------------------------- */
-
-
